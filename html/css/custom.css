@@ -1,0 +1,3527 @@
+@charset "utf-8";
+/* CSS Document */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+	padding: 0;
+	margin: 0 auto;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style: none;
+}
+a:focus, a:hover {
+	outline: none;
+}
+a {
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+a:hover {
+	text-decoration: none;
+}
+p {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	color: #666d81;
+	line-height: 40px;
+	font-weight: 400;
+}
+body {
+	font-family: 'Poppins', sans-serif;
+	font-size: 16px;
+	color: #464646;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Poppins', sans-serif;
+	margin-bottom: 0;
+}
+.custom-pad {
+	padding:100px 0;
+}
+
+/*
+        font-family: 'Exo', sans-serif;
+
+    font-family: 'Libre Baskerville', serif;
+*/
+.container{
+	width: 100%;
+	max-width: 1400px;
+}
+
+.dp-btn{
+	font-family: 'Poppins', sans-serif;
+}
+
+/*=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+dp-toggle-nav-css-start=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+.navbar-default .navbar-toggle {
+    border-color: #5f4b8b;
+    background: #5f4b8b;
+    outline: none;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+.navbar-toggle .icon-bar+.icon-bar {
+    margin-top: 4px;
+}
+.navbar-toggle .icon-bar+.icon-bar {
+    margin-top: 4px;
+}
+.navbar-header{
+	display:none;
+}
+/*=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+dp-toggle-nav-css-end=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*========================custom-header=======================*/
+
+.custom-header {
+    background: rgb(120,131,235);
+    background: linear-gradient(94deg, rgba(120,131,235,1) 0%, rgba(152,162,255,1) 100%);
+    padding: 12px 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 99999;
+}
+.notification-chat {
+    display: inline-block;
+    vertical-align: middle;
+    width: 72%;
+    text-align: right;
+}
+.header-admin {
+    display: inline-block;
+    vertical-align: middle;
+    width: 25%;
+	position: relative;
+}
+.notification-chat li {
+    display: inline-block;
+}
+.header-search input {
+    background-color: #7883eb;
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    height: 46px;
+    border-radius: 50px;
+	padding-left: 30px;
+}
+.header-search input::placeholder{
+	color: #fff;
+}
+.header-search .input-group-append button {
+    background-color: #7883eb;
+    border: 0;
+    padding: 11px 24px 11px 14px;
+    border-radius: 50px 50px 50px 50px;
+}
+.header-admin .dropdown-toggle::after {
+	display: none;
+}
+.header-admin img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+	object-fit: cover;
+}
+.header-admin button {
+    background-color: transparent;
+    border: 0;
+}
+.header-admin .dropdown {
+    text-align: right;
+}
+.header-admin span.active {
+    height: 10px;
+    width: 10px;
+    background-color: #30ff30;
+    display: block;
+    position: absolute;
+    right: 0;
+    border-radius: 505%;
+    border: 2px solid #fff;
+    bottom: 0;
+}
+
+.notification-chat li {
+    display: inline-block;
+    position: relative;
+    margin-left: 30px;
+}
+.notification-chat li span {
+    font-size: 10px;
+    color: #fff;
+    height: 18px;
+    width: 18px;
+    background-color: #7883eb;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    border-radius: 50%;
+    font-weight: 500;
+    line-height: 18px;
+    right: -20px;
+    top: -7px;
+}
+.notification-chat li:first-child{
+	margin-left: 0;
+}
+.notification-chat {
+    padding-right: 32px;
+}
+
+/*=======================aside-menu======================*/
+
+
+.custom-main-aside-menu {
+    background-color: #353841;
+    height: 100vh;
+    position: fixed;
+    width: 290px;
+    padding-top: 120px;
+}
+.dp-left-menu li{
+	margin-bottom: 6px;
+}
+.dp-left-menu li a {
+    display: block;
+    padding: 8px 20px 8px 74px;
+    position: relative;
+    color: #fff;
+    font-size: 15px;
+	transition: all 0.3s ease-in-out;
+}
+.dp-left-menu li a span {
+    position: absolute;
+    left: 40px;
+    top: 7px;
+}
+.dp-left-menu li a span img {
+    height: 17px;
+}
+.dp-left-menu li.active a {
+    background-color: #494b50;
+    color: #98a2ff;
+    font-weight: 700;
+    box-shadow: 0px 3px 11px rgba(0,0,0,0.26);
+}
+.dp-left-menu li a:hover{
+	background-color: #494b50;
+    color: #98a2ff;
+    font-weight: 700;
+    box-shadow: 0px 3px 11px rgba(0,0,0,0.26);
+}
+
+
+
+
+/*==================================================calender-css============================================*/
+
+/*!
+ * FullCalendar v3.9.0
+ * Docs & License: https://fullcalendar.io/
+ * (c) 2018 Adam Shaw
+ */
+.fc {
+  direction: ltr;
+  text-align: left; }
+
+.fc-rtl {
+  text-align: right; }
+
+ .fc {
+  /* extra precedence to overcome jqui */
+  font-size: 1em; }
+
+/* Colors
+--------------------------------------------------------------------------------------------------*/
+.fc-highlight {
+  /* when user is selecting cells */
+  background: #bce8f1;
+  opacity: .3; }
+
+.fc-bgevent {
+  /* default look for background events */
+  background: #8fdf82;
+  opacity: .3; }
+
+.fc-nonbusiness {
+  /* default look for non-business-hours areas */
+  /* will inherit .fc-bgevent's styles */
+  background: rgba(52,40,104,.05); }
+
+/* Buttons (styled <button> tags, normalized to work cross-browser)
+--------------------------------------------------------------------------------------------------*/
+.fc button {
+  /* force height to include the border and padding */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* dimensions */
+  margin: 0;
+  height: auto;
+  padding: 0 .6em;
+  /* text & cursor */
+  font-size: 1em;
+  /* normalize */
+  white-space: nowrap;
+  cursor: pointer; }
+
+/* Firefox has an annoying inner border */
+.fc button::-moz-focus-inner {
+  margin: 0;
+  padding: 0; }
+
+.fc-state-default {
+  /* non-theme */
+  border: 1px solid; }
+
+.fc-state-default.fc-corner-left {
+  /* non-theme */
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px; }
+
+.fc-state-default.fc-corner-right {
+  /* non-theme */
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px; }
+
+/* icons in buttons */
+.fc button .fc-icon {
+  /* non-theme */
+  position: relative;
+  top: -0.05em;
+  /* seems to be a good adjustment across browsers */
+  margin: 0 .2em;
+  vertical-align: middle; }
+
+/*
+  button states
+  borrowed from twitter bootstrap (http://twitter.github.com/bootstrap/)
+*/
+.fc-state-default {
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  color: #333;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); }
+
+.fc-state-hover,
+.fc-state-down,
+.fc-state-active,
+.fc-state-disabled {
+  color: #333333;
+  background-color: #e6e6e6; }
+
+.fc-state-hover {
+  color: #333333;
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+  -moz-transition: background-position 0.1s linear;
+  -o-transition: background-position 0.1s linear;
+  transition: background-position 0.1s linear; }
+
+.fc-state-down,
+.fc-state-active {
+  background-color: #cccccc;
+  background-image: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); }
+
+.fc-state-disabled {
+  cursor: default;
+  background-image: none;
+  opacity: 0.65;
+  box-shadow: none; }
+
+/* Buttons Groups
+--------------------------------------------------------------------------------------------------*/
+.fc-button-group {
+  display: inline-block; }
+
+/*
+every button that is not first in a button group should scootch over one pixel and cover the
+previous button's border...
+*/
+.fc .fc-button-group > * {
+  /* extra precedence b/c buttons have margin set to zero */
+  float: left;
+  margin: 0 0 0 -1px; }
+
+.fc .fc-button-group > :first-child {
+  /* same */
+  margin-left: 0; }
+
+/* Popover
+--------------------------------------------------------------------------------------------------*/
+.fc-popover {
+  position: absolute;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
+
+.fc-popover .fc-header {
+  /* TODO: be more consistent with fc-head/fc-body */
+  padding: 2px 4px; }
+
+.fc-popover .fc-header .fc-title {
+  margin: 0 2px; }
+
+.fc-popover .fc-header .fc-close {
+  cursor: pointer; }
+
+.fc-ltr .fc-popover .fc-header .fc-title,
+.fc-rtl .fc-popover .fc-header .fc-close {
+  float: left; }
+
+.fc-rtl .fc-popover .fc-header .fc-title,
+.fc-ltr .fc-popover .fc-header .fc-close {
+  float: right; }
+
+/* Misc Reusable Components
+--------------------------------------------------------------------------------------------------*/
+.fc-divider {
+  border-style: solid;
+  border-width: 1px; }
+
+hr.fc-divider {
+  height: 0;
+  margin: 0;
+  padding: 0 0 2px;
+  /* height is unreliable across browsers, so use padding */
+  border-width: 1px 0; }
+
+.fc-clear {
+  clear: both; }
+
+.fc-bg,
+.fc-bgevent-skeleton,
+.fc-highlight-skeleton,
+.fc-helper-skeleton {
+  /* these element should always cling to top-left/right corners */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; }
+
+.fc-bg {
+  bottom: 0;
+  /* strech bg to bottom edge */ }
+
+.fc-bg table {
+  height: 100%;
+  /* strech bg to bottom edge */ }
+
+/* Tables
+--------------------------------------------------------------------------------------------------*/
+.fc table {
+  width: 100%;
+  box-sizing: border-box;
+  /* fix scrollbar issue in firefox */
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+  /* normalize cross-browser */ }
+
+.fc th {
+  text-align: center; }
+
+.fc th,
+.fc td {
+  border-style: solid;
+  border-width: 1px 1px 0 1px !important;
+  padding: 0;
+  border-color: #eee;
+  vertical-align: top;
+}
+
+.fc td.fc-today {
+  border-style: double;
+  /* overcome neighboring borders */ }
+
+/* Internal Nav Links
+--------------------------------------------------------------------------------------------------*/
+.dashboard-cal-sheet a[data-goto] {
+  cursor: pointer; }
+
+.dashboard-cal-sheet a[data-goto]:hover {
+  text-decoration: underline; }
+
+/* Fake Table Rows
+--------------------------------------------------------------------------------------------------*/
+.fc .fc-row {
+  /* extra precedence to overcome themes w/ .ui-widget-content forcing a 1px border */
+  /* no visible border by default. but make available if need be (scrollbar width compensation) */
+  border-style: solid;
+  border-width: 0; }
+
+.fc-row table {
+  /* don't put left/right border on anything within a fake row.
+     the outer tbody will worry about this */
+  border-left: 0 hidden transparent;
+  border-right: 0 hidden transparent;
+  /* no bottom borders on rows */
+  border-bottom: 0 hidden transparent; }
+
+.fc-row:first-child table {
+  border-top: 0 hidden transparent;
+  /* no top border on first row */ }
+
+/* Day Row (used within the header and the DayGrid)
+--------------------------------------------------------------------------------------------------*/
+.fc-row {
+  position: relative;
+  background: #ffffff;
+}
+
+.fc-row .fc-bg {
+  z-index: 1; }
+
+/* highlighting cells & background event skeleton */
+.fc-row .fc-bgevent-skeleton,
+.fc-row .fc-highlight-skeleton {
+  bottom: 0;
+  /* stretch skeleton to bottom of row */ }
+
+.fc-row .fc-bgevent-skeleton table,
+.fc-row .fc-highlight-skeleton table {
+  height: 100%;
+  /* stretch skeleton to bottom of row */ }
+
+.fc-row .fc-highlight-skeleton td,
+.fc-row .fc-bgevent-skeleton td {
+  border-color: transparent; }
+
+.fc-row .fc-bgevent-skeleton {
+  z-index: 2; }
+
+.fc-row .fc-highlight-skeleton {
+  z-index: 3; }
+
+/*
+row content (which contains day/week numbers and events) as well as "helper" (which contains
+temporary rendered events).
+*/
+.fc-row .fc-content-skeleton {
+  position: relative;
+  z-index: 4;
+  padding-bottom: 2px;
+  /* matches the space above the events */ }
+
+.fc-row .fc-helper-skeleton {
+  z-index: 5; }
+
+.fc .fc-row .fc-content-skeleton table,
+.fc .fc-row .fc-content-skeleton td,
+.fc .fc-row .fc-helper-skeleton td {
+  /* see-through to the background below */
+  /* extra precedence to prevent theme-provided backgrounds */
+  background: none;
+  /* in case <td>s are globally styled */
+  border-color: transparent;
+  padding: .5rem .5rem;
+}
+
+.fc-row .fc-content-skeleton td,
+.fc-row .fc-helper-skeleton td {
+  /* don't put a border between events and/or the day number */
+  border-bottom: 0; }
+
+.fc-row .fc-content-skeleton tbody td,
+.fc-row .fc-helper-skeleton tbody td {
+  /* don't put a border between event cells */
+  border-top: 0; }
+
+/* Scrolling Container
+--------------------------------------------------------------------------------------------------*/
+.fc-scroller {
+  -webkit-overflow-scrolling: touch; }
+
+/* TODO: move to agenda/basic */
+.fc-scroller > .fc-day-grid,
+.fc-scroller > .fc-time-grid {
+  position: relative;
+  /* re-scope all positions */
+  width: 100%;
+  /* hack to force re-sizing this inner element when scrollbars appear/disappear */ }
+
+/* Global Event Styles
+--------------------------------------------------------------------------------------------------*/
+.fc-event {
+  position: relative;
+  /* for resize handle and other inner positioning */
+  display: block;
+  /* make the <a> tag block */
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  border-radius: 3px;
+  font-weight: 500;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  /* default BORDER color */ }
+
+.fc-event,
+.fc-event-dot {
+  background-color: #ffffff;
+  color: #5d5386;
+  position: relative;
+  /* default BACKGROUND color */ }
+.fc-event:before,
+.fc-event-dot:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 50px;
+    height: 100%;
+    border-left: 3px solid #5d5386;
+    border-bottom: 3px solid #5d5386;
+    -webkit-border-radius: 3px 0px 0px 3px;
+    -moz-border-radius: 3px 0px 0px 3px;
+    border-radius: 3px 0px 0px 3px;
+}
+.fc-event .fc-title {
+    font-weight: 500;
+}
+.fc-event i{
+    font-size: 26px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.fc-event,
+.fc-event:hover {
+  color: #fff;
+  /* default TEXT color */
+  text-decoration: none;
+  /* if <a> has an href */ }
+
+.fc-event[href],
+.fc-event.fc-draggable {
+  cursor: pointer;
+  /* give events with links and draggable events a hand mouse pointer */ }
+
+.fc-not-allowed,
+.fc-not-allowed .fc-event {
+  /* to override an event's custom cursor */
+  cursor: not-allowed; }
+
+.fc-event .fc-bg {
+  /* the generic .fc-bg already does position */
+  z-index: 1;
+  background: #fff;
+  opacity: .25; }
+
+.fc-event .fc-content {
+    color: #2c304d;
+    position: relative;
+    z-index: 2;
+    padding: 8px;
+}
+
+/* resizer (cursor AND touch devices) */
+.fc-event .fc-resizer {
+  position: absolute;
+  z-index: 4; }
+
+/* resizer (touch devices) */
+.fc-event .fc-resizer {
+  display: none; }
+
+.fc-event.fc-allow-mouse-resize .fc-resizer,
+.fc-event.fc-selected .fc-resizer {
+  /* only show when hovering or selected (with touch) */
+  display: block; }
+
+/* hit area */
+.fc-event.fc-selected .fc-resizer:before {
+  /* 40x40 touch area */
+  content: "";
+  position: absolute;
+  z-index: 9999;
+  /* user of this util can scope within a lower z-index */
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px; }
+
+/* Event Selection (only for touch devices)
+--------------------------------------------------------------------------------------------------*/
+.fc-event.fc-selected {
+  z-index: 9999 !important;
+  /* overcomes inline z-index */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+
+.fc-event.fc-selected.fc-dragging {
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3); }
+
+/* Horizontal Events
+--------------------------------------------------------------------------------------------------*/
+/* bigger touch area when selected */
+.fc-h-event.fc-selected:before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  /* below resizers */
+  top: -10px;
+  bottom: -10px;
+  left: 0;
+  right: 0; }
+
+/* events that are continuing to/from another week. kill rounded corners and butt up against edge */
+.fc-ltr .fc-h-event.fc-not-start,
+.fc-rtl .fc-h-event.fc-not-end {
+  margin-left: 0;
+  border-left-width: 0;
+  padding-left: 1px;
+  /* replace the border with padding */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0; }
+
+.fc-ltr .fc-h-event.fc-not-end,
+.fc-rtl .fc-h-event.fc-not-start {
+  margin-right: 0;
+  border-right-width: 0;
+  padding-right: 1px;
+  /* replace the border with padding */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0; }
+
+/* resizer (cursor AND touch devices) */
+/* left resizer  */
+.fc-ltr .fc-h-event .fc-start-resizer,
+.fc-rtl .fc-h-event .fc-end-resizer {
+  cursor: w-resize;
+  left: -1px;
+  /* overcome border */ }
+
+/* right resizer */
+.fc-ltr .fc-h-event .fc-end-resizer,
+.fc-rtl .fc-h-event .fc-start-resizer {
+  cursor: e-resize;
+  right: -1px;
+  /* overcome border */ }
+
+/* resizer (mouse devices) */
+.fc-h-event.fc-allow-mouse-resize .fc-resizer {
+  width: 7px;
+  top: -1px;
+  /* overcome top border */
+  bottom: -1px;
+  /* overcome bottom border */ }
+
+/* resizer (touch devices) */
+.fc-h-event.fc-selected .fc-resizer {
+  /* 8x8 little dot */
+  border-radius: 4px;
+  border-width: 1px;
+  width: 6px;
+  height: 6px;
+  border-style: solid;
+  border-color: inherit;
+  background: #fff;
+  /* vertically center */
+  top: 50%;
+  margin-top: -4px; }
+
+/* left resizer  */
+.fc-ltr .fc-h-event.fc-selected .fc-start-resizer,
+.fc-rtl .fc-h-event.fc-selected .fc-end-resizer {
+  margin-left: -4px;
+  /* centers the 8x8 dot on the left edge */ }
+
+/* right resizer */
+.fc-ltr .fc-h-event.fc-selected .fc-end-resizer,
+.fc-rtl .fc-h-event.fc-selected .fc-start-resizer {
+  margin-right: -4px;
+  /* centers the 8x8 dot on the right edge */ }
+
+/* DayGrid events
+----------------------------------------------------------------------------------------------------
+We use the full "fc-day-grid-event" class instead of using descendants because the event won't
+be a descendant of the grid when it is being dragged.
+*/
+.fc-day-grid-event {
+  margin: 1px 2px 0;
+  /* spacing between events and edges */
+  padding: 0; }
+
+tr:first-child > td > .fc-day-grid-event {
+  margin-top: 2px;
+  /* a little bit more space before the first event */ }
+
+.fc-day-grid-event.fc-selected:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  /* same z-index as fc-bg, behind text */
+  /* overcome the borders */
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  /* darkening effect */
+  background: #000;
+  opacity: .25; }
+
+.fc-day-grid-event .fc-content {
+  /* force events to be one-line tall */
+  white-space: nowrap;
+  overflow: hidden; }
+
+.fc-day-grid-event .fc-time {
+  font-weight: bold; }
+
+/* resizer (cursor devices) */
+/* left resizer  */
+.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer,
+.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer {
+  margin-left: -2px;
+  /* to the day cell's edge */ }
+
+/* right resizer */
+.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer,
+.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer {
+  margin-right: -2px;
+  /* to the day cell's edge */ }
+
+/* Event Limiting
+--------------------------------------------------------------------------------------------------*/
+/* "more" link that represents hidden events */
+a.fc-more {
+  margin: 1px 3px;
+  font-size: .85em;
+  cursor: pointer;
+  text-decoration: none; }
+
+a.fc-more:hover {
+  text-decoration: underline; }
+
+.fc-limited {
+  /* rows and cells that are hidden because of a "more" link */
+  display: none; }
+
+/* popover that appears when "more" link is clicked */
+.fc-day-grid .fc-row {
+  z-index: 1;
+  /* make the "more" popover one higher than this */ }
+
+.fc-more-popover {
+  z-index: 2;
+  width: 220px; }
+
+.fc-more-popover .fc-event-container {
+  padding: 10px; }
+
+/* Now Indicator
+--------------------------------------------------------------------------------------------------*/
+.fc-now-indicator {
+  position: absolute;
+  border: 0 solid red; }
+
+/* Utilities
+--------------------------------------------------------------------------------------------------*/
+.fc-unselectable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent; }
+
+/*
+TODO: more distinction between this file and common.css
+*/
+/* Colors
+--------------------------------------------------------------------------------------------------*/
+.fc-unthemed th,
+.fc-unthemed td,
+.fc-unthemed thead,
+.fc-unthemed tbody,
+.fc-unthemed .fc-divider,
+.fc-unthemed .fc-row,
+.fc-unthemed .fc-content,
+.fc-unthemed .fc-popover,
+.fc-unthemed .fc-list-view,
+.fc-unthemed .fc-list-heading td {
+  border-color: #ddd; }
+
+.fc-unthemed .fc-popover {
+  background-color: #fff; }
+
+.fc-unthemed .fc-divider,
+.fc-unthemed .fc-popover .fc-header,
+.fc-unthemed .fc-list-heading td {
+  background: #eee; }
+
+.fc-unthemed .fc-popover .fc-header .fc-close {
+  color: #666; }
+
+.fc-unthemed td.fc-today {
+  background: #fcf8e3; }
+
+.fc-unthemed .fc-disabled-day {
+  background: #d7d7d7;
+  opacity: .3; }
+
+/* Icons (inline elements with styled text that mock arrow icons)
+--------------------------------------------------------------------------------------------------*/
+.fc-icon {
+  display: inline-block;
+  height: 1em;
+  line-height: 1em;
+  font-size: 1em;
+  text-align: center;
+  overflow: hidden;
+  font-family: "Courier New", Courier, monospace;
+  /* don't allow browser text-selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/*
+Acceptable font-family overrides for individual icons:
+  "Arial", sans-serif
+  "Times New Roman", serif
+
+NOTE: use percentage font sizes or else old IE chokes
+*/
+.fc-icon:after {
+  position: relative; }
+
+.fc-icon-left-single-arrow:after {
+  content: "\2039";
+  font-weight: bold;
+  font-size: 200%;
+  top: -7%; }
+
+.fc-icon-right-single-arrow:after {
+  content: "\203A";
+  font-weight: bold;
+  font-size: 200%;
+  top: -7%; }
+
+.fc-icon-left-double-arrow:after {
+  content: "\AB";
+  font-size: 160%;
+  top: -7%; }
+
+.fc-icon-right-double-arrow:after {
+  content: "\BB";
+  font-size: 160%;
+  top: -7%; }
+
+.fc-icon-left-triangle:after {
+  content: "\25C4";
+  font-size: 125%;
+  top: 3%; }
+
+.fc-icon-right-triangle:after {
+  content: "\25BA";
+  font-size: 125%;
+  top: 3%; }
+
+.fc-icon-down-triangle:after {
+  content: "\25BC";
+  font-size: 125%;
+  top: 2%; }
+
+.fc-icon-x:after {
+  content: "\D7";
+  font-size: 200%;
+  top: 6%; }
+
+/* Popover
+--------------------------------------------------------------------------------------------------*/
+.fc-unthemed .fc-popover {
+  border-width: 1px;
+  border-style: solid; }
+
+.fc-unthemed .fc-popover .fc-header .fc-close {
+  font-size: .9em;
+  margin-top: 2px; }
+
+/* List View
+--------------------------------------------------------------------------------------------------*/
+.fc-unthemed .fc-list-item:hover td {
+  background-color: #f5f5f5; }
+
+/* Colors
+--------------------------------------------------------------------------------------------------*/
+.ui-widget .fc-disabled-day {
+  background-image: none; }
+
+/* Popover
+--------------------------------------------------------------------------------------------------*/
+.fc-popover > .ui-widget-header + .ui-widget-content {
+  border-top: 0;
+  /* where they meet, let the header have the border */ }
+
+/* Global Event Styles
+--------------------------------------------------------------------------------------------------*/
+.ui-widget .fc-event {
+  /* overpower jqui's styles on <a> tags. TODO: more DRY */
+  color: #fff;
+  /* default TEXT color */
+  text-decoration: none;
+  /* if <a> has an href */
+  /* undo ui-widget-header bold */
+  font-weight: normal; }
+
+/* TimeGrid axis running down the side (for both the all-day area and the slot area)
+--------------------------------------------------------------------------------------------------*/
+.ui-widget td.fc-axis {
+  font-weight: normal;
+  /* overcome bold */ }
+
+/* TimeGrid Slats (lines that run horizontally)
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid .fc-slats .ui-widget-content {
+  background: none;
+  /* see through to fc-bg */ }
+
+.fc.fc-bootstrap3 a {
+  text-decoration: none; }
+
+.fc.fc-bootstrap3 a[data-goto]:hover {
+  text-decoration: underline; }
+
+.fc-bootstrap3 hr.fc-divider {
+  border-color: inherit; }
+
+.fc-bootstrap3 .fc-today.alert {
+  border-radius: 0; }
+
+/* Popover
+--------------------------------------------------------------------------------------------------*/
+.fc-bootstrap3 .fc-popover .panel-body {
+  padding: 0; }
+
+/* TimeGrid Slats (lines that run horizontally)
+--------------------------------------------------------------------------------------------------*/
+.fc-bootstrap3 .fc-time-grid .fc-slats table {
+  /* some themes have background color. see through to slats */
+  background: none; }
+
+.fc.fc-bootstrap4 a {
+  text-decoration: none; }
+
+.fc.fc-bootstrap4 a[data-goto]:hover {
+  text-decoration: underline; }
+
+.fc-bootstrap4 hr.fc-divider {
+  border-color: inherit; }
+
+.fc-bootstrap4 .fc-today.alert {
+  border-radius: 0; }
+
+.fc-bootstrap4 a.fc-event:not([href]):not([tabindex]) {
+  color: #5d5386; }
+
+.fc-bootstrap4 .fc-popover.card {
+  position: absolute; }
+
+/* Popover
+--------------------------------------------------------------------------------------------------*/
+.fc-bootstrap4 .fc-popover .card-body {
+  padding: 0; }
+
+/* TimeGrid Slats (lines that run horizontally)
+--------------------------------------------------------------------------------------------------*/
+.fc-bootstrap4 .fc-time-grid .fc-slats table {
+  /* some themes have background color. see through to slats */
+  background: none; }
+
+/* Toolbar
+--------------------------------------------------------------------------------------------------*/
+.fc-toolbar {
+  text-align: center; }
+
+.fc-toolbar.fc-header-toolbar {
+    margin-bottom: 40px;
+}
+
+.fc-toolbar.fc-footer-toolbar {
+  margin-top: 1em; }
+
+.fc-toolbar .fc-left {
+  float: left; }
+
+.fc-toolbar .fc-right {
+  float: right; }
+
+.fc-toolbar .fc-center {
+  display: inline-block; width: 100%;}
+
+.fc button {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    height: auto;
+    padding: 0 1rem;
+    font-size: 1rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/* the things within each left/right/center section */
+.fc .fc-toolbar > * > * {
+  /* extra precedence to override button border margins */
+  float: left;
+  margin-left: .75em; }
+
+/* the first thing within each left/center/right section */
+.fc .fc-toolbar > * > :first-child {
+  /* extra precedence to override button border margins */
+  margin-left: 0; }
+
+/* title text */
+.fc-toolbar h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* button layering (for border precedence) */
+.fc-toolbar button {
+  position: relative; }
+
+.fc-toolbar .fc-state-hover,
+.fc-toolbar .ui-state-hover {
+  z-index: 2; }
+
+.fc-toolbar .fc-state-down {
+  z-index: 3; }
+
+.fc-toolbar .fc-state-active,
+.fc-toolbar .ui-state-active {
+  z-index: 4; }
+
+.fc-toolbar button:focus {
+  z-index: 5; }
+
+/* View Structure
+--------------------------------------------------------------------------------------------------*/
+/* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */
+/* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */
+.fc-view-container *,
+.fc-view-container *:before,
+.fc-view-container *:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; }
+
+.fc-view,
+.fc-view > table {
+  /* so dragged elements can be above the view's main element */
+  position: relative;
+  z-index: 1; }
+
+/* BasicView
+--------------------------------------------------------------------------------------------------*/
+/* day row structure */
+.fc-basicWeek-view .fc-content-skeleton,
+.fc-basicDay-view .fc-content-skeleton {
+  /* there may be week numbers in these views, so no padding-top */
+  padding-bottom: 1em;
+  /* ensure a space at bottom of cell for user selecting/clicking */ }
+
+.fc-basic-view .fc-body .fc-row {
+  min-height: 4em;
+  /* ensure that all rows are at least this tall */ }
+
+/* a "rigid" row will take up a constant amount of height because content-skeleton is absolute */
+.fc-row.fc-rigid {
+  overflow: hidden; }
+
+.fc-row.fc-rigid .fc-content-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; }
+
+/* week and day number styling */
+.fc-day-top.fc-other-month {
+  opacity: 0.3; }
+
+.fc-basic-view .fc-week-number,
+.fc-basic-view .fc-day-number {
+  padding: 2px;
+  color: rgba(52,40,104,.8);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.fc-basic-view th.fc-week-number,
+.fc-basic-view th.fc-day-number {
+  padding: 0 2px;
+  /* column headers can't have as much v space */ }
+
+.fc-ltr .fc-basic-view .fc-day-top .fc-day-number {
+  float: right; }
+
+.fc-rtl .fc-basic-view .fc-day-top .fc-day-number {
+  float: left; }
+
+.fc-ltr .fc-basic-view .fc-day-top .fc-week-number {
+  float: left;
+  border-radius: 0 0 3px 0; }
+
+.fc-rtl .fc-basic-view .fc-day-top .fc-week-number {
+  float: right;
+  border-radius: 0 0 0 3px; }
+
+.fc-basic-view .fc-day-top .fc-week-number {
+  min-width: 1.5em;
+  text-align: center;
+  background-color: #f2f2f2;
+  color: #808080; }
+
+/* when week/day number have own column */
+.fc-basic-view td.fc-week-number {
+  text-align: center; }
+
+.fc-basic-view td.fc-week-number > * {
+  /* work around the way we do column resizing and ensure a minimum width */
+  display: inline-block;
+  min-width: 1.25em; }
+
+/* AgendaView all-day area
+--------------------------------------------------------------------------------------------------*/
+.fc-agenda-view .fc-day-grid {
+  position: relative;
+  z-index: 2;
+  /* so the "more.." popover will be over the time grid */ }
+
+.fc-agenda-view .fc-day-grid .fc-row {
+  min-height: 3em;
+  /* all-day section will never get shorter than this */ }
+
+.fc-agenda-view .fc-day-grid .fc-row .fc-content-skeleton {
+  padding-bottom: 1em;
+  /* give space underneath events for clicking/selecting days */ }
+
+/* TimeGrid axis running down the side (for both the all-day area and the slot area)
+--------------------------------------------------------------------------------------------------*/
+.fc .fc-axis {
+  /* .fc to overcome default cell styles */
+  vertical-align: middle;
+  padding: 0 4px;
+  white-space: nowrap; }
+
+.fc-ltr .fc-axis {
+  text-align: right; }
+
+.fc-rtl .fc-axis {
+  text-align: left; }
+
+/* TimeGrid Structure
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid-container,
+.fc-time-grid {
+  /* so slats/bg/content/etc positions get scoped within here */
+  position: relative;
+  z-index: 1; }
+
+.fc-time-grid {
+  min-height: 100%;
+  /* so if height setting is 'auto', .fc-bg stretches to fill height */ }
+
+.fc-time-grid table {
+  /* don't put outer borders on slats/bg/content/etc */
+  border: 0 hidden transparent; }
+
+.fc-time-grid > .fc-bg {
+  z-index: 1;
+  background: #fff;
+}
+
+.fc-time-grid .fc-slats,
+.fc-time-grid > hr {
+  /* the <hr> AgendaView injects when grid is shorter than scroller */
+  position: relative;
+  z-index: 2; }
+
+.fc-time-grid .fc-content-col {
+  position: relative;
+  /* because now-indicator lives directly inside */ }
+
+.fc-time-grid .fc-content-skeleton {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0; }
+
+/* divs within a cell within the fc-content-skeleton */
+.fc-time-grid .fc-business-container {
+  position: relative;
+  z-index: 1; }
+
+.fc-time-grid .fc-bgevent-container {
+  position: relative;
+  z-index: 2; }
+
+.fc-time-grid .fc-highlight-container {
+  position: relative;
+  z-index: 3; }
+
+.fc-time-grid .fc-event-container {
+  position: relative;
+  z-index: 4; }
+
+.fc-time-grid .fc-now-indicator-line {
+  z-index: 5; }
+
+.fc-time-grid .fc-helper-container {
+  /* also is fc-event-container */
+  position: relative;
+  z-index: 6; }
+
+/* TimeGrid Slats (lines that run horizontally)
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid .fc-slats td {
+  height: 1.5em;
+  border-bottom: 0;
+  padding: 10px;
+  /* each cell is responsible for its top border */ }
+.fc-agendaDay-view .fc-time-grid .fc-slats td{
+  background: #ffffff;
+}
+.fc-time-grid .fc-slats .fc-minor td {
+  border-top-style: dotted; }
+
+/* TimeGrid Highlighting Slots
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid .fc-highlight-container {
+  /* a div within a cell within the fc-highlight-skeleton */
+  position: relative;
+  /* scopes the left/right of the fc-highlight to be in the column */ }
+
+.fc-time-grid .fc-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* top and bottom will be in by JS */ }
+
+/* TimeGrid Event Containment
+--------------------------------------------------------------------------------------------------*/
+.fc-ltr .fc-time-grid .fc-event-container {
+  /* space on the sides of events for LTR (default) */
+  margin: 0 2.5% 0 2px; }
+
+.fc-rtl .fc-time-grid .fc-event-container {
+  /* space on the sides of events for RTL */
+  margin: 0 2px 0 2.5%; }
+
+.fc-time-grid .fc-event,
+.fc-time-grid .fc-bgevent {
+  position: absolute;
+  z-index: 1;
+  /* scope inner z-index's */ }
+
+.fc-time-grid .fc-bgevent {
+  /* background events always span full width */
+  left: 0;
+  right: 0; }
+
+/* Generic Vertical Event
+--------------------------------------------------------------------------------------------------*/
+.fc-v-event.fc-not-start {
+  /* events that are continuing from another day */
+  /* replace space made by the top border with padding */
+  border-top-width: 0;
+  padding-top: 1px;
+  /* remove top rounded corners */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+.fc-v-event.fc-not-end {
+  /* replace space made by the top border with padding */
+  border-bottom-width: 0;
+  padding-bottom: 1px;
+  /* remove bottom rounded corners */
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+/* TimeGrid Event Styling
+----------------------------------------------------------------------------------------------------
+We use the full "fc-time-grid-event" class instead of using descendants because the event won't
+be a descendant of the grid when it is being dragged.
+*/
+.fc-time-grid-event {
+  overflow: hidden;
+  /* don't let the bg flow over rounded corners */ }
+
+.fc-time-grid-event.fc-selected {
+  /* need to allow touch resizers to extend outside event's bounding box */
+  /* common fc-selected styles hide the fc-bg, so don't need this anyway */
+  overflow: visible; }
+
+.fc-time-grid-event.fc-selected .fc-bg {
+  display: none;
+  /* hide semi-white background, to appear darker */ }
+
+.fc-time-grid-event .fc-content {
+  overflow: hidden;
+  /* for when .fc-selected */ }
+
+.fc-time-grid-event .fc-time,
+.fc-time-grid-event .fc-title {
+  padding: 0 1px; }
+
+.fc-time-grid-event .fc-time {
+  font-size: .85em;
+  white-space: nowrap; }
+
+/* short mode, where time and title are on the same line */
+.fc-time-grid-event.fc-short .fc-content {
+  /* don't wrap to second line (now that contents will be inline) */
+  white-space: nowrap; }
+
+.fc-time-grid-event.fc-short .fc-time,
+.fc-time-grid-event.fc-short .fc-title {
+  /* put the time and title on the same line */
+  display: inline-block;
+  vertical-align: top; }
+
+.fc-time-grid-event.fc-short .fc-time span {
+  display: none;
+  /* don't display the full time text... */ }
+
+.fc-time-grid-event.fc-short .fc-time:before {
+  content: attr(data-start);
+  /* ...instead, display only the start time */ }
+
+.fc-time-grid-event.fc-short .fc-time:after {
+  content: "\A0-\A0";
+  /* seperate with a dash, wrapped in nbsp's */ }
+
+.fc-time-grid-event.fc-short .fc-title {
+  font-size: .85em;
+  /* make the title text the same size as the time */
+  padding: 0;
+  /* undo padding from above */ }
+
+/* resizer (cursor device) */
+.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  overflow: hidden;
+  line-height: 8px;
+  font-size: 11px;
+  font-family: monospace;
+  text-align: center;
+  cursor: s-resize; }
+
+.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after {
+  content: "="; }
+
+/* resizer (touch device) */
+.fc-time-grid-event.fc-selected .fc-resizer {
+  /* 10x10 dot */
+  border-radius: 5px;
+  border-width: 1px;
+  width: 8px;
+  height: 8px;
+  border-style: solid;
+  border-color: inherit;
+  background: #fff;
+  /* horizontally center */
+  left: 50%;
+  margin-left: -5px;
+  /* center on the bottom edge */
+  bottom: -5px; }
+
+/* Now Indicator
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid .fc-now-indicator-line {
+  border-top-width: 1px;
+  left: 0;
+  right: 0; }
+
+/* arrow on axis */
+.fc-time-grid .fc-now-indicator-arrow {
+  margin-top: -5px;
+  /* vertically center on top coordinate */ }
+
+.fc-ltr .fc-time-grid .fc-now-indicator-arrow {
+  left: 0;
+  /* triangle pointing right... */
+  border-width: 5px 0 5px 6px;
+  border-top-color: transparent;
+  border-bottom-color: transparent; }
+
+.fc-rtl .fc-time-grid .fc-now-indicator-arrow {
+  right: 0;
+  /* triangle pointing left... */
+  border-width: 5px 6px 5px 0;
+  border-top-color: transparent;
+  border-bottom-color: transparent; }
+
+/* List View
+--------------------------------------------------------------------------------------------------*/
+/* possibly reusable */
+.fc-event-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px; }
+
+/* view wrapper */
+.fc-rtl .fc-list-view {
+  direction: rtl;
+  /* unlike core views, leverage browser RTL */ }
+
+.fc-list-view {
+  border-width: 1px;
+  border-style: solid; }
+
+/* table resets */
+.fc .fc-list-table {
+  table-layout: auto;
+  /* for shrinkwrapping cell content */ }
+
+.fc-list-table td {
+  border-width: 1px 0 0;
+  padding: 8px 14px; }
+
+.fc-list-table tr:first-child td {
+  border-top-width: 0; }
+
+/* day headings with the list */
+.fc-list-heading {
+  border-bottom-width: 1px; }
+
+.fc-list-heading td {
+  font-weight: bold; }
+
+.fc-ltr .fc-list-heading-main {
+  float: left; }
+
+.fc-ltr .fc-list-heading-alt {
+  float: right; }
+
+.fc-rtl .fc-list-heading-main {
+  float: right; }
+
+.fc-rtl .fc-list-heading-alt {
+  float: left; }
+
+/* event list items */
+.fc-list-item.fc-has-url {
+  cursor: pointer;
+  /* whole row will be clickable */ }
+
+.fc-list-item-marker,
+.fc-list-item-time {
+  white-space: nowrap;
+  width: 1px; }
+
+/* make the dot closer to the event title */
+.fc-ltr .fc-list-item-marker {
+  padding-right: 0; }
+
+.fc-rtl .fc-list-item-marker {
+  padding-left: 0; }
+
+.fc-list-item-title a {
+  /* every event title cell has an <a> tag */
+  text-decoration: none;
+  color: inherit; }
+
+.fc-list-item-title a[href]:hover {
+  /* hover effect only on titles with hrefs */
+  text-decoration: underline; }
+
+/* message when no events */
+.fc-list-empty-wrap2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+.fc-list-empty-wrap1 {
+  width: 100%;
+  height: 100%;
+  display: table; }
+
+.fc-list-empty {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center; }
+
+.fc-unthemed .fc-list-empty {
+  /* theme will provide own background */
+  background-color: #eee; }
+
+
+.fc th.fc-day-header{
+    padding: 11px 7px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.fc-day.fc-today{
+    background: rgba(52,40,104,.03);
+}
+.fc-day.alert-info{
+    background: rgba(52,40,104,.03);
+}
+
+.dashboard-cal-sheet .datepicker{
+	z-index: 123456;
+}
+
+.dashboard-cal-sheet .card{
+  border: 0;
+  background: transparent;
+}
+.dashboard-cal-sheet h2{
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+  color: #002147;
+  margin-bottom: 20px;
+}
+.dashboard-cal-sheet .btn {
+    font-size: 10px !important;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 00.56px;
+    box-shadow: none !important;
+    border: 0;
+    padding: 10px 20px !important;
+}
+.dashboard-cal-sheet .btn:focus{
+  box-shadow: none;
+}
+.dashboard-cal-sheet .btn.btn-primary{
+  background: #353841;
+  color: #ffffff;
+}
+.dashboard-cal-sheet .form-group label{
+  font-weight: 600;
+  letter-spacing: 0.010em;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.dashboard-cal-sheet .modal-body{
+  background: #F3F5F9;
+  border-radius: 10px;
+}
+.dashboard-cal-sheet .modal-body h4{
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  color: #002147;
+  margin-bottom: 20px;
+}
+.dashboard-cal-sheet .modal-body .form-control{
+  box-shadow: none;
+  height: 50px;
+}
+.dasboard-calender .fc-center{
+	display: none;
+}
+.dasboard-calender .fc-right .fc-today-button{
+	display: none;
+}
+
+/*=============================Weekly-time-table========================*/
+
+
+
+
+.dashboard-cal-sheet {
+    padding-top: 100px;
+}
+
+.custom-heading h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #002147;
+    line-height: 20px;
+}
+.dp-weekly-time-sheet .custom-heading {
+    margin-bottom: 20px;
+}
+.weekly-time-table-dashboard h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 22px;
+}
+.weekly-time-table-dashboard .table .thead-dark th {
+    background-color: #353841;
+    border-color: #353841;
+    font-size: 13px;
+}
+.weekly-time-table-dp tbody tr th {
+    font-size: 12px;
+}
+.weekly-time-table-dp tbody tr td {
+    font-size: 12px;
+}
+.bg-dp-drk {
+    background-color: #f1f1f1;
+}
+.weekly-time-table-dashboard .table td, .weekly-time-table-dashboard .table th {
+    border: 1px solid #dee2e6;
+    padding: 5px 10px;
+}
+.custom-em-signtures {
+    text-align: center;
+}
+.custom-em-signtures img {
+    height: 40px;
+    display: block;
+}
+.custom-em-signtures h6 {
+    font-style: italic;
+    color: #333;
+    font-size: 12px;
+    border-top: 2px solid #333;
+    padding-top: 6px;
+    margin-top: 6px;
+    display: inline-block;
+    width: 60%;
+}
+.table.weekly-time-table-dp {
+    margin-bottom: 32px;
+}
+.dasboard-calender #modal-view-event-add {
+    display: none !important;
+}
+
+
+/*=================main-table=====================*/
+
+.main-dash-board-work-input-time-sheet-custom .table {
+    margin-top: 40px;
+}
+.main-dash-board-work-input-time-sheet-custom .table .thead-light th {
+    background-color: #353841;
+    color: #fff;
+    font-weight: 500;
+    border-right: 6px solid #fff;
+    font-size: 14px;
+}
+.main-dash-board-work-input-time-sheet-custom .table .thead-light th:last-child{
+	border-right: 0;
+}
+.main-dash-board-work-input-time-sheet-custom .table {
+    margin-top: 40px;
+    border: 1px solid #acacac;
+}
+.main-dash-board-work-input-time-sheet-custom {
+    position: relative;
+}
+.main-dash-board-work-input-time-sheet-custom::before{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	background-color: #acacac;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+.main-dash-board-work-input-time-sheet-custom select {
+    padding-left: 2px;
+    font-size: 14px;
+}
+.main-dash-board-work-input-time-sheet-custom input {
+    width: 160px;
+	font-size: 14px;
+}
+.addBtn {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-61%);
+	background-color: #7d88ee;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 32px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+.main-dash-board-work-input-time-sheet-custom tr td:last-child {
+    position: relative;
+}
+.main-dash-board-work-input-time-sheet-custom tr td:last-child a {
+    
+}
+.dlt-btn-dp {
+    background-color: red;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    line-height: 31px;
+    right: -40px;
+	position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.custom-footer {
+    background-color: #f1f1f1;
+    position: relative;
+    z-index: 99;
+    text-align: center;
+	margin-top: 60px;
+}
+.custom-footer p {
+    color: #000;
+}
+.custom-client-details {
+    padding-top: 100px;
+    margin-bottom: 40px;
+}
+.media-body.custom-client-media-content h6 {
+    font-size: 12px;
+    color: #6a6a6a;
+    font-weight: 400;
+}
+.custom-client-media-content h4 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 18px;
+}
+.client-dashboard-main-content {
+    background-color: #f4f4f4;
+    padding: 24px 0px 30px 24px;
+    position: relative;
+}
+.client-dashboard-main-content::after{
+	content: '';
+	position: absolute;
+	right: -4000px;
+	top: 0;
+	height: 100%;
+	width: 4000px;
+	background-color: #f4f4f4;
+}
+main.custom-dahboard-main {
+    overflow-x: hidden;
+}
+.client-dashboard-main-left h5 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #010101;
+    margin-bottom: 20px;
+}
+.client-dashboard-details-list ul li {
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    padding: 26px 12px 26px 42px;
+    font-size: 20px;
+    font-weight: 400;
+    position: relative;
+}
+.client-dashboard-details-list ul li ul {
+    float: right;
+    margin-top: -13px;
+}
+.client-dashboard-details-list ul li ul li {
+    background-color: transparent;
+    margin-bottom: 0;
+    padding: 0;
+    display: inline-block;
+    margin-left: -31px;
+}
+.client-dashboard-details-list ul li ul li img {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 4px solid #e5e6e6;
+}
+.client-dashboard-details-list ul li span {
+    position: absolute;
+    left: 12px;
+    top: 24px;
+}
+.client-dashboard-details-list ul li span img {
+    height: 22px;
+}
+.varrient-boses h5 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 22px;
+}
+.varrient-boses ul {
+    background-color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 26px 12px;
+    border-radius: 6px;
+}
+.varrient-boses ul li {
+    display: inline-block;
+    width: 49%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 17px;
+    color: #9f9f9f;
+    margin-bottom: 16px;
+	position: relative;
+}
+.varrient-boses ul li span {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 6px;
+}
+.varrient-boses ul li:last-child {
+    margin-bottom: 0;
+}
+.upcoming-holiday h5 {
+    font-size: 18px;
+    margin-bottom: 0;
+    color: #686868;
+    font-weight: 500;
+}
+.varrient-boses ul li:first-child::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #adadad;
+    top: 4px;
+}
+.apply-varrient-btn {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: rgb(60,60,160);
+    background: linear-gradient(230deg, rgba(60,60,160,1) 0%, rgba(80,84,186,1) 46%, rgba(120,131,235,1) 100%);
+    color: #fff;
+    padding: 8px 22px;
+    border-radius: 6px;
+}
+.inner-head-brd {
+    padding-top: 100px;
+    margin-bottom: 60px;
+	position: relative;
+}
+.inner-head-brd h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+}
+.inner-head-brd ul li a {
+    font-size: 14px;
+	color: #000;
+	position: relative;
+}
+.inner-head-brd ul li a::after {
+    content: '/';
+    position: absolute;
+    right: -14px;
+    top: 1px;
+    font-size: 12px;
+}
+.inner-head-brd ul li {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 18px;
+	color: #000;
+}
+.custom-employee-profile {
+    background-color: #f8f8f8;
+    padding: 40px 30px;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    box-shadow: 0px -2px 7px rgba(0,0,0,0.16);
+}
+.em-pro-main-media img {
+    border-radius: 4px;
+}
+.em-pro-main-details h4 {
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+    margin-bottom: 12px;
+}	
+.em-pro-main-details .media-body p {
+    line-height: 20px;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+.employee-id {
+    font-size: 13px;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 16px;
+    display: block;
+}
+.snd-msg-emp {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: rgb(60,60,160);
+    background: linear-gradient(230deg, rgba(60,60,160,1) 0%, rgba(80,84,186,1) 46%, rgba(120,131,235,1) 100%);
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 16px;
+}
+.common-details li {
+    position: relative;
+    padding-left: 160px;
+    margin-bottom: 10px;
+}
+.common-details li span {
+  position: absolute;
+  left: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #070707;
+}
+.common-details li a span {
+  position: unset;
+}
+.common-details li a {
+    color: #4243a7;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+}
+.common-details li p {
+    line-height: 28px;
+}
+.em-pro-main-details {
+    position: relative;
+}
+.em-pro-main-details::after {
+    content: '';
+    position: absolute;
+    right: 30px;
+    top: -6px;
+    height: 110%;
+    width: 1px;
+    border-right: 1px dashed #000;
+}
+.common-details li a span img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: contain;
+    margin-right: 6px;
+}
+.contact-pin {
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    height: 28px;
+    width: 28px;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 28px;
+    cursor: pointer;    
+    top: -25px;
+	
+}
+.contact-pin span {
+    color: #808080;
+    font-size: 12px;
+	transform: rotate(38deg);
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+.contact-pin:hover span{
+	transform: rotate(90deg);
+	color: #4243a7
+}
+.nav-tabs.dp-information-tab li {
+    display: inline-block;
+}
+.nav-tabs.dp-information-tab li a {
+    font-size: 12px;
+    padding: 8px 24px;
+    color: #000;
+	border: 0;
+	border-bottom: 2px solid transparent;
+}
+.nav-tabs.dp-information-tab li a.active {
+    color: #000;
+    border: 0;        
+    border-bottom: 2px solid #4749ae;
+	background-color: transparent;
+}
+.nav-tabs.dp-information-tab {
+    border: 0;
+    background-color: #f8f8f8;
+    display: block;
+    padding-left: 20px;
+    padding-bottom: 1px;
+    border-radius: 0 0 6px 6px;
+    padding-top: 2px;
+    box-shadow: 0px 0px 9px rgba(0,0,0,0.16);
+}
+.custom-profile-information-tab {
+    border-top: 2px solid #cacaca;
+}
+.information-tab-content {
+    margin-top: 30px;
+}
+.common-info-inner-wrap {
+    background-color: #f8f8f8;
+    border-radius: 6px;
+    padding: 30px 20px;
+    position: relative;
+    max-height: 414px;
+    margin-bottom: 30px;
+    box-shadow: 0px 1px 6px rgba(0,0,0,0.08);
+    min-height: 262px;
+}
+.common-info-inner-wrap h4 {
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 26px;
+}
+.common-info-inner-wrap .common-details li{
+	padding-left: 240px
+}
+.common-info-inner-wrap .common-details li {
+    padding-left: 280px;
+}
+.contact-pin {right: 15px;top: 15px;}
+.common-details.per-info-list h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 12px;
+}
+.common-info-inner-wrap.emergency-info ul {
+    border-bottom: 2px solid #ababab;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.common-info-inner-wrap.emergency-info ul:last-child {
+    border-bottom: 0;
+	padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+.common-info-inner-wrap.emergency-info ul:last-child li:last-child{
+	margin-bottom: 0;
+}
+.emergency-info ul li span{
+	color: #565555;
+}
+.custom-education-exp-list li p {
+    line-height: 22px;
+}
+.custom-education-exp-list {
+    padding-left: 30px;
+	position: relative;
+}
+.custom-education-exp-list::before{
+	content: '';
+	position: absolute;
+	left: 0;
+	height: 100%;
+	width: 3px;
+	background-color: #d3d3d3;
+}
+.custom-education-exp-list li {
+    margin-bottom: 20px;
+}
+.custom-education-exp-list h6{
+	position: relative;
+}
+.custom-education-exp-list h6::before {
+    content: '';
+    position: absolute;
+    left: -36px;
+    top: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #d3d3d3;
+    border-radius: 50%;
+}
+.custom-education-exp-list p {
+    margin-top: 6px;
+}
+.custom-education-exp-list.experience-custom li {
+    margin-bottom: 47px;
+}
+.custom-login-left {
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+	position: relative;
+}
+.custom-login-right {
+    min-height: 100vh;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+	position: relative;
+	z-index: 9;
+}
+.custom-login-right::after{
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(7,66,94,0.72);
+    z-index:-1;
+}
+
+.custom-login-left-wrap {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 60px 0px 100px;
+}
+.custom-login-right-wrap {
+	width: 100%;
+    top: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+    padding: 0 100px 0 60px;
+}
+.login-content h3 {
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 58px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.login-content p {
+    font-size: 20px;
+    line-height: 32px;
+    color: #616161;
+}
+.custom-login-form {
+    margin-top: 38px;
+}
+.custom-login-form form input {
+    background-color: #fff;
+    border: 0;
+    height: 62px;
+    border-radius: 4px;
+    box-shadow: 0px 1px 8px rgba(0,0,0,0.16);
+    margin-bottom: 22px;
+}
+.dp-remember input {
+    height: auto !important;
+}
+.dp-remember label {
+    font-size: 16px;
+    color: #000;
+}
+.dp-forget-pw {
+    text-align: right;
+}
+.dp-forget-pw a{
+	color: #000;
+	font-size: 16px;
+}
+.dp-login-btn {
+    width: 100%;
+    background-color: #07425e;
+    border: 0;
+    font-size: 22px;
+    padding: 16px 0;
+    border-radius: 50px;
+}
+.dp-register-ac p {
+    font-size: 18px;
+    color: #616161;
+}
+.dp-register-ac p a{
+	color: #07425e
+}
+.dp-register-ac {
+    text-align: center;
+    margin-top: 14px;
+}
+.custom-login-right-wrap h5 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.custom-login-right-wrap h3 {
+    font-size: 49px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 65px;
+    margin-bottom: 40px;
+}
+.video-btn {
+    border: 2px solid #fff;
+    color: #fff;
+    position: relative;
+    padding: 14px 30px 14px 50px;
+    display: inline-block;
+}
+.video-btn span.play-btn {
+    position: absolute;
+    background-color: #fff;
+    height: 22px;
+    width: 22px;
+    color: #133e52;
+    font-size: 9px;
+    text-align: center;
+    border-radius: 50%;
+    text-indent: 2px;
+    line-height: 23px;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.custom-login-form form input[type="password"]{
+	background-color: #fff !important
+}
+.custom-register {
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: 90% 40%;
+    position: relative;
+}
+.register-heading h3 {
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 50px;
+    margin-bottom: 0px;
+}
+.reg-form {
+    margin-top: 26px;
+}
+.register-heading p {
+    font-size: 20px;
+    line-height: 32px;
+    color: #616161;
+}
+.reg-form input {
+    border: 0;
+    border-bottom: 2px solid #0f1b3a;
+    border-radius: 0;
+    background-color: transparent;
+    padding-left: 50px;
+    height: 44px;
+    font-size: 18px;
+}
+.reg-form .form-group {
+    position: relative;
+    margin-bottom: 22px;
+}
+.custom-input-icon img {
+    height: 20px;
+}
+.custom-input-icon {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}
+.dp-reg-btn {
+    background-color: #25a3dc;
+    color: #fff;
+    font-size: 22px;
+    padding: 12px 46px;
+}
+.reg-wrap {
+    margin-top: 80px;
+}
+.custom-register::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: url('../images/reg-p-left-top-cap.png');
+    width: 291px;
+    height: 81px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.custom-register::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-image: url('../images/reg-p-right-btm-cap.png');
+    width: 291px;
+    height: 74px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.add-employee-btn {
+    background-color: #7883eb;
+    color: #fff;
+    padding: 14px 35px 14px 70px;
+    border-radius: 50px;
+    font-weight: 600;
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+}
+.add-employee-btn span.add-icon {
+    background-color: #fff;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 50%;
+    left: 20px;
+    top: 11px;
+    line-height: 31px;
+}
+.employee-search-frm-wrap form input {
+    height: 52px;
+    border: 1px solid #585858;
+    font-size: 14px;
+}
+.employee-search-frm-wrap form select {
+    border: 1px solid #585858;
+    height: 52px !important;
+    padding-top: 23px;
+    font-size: 12px;
+	color: #000;
+}
+.employee-search-frm-wrap form .form-group {
+    position: relative;
+}
+.employee-search-frm-wrap form span.des {
+    position: absolute;
+    left: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+    top: 5px;
+}
+.employee-search-btn {
+    background-color: #1fbd5e;
+    color: #fff;
+    font-weight: 500;
+    width: 100%;
+    height: 52px;
+}
+.employee-profiles-thubmnail {
+    background-color: #f4f4f4;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+	position: relative;
+	transition: all 0.3s ease-in-out;
+}
+.employee-thumb-toggle button {
+    background-color: transparent;
+    border: 0;
+    color: #000;
+}
+.employee-thumb-toggle button::after{
+	display: none;
+}
+.dropdown.employee-thumb-toggle {
+    position: absolute;
+    right: 6px;
+    top: 8px;
+}
+.employee-image img {
+    height: 96px;
+    width: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.employee-image {
+    margin-bottom: 12px;
+}
+.employee-content a {
+    color: #000;
+    font-weight: 600;
+    font-size: 20px;
+	transition: all 0.3s ease-in-out;
+}
+.employee-content h6 {
+    color: #878787;
+    font-size: 11px;transition: all 0.3s ease-in-out;
+}
+.employee-profiles-thubmnail:hover{
+	background-color: #7883eb;
+}
+.employee-profiles-thubmnail:hover a{
+	color: #fff;
+}
+.employee-profiles-thubmnail:hover h6{
+	color: #f1f1f1;
+}
+.employee-profiles-thubmnail:hover .dropdown-menu a{
+	color: #333
+}
+.employee-search-frm-wrap {
+    margin-bottom: 30px;
+}
+.salary-slip-date-submit-btn {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: rgb(60,60,160);
+    background: linear-gradient(230deg, rgba(60,60,160,1) 0%, rgba(80,84,186,1) 46%, rgba(120,131,235,1) 100%);
+    color: #fff;
+    padding: 10px 72px;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+.salary-slip-from-wrap select {
+    border: 1px solid #333;
+    font-size: 15px;
+}
+.custom-salary-form {
+    background-color: #fdfdfd;
+    padding: 40px 20px 24px;
+}
+
+.salary-slip-download-btn{
+	font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: rgb(60,60,160);
+    background: linear-gradient(230deg, rgba(60,60,160,1) 0%, rgba(80,84,186,1) 46%, rgba(120,131,235,1) 100%);
+    color: #fff;
+    padding: 10px 72px;
+    border-radius: 6px;
+    margin-top: 20px;
+	border: 0;
+	cursor: pointer
+}
+.projects-btn li a::after {
+    display: none;
+}
+.projects-btn {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+}
+.projects-btn button.dropdown-toggle::after {
+    display: none;
+}
+.projects-btn button.dropdown-toggle {
+    background-color: #ededed;
+    color: #000;
+    border: 2px solid #000;
+    font-size: 20px;
+    padding: 2px 12px;
+}
+.creat-project-btn {
+    background-color: #f97424;
+    color: #fff !important;
+    font-size: 16px !important;
+    padding: 8px 36px 10px 50px;
+    border-radius: 50px;
+    font-weight: 600;
+}
+.creat-project-btn span {
+    position: absolute;
+    left: 18px;
+    font-size: 27px;
+    top: 7px;
+}
+.project-search-frm-wrap form input {
+    height: 52px;
+    border: 1px solid #d6d6d6;
+    font-size: 14px;
+    background-color: #f6f6f6;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+}
+.project-search-frm-wrap form .form-group {
+    position: relative;
+}
+.project-search-frm-wrap form select {
+    border: 1px solid #d6d6d6;
+    height: 52px !important;
+    padding-top: 23px;
+    font-size: 12px;
+    color: #000;
+	background-color: #f6f6f6;
+	box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+    
+} 
+.project-search-frm-wrap form span.des {
+
+    position: absolute;
+    left: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+    top: 5px;
+
+}
+.custom-project-wrap {
+    background-color: #f6f6f6;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+    padding: 10px 10px 24px;	
+}
+.custom-project-wrap a.project-title {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+}
+.custom-project-wrap h6 {
+    font-size: 10px;
+    color: #858585;
+    font-weight: 400;
+    margin: 6px 0 12px;
+}
+.custom-project-wrap h6 span.project-count {
+    color: #333;
+}
+.custom-project-wrap p {
+    font-size: 10px;
+    color: #858585;
+    line-height: 18px;
+}
+.custom-project-wrap h5 {
+    font-size: 14px;
+    margin: 10px 0 4px;
+    font-weight: 600;
+    color: #333;
+}
+.custom-project-wrap a.project-leader-img img {
+    height: 36px;
+    width: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.custom-project-wrap a.project-leader-img {
+    margin-top: 10px;
+    display: block;
+}
+.project-team-list li a img {
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.project-team-list li {
+  display: inline-block;
+  margin-left: -14px;
+	vertical-align: top;
+}
+.project-team-list li:first-child {
+  margin-left: 0;
+}
+.project-team-list li:last-child {
+  margin-left: 0;
+}
+.project-team-list li:last-child a {
+    background-color: #f97424;
+    height: 35px;
+    width: 35px;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 34px;
+}
+.project-thumb-toggle button {
+    background-color: transparent;
+    border: 0;
+    color: #000;
+    font-size: 12px;
+    padding: 4px 6px;
+}
+.project-thumb-toggle button::after{
+	display: none;
+}
+.dropdown.project-thumb-toggle {
+    position: absolute;
+    right: 19px;
+    top: 12px;
+}
+
+
+/*=======================progress-bar-project========================*/
+
+.progress-bar {
+  width: 0;
+  -webkit-animation: progress 1.5s ease-in-out forwards;
+          animation: progress 1.5s ease-in-out forwards;
+}
+.progress-bar .title {
+  opacity: 0;
+  -webkit-animation: show 0.35s forwards ease-in-out 0.5s;
+          animation: show 0.35s forwards ease-in-out 0.5s;
+}
+
+@-webkit-keyframes progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@-webkit-keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.custom-project-progress .progress-bar{
+	background-color: #55ce63;
+}
+.custom-dp-progress .progress {
+    height: 3px;
+}
+.dp-progress-value p {
+    font-size: 12px;
+    font-weight: 600;
+    color: #55ce63;
+    text-align: right;
+}
+
+/*==========================Apply Job===========================*/
+
+.custom-apply-job {
+    background-color: #f6f6f6;
+    min-height: 100vh;
+}
+.apply-btn-top {
+    text-align: right;
+    margin-top: 60px;
+}
+.apply-btn-top a {
+    background-color: #7883eb;
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 52px;
+    display: inline-block;
+    border-radius: 50px;
+}
+.apply-job-wrap {
+    background-color: #fff;
+    border: 1px solid #717171;
+    border-radius: 10px;
+    text-align: center;
+    padding: 30px;
+	margin-top: 80px;
+}
+.applicant-img img {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+}
+.applicant-name h4 {
+    font-size: 20px;
+    margin-top: 12px;
+}
+.apply-job-form-ex-login form {
+    margin-top: 20px;
+}
+.apply-job-form-ex-login label {
+    display: block;
+    text-align: left;
+    font-size: 15px;
+}
+.applicant-en-btn {
+    display: block;
+    width: 100%;
+    background: rgb(120,131,235);
+    background: linear-gradient(94deg, rgba(120,131,235,1) 0%, rgba(152,162,255,1) 100%);
+    border-radius: 0;
+    border: 0;
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 12px;
+}
+.apply-job-form-ex-login .form-group input {
+    height: 58px;
+    border-radius: 0;
+}
+.diffrent-login {
+    font-size: 15px;
+    margin-top: 18px;
+    display: block;
+}
+.diffrent-login a{
+	color: #0c1999;
+}
+
+
+/*=======================================categories================================*/
+
+/*=======================================categories-table-css-start=====================================*/
+
+.dataTables_length,
+.dataTables_wrapper {
+  font-size: 1.6rem;
+}
+.dataTables_length select,
+.dataTables_length input,
+.dataTables_wrapper select,
+.dataTables_wrapper input {
+  background-color: #f9f9f9;
+  border: 1px solid #999;
+  border-radius: 4px;
+  height: 3rem;
+  line-height: 2;
+  font-size: 1.8rem;
+  color: #333;
+}
+.dataTables_length .dataTables_length,
+.dataTables_length .dataTables_filter,
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+  margin-top: 30px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  display: inline-flex;
+}
+
+.paginate_button {
+  min-width: 4rem;
+  display: inline-block;
+  text-align: center;
+  padding: 1rem 1.6rem;
+  margin-top: -1rem;
+  border: 2px solid lightblue;
+}
+.paginate_button:not(.previous) {
+  border-left: none;
+}
+.paginate_button.previous {
+  border-radius: 8px 0 0 8px;
+  min-width: 7rem;
+}
+.paginate_button.next {
+  border-radius: 0 8px 8px 0;
+  min-width: 7rem;
+}
+.paginate_button:hover {
+  cursor: pointer;
+  background-color: #eee;
+  text-decoration: none;
+}
+#example_length {
+    display: none;
+}
+#example_filter {
+    display: none;
+}
+.custom-categories-table table.dataTable thead .sorting_asc::after {
+    content: "\f039";
+}
+.custom-categories-table  table.dataTable thead .sorting_desc::after {
+    content: "\f038";
+}
+.custom-categories-table table.dataTable thead .sorting::after {
+    content: "\f039";
+}
+.custom-categories-table table th {
+    font-size: 16px;
+}
+.custom-categories-table table td {
+    font-size: 16px;
+}
+
+.custom-categories-table .project-thumb-toggle{
+	position: unset;
+}
+.custom-categories-table  .dataTables_info {
+	display: inline-block;
+	font-size: 16px;
+	width: 40%;
+	vertical-align: middle;
+	padding-top: 0 !important;
+}
+#example_paginate {
+    display: inline-block;
+    width: 60%;
+    vertical-align: middle;
+}
+#example_paginate .paginate_button {
+    font-size: 14px;
+    padding: 10px 0;
+	background-color: #7883eb;
+border: 1px solid #7883eb;
+color: #fff;
+    
+}
+#example_paginate span .paginate_button{
+	background-color: #fff;
+	color: #111;
+	border-top: 1px solid #7883eb;
+	border-bottom: 1px solid #7883eb;
+}
+#example_paginate .paginate_button.previous{
+	border-radius: 50px 0px 0px 50px;
+}
+#example_paginate .paginate_button.next{
+	border-radius: 0px 50px 50px 0px;
+}
+.custom-categories-table table#example{
+	margin-bottom: 40px !important;
+}
+/*=======================================categories-table-css-end=====================================*/
+.custom-salary-table th h5 {
+    font-size: 14px;
+}
+.custom-salary-table th h5 span {
+    font-size: 11px;
+    color: #7b7b7b;
+	display: block;
+}
+.custom-salary-table table tr td {
+    font-size: 14px;
+	vertical-align: middle
+}
+.custom-salary-table table thead tr th {
+    font-size: 15px;
+    color: #2a2a2a;
+    font-weight: 500;
+    border: 0;
+    padding-top: 16px !important;
+    padding-bottom: 16px;
+}
+.custom-salary-table table tr td h4 {
+    font-size: 12px;
+    background-color: #fff;
+    padding: 8px 14px;
+    text-align: center;
+    border-radius: 30px;
+    border: 1px solid #6e6e6e;
+}
+.custom-salary-table table tr td span.salary-amt {
+    font-weight: 600;
+}
+.genarate-slip {
+    background-color: #7883eb;
+    color: #fff;
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 4px;
+}
+.custom-salary-table table tr td .dropdown.project-thumb-toggle{
+	position: unset;
+}
+.custom-salary-table table thead tr {
+    background-color: #f9f9f9;
+}
+.custom-salary-table tbody tr:nth-of-type(2n+1) {
+    background-color: #e8e8e8;
+}
+.custom-salary-table table tr td {
+    padding-top: 16px;
+    padding-bottom: 16px;
+	border-top: 0;
+}
+.custom-salary-table table tr th{
+	border-top: 0;
+}
+.custom-salary-table table tr th{
+	padding-top: 16px;
+    padding-bottom: 16px;
+}
+.custom-salary-table table tr td:nth-child(3) {
+    font-size: 12px;
+}
+.custom-salary-table tbody tr{
+	background-color: #f9f9f9;
+}
+.custom-salary-table table{
+	border-collapse: separate;
+	border-spacing: 0 14px;
+}
+
+/*============================================Custom-employee-form-step-css(21-02-2022)===================================*/
+
+.employee-form {
+  background-color: #f8f8f8;
+  padding: 40px 30px;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  box-shadow: 0px -2px 7px rgba(0,0,0,0.16);
+}
+.employee-form form h4 {
+  font-size: 20px;
+  color: #000;
+  font-weight: 600;
+  margin-bottom: 12px;
+	margin-left: 0;
+}
+.employee-form input {
+  background-color: #fff;
+  border: 0;
+  border-radius: 0;
+  height: 43px;
+  font-size: 13px;
+  box-shadow: 0px 2px 2px rgba(0,0,0,0.06);
+}
+.employee-form select {
+  background-color: #fff;
+  border: 0;
+  border-radius: 0;
+  height: 43px;
+  font-size: 13px;
+  box-shadow: 0px 2px 2px rgba(0,0,0,0.06);
+}
+.employee-form label {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.custom-devider-dp {
+  display: block;
+  width: 100%;
+  background-color: #f1f1f1;
+  height: 1px;
+  margin: 20px 0;
+}
+.dp-em-nxt-btn {
+  background-color: #7883eb;
+  color: #fff;
+  border-radius: 50px;
+  padding: 12px 60px;
+}
+.dp-family-remove {
+  text-align: right;
+}
+.dp-family-remove .dp-cus-remove {
+  background-color: #e31414;
+  color: #fff;
+  height: 36px;
+  display: inline-block;
+  width: 36px;
+  border-radius: 50%;
+  border: 0;
+  margin-top: 32px;
+  padding-top: 1px;
+}
+.dp-cus-add-member {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  background: rgb(60,60,160);
+  background: linear-gradient(230deg, rgba(60,60,160,1) 0%, rgba(80,84,186,1) 46%, rgba(120,131,235,1) 100%);
+  color: #fff;
+  padding: 10px 23px;
+  border-radius: 6px;
+  display: inline-block;
+  border: 0;
+}
+.add-member-btn-wrap {
+  text-align: center;
+  margin-top: 20px;
+}
+.dp-custom-multifields .multi-field {
+  margin-bottom: 20px;
+}
+.dp-custom-multifields .multi-field-2 {
+  margin-bottom: 20px;
+}
+
+
+/*===================================sudipa-css-leave-form-start(21-02-2022)=========================================*/
+
+.text h2{padding-bottom: 10px;}
+.text p{line-height: 20px;}
+.text hr{padding-bottom: 15px;}
+.emp-form .form-check {
+  display: inline-block;
+  width: 40%; 
+	margin-bottom: 5px;
+}
+.emp-form{padding-left: 0;}
+.emp-form .form-check label{margin-top: 0;}
+.emp-form .calender {
+  margin-top: 20px;
+}
+.send button{margin-top: 30px;
+  padding: 7px 32px;display: inline-block;
+  border: none;
+  background-color: #7883eb;
+  border-radius: 50px;
+  color: #fff; 
+}
+.send {
+  text-align: center;
+}
+
+.emp-form label {
+  font-size: 14px;
+}
+.emp-form h6{font-size: 14px;font-weight: 400;}
+.emp-form .form-check .form-check-input {
+  margin-top: 6px;
+}
+
+/*===================================sudipa-css-leave-form-end(21-02-2022)=========================================*/
+
+/*===================================sudipa-css-leave-table-start(21-02-2022)=========================================*/
+
+.leave-status-btn {
+    background-color: #7883eb;
+    color: #fff;
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    min-width: 40px;
+}
+.pending-btn{background-color: rgb(233, 159, 22);}
+.decline-btn{background-color: rgb(236, 15, 15);}
+.Successful-btn{background-color: rgb(5, 138, 5);}
+a.leave-status-btn {
+  min-width: 80px;
+  display: inline-block;
+  text-align: center;
+}
+.leave-table tr td h5{font-size: 13px;}
+.custom-leave-table table tr td .dropdown.project-thumb-toggle{
+	position: unset;
+}
+.custom-leave-table table thead tr {
+    background-color: #f9f9f9;
+}
+.custom-leave-table tbody tr:nth-of-type(2n+1) {
+    background-color: #e8e8e8;
+}
+.custom-leave-table table tr td {
+    padding-top: 16px;
+    padding-bottom: 16px;
+	border-top: 0;
+}
+.custom-leave-table table tr th{
+	border-top: 0;
+}
+.custom-leave-table table tr th{
+	padding-top: 16px;
+    padding-bottom: 16px;
+}
+.custom-leave-table table tr td:nth-child(3) {
+    font-size: 12px;
+}
+.custom-leave-table tbody tr{
+	background-color: #f9f9f9;
+}
+.custom-leave-table table{
+	border-collapse: separate;
+	border-spacing: 0 14px;
+}
+/*======================================= swagata chat (start 21.02.22)=====================================*/
+.font-size-15 {
+  font-size: 15px;
+}
+.font-size-14 {
+  font-size: 14px;
+}
+.font-size-12 {
+  font-size: 12px;
+}
+.chat-bg-grey {
+  background-color: #f8f8f8;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.10);
+}
+
+.chat-bg-grey .col-12 {
+  padding-right: 0;
+}
+.chat-title {
+  position: relative;
+  padding: 0 15px;
+  border-bottom: 1px solid #e1e4e8;
+}
+.chat-left-icon, .chat-left-title, .chat-noti-dropdown {
+  display: inline-block;
+  max-width: 100%;
+}
+.chat-left-icon-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+.chat-left-title h5 {
+  color: #000;
+}
+.chat-left-title.media-body p {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.chat-noti-dropdown .dropdown.project-thumb-toggle {
+  position: absolute;
+  right: 19px;
+  top: 24px;
+}
+
+span.activity-icon {
+  width: 10px;
+  display: inline-block;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(129, 128, 128);
+}
+.bg-green {
+  background-color: #1fbd5e !important;
+}
+.chat-search .input-group .form-control {
+  display: block;
+  padding: 4px 12px;
+}
+.chat-search input {
+  background-color: #fff;
+  border: 0;
+  color: #111;
+  font-size: 12px;
+  height: 35px;
+  border-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  padding-left: 30px;
+}
+
+.chat-search .input-group-append button {
+  background-color: #7883eb;
+  border: 0;
+  padding: 0px 20px 0px 14px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.chat-recent .recent-heading {
+  padding-left: 7px;
+}
+
+.chat-recent-content {
+  height: 305px;
+  overflow-y: scroll;
+}
+
+.chat-recent-content {
+  scrollbar-width: thin;
+  scrollbar-color: #7883eb #fff;
+}
+
+.chat-recent-content::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+.chat-recent-content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.chat-recent-content::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.chat-left-icon-img-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.chat-time p  {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+/* right side */
+.chat-conversation {
+  scrollbar-width: thin;
+  scrollbar-color: #7883eb #fff;
+}
+.chat-conversation {
+  height: 337px;
+  overflow-y: scroll;
+}
+.chat-conversation .chat-day-title  {
+  position: relative;
+  text-align: center;
+  margin-bottom: 24px;
+	margin-right: 7px;
+}
+
+.chat-conversation .chat-day-title h5 {
+  display: inline-block;
+  font-size: 13px;
+  background-color: #f8f8f8;
+  position: relative;
+  z-index: 1;
+  padding: 6px 24px;
+}
+
+.chat-conversation .chat-day-title::before {
+  content: "";
+position: absolute;
+width: 100%;
+height: 1px;
+left: 0;
+right: 0;
+background-color: rgb(222, 226, 230);
+top: 14px;
+}
+.chat-main .row {
+  padding-bottom: 20px;
+}
+.conversation-input .row {
+  padding-bottom: 0;
+}
+.conversation-list .conversation-text {
+  
+  font-size: 12px;
+  font-weight: 600;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.conversation-list .chat-receiver {
+  padding-right: 10px;
+}
+
+.conversation-list .ctext-wrap {
+  background: #7883eb;
+  border-radius: 0 6px 6px 6px;
+  display: inline-block;
+  padding: 12px;
+  position: relative;
+  color: #fff;
+}
+
+.conversation-list .rtext-wrap {
+  background: #e9e9e9;
+  border-radius: 6px 0px 6px 6px;
+  display: inline-block;
+  padding: 12px;
+  position: relative;
+  color: #2a2a2a;
+}
+
+.conversation-list .ctext-wrap::after {
+  content: " ";
+  position: absolute;
+  right: 100%;
+  top: 0;
+  border: solid transparent;
+  border-right-color: #7883eb;
+  border-top-color: #7883eb;
+  border-width: 5px;
+}
+.conversation-list .rtext-wrap::after {
+  content: " ";
+  position: absolute;
+  left: 100%;
+  top: 0;
+  border: solid transparent;
+  border-left-color: #e9e9e9;
+  border-top-color: #e9e9e9;
+  border-width: 5px;
+}
+
+.conversation-list .ctext-wrap p, .conversation-list .rtext-wrap p {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 0;
+  padding-top: 4px;
+  color: #fff;
+}
+
+.conversation-list .rtext-wrap p  {
+  color: #2a2a2a;
+}
+
+.conversation-list .conversation-text .ctime {
+  display: block;
+  font-size: 10px;
+  margin-top: 1px;
+  font-weight: 500;
+  color: #666d81;
+  margin-left: 1px;
+}
+
+.conversation-list .conversation-text .rtime {
+  display: block;
+  font-size: 10px;
+  margin-top: 1px;
+  font-weight: 500;
+  color: #666d81;
+  text-align: right;
+  margin-right: 1px;
+}
+
+.chat-input {
+  border-radius: 30px;
+  background-color: #e9e9e9 !important;
+  border-color: #e9e9e9 !important;
+  padding-right: 120px;
+}
+
+.form-control.chat-input  {
+  font-size: 13px;
+}
+
+.chat-area .btn {
+  font-size: 13px;
+  border-radius: 50px;
+  background-color: #7883eb;
+  border-color: #7883eb;
+  font-weight: 500;
+}
+.input-group {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.chat-area .form-control {
+  border-radius: 50px;
+  border: none;
+  background-color: #e9e9e9;
+  font-size: 13px;
+  padding-left: 20px;
+}
+.cus-recent-chat-list {
+  padding: 0 7px;
+  border-bottom: 1px solid #e3e6ea;
+}
+/*======================================= swagata chat (end 21.02.22)=====================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

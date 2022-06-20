@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel='stylesheet' href='https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css'>
+<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<title>Codearts Dashboard</title>
+</head>
+<body>
+<!--
+    <div id="custom-owl" class="owl-carousel owl-theme">
+    	<div class="item"><h4>1</h4></div>
+	</div>
+-->
+<header class="custom-header"> 
+  <!--
+  <nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="#">CUstom_logo</a>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active"> <a class="nav-link" href="#">Home</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li>
+        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a> </div>
+        </li>
+        <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li>
+      </ul>
+    </div>
+  </nav>
+-->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-6 align-self-center">
+        <div class="dashboard-header-left"> <a href="#" class="logo"> <img src="images/logo-main.png" class="img-fluid" alt="Codearts Logo"> </a> </div>
+      </div>
+      <div class="col-lg-3 col-md-6 align-self-center">
+        <div class="header-search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Here">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button"> <i class="fa fa-search"></i> </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 align-self-center">
+        <ul class="notification-chat">
+          <li><a href=""><img src="images/notification-icon-header.png" alt="Notifications"><span>3</span></a></li>
+          <li><a href="#"><img src="images/chat-icon-header.png" alt="Chat"><span>2</span></a></li>
+        </ul>
+        <ul class="header-admin">
+          <div class="dropdown">
+            <button class="dropdown-toggle header-admin-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/admin-img.jpg" alt="User"></button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a> </div>
+            <span class="active"></span> </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="custom-main-aside-menu">
+          <ul class="dp-left-menu">
+            <li class="active"><a href="#"><span><img src="images/menu-icon-1.png" alt=""></span> Home</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-2.png" alt=""></span> Profile</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-3.png" alt=""></span> Leave</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-4.png" alt=""></span> Holidays</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-5.png" alt=""></span> Salary</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-6.png" alt=""></span> Pay Slip</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-7.png" alt=""></span> Projects</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-8.png" alt=""></span> Time Sheet</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-9.png" alt=""></span> Chat</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-10.png" alt=""></span> Notices</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-11.png" alt=""></span> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <section class="dashboard-cal-sheet">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="dasboard-calender">
+                <div class="card">
+                  <div class="card-body p-0">
+                    <div id="calendar"></div>
+                  </div>
+                </div>
+                <!-- calendar modal -->
+                <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <h4 class="modal-title"><span class="event-icon"></span><span class="event-title"></span></h4>
+                        <div class="event-body"></div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <form id="add-event">
+                        <div class="modal-body">
+                          <h4>Add Event Detail</h4>
+                          <div class="form-group">
+                            <label>Event name</label>
+                            <input type="text" class="form-control" name="ename">
+                          </div>
+                          <div class="form-group">
+                            <label>Event Date</label>
+                            <input type="text" class="datetimepicker form-control" name="edate">
+                          </div>
+                          <div class="form-group">
+                            <label>Event Description</label>
+                            <textarea class="form-control" name="edesc"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label>Event Color</label>
+                            <select class="form-control" name="ecolor">
+                              <option value="fc-bg-default">fc-bg-default</option>
+                              <option value="fc-bg-blue">fc-bg-blue</option>
+                              <option value="fc-bg-lightgreen">fc-bg-lightgreen</option>
+                              <option value="fc-bg-pinkred">fc-bg-pinkred</option>
+                              <option value="fc-bg-deepskyblue">fc-bg-deepskyblue</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label>Event Icon</label>
+                            <select class="form-control" name="eicon">
+                              <option value="circle">circle</option>
+                              <option value="cog">cog</option>
+                              <option value="group">group</option>
+                              <option value="suitcase">suitcase</option>
+                              <option value="calendar">calendar</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary" >Save</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="dp-weekly-time-sheet">
+                <div class="custom-heading">
+                  <h3>Weekly Employee Time Sheet</h3>
+                </div>
+                <div class="weekly-time-table-dashboard">
+                  <h4>Employee Name: <span>Jhon Doe</span></h4>
+                  <table class="table weekly-time-table-dp">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Day</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">Finish</th>
+                        <th scope="col">Breaks</th>
+                        <th scope="col">Total Hours</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">20-09-2021</th>
+                        <td class="bg-dp-drk">Monday</td>
+                        <td>10.30</td>
+                        <td>7.30</td>
+                        <td>1.20</td>
+                        <td>7.40</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">21-09-2021</th>
+                        <td class="bg-dp-drk">Tuseday</td>
+                        <td>10.30</td>
+                        <td>7.30</td>
+                        <td>1.20</td>
+                        <td>7.40</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">22-09-2021</th>
+                        <td class="bg-dp-drk">Wednesday</td>
+                        <td>10.30</td>
+                        <td>7.30</td>
+                        <td>1.20</td>
+                        <td>7.40</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">23-09-2021</th>
+                        <td class="bg-dp-drk">Thursday</td>
+                        <td>10.30</td>
+                        <td>7.30</td>
+                        <td>1.20</td>
+                        <td>7.40</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">24-09-2021</th>
+                        <td class="bg-dp-drk">Friday</td>
+                        <td>10.30</td>
+                        <td>7.30</td>
+                        <td>1.20</td>
+                        <td>7.40</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">25-09-2021</th>
+                        <td class="bg-dp-drk">Saturday</td>
+                        <td>10.30</td>
+                        <td>7.30</td>
+                        <td>1.20</td>
+                        <td>7.40</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="custom-em-signtures"> <img src="images/signature.png" alt="">
+                    <h6>Employee Signature</h6>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="custom-em-signtures"> <img src="images/signature-2.png" alt="">
+                    <h6>Employer Signature</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="main-dash-board-work-input-time-sheet-custom">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Project Id</th>
+                <th scope="col">Type</th>
+                <th scope="col">Issue No</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Remark</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="addRow">
+               <form>
+               	<th scope="row">
+               		<select class="form-control">
+					  <option>12.00 am</option>
+					  <option>12.30am</option>
+					  <option>1am</option>
+					  <option>1.30am</option>
+					  <option>2am</option>
+					  <option>2.30am</option>
+					  <option>3am</option>
+					  <option>3.30am</option>
+					  <option>4am</option>
+					  <option>4.30am</option>
+					  <option>5am</option>
+					  <option>5.50am</option>
+					  <option>6am</option>
+					  <option>6.30am</option>
+					  <option>7am</option> 
+					  <option>7.30am</option>
+					  <option>8am</option>
+					  <option>8.30am</option>
+					  <option>9am</option>
+					  <option>9.30am</option>
+					  <option>10am</option>
+					  <option>10.30am</option>
+					  <option>11am</option>
+					  <option>11.30am</option>
+					  <option>12pm</option>
+					  <option>12.30pm</option>
+					  <option>1pm</option>
+					  <option>1.30pm</option>
+					  <option>2pm</option>
+					  <option>2.30pm</option>
+					  <option>3pm</option>
+					  <option>3.30pm</option>
+					  <option>4pm</option>
+					  <option>4.30pm</option>
+					  <option>5pm</option>
+					  <option>5.30pm</option>
+					  <option>6pm</option>
+					  <option>6.30pm</option>
+					  <option>7pm</option>
+					  <option>7.30pm</option>
+					  <option>8pm</option>
+					  <option>8.30pm</option>
+					  <option>9pm</option>
+					  <option>9.30pm</option>
+					  <option>10pm</option>
+					  <option>10.30pm</option>
+					  <option>11pm</option>
+					  <option>11.30pm</option>
+					</select>
+               	</th>
+                <td>
+                	<select class="form-control">
+					  <option>12.00 am</option>
+					  <option>12.30am</option>
+					  <option>1am</option>
+					  <option>1.30am</option>
+					  <option>2am</option>
+					  <option>2.30am</option>
+					  <option>3am</option>
+					  <option>3.30am</option>
+					  <option>4am</option>
+					  <option>4.30am</option>
+					  <option>5am</option>
+					  <option>5.50am</option>
+					  <option>6am</option>
+					  <option>6.30am</option>
+					  <option>7am</option> 
+					  <option>7.30am</option>
+					  <option>8am</option>
+					  <option>8.30am</option>
+					  <option>9am</option>
+					  <option>9.30am</option>
+					  <option>10am</option>
+					  <option>10.30am</option>
+					  <option>11am</option>
+					  <option>11.30am</option>
+					  <option>12pm</option>
+					  <option>12.30pm</option>
+					  <option>1pm</option>
+					  <option>1.30pm</option>
+					  <option>2pm</option>
+					  <option>2.30pm</option>
+					  <option>3pm</option>
+					  <option>3.30pm</option>
+					  <option>4pm</option>
+					  <option>4.30pm</option>
+					  <option>5pm</option>
+					  <option>5.30pm</option>
+					  <option>6pm</option>
+					  <option>6.30pm</option>
+					  <option>7pm</option>
+					  <option>7.30pm</option>
+					  <option>8pm</option>
+					  <option>8.30pm</option>
+					  <option>9pm</option>
+					  <option>9.30pm</option>
+					  <option>10pm</option>
+					  <option>10.30pm</option>
+					  <option>11pm</option>
+					  <option>11.30pm</option>
+					</select>
+                </td>
+                <td>
+                <select class="form-control">
+					  <option>#123456</option>
+					  <option>#123457</option>
+					  <option>#123458</option>
+					  <option>#123459</option>
+					  <option>#123450</option>
+					</select>
+               </td>
+                <td>
+                	<select class="form-control" id="exampleFormControlSelect1">
+					  <option>Type A</option>
+					  <option>Type B</option>
+					  <option>Type C</option>
+					  <option>Type D</option>
+					  <option>Type E</option>
+					</select>
+                </td>
+                <td>
+                	<select class="form-control">
+					  <option>Issue No. 1</option>
+					  <option>Issue No. 2</option>
+					  <option>Issue No. 3</option>
+					  <option>Issue No. 4</option>
+					  <option>Issue No. 5</option>
+					</select>
+                </td>
+                <td>
+                	<input type="text" class="form-control">
+                </td>
+                <td>
+                	<input type="text" class="form-control">
+                	
+                	<span class="addBtn">
+            <i class="fa fa-plus"></i>
+          </span>
+                </td>
+                
+        
+      
+               </form>
+                
+              </tr>
+              
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="custom-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<p class="demo">Copyright © 2021Dashboard. All rights reserved</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<!-- Optional JavaScript --> 
+<!-- jQuery first, then Popper.js, then Bootstrap JS --> 
+<script src="js/jquery-min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
+<script src="js/owl.carousel.min.js"></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js'></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js'></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js'></script> 
+<script src="js/custom.js"></script>
+</body>
+</html>

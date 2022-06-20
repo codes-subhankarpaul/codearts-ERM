@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel='stylesheet' href='https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css'>
+<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<title>Chat Dashboard</title>
+</head>
+<body>
+<!--
+    <div id="custom-owl" class="owl-carousel owl-theme">
+    	<div class="item"><h4>1</h4></div>
+	</div>
+-->
+<header class="custom-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-6 align-self-center">
+        <div class="dashboard-header-left"> <a href="#" class="logo"> <img src="images/logo-main.png" class="img-fluid" alt="Codearts Logo"> </a> </div>
+      </div>
+      <div class="col-lg-3 col-md-6 align-self-center">
+        <div class="header-search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Here">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button"> <i class="fa fa-search"></i> </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 align-self-center">
+        <ul class="notification-chat">
+          <li><a href=""><img src="images/notification-icon-header.png" alt="Notifications"><span>3</span></a></li>
+          <li><a href="#"><img src="images/chat-icon-header.png" alt="Chat"><span>2</span></a></li>
+        </ul>
+        <ul class="header-admin">
+          <div class="dropdown">
+            <button class="dropdown-toggle header-admin-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/admin-img.jpg" alt="User"></button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a> </div>
+            <span class="active"></span> </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="custom-dahboard-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="custom-main-aside-menu">
+          <ul class="dp-left-menu">
+            <li class="active"><a href="#"><span><img src="images/menu-icon-1.png" alt=""></span> Home</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-2.png" alt=""></span> Profile</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-3.png" alt=""></span> Leave</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-4.png" alt=""></span> Holidays</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-5.png" alt=""></span> Salary</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-6.png" alt=""></span> Pay Slip</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-7.png" alt=""></span> Projects</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-8.png" alt=""></span> Time Sheet</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-9.png" alt=""></span> Chat</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-10.png" alt=""></span> Notices</a></li>
+            <li><a href="#"><span><img src="images/menu-icon-11.png" alt=""></span> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-9">
+		<section class="inner-head-brd">
+			<h2>Chat</h2>
+			<ul>
+			  <li><a href="#">Home</a></li>
+			  <li>Chat</li>
+			</ul>
+		</section>
+		<section class="chat-main">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="chat-bg-grey">
+							<div class="chat-title">
+								<div class="media py-4">
+									<div class="chat-left-icon">
+										<img class="chat-left-icon-img" src="images/employee-3.jpg" alt="" srcset="">
+									</div>
+									<div class="chat-left-title media-body ml-3">
+										  <h5 class="mb-1 font-size-15">John Doe</h5>
+										  <p class="chat-activity-status mb-0">
+											<span class="activity-icon bg-green align-middle mr-1"></span> 
+											Active
+										  </p>
+									</div>
+									<div class="chat-noti-dropdown">
+										<div class="dropdown project-thumb-toggle">
+											<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											  <i class="fas fa-ellipsis-v"></i></button>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+											  <a class="dropdown-item" href="#">Action</a> 
+											  <a class="dropdown-item" href="#">Another action</a> 
+											  <a class="dropdown-item" href="#">Something else here</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="chat-search py-4">
+								<div class="input-group">
+								  <input type="text" class="form-control" placeholder="Search Here">
+								  <div class="input-group-append">
+									<button class="btn btn-secondary" type="button"> 
+									  <i class="fa fa-search"></i> 
+									</button>
+								  </div>
+								</div>
+							</div>
+							<div class="chat-recent">
+								<h5 class="font-size-15 recent-heading">Recent</h5>
+								<div class="chat-recent-content">
+									<ul>
+										<li class="cus-recent-chat-list">
+											<a href="#">
+												<ul class="media py-3">
+													<li class="chat-activity-status align-self-center">
+														<span class="activity-icon bg-green align-middle"></span>
+													</li>
+													<li class="chat-left-icon ml-3 align-self-center">
+														<img class="chat-left-icon-img-sm" src="images/employee-3.jpg" alt="" srcset="">
+													</li>
+													<li class="chat-left-title media-body ml-3">
+														  <h5 class="mb-1 font-size-14">John Doe</h5>
+														  <p class="chat-message mb-0">Hey! there I am available.</p>
+													</li>
+													<li class="chat-time mr-1 align-self-start">
+														<p class="mb-0">05 min</p>
+													</li>
+												</ul>
+											</a>
+										</li>
+										<li class="cus-recent-chat-list">
+											<a href="#">
+												<ul class="media py-3">
+													<li class="chat-activity-status align-self-center">
+														<span class="activity-icon  align-middle"></span>
+													</li>
+													<li class="chat-left-icon ml-3 align-self-center">
+														<img class="chat-left-icon-img-sm" src="images/employee-3.jpg" alt="" srcset="">
+													</li>
+													<li class="chat-left-title media-body ml-3">
+														  <h5 class="mb-1 font-size-14">John Doe</h5>
+														  <p class="chat-message mb-0">Hey! there I am available.</p>
+													</li>
+													<li class="chat-time mr-1 align-self-start">
+														<p class="mb-0">05 min</p>
+													</li>
+												</ul>
+											</a>
+										</li>
+										<li class="cus-recent-chat-list">
+											<a href="#">
+												<ul class="media py-3">
+													<li class="chat-activity-status align-self-center">
+														<span class="activity-icon  align-middle"></span>
+													</li>
+													<li class="chat-left-icon ml-3 align-self-center">
+														<img class="chat-left-icon-img-sm" src="images/employee-3.jpg" alt="" srcset="">
+													</li>
+													<li class="chat-left-title media-body ml-3">
+														  <h5 class="mb-1 font-size-14">John Doe</h5>
+														  <p class="chat-message mb-0">Hey! there I am available.</p>
+													</li>
+													<li class="chat-time mr-1 align-self-start">
+														<p class="mb-0">05 min</p>
+													</li>
+												</ul>
+											</a>
+										</li>
+										<li class="cus-recent-chat-list">
+											<a href="#">
+												<ul class="media py-3">
+													<li class="chat-activity-status align-self-center">
+														<span class="activity-icon  align-middle"></span>
+													</li>
+													<li class="chat-left-icon ml-3 align-self-center">
+														<img class="chat-left-icon-img-sm" src="images/employee-3.jpg" alt="" srcset="">
+													</li>
+													<li class="chat-left-title media-body ml-3">
+														  <h5 class="mb-1 font-size-14">John Doe</h5>
+														  <p class="chat-message mb-0">Hey! there I am available.</p>
+													</li>
+													<li class="chat-time mr-1 align-self-start">
+														<p class="mb-0">05 min</p>
+													</li>
+												</ul>
+											</a>
+										</li>
+										<li class="cus-recent-chat-list">
+											<a href="#">
+												<ul class="media py-3">
+													<li class="chat-activity-status align-self-center">
+														<span class="activity-icon  align-middle"></span>
+													</li>
+													<li class="chat-left-icon ml-3 align-self-center">
+														<img class="chat-left-icon-img-sm" src="images/employee-3.jpg" alt="" srcset="">
+													</li>
+													<li class="chat-left-title media-body ml-3">
+														  <h5 class="mb-1 font-size-14">John Doe</h5>
+														  <p class="chat-message mb-0">Hey! there I am available.</p>
+													</li>
+													<li class="chat-time mr-1 align-self-start">
+														<p class="mb-0">05 min</p>
+													</li>
+												</ul>
+											</a>
+										</li>
+										<li class="cus-recent-chat-list">
+											<a href="#">
+												<ul class="media py-3">
+													<li class="chat-activity-status align-self-center">
+														<span class="activity-icon  align-middle"></span>
+													</li>
+													<li class="chat-left-icon ml-3 align-self-center">
+														<img class="chat-left-icon-img-sm" src="images/employee-3.jpg" alt="" srcset="">
+													</li>
+													<li class="chat-left-title media-body ml-3">
+														  <h5 class="mb-1 font-size-14">John Doe</h5>
+														  <p class="chat-message mb-0">Hey! there I am available.</p>
+													</li>
+													<li class="chat-time mr-1 align-self-start">
+														<p class="mb-0">05 min</p>
+													</li>
+												</ul>
+											</a>
+										</li>
+										<li class="cus-recent-chat-list">
+											<a href="#">
+												<ul class="media py-3">
+													<li class="chat-activity-status align-self-center">
+														<span class="activity-icon  align-middle"></span>
+													</li>
+													<li class="chat-left-icon ml-3 align-self-center">
+														<img class="chat-left-icon-img-sm" src="images/employee-3.jpg" alt="" srcset="">
+													</li>
+													<li class="chat-left-title media-body ml-3">
+														  <h5 class="mb-1 font-size-14">John Doe</h5>
+														  <p class="chat-message mb-0">Hey! there I am available.</p>
+													</li>
+													<li class="chat-time mr-1 align-self-start">
+														<p class="mb-0">05 min</p>
+													</li>
+												</ul>
+											</a>
+										</li>
+										<li class="cus-recent-chat-list">
+											<a href="#">
+												<ul class="media py-3">
+													<li class="chat-activity-status align-self-center">
+														<span class="activity-icon  align-middle"></span>
+													</li>
+													<li class="chat-left-icon ml-3 align-self-center">
+														<img class="chat-left-icon-img-sm" src="images/employee-3.jpg" alt="" srcset="">
+													</li>
+													<li class="chat-left-title media-body ml-3">
+														  <h5 class="mb-1 font-size-14">John Doe</h5>
+														  <p class="chat-message mb-0">Hey! there I am available.</p>
+													</li>
+													<li class="chat-time mr-1 align-self-start">
+														<p class="mb-0">05 min</p>
+													</li>
+												</ul>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8">
+						<div class="chat-bg-grey">
+							<div class="chat-title">
+								<div class="media py-4">
+									<div class="chat-left-icon">
+										<img class="chat-left-icon-img" src="images/employee-1.jpg" alt="" srcset="">
+									</div>
+									<div class="chat-left-title media-body ml-3">
+										  <h5 class="mb-1 font-size-15">Robert Brown</h5>
+										  <p class="chat-activity-status mb-0">
+											<span class="activity-icon bg-green align-middle mr-1"></span> 
+											Active
+										  </p>
+									</div>
+									<div class="chat-noti-dropdown">
+										<div class="dropdown project-thumb-toggle">
+											<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											  <i class="fas fa-ellipsis-v"></i></button>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+											  <a class="dropdown-item" href="#">Action</a> 
+											  <a class="dropdown-item" href="#">Another action</a> 
+											  <a class="dropdown-item" href="#">Something else here</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="chat-conversation">
+									<ul class="conversation-list">
+										<li>
+											<div class="chat-day-title">
+												<h5 class="">Today</h5>
+											</div>
+										</li>
+										<li class="chat-sender">
+											<div class="media">
+												<div class="chat-avatar">
+													<img class="chat-left-icon-img-sm" src="images/employee-1.jpg" alt="">
+												</div>
+												<div class="media-body conversation-text ml-3">
+													<div class="ctext-wrap">
+														<h5 class="mb-0 font-size-12">John Doe</h5>
+														<p>Hello!</p>
+													</div>
+													<span class="ctime">10:00</span>
+												</div>
+											</div>
+										</li>
+										<li class="chat-sender">
+											<div class="media">
+												<div class="chat-avatar">
+													<img class="chat-left-icon-img-sm" src="images/employee-1.jpg" alt="">
+												</div>
+												<div class="media-body conversation-text ml-3">
+													<div class="ctext-wrap">
+														<h5 class="mb-0 font-size-12">John Doe</h5>
+														<p>Lorem ipsum dolor sit, amet consectetur adipisicing.!</p>
+													</div>
+													<span class="ctime">10:00</span>
+												</div>
+											</div>
+										</li>
+										<li class="chat-receiver text-right">
+											<div class="media">
+												<div class="media-body conversation-text mr-3">
+													<div class="rtext-wrap">
+														<h5 class="mb-0 font-size-12">John Doe</h5>
+														<p>Lorem ipsum dolor sit, amet consectetur adipisicing.!</p>
+													</div>
+													<span class="rtime">10:00</span>
+												</div>
+												<div class="chat-avatar">
+													<img class="chat-left-icon-img-sm" src="images/employee-1.jpg" alt="">
+												</div>
+											</div>
+										</li>
+										<li class="chat-sender">
+											<div class="media">
+												<div class="chat-avatar">
+													<img class="chat-left-icon-img-sm" src="images/employee-1.jpg" alt="">
+												</div>
+												<div class="media-body conversation-text ml-3">
+													<div class="ctext-wrap">
+														<h5 class="mb-0 font-size-12">John Doe</h5>
+														<p>Hello!</p>
+													</div>
+													<span class="ctime">10:00</span>
+												</div>
+											</div>
+										</li>
+										<li class="chat-receiver text-right">
+											<div class="media">
+												<div class="media-body conversation-text mr-3">
+													<div class="rtext-wrap">
+														<h5 class="mb-0 font-size-12">John Doe</h5>
+														<p>Lorem ipsum dolor sit, amet consectetur adipisicing.!</p>
+													</div>
+													<span class="rtime">10:00</span>
+												</div>
+												<div class="chat-avatar">
+													<img class="chat-left-icon-img-sm" src="images/employee-1.jpg" alt="">
+												</div>
+											</div>
+										</li>
+										<li class="chat-sender">
+											<div class="media">
+												<div class="chat-avatar">
+													<img class="chat-left-icon-img-sm" src="images/employee-1.jpg" alt="">
+												</div>
+												<div class="media-body conversation-text ml-3">
+													<div class="ctext-wrap">
+														<h5 class="mb-0 font-size-12">John Doe</h5>
+														<p>Hello!</p>
+													</div>
+													<span class="ctime">10:00</span>
+												</div>
+											</div>
+										</li>
+										<li class="chat-receiver text-right">
+											<div class="media">
+												<div class="media-body conversation-text mr-3">
+													<div class="rtext-wrap">
+														<h5 class="mb-0 font-size-12">John Doe</h5>
+														<p>Lorem ipsum dolor sit, amet consectetur adipisicing.!</p>
+													</div>
+													<span class="rtime">10:00</span>
+												</div>
+												<div class="chat-avatar">
+													<img class="chat-left-icon-img-sm" src="images/employee-1.jpg" alt="">
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="chat-area">
+								<div class="p-3 conversation-input border-top">
+									<div class="row">
+										
+										<div class="input-group">
+											<input type="text" class="form-control" placeholder="Enter your message...">
+											<div class="input-group-append">
+											  <button class="btn btn-secondary" type="button">
+												  Send
+												  <i class="fa fa-paper-plane p-1" aria-hidden="true"></i>
+											  </button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+		</section>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="custom-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="demo">Copyright © 2021Dashboard. All rights reserved</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Optional JavaScript --> 
+<!-- jQuery first, then Popper.js, then Bootstrap JS --> 
+<script src="js/jquery-min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
+<script src="js/owl.carousel.min.js"></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js'></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js'></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js'></script> 
+<script src="js/custom.js"></script>
+</body>
+</html>
