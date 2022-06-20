@@ -1,0 +1,36 @@
+[28-May-2022 15:30:28 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, string given in /home/codearts/public_html/ERM/ajax_reset_password_link.php on line 10
+[28-May-2022 15:30:28 Asia/Kolkata] PHP Notice:  Trying to get property of non-object in /home/codearts/public_html/ERM/ajax_reset_password_link.php on line 11
+[28-May-2022 15:33:04 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, string given in /home/codearts/public_html/ERM/ajax_reset_password_link.php on line 10
+[28-May-2022 15:33:04 Asia/Kolkata] PHP Notice:  Trying to get property of non-object in /home/codearts/public_html/ERM/ajax_reset_password_link.php on line 11
+[28-May-2022 15:33:29 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, string given in /home/codearts/public_html/ERM/ajax_reset_password_link.php on line 10
+[28-May-2022 15:33:29 Asia/Kolkata] PHP Notice:  Trying to get property of non-object in /home/codearts/public_html/ERM/ajax_reset_password_link.php on line 11
+[06-Jun-2022 11:29:42 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/index.php on line 8
+[06-Jun-2022 11:29:44 Asia/Kolkata] PHP Notice:  Undefined index: emp_image in /home/codearts/public_html/ERM/info_panel.php on line 27
+[06-Jun-2022 11:29:44 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 27
+[06-Jun-2022 11:29:44 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/info_panel.php on line 30
+[06-Jun-2022 11:29:44 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 30
+[06-Jun-2022 11:29:44 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/index.php on line 114
+[09-Jun-2022 16:57:08 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/index.php on line 8
+[09-Jun-2022 16:57:09 Asia/Kolkata] PHP Notice:  Undefined index: emp_image in /home/codearts/public_html/ERM/info_panel.php on line 27
+[09-Jun-2022 16:57:09 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 27
+[09-Jun-2022 16:57:09 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/info_panel.php on line 30
+[09-Jun-2022 16:57:09 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 30
+[09-Jun-2022 16:57:09 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/index.php on line 114
+[17-Jun-2022 00:40:42 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/edit_profile_basic_info.php on line 8
+[17-Jun-2022 00:40:42 Asia/Kolkata] PHP Notice:  Undefined index: emp_image in /home/codearts/public_html/ERM/info_panel.php on line 27
+[17-Jun-2022 00:40:42 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 27
+[17-Jun-2022 00:40:42 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/info_panel.php on line 30
+[17-Jun-2022 00:40:42 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 30
+[17-Jun-2022 00:40:42 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/edit_profile_basic_info.php on line 43
+[17-Jun-2022 22:21:30 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/edit_profile_basic_info.php on line 8
+[17-Jun-2022 22:21:30 Asia/Kolkata] PHP Notice:  Undefined index: emp_image in /home/codearts/public_html/ERM/info_panel.php on line 27
+[17-Jun-2022 22:21:30 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 27
+[17-Jun-2022 22:21:30 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/info_panel.php on line 30
+[17-Jun-2022 22:21:30 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 30
+[17-Jun-2022 22:21:30 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/edit_profile_basic_info.php on line 43
+[20-Jun-2022 13:00:01 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/index.php on line 8
+[20-Jun-2022 13:00:01 Asia/Kolkata] PHP Notice:  Undefined index: emp_image in /home/codearts/public_html/ERM/info_panel.php on line 27
+[20-Jun-2022 13:00:01 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 27
+[20-Jun-2022 13:00:01 Asia/Kolkata] PHP Notice:  Undefined index: emp_id in /home/codearts/public_html/ERM/info_panel.php on line 30
+[20-Jun-2022 13:00:01 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/info_panel.php on line 30
+[20-Jun-2022 13:00:01 Asia/Kolkata] PHP Notice:  Undefined index: emp_name in /home/codearts/public_html/ERM/index.php on line 114

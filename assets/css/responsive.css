@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+@media (min-width: 1200px) and (max-width: 1500px){
+	.main-dash-board-work-input-time-sheet-custom::before {width: 96%;}
+	.main-dash-board-work-input-time-sheet-custom {padding-right: 40px;}
+	.varrient-boses ul li {font-size: 16px;}
+}
+@media (min-width: 1024px) and (max-width: 1200px){
+	
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+	
+}
+
+@media only screen and (max-width: 991px) {    
+   .navbar-toggle { float: left;margin: 0; height: 45px; width: 45px; border-radius: 0;z-index: 1}
+.navbar-toggle .icon-bar { width: 24px; background: #fff;transition: .5s ease;}
+.navbar-toggle.collapsed .icon-bar:nth-child(2){transform: rotate(0)translateY(0)translateX(0);}
+.navbar-toggle.collapsed .icon-bar:nth-child(3){opacity:1}
+.navbar-toggle.collapsed .icon-bar:nth-child(4){transform:rotate(0)translateY(0)translateX(0);}
+.navbar-toggle .icon-bar:nth-child(2){transform: rotate(-45deg)translateY(5px)translateX(-5px);}
+.navbar-toggle .icon-bar:nth-child(3){opacity: 0}
+.navbar-toggle .icon-bar:nth-child(4){transform:rotate(45deg)translateY(-4px)translateX(-3px);}
+.navbar-header {display: block;}
+}
+
+
+@media (max-width: 767px){
+    
+}
+@media only screen and (max-width: 480px) {	
+    
+}
+
