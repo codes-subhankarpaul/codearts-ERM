@@ -8,6 +8,12 @@ image: composer:2.0
 pipelines:
   default:
     - step:
+        name: Install Unzip
+        script:
+          - echo "Installing Unzip"
+          - apt-get update
+          - apt-get install unzip
+    - step:
         caches:
           - composer
         script:
