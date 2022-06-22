@@ -1,14 +1,11 @@
-# Template PHP Build
-
-# This template allows you to validate your PHP application.
-# The workflow allows running tests and code linting on the default branch.
-
 image: composer:2.0
-
 pipelines:
-  default:
+  branches:
+    master:
     - step:
         script:
-          - apt-get update
-          - apt-get -qq install git-ftp
-          - git ftp init --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://107.180.58.68/public_html/ERM/
+          - pipe: atlassian/ftp-deploy:0.3.6
+            variables:
+              USER: $FTP_USERNAME
+              PASSWORD: $FTP_PASSWORD
+              SERVER: ftp.codeartssolution.com
