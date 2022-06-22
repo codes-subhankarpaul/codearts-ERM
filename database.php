@@ -14,4 +14,5 @@ if ($con->connect_error) {
 }
 
 $baseURL = 'http://codeartssolution.com/ERM/';
+$homeURL = 'http://codeartssolution.com/ERM/';
 ?>
