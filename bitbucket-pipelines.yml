@@ -9,3 +9,4 @@ pipelines:
               USER: $FTP_USERNAME
               PASSWORD: $FTP_PASSWORD
               SERVER: ftp.codeartssolution.com
+              REMOTE_PATH: /
