@@ -8,16 +8,7 @@ image: composer:2.0
 pipelines:
   default:
     - step:
-        name: Install Unzip
         script:
-          - echo "Installing Unzip"
           - apt-get update
-          - apt-get install unzip
-    - step:
-        caches:
-          - composer
-        script:
-          - apt-get update && apt-get install -y unzip
-          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - apt-get -qq install git-ftp
-          - git ftp init --user $FTP_USERNAME --password $FTP_PASSWORD $FTP_HOST_PATH
+          - git ftp init --user $FTP_USERNAME --passwd $FTP_PASSWORD ftp://107.180.58.68/public_html/ERM/
