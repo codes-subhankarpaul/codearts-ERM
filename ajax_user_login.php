@@ -34,7 +34,7 @@
                 }
                 else
                 {
-                    $sql3 = "INSERT into capms_login_information ( id, user_id, login_date, login_time ) VALUES ('', '".$_SESSION['emp_id']."', '".date('d-m-Y', strtotime('now'))."', '".date('h-i-s', strtotime('now'))."') ";
+                    $sql3 = "INSERT into capms_login_information ( id, user_id, login_date, login_time ) VALUES ('', '".$_SESSION['emp_id']."', '".date('d-m-Y', strtotime('now'))."', '".date('G:i A', strtotime('now'))."') ";
                     $result3 = mysqli_query($con, $sql3);
                     echo json_encode( array( "status" => 'success' ) );
                 }

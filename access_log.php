@@ -5,9 +5,9 @@
         <!-- Header CSS files -->
         <?php include 'header_css.php'; ?>
         <style type="text/css">
-            .lunch-break-btn-disabled {
+            /*.lunch-break-btn-disabled {
                 color: red;
-            }
+            }*/
             .evening-break-btn-disabled {
                 color: red;
             }
@@ -82,9 +82,8 @@
                                 </section>
                             <?php } else if($_SESSION['emp_type'] == 'employee' || $_SESSION['emp_type'] == '') { ?>
                                 <section>
-                                    <a href="Javascript:void(0)" id="lunch-break-btn" class="lunch-break-btn">Lunch Break</a>
-                                    <br>
-                                    <a href="Javascript:void(0)" id="evening-break-btn" class="evening-break-btn">Evening Break</a>
+                                    <button type="button" id="lunch-break-btn" class="btn btn-primary lunch-break-btn">Lunch Break</button>
+                                    <button type="button" id="evening-break-btn" class="btn btn-primary evening-break-btn">Evening Break</button>
                                 </section>
                                 <section class="access-logs">
                                     <table class="table weekly-time-table-dp">
@@ -198,6 +197,7 @@
                         type: "GET",
                         url: "<?php echo $baseURL; ?>ajax_lunch_break_duration.php",
                         data: {
+                            baseURL: '<?php echo $baseURL; ?>',
                             status: status,
                             emp_id: emp_id
                         },
@@ -207,10 +207,15 @@
                             if(response.status == 'lunch_break_started')
                             {
                                 jQuery('#lunch-break-btn').addClass('lunch-break-btn-disabled');
+                                jQuery('#lunch-break-btn').removeClass('btn-primary');
+                                jQuery('#lunch-break-btn').addClass('btn-warning');
                             }
                             else if(response.status == 'lunch_break_stopped')
                             {
                                 jQuery('#lunch-break-btn').removeClass('lunch-break-btn-disabled');
+                                jQuery('#lunch-break-btn').removeClass('btn-warning');
+                                jQuery('#lunch-break-btn').addClass('btn-secondary');
+                                jQuery('#lunch-break-btn').attr('disabled', true);
                             }
                         }
                     });
@@ -235,6 +240,7 @@
                         type: "GET",
                         url: "<?php echo $baseURL; ?>ajax_evening_break_duration.php",
                         data: {
+                            baseURL: '<?php echo $baseURL; ?>',
                             status: status,
                             emp_id: emp_id
                         },
@@ -244,10 +250,15 @@
                             if(response.status == 'evening_break_started')
                             {
                                 jQuery('#evening-break-btn').addClass('evening-break-btn-disabled');
+                                jQuery('#evening-break-btn').removeClass('btn-primary');
+                                jQuery('#evening-break-btn').addClass('btn-warning');
                             }
-                            else if(response.status == 'lunch_break_stopped')
+                            else if(response.status == 'evening_break_stopped')
                             {
                                 jQuery('#evening-break-btn').removeClass('evening-break-btn-disabled');
+                                jQuery('#evening-break-btn').removeClass('btn-warning');
+                                jQuery('#evening-break-btn').addClass('btn-secondary');
+                                jQuery('#evening-break-btn').attr('disabled', true);
                             }
                         }
                     });

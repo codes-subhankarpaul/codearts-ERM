@@ -74,6 +74,7 @@
                         type: "GET",
                         url: "<?php echo $baseURL; ?>ajax_reset_password_link.php",
                         data: {
+                            baseURL: '<?php echo $baseURL; ?>',
                             user_info: user_info,
                         },
                         dataType: "json",
