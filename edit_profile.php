@@ -7,7 +7,7 @@
         <?php
             if($_SESSION['emp_id'] == '')
             {
-              echo "<script>location.href='http://codeartssolution.com/ERM/login.php';</script>";
+              echo "<script>location.href='".$baseURL."login.php';</script>";
             }
         ?>
         <title>Edit Profile - CERM :: Codearts Employee Relationship Management</title>
@@ -119,7 +119,7 @@
                                                 }
                                             }
                                         }
-                                        echo "<script>location.href='http://codeartssolution.com/ERM/edit_profile_basic_info.php';</script>";
+                                        echo "<script>location.href='".$baseURL."edit_profile_basic_info.php';</script>";
                                     }
                                 ?>
                             </section>

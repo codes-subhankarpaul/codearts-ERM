@@ -7,7 +7,7 @@
         <?php
             if($_SESSION['emp_id'] == '')
             {
-              echo "<script>location.href='http://codeartssolution.com/ERM/login.php';</script>";
+              echo "<script>location.href='".$baseURL."login.php';</script>";
             }
         ?>
         <title>Edit Profile - CERM :: Codearts Employee Relationship Management</title>
@@ -115,7 +115,7 @@
 
                                             $sql1 = "UPDATE capms_admin_users SET user_designation = '".$user_designation."', user_dob = '".$_POST['user_dob']."', user_address = '".$_POST['user_address']."', user_gender = '".$_POST['user_gender']."',  updated_at = '".date('Y-m-d h:i:s', strtotime('now'))."' WHERE id = '".$_SESSION['emp_id']."' ";
                                             $result1 = mysqli_query($con, $sql1);
-                                            echo "<script>location.href='http://codeartssolution.com/ERM/edit_profile_personal_info.php';</script>";
+                                            echo "<script>location.href='".$baseURL."edit_profile_personal_info.php';</script>";
 
                                         }
                                         else

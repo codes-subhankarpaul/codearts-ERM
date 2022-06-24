@@ -15,7 +15,7 @@
     </div>
 
     <ul class="dp-left-menu">
-        <li class="<?php if($slug == 'index.php' || $url == 'http://codeartssolution.com/ERM/') { echo 'active'; } ?>">
+        <li class="<?php if($slug == 'index.php' || $url == $baseURL) { echo 'active'; } ?>">
             <a href="<?php echo $baseURL; ?>">
                 <span>
                     <img src="assets/images/menu-icon-1.png" alt="">

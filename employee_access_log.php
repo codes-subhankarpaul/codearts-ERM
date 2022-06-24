@@ -7,7 +7,7 @@
         <?php
             if($_SESSION['emp_id'] == '')
             {
-              echo "<script>location.href='http://codeartssolution.com/ERM/login.php';</script>";
+              echo "<script>location.href='".$baseURL."login.php';</script>";
             }
         ?>
         <title>Employee Access Log - CERM :: Codearts Employee Relationship Management</title>
