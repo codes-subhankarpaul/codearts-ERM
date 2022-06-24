@@ -85,6 +85,7 @@
                         type: "GET",
                         url: "<?php echo $baseURL; ?>ajax_user_login.php",
                         data: {
+                            baseURL: '<?php echo $baseURL; ?>',
                             login_username: login_username,
                             login_password: login_password,
                         },
