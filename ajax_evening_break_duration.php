@@ -6,7 +6,7 @@
 	$baseURL = $_REQUEST['baseURL'];
 	$status = $_REQUEST['status'];
 	$date_today = date('d-m-Y', strtotime('now'));
-	$time_now = date('G:i A', strtotime('now'));
+	$time_now = date('g:i A', strtotime('now'));
 	$emp_id = $_REQUEST['emp_id'];
 
 	$sql1 = "SELECT * FROM capms_login_information WHERE user_id = '".$emp_id."' AND login_date = '".$date_today."' ";
