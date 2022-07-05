@@ -4,14 +4,6 @@
     <head>
         <!-- Header CSS files -->
         <?php include 'header_css.php'; ?>
-        <style type="text/css">
-            /*.lunch-break-btn-disabled {
-                color: red;
-            }*/
-            .evening-break-btn-disabled {
-                color: red;
-            }
-        </style>
         <?php
             if($_SESSION['emp_id'] == '')
             {
@@ -114,9 +106,8 @@
                                                             <!-- login time -->
                                                             <td class="bg-dp-drk">
                                                                 <?php
-                                                                    $login_time = str_replace('-', ':', $row2['login_time']);
-                                                                    $login_time = date('G:i A' ,strtotime($login_time));
-                                                                    echo $login_time;
+                                                                    $login_time = date('g:i a' ,strtotime($row2['login_time']));
+                                                                    echo $row2['login_time'];
                                                                 ?>
                                                             </td>
                                                             <!-- lunch break duration -->
@@ -124,11 +115,11 @@
                                                                 <?php
                                                                     if($row2['lunch_break_start'] != '')
                                                                     {
-                                                                        echo date('h:i', strtotime($row2['lunch_break_start']));
+                                                                        echo date('g:i A', strtotime($row2['lunch_break_start']));
                                                                     }
                                                                     if($row2['lunch_break_end'] != '')
                                                                     {
-                                                                        echo " - ".date('G:i', strtotime($row2['lunch_break_end']));
+                                                                        echo " - ".date('g:i A', strtotime($row2['lunch_break_end']));
                                                                     }
                                                                 ?>
                                                             </td>
@@ -137,11 +128,11 @@
                                                                 <?php
                                                                     if($row2['evening_break_start'] != '')
                                                                     {
-                                                                        echo date('h:i', strtotime($row2['evening_break_start']));
+                                                                        echo date('g:i A', strtotime($row2['evening_break_start']));
                                                                     }
                                                                     if($row2['evening_break_end'] != '')
                                                                     {
-                                                                        echo " - ".date('G:i', strtotime($row2['evening_break_end']));
+                                                                        echo " - ".date('g:i A', strtotime($row2['evening_break_end']));
                                                                     }
                                                                 ?>
                                                             </td>
@@ -149,7 +140,7 @@
                                                             <td class="bg-dp-drk">
                                                                 <?php
                                                                     $logout_time = str_replace('-', ':', $row2['logout_time']);
-                                                                    $logout_time = date('G:i A' ,strtotime($logout_time));
+                                                                    $logout_time = date('g:i A' ,strtotime($logout_time));
                                                                     echo $logout_time;
                                                                 ?>
                                                             </td>
@@ -178,6 +169,7 @@
         <script src="assets/js/jquery-min.js"></script>
         <script>
             jQuery( document ).ready(function() {
+                /* lunch break time duration */
                 lunch_break_time_duration('blank');
                 jQuery('#lunch-break-btn').click(function () {
                     if(jQuery(this).hasClass('lunch-break-btn-disabled'))
