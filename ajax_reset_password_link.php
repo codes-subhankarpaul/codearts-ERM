@@ -12,59 +12,38 @@
 	{
 		while($row1 = mysqli_fetch_assoc($result1))
 		{
-			echo json_encode(
-				array(
-					"status" => 'success',
-					"action" => "<p class='user-info-success text-success'><span class='validation-success'><i class='fas fa-tick'></i></span>A Password Reset Link has been sento the registered email address. Please check.".$row1['user_email']."-".$token."</p>"
-				)
-			);
+			$email_to = $row1['user_email'];
+			$subject = "Password reset token";
+			
+			$body = '';
+			$body .= '<h1>Password reset token</h1>'; 
+			$body .= '<p>'.$token.'</p>';
+			
+			$headers  = 'From: Codearts Solution ERM <erm.codeartssolution@gmail.com>';
+
+			if(mail($email_to, $subject, $body, $headers))
+			{
+				echo json_encode(
+					array(
+						"status"	=> 'success',
+						"action"	=> "<p class='user-info-success text-success'><span class='validation-success'><i class='fas fa-tick'></i></span>A Password Reset Link has been sent to the registered email address. Please check ".$row1['user_email'].". The token is - ".$token."</p>",
+						"message"	=> "Password reset token sent successfully. Please check your inbox.",
+						"token"		=> $token
+					)
+				);
+			}
+			else
+			{
+				echo json_encode(
+					array(
+						"status"	=> 'failed',
+						"action"	=> "<p class='user-info-success text-error'><span class='validation-error'><i class='fas fa-exclamation'></i></span>Something is wrong. Please contact the developer.</p>",
+						"message"	=> "Failed operation. Please try again later.",
+						"token"		=> ''
+					)
+				);
+			}
 		}
-		// Import PHPMailer classes into the global namespace 
-		use PHPMailer\PHPMailer\PHPMailer; 
-		use PHPMailer\PHPMailer\Exception; 
-		 
-		require 'PHPMailer/Exception.php'; 
-		require 'PHPMailer/PHPMailer.php'; 
-		require 'PHPMailer/SMTP.php'; 
-		 
-		$mail = new PHPMailer; 
-		 
-		$mail->isSMTP();                      // Set mailer to use SMTP 
-		$mail->Host = 'smtp.gmail.com';       // Specify main and backup SMTP servers 
-		$mail->SMTPAuth = true;               // Enable SMTP authentication 
-		$mail->Username = 'user@gmail.com';   // SMTP username 
-		$mail->Password = 'gmail_password';   // SMTP password 
-		$mail->SMTPSecure = 'tls';            // Enable TLS encryption, `ssl` also accepted 
-		$mail->Port = 587;                    // TCP port to connect to 
-		 
-		// Sender info 
-		$mail->setFrom('sender@codexworld.com', 'CodexWorld'); 
-		$mail->addReplyTo('reply@codexworld.com', 'CodexWorld'); 
-		 
-		// Add a recipient 
-		$mail->addAddress('recipient@example.com'); 
-		 
-		//$mail->addCC('cc@example.com'); 
-		//$mail->addBCC('bcc@example.com'); 
-		 
-		// Set email format to HTML 
-		$mail->isHTML(true); 
-		 
-		// Mail subject 
-		$mail->Subject = 'Email from Localhost by CodexWorld'; 
-		 
-		// Mail body content 
-		$bodyContent = '<h1>How to Send Email from Localhost using PHP by CodexWorld</h1>'; 
-		$bodyContent .= '<p>This HTML email is sent from the localhost server using PHP by <b>CodexWorld</b></p>'; 
-		$mail->Body    = $bodyContent; 
-		 
-		// Send email 
-		if(!$mail->send()) { 
-		    echo 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo; 
-		} else { 
-		    echo 'Message has been sent.'; 
-		} 
-		 
 	}
 
 ?>

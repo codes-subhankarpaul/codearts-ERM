@@ -42,6 +42,27 @@
                                             <button class="btn btn-primary dp-login-btn" id="password_reset_link">Send Password Reset Link</button>
                                         </div>
                                     </form>
+
+                                    <form method="POST" id="set-new-password-form">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Token recieved in Mailbox" id="password_reset_token" name="password_reset_token">
+                                            <input type="password" class="form-control" placeholder="Set New Password" id="set_new_password" name="set_new_password" required>
+                                            <input type="password" class="form-control" placeholder="Confirm New Password" id="confirm_new_password" name="confirm_new_password" required>
+                                        </div>
+                                        <div class="form-group form-check">
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="reset-wrapper">
+                                                        <button type="reset" class="btn dp-login-reset-btn">Reset Credentials</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary dp-login-btn" id="set_new_password">Set New Password</button>
+                                        </div>
+                                    </form>
+
                                     <div class="dp-register-ac register_now">
                                         <p class="demo">Don't Have An Account? <a href="register.php">Register Here</a></p>
                                         <p class="demo">Remeber User Credentials? <a href="login.php">Try Login</a></p>
@@ -67,6 +88,8 @@
         <script src="assets/js/jquery-min.js"></script>
         <script>
             jQuery( document ).ready(function() {
+                jQuery("#password-reset-link-form").show();
+                jQuery("#set-new-password-form").hide();
                 jQuery("#password-reset-link-form").submit( function(event) {
                     event.preventDefault();
                     var user_info = jQuery("#user_info").val();
@@ -80,8 +103,51 @@
                         dataType: "json",
                         success: function(response){
                             console.log(response);
+                            if(response.status == 'success')
+                            {
+                                jQuery("#password-reset-link-form").hide();
+                                jQuery("#set-new-password-form").show();
+                            }
+                            else
+                            {
+                                jQuery("#password-reset-link-form").show();
+                                jQuery("#set-new-password-form").hide();
+                            }
                         }
                     });
+                });
+                jQuery("#set-new-password-form").submit( function(event) {
+                    event.preventDefault();
+                    var token = jQuery("#password_reset_token").val();
+                    if(token == response.token)
+                    {
+                        var new_password = jQuery("#set_new_password").val();
+                        var confirm_new_password = jQuery("#confirm_new_password").val();
+                        if(new_password == confirm_new_password)
+                        {
+                            jQuery.ajax({
+                                type: "GET",
+                                url: "<?php echo $baseURL; ?>ajax_set_new_password.php",
+                                data: {
+                                    baseURL: '<?php echo $baseURL; ?>',
+                                    user_info: user_info,
+                                },
+                                dataType: "json",
+                                success: function(result){
+                                    console.log(result);
+                                }
+                            });
+                        }
+                        else
+                        {
+                            alert("Password Confirmation in invalid. Try again.");
+                        }
+
+                    }
+                    else
+                    {
+                        alert("Password Reset Token in not matching. Try again.");
+                    }
                 });
             });
         </script>
