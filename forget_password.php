@@ -45,6 +45,8 @@
 
                                     <form method="POST" id="set-new-password-form">
                                         <div class="form-group">
+                                            <input type="hidden" name="set_new_password_email" id="set_new_password_email">
+                                            <input type="hidden" name="password_reset_token_mailbox" id="password_reset_token_mailbox">
                                             <input type="text" class="form-control" placeholder="Token recieved in Mailbox" id="password_reset_token" name="password_reset_token">
                                             <input type="password" class="form-control" placeholder="Set New Password" id="set_new_password" name="set_new_password" required>
                                             <input type="password" class="form-control" placeholder="Confirm New Password" id="confirm_new_password" name="confirm_new_password" required>
@@ -102,11 +104,12 @@
                         },
                         dataType: "json",
                         success: function(response){
-                            console.log(response);
                             if(response.status == 'success')
                             {
                                 jQuery("#password-reset-link-form").hide();
                                 jQuery("#set-new-password-form").show();
+                                jQuery("#password_reset_token_mailbox").val(response.token);
+                                jQuery("#set_new_password_email").val(response.user_mail);
                             }
                             else
                             {
@@ -118,8 +121,11 @@
                 });
                 jQuery("#set-new-password-form").submit( function(event) {
                     event.preventDefault();
+                    var user_mail = jQuery("#set_new_password_email").val();
                     var token = jQuery("#password_reset_token").val();
-                    if(token == response.token)
+                    token = token.toLowerCase();
+                    var mailbox_token = jQuery("#password_reset_token_mailbox").val();
+                    if(token == mailbox_token)
                     {
                         var new_password = jQuery("#set_new_password").val();
                         var confirm_new_password = jQuery("#confirm_new_password").val();
@@ -130,11 +136,15 @@
                                 url: "<?php echo $baseURL; ?>ajax_set_new_password.php",
                                 data: {
                                     baseURL: '<?php echo $baseURL; ?>',
-                                    user_info: user_info,
+                                    password: confirm_new_password,
+                                    user_mail: user_mail
                                 },
                                 dataType: "json",
                                 success: function(result){
-                                    console.log(result);
+                                    if(result.status == "success")
+                                    {
+                                        window.location.href="<?php echo $baseURL.'login.php'; ?>";
+                                    }
                                 }
                             });
                         }
