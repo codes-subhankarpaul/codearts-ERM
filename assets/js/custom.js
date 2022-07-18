@@ -1,21 +1,3 @@
-jQuery(document).ready(function(){
-
-	jQuery("#leave_date").datepicker({
-		minDate: 0,
-		onSelect: function(date) {
-			jQuery("#return_date").datepicker('option', 'minDate', date);
-		}
-	});
-	jQuery("#return_date").datepicker({});
-	jQuery("#half").click  (function(){ 
-		jQuery("#return_date").css("display", "none");
-		jQuery("#calculate").css("display", "none");
-	});
-	jQuery("#full").click  (function(){ 
-		jQuery("#return_date").css("display", "block");
-	});
-});
-
 // JavaScript Document
 jQuery('#custom-owl').owlCarousel({
     loop:true,

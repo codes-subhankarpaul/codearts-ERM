@@ -32,7 +32,13 @@
             </a>
         </li>
 
-        <li><a href="#"><span><img src="assets/images/menu-icon-3.png" alt=""></span> Leave</a></li>
+        <li class="<?php if($slug == 'leave.php' || $slug == 'leave_form.php' || $slug == 'leave_update.php' || $slug == 'leave_view.php') { echo 'active'; } ?>">
+            <a href="leave.php">
+                <span>
+                    <img src="assets/images/menu-icon-3.png" alt="">
+                </span> Leave
+            </a>
+        </li>
         
         <li><a href="#"><span><img src="assets/images/menu-icon-4.png" alt=""></span> Holidays</a></li>
         
