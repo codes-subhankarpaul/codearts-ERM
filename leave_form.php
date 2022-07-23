@@ -173,7 +173,7 @@
                                                                         <h6>Leave Start Date</h6>
                                                                     </div>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" id="leave_start_date" class="form-control" name="leave_start_date"/>
+                                                                        <input type="text" id="leave_start_date" class="form-control" name="leave_start_date" />
                                                                     </div>
                                                                 </div>
                                                                 <!-- Leave End Date -->
@@ -228,12 +228,15 @@
                 jQuery("#leave_status_clarification").hide();
 
                 jQuery("#leave_start_date").datepicker({
+                    dateFormat: 'dd-mm-yy',
                     minDate: 0,
                     onSelect: function(date) {
                         jQuery("#leave_end_date").datepicker('option', 'minDate', date);
                     }
                 });
-                jQuery("#leave_end_date").datepicker({});
+                jQuery("#leave_end_date").datepicker({
+                    dateFormat: 'dd-mm-yy',
+                });
                 
                 jQuery("#type_of_leave_first_half").click  (function(){ 
                     jQuery("#leave_end_date").css("display", "none");
@@ -255,11 +258,34 @@
                     var emp_remaining_pls = jQuery("#remaining_pls").val();
                     var reason_of_leave = jQuery("input[name='reason_of_leave']:checked").val();
                     var type_of_leave = jQuery("input[name='type_of_leave']:checked").val();
-                    if(reason_of_leave == '' || reason_of_leave == 'undefined')
+                    var leave_start_date = jQuery("#leave_start_date").val();
+                    var leave_end_date = jQuery("#leave_end_date").val();
+                    var leave_message = jQuery("#leave_message").val();
+                    
+                    if(reason_of_leave == null || type_of_leave == null)
                     {
-                        alert('Please select atleast one Reason of Leave')
+                        alert('Choose both Reason of Leave and Type of Leave');      
                     }
-                    alert(emp_name+" "+emp_dept+" "+emp_remaining_pls+" "+reason_of_leave+" "+type_of_leave);
+                    else
+                    {
+                        if(leave_start_date == '' || leave_message == '')
+                        {
+                            alert('Select Leave dates and put the Leave message both');
+                        }
+                        else
+                        {
+                            if(leave_end_date == '')
+                            {
+
+                            }
+                            else
+                            {
+                                var start_date = moment(leave_start_date, "DD-MM-YYYY").toDate();
+                                var leave_date = moment(leave_end_date, "DD-MM-YYYY").toDate();
+                                
+                            }
+                        }
+                    }
                 });
             });
         </script>
