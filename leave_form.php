@@ -189,16 +189,39 @@
                                                                 <div class="form-group row">
                                                                     <div class="col-sm-3">
                                                                             <h6>Leave Message</h6>
-                                                                        </div>
-                                                                      <div class="col-sm-9">
+                                                                    </div>
+                                                                    <div class="col-sm-9">
                                                                         <textarea class="form-control" id="leave_message" name="leave_message" rows="6"></textarea>
-                                                                      </div>
+                                                                    </div>
                                                                 </div>
                                                                 <!-- Confirm Application -->
                                                                 <div class="form-group send">
                                                                     <button class="btn btn-primary" id="confirm_leave_application" name="confirm_leave_application">Confirm Leave Application</button>
                                                                 </div>
-                                                                <div class="leave_status_clarification" id="leave_status_clarification"></div>
+                                                                <!-- Leave Status Clarification -->
+                                                                <div class="leave_status_clarification" id="leave_status_clarification">
+                                                                    <table class="table table-striped">
+                                                                        <thead class="thead-dark">
+                                                                            <tr>
+                                                                                <th>Reason</th>
+                                                                                <th>Type</th>
+                                                                                <th>Date</th>
+                                                                                <th>Day</th>
+                                                                                <th>Leaves</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="leave_status_clarification_body"></tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <!-- Total No. of Leaves -->
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-3" id="total_leave_days_label">
+                                                                        <h6>Total No. of Leaves</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9">
+                                                                        <input type="text" id="total_leave_days" class="form-control" name="total_leave_days" />
+                                                                    </div>
+                                                                </div>
                                                                 <!-- Submit Leave Application -->
                                                                 <div class="send">
                                                                     <button type="submit" class="btn btn-primary" name="submit_leave_application" id="submit_leave_application" value="Send and Email">Submit Application</button>
@@ -226,6 +249,8 @@
             jQuery(document).ready(function(){
                 jQuery("#submit_leave_application").hide();
                 jQuery("#leave_status_clarification").hide();
+                jQuery("#total_leave_days_label").hide();
+                jQuery("#total_leave_days").hide();
 
                 jQuery("#leave_start_date").datepicker({
                     dateFormat: 'dd-mm-yy',
@@ -280,9 +305,70 @@
                             }
                             else
                             {
-                                var start_date = moment(leave_start_date, "DD-MM-YYYY").toDate();
-                                var leave_date = moment(leave_end_date, "DD-MM-YYYY").toDate();
-                                
+                                var getDaysBetweenDates = function(startDate, endDate) {
+                                    var now = startDate.clone(), dates = [];
+                              
+                                    while (now.isSameOrBefore(endDate)) {
+                                        dates.push(now.format('DD-MM-YYYY'));
+                                        now.add(1, 'days');
+                                    }
+                                    return dates;
+                                };
+                          
+                                var startDate = moment(leave_start_date, "DD-MM-YYYY");
+                                var endDate = moment(leave_end_date, "DD-MM-YYYY");
+                              
+                                var dateList = getDaysBetweenDates(startDate, endDate);
+                                var status_table = '';
+                                var i=1;
+
+                                function test(mJsDate){
+                                   //var str = mJsDate.toLocaleString().substring(0, 3) +" number " + Math.ceil(mJsDate.date() / 7) +" of the month";
+                                   var str = Math.ceil(mJsDate.date() / 7)+" Saturday";
+                                   return str;
+                                }
+
+                                jQuery.each(dateList, function(key, value){
+                                    status_table += '<tr>';
+                                    status_table += '<td>'+reason_of_leave+'</td>';
+                                    status_table += '<td>'+type_of_leave+'</td>';
+                                    status_table += '<td>'+value+'</td>';
+                                    var oneDate = moment(value, 'DD-MM-YYYY');
+                                    if(oneDate.format('dddd') == 'Saturday')
+                                    {
+                                        if(test(oneDate) == '1 Saturday' || test(oneDate) == '3 Saturday')
+                                        {
+                                            status_table += '<td>'+oneDate.format('dddd')+'</td>';
+                                            status_table += '<td>-</td>';
+                                        }
+                                        else
+                                        {
+                                            status_table += '<td>'+oneDate.format('dddd')+'</td>';
+                                            status_table += '<td>'+i+'</td>';
+                                            i++;
+                                        }
+                                        
+                                    }
+                                    else if(oneDate.format('dddd') == 'Sunday')
+                                    {
+                                        status_table += '<td>'+oneDate.format('dddd')+'</td>';
+                                        status_table += '<td>-</td>';
+                                    }
+                                    else
+                                    {
+                                        status_table += '<td>'+oneDate.format('dddd')+'</td>';
+                                        status_table += '<td>'+i+'</td>';
+                                        i++;
+                                    }
+                                    status_table += '</tr>';
+                                });
+                                jQuery("#total_leave_days_label").show();
+                                jQuery("#total_leave_days").show();
+                                jQuery("#total_leave_days").val(i);
+                                jQuery("#leave_status_clarification").show();
+                                jQuery("#confirm_leave_application").hide();
+                                jQuery("#submit_leave_application").show();
+                                jQuery("#leave_status_clarification_body").append(status_table);
                             }
                         }
                     }
