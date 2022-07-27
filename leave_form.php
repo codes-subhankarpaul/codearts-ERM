@@ -60,7 +60,7 @@
                                                                 <div class="form-group row">
                                                                     <label for="inputText" class="col-sm-3 col-form-label">Employee Name</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" class="form-control" id="empname" placeholder="" name="ename" value="<?php echo $_SESSION['emp_name'];  ?>" disabled>
+                                                                        <input type="text" class="form-control" id="empname" placeholder="" name="ename" value="<?php echo $_SESSION['emp_name']; ?>" disabled>
                                                                     </div>
                                                                 </div>
                                                                 <!-- Employee Department -->
@@ -320,10 +320,9 @@
                               
                                 var dateList = getDaysBetweenDates(startDate, endDate);
                                 var status_table = '';
-                                var i=1;
+                                var i=0;
 
                                 function test(mJsDate){
-                                   //var str = mJsDate.toLocaleString().substring(0, 3) +" number " + Math.ceil(mJsDate.date() / 7) +" of the month";
                                    var str = Math.ceil(mJsDate.date() / 7)+" Saturday";
                                    return str;
                                 }
@@ -343,9 +342,10 @@
                                         }
                                         else
                                         {
+                                            i++;
                                             status_table += '<td>'+oneDate.format('dddd')+'</td>';
                                             status_table += '<td>'+i+'</td>';
-                                            i++;
+                                            
                                         }
                                         
                                     }
@@ -356,9 +356,10 @@
                                     }
                                     else
                                     {
+                                        i++;
                                         status_table += '<td>'+oneDate.format('dddd')+'</td>';
                                         status_table += '<td>'+i+'</td>';
-                                        i++;
+                                        
                                     }
                                     status_table += '</tr>';
                                 });
@@ -369,6 +370,29 @@
                                 jQuery("#confirm_leave_application").hide();
                                 jQuery("#submit_leave_application").show();
                                 jQuery("#leave_status_clarification_body").append(status_table);
+                                jQuery("#submit_leave_application").click(function(event) {
+                                    event.preventDefault();
+                                    jQuery.ajax({
+                                        type: "GET",
+                                        url: "<?php echo $baseURL; ?>ajax_leave_application.php",
+                                        data: {
+                                            baseURL: '<?php echo $baseURL; ?>',
+                                            emp_id: '<?php echo $_SESSION['emp_id']; ?>',
+                                            emp_name: emp_name,
+                                            emp_dept: emp_dept,
+                                            emp_remaining_pls: emp_remaining_pls,
+                                            reason_of_leave: reason_of_leave,
+                                            type_of_leave: type_of_leave,
+                                            dateList: dateList,
+                                            total_leaves: jQuery("#total_leave_days").val(),
+                                            leave_message: leave_message
+                                        },
+                                        dataType: "json",
+                                        success: function(response){
+                                            console.log(response);
+                                        }
+                                    });
+                                });
                             }
                         }
                     }
