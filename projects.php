@@ -111,7 +111,7 @@
                                                   print_r($team_members);
                                                   foreach ($team_members as $each_members) {
                                             
-                                                    $sql1 = "SELECT * FROM capms_admin_users WHERE id ='.$each_members.'";
+                                                    $sql1 = "SELECT * FROM capms_admin_users WHERE id ='.$each_members=.'";
                                                     $result1 = mysqli_query($con, $sql1);
                                                     //print_r($result1);
                                                     if($result1->num_rows > 0)

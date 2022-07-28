@@ -65,7 +65,7 @@
                                     <div class="form-row"> 
                                     <?php 
                                     if(isset($_POST['submit']))
-                                    {
+                                    {   
                                         $eid=$_GET['editid'];
                                         print_r($eid);
                                         //Getting Post Values

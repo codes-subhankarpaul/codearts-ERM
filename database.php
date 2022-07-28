@@ -13,5 +13,5 @@ if ($con->connect_error) {
   die("Connection failed: " . $con->connect_error);
 }
 
-$baseURL = 'http://localhost/codearts/';
+$baseURL = 'http://localhost/codearts/';//
 ?>
