@@ -60,7 +60,7 @@
        
         <li><a href="#"><span><img src="assets/images/menu-icon-9.png" alt=""></span> Chat</a></li>
        
-        <li><a href="#"><span><img src="assets/images/menu-icon-10.png" alt=""></span> Notices</a></li>
+        <li><a href="notice.php"><span><img src="assets/images/menu-icon-10.png" alt=""></span> Notices</a></li>
        
         <!-- <li>
             <a href="logout.php">

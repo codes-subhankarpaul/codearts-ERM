@@ -34,3 +34,29 @@
                                     <li>Profile</li>
                                 </ul>
                             </section>
+                            <section>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="departmentTitle">Department Title</label>
+                                            <select class="form-control" id="departmentName">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="departmentHead">Department Head</label>
+                                            <select class="form-control" id="departmentHead">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </section>
