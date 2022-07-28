@@ -128,7 +128,7 @@
                                                     <label>Project Details</label> 
                                                       <textarea id="editor" name="description" disabled><?php if($row['project_details'] != '') { echo $row['project_details']; } ?></textarea>
                                                 </div>
-                                                 
+                                                  
 
                                                 <!-- <div class="col-md-12">
                                                     <div class="form-group files color">
