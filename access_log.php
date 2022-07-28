@@ -34,7 +34,7 @@
                                     <li>Access Log</li>
                                 </ul>
                             </section>
-                            <?php if($_SESSION['emp_type'] == 'hr' || $_SESSION['emp_type'] == 'admin') { ?>
+                            <?php if($_SESSION['emp_type'] == 'hr' || $_SESSION['emp_type'] == 'admin' ||$_SESSION['emp_type'] == 'project_lead' ) { ?>
                                 <section class="employee-profiles">
                                     <div class="row">
                                         <?php 
@@ -105,21 +105,18 @@
                                                             </th>
                                                             <!-- login time -->
                                                             <td class="bg-dp-drk">
-                                                                <?php
-                                                                    $login_time = date('g:i a' ,strtotime($row2['login_time']));
-                                                                    echo $row2['login_time'];
-                                                                ?>
+                                                                <?php echo $row2['login_time']; ?>
                                                             </td>
                                                             <!-- lunch break duration -->
                                                             <td>
                                                                 <?php
                                                                     if($row2['lunch_break_start'] != '')
                                                                     {
-                                                                        echo date('g:i A', strtotime($row2['lunch_break_start']));
+                                                                        echo $row2['lunch_break_start'];
                                                                     }
                                                                     if($row2['lunch_break_end'] != '')
                                                                     {
-                                                                        echo " - ".date('g:i A', strtotime($row2['lunch_break_end']));
+                                                                        echo " - ".$row2['lunch_break_end'];
                                                                     }
                                                                 ?>
                                                             </td>
@@ -128,11 +125,11 @@
                                                                 <?php
                                                                     if($row2['evening_break_start'] != '')
                                                                     {
-                                                                        echo date('g:i A', strtotime($row2['evening_break_start']));
+                                                                        echo $row2['evening_break_start'];
                                                                     }
                                                                     if($row2['evening_break_end'] != '')
                                                                     {
-                                                                        echo " - ".date('g:i A', strtotime($row2['evening_break_end']));
+                                                                        echo " - ".$row2['evening_break_end'];
                                                                     }
                                                                 ?>
                                                             </td>
