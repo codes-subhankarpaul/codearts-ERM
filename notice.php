@@ -31,6 +31,7 @@
     </style>
 </head>
 <body>
+    <!-- notice model update git hub -->
     <header class="custom-header">
         <!-- Dashboard Top Info Panel -->
         <?php include 'info_panel.php'; ?>
@@ -79,5 +80,4 @@
             </div>
     </main>
 </body>
-<!-- new file -->
 </html>      

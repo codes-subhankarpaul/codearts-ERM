@@ -14,6 +14,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- create notice update file for git hub -->
     <header class="custom-header">
         <!-- Dashboard Top Info Panel -->
         <?php include 'info_panel.php'; ?>
