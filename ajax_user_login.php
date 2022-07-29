@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	date_default_timezone_set('Asia/Kolkata');
-	$con = mysqli_connect("localhost","root","","codearts");
+	$con = mysqli_connect("localhost","root","","codearts_pms");
 
     $baseURL = $_GET['baseURL'];
 	$login_username = $_GET['login_username'];

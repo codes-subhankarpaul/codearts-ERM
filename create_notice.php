@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
     <?php include 'header_css.php'; ?>
-    <?php
-        if(isset($_SESSION['emp_id']) )
-        {
-            echo "<script>location.href='".$baseURL."';</script>";
-        }
-        ?>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
+    <!-- create notice update file for git hub -->
     <header class="custom-header">
         <!-- Dashboard Top Info Panel -->
         <?php include 'info_panel.php'; ?>
