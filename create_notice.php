@@ -37,12 +37,19 @@
                                         <label for="noticeBody">Notice Content</label>
                                         <textarea class="form-control" id="noticeBody" name="noticeBody" rows="3"></textarea>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="noticeFile">Choose file...</label>
+                                        <input type="file" id="noticeFile" name="noticeFile">
+                                    </div>
                                     <button type="submit" name="noticeSubmit" class="btn btn-primary">Submit</button>
                                 </form>
                                 <?php
                                     if(isset($_POST['noticeSubmit'])){
                                         $query = "INSERT into capms_notice_info (notice_id, notice_subject, notice_body, created_at ) VALUES (NULL, '".$_POST['noticeSubject']."', '".$_POST['noticeBody']."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
                                         $result = mysqli_query($con, $query);
+                                        if(!file_exists("assets/noticeFiles")){
+                                            mkdir("assets/noticeFiles");
+                                        }
                                     }
                                 ?>
                             </section>
