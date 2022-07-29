@@ -47,7 +47,7 @@
                                         <div class="col-md-6">
                                             <div class="em-pro-main-details">
                                                 <div class="media em-pro-main-media"> <img class="mr-3"
-                                                        src="assets/images/client-img-1.jpg" alt="Employee Image">
+                                                        src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt="Employee Image">
                                                     <div class="media-body">
                                                         <h4><?php echo $row1['user_fullname']; ?></h4>
                                                         <p class="demo">UI/UX Design Team</p>
