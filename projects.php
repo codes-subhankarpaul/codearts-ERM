@@ -12,7 +12,7 @@
             ?>
         <title>Projects - CERM :: Codearts Employee Relationship Management</title>
     </head>
-
+ 
     <body>
         <header class="custom-header">
             <!-- Dashboard Top Info Panel -->
@@ -34,7 +34,7 @@
                                     <li>Projects</li>
                                 </ul>
                                 <ul class="projects-btn">
-                                    <li>
+                                    <!-- <li>
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
@@ -44,7 +44,7 @@
                                                     href="#">Another action</a> <a class="dropdown-item" href="#">Something else
                                                     here</a> </div>
                                         </div>
-                                    </li>
+                                    </li> -->
                                     <li><a class="creat-project-btn" href="create-project.php"><span>+</span> Creat Project</a></li>
                                 </ul>
                             </section>
@@ -89,48 +89,44 @@
                                         <div class="custom-project-wrap">
                                             <div class="dropdown project-thumb-toggle">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a
                                                         class="dropdown-item" href="view-project.php?viewid=<?php echo $row['project_id'];?>">View</a> <a class="dropdown-item"
                                                         href="edit-project.php?editid=<?php echo $row['project_id'];?>">Edit</a> </div>
                                             </div>
-                                            <a class="project-title" href="#"><?php  echo $row['project_name'];?></a>
+                                            <a class="project-title" href="#"><?php echo $row['project_name'];?></a>
                                             <h6><span class="project-count">1</span> open tasks, <span
                                                     class="project-count">9</span> tasks completed</h6>
-                                            <p class="demo"><?php  echo $row['project_details'];?></p>
+                                            <p class="demo"><?php echo $row['project_details']; ?></p>
                                             <h5 class="custom-deadline">Deadline :</h5>
-                                            <p class="deadline-date"><?php  echo $row['project_deadline'];?></p>
-                                            <h5 class="pro-leader">Project Leader :</h5>
+                                            <p class="deadline-date"><?php echo $row['project_deadline'];?></p>
+                                            <!-- <h5 class="pro-leader">Project Leader :</h5>
                                             <a class="project-leader-img" href="#"> <img src="assets/images/client-img-1.jpg" alt="">
-                                            </a>
+                                            </a> -->
                                             <h5 class="pro-team">Project Team :</h5>
                                             <ul class="project-team-list">
                                             <?php $team = $row['project_team'];
                                                   $team_members = explode(",",$team);
-                                                  print_r($team_members);
+                                                 
                                                   foreach ($team_members as $each_members) {
+                                                    
                                             
-                                                    $sql1 = "SELECT * FROM capms_admin_users WHERE id ='.$each_members=.'";
+                                                    $sql1 = " SELECT * FROM capms_admin_users WHERE id ='".$each_members."' ";
                                                     $result1 = mysqli_query($con, $sql1);
-                                                    //print_r($result1);
+                                                    
                                                     if($result1->num_rows > 0)
                                                     {
                                                         while($row1 = mysqli_fetch_assoc($result1))
                                                         {
+                                                            
                                             ?>
                                                 
-
                                                 <li><a href="#"><img src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image'] ?>" alt=""></a></li>
 
                                             <?php  } } } ?>
-                                                <!-- <li><a href="#"><img src="assets/images/employee-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-2.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-5.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-4.jpg" alt=""></a></li>
-                                                <li><a href="#">+15</a></li> -->
+
                                             </ul>
-                                            <div class="custom-project-progress">
+                                            <!-- <div class="custom-project-progress">
                                                 <h5 class="pro-team">Progress :</h5>
                                                 <div class="custom-dp-progress" style="width: 100%;">
                                                     <div class="dp-progress-value">
@@ -141,7 +137,7 @@
                                                             aria-valuemin="0" aria-valuemax="100" style="max-width: 40%"></div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <?php 

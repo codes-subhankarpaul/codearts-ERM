@@ -128,8 +128,6 @@
                                                     <label>End Date</label> 
                                                     <input type="date" class="form-control" name="end_date" value="<?php echo $row['project_edate']; ?>">
                                                 </div>
-                                                
-
                                                 <div class="col-md-6">
                                                     <label>Deadline</label> 
                                                     <input type="date" class="form-control" placeholder="Name" name="deadline" id="deadline" value="<?php echo $row['project_deadline']; ?>" >
@@ -138,33 +136,31 @@
                                                     <label>Project Assigned to:</label> 
                                                     <input type="text" class="form-control" placeholder="Name" name="team_name" id="teams" value="<?php echo $row['project_team']; ?>">
                                                 </div>
-
-
                                                 <div class="col-md-12">
                                                     <label>Project Details</label> 
                                                       <textarea id="editor" name="description"><?php if($row['project_details'] != '') { echo $row['project_details']; } ?></textarea>
                                                 </div>
                                                
 
-                                                <div class="col-md-12">
+                                                <!-- <div class="col-md-12">
                                                     <div class="form-group files color">
                                                         <label>Upload Your File </label>
                                                         <input type="file" class="form-control" multiple="" name="document_files">
                                                       </div>
-                                                </div>
+                                                </div> -->
 
 
                                               </div>
                                           </div>                        
                                           </div>    
-                                                         
+                                                          
                                               
                                           </div>
                                       </div>
                                       <?php 
                                             } 
                                        ?>
-                                  
+
                                     <div class="col-md-12 text-center">
                                         <input type="submit" class="btn dp-em-nxt-btn" name="create" value="Create" >
                                       </div>

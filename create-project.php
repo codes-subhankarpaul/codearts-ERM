@@ -56,7 +56,7 @@
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li>Projects</li>
                                 </ul>
-                               
+                                
                             </section>
                             <?php
                         $sql1 = "SELECT * FROM capms_admin_users WHERE id = '".$_SESSION['emp_id']."' ";
@@ -217,7 +217,7 @@
         <!-- Footer JS files -->
         <?php include 'footer_js.php' ?>
 
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://jqueryui.com//resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
