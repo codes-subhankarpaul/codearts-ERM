@@ -2,12 +2,6 @@
 <html lang="en">
 <head>
     <?php include 'header_css.php'; ?>
-    <?php
-        if(isset($_SESSION['emp_id']) )
-        {
-            echo "<script>location.href='".$baseURL."';</script>";
-        }
-        ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,22 +36,43 @@
                                         <label for="noticeFile">Choose file...</label>
                                         <input type="file" id="noticeFile" name="noticeFile">
                                     </div>
+
                                     <button type="submit" name="noticeSubmit" class="btn btn-primary">Submit</button>
                                 </form>
                                 <?php
                                     if(isset($_POST['noticeSubmit'])){
-                                        $query = "INSERT into capms_notice_info (notice_id, notice_subject, notice_body, created_at ) VALUES (NULL, '".$_POST['noticeSubject']."', '".$_POST['noticeBody']."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
-                                        $result = mysqli_query($con, $query);
-                                        if(!file_exists("assets/noticeFiles")){
-                                            mkdir("assets/noticeFiles");
+                                        
+                                        $query = "INSERT INTO `capms_notice` (`notice_id`, `notice_title`, `notice_content`, `notice_file`, `created_at`) VALUES (Null, '".$_POST['noticeSubject']."', '".$_POST['noticeBody']."', '', '');";
+
+                                        mysqli_query($con, $query);
+                                        $last_notice_id = $con->insert_id;
+                                        if($last_notice_id){
+                                            if(isset($_FILES['noticeFile']['name']))
+                                                    {
+                                                        $tmpFileName = $_FILES['noticeFile']['tmp_name'];
+                                                        if($tmpFileName != "")
+                                                        {
+                                                            $shortname = $_FILES['noticeFile']['name'];
+                                                            $timestamp = strtotime('now').'-'.$_FILES['noticeFile']['name'];
+                                                            $filename = $_FILES['noticeFile']['name'];
+                                                            $filePath = "assets/noticeFiles/" .$timestamp;
+
+                                                            if(move_uploaded_file($tmpFileName, $filePath))
+                                                            {
+                                                                $sql3 = "UPDATE capms_notice SET notice_file = '".$timestamp."' WHERE notice_id = '".$last_notice_id."' ";
+                                                                mysqli_query($con, $sql3);
+                                                            }
+                                                        }
+                                                    }
                                         }
                                     }
-                                ?>
+                                 ?>
                             </section>
                         </div>
                     </div>
                 </div>
             </div>        
     </main>
+    
 </body>
 </html>
