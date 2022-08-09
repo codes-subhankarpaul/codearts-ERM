@@ -10,7 +10,7 @@
                   echo "<script>location.href='".$baseURL."login.php';</script>";
                 }
             ?>
-        <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+        <title>Projects Task Lists - CERM :: Codearts Employee Relationship Management</title>
     </head>
 
     <body>
@@ -45,7 +45,7 @@
                                                     here</a> </div>
                                         </div>
                                     </li>
-                                    <li><a class="creat-project-btn" href="create-project.php"><span>+</span> Creat Project</a></li>
+                                    <li><a class="creat-project-btn" href="create_project_task.php"><span>+</span> Creat Task</a></li>
                                 </ul>
                             </section>
                             <section class="project-search">
@@ -53,19 +53,10 @@
                                     <form>
                                         <div class="row">
                                             <div class="form-group col-lg-3 col-md-6">
-                                                <input type="text" class="form-control" placeholder="Project Name">
+                                                <input type="text" class="form-control" placeholder="Task Name">
                                             </div>
                                             <div class="form-group col-lg-3 col-md-6">
-                                                <input type="text" class="form-control" placeholder="Employee Name">
-                                            </div>
-                                            <div class="form-group col-lg-3 col-md-6"> <span class="des">Designation</span>
-                                                <select class="form-control" id="exampleFormControlSelect1">
-                                                    <option>Select Roll</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
+                                                <input type="text" class="form-control" placeholder="Project Name">
                                             </div>
                                             <div class="col-lg-3 text-center">
                                                 <button type="submit" class="btn employee-search-btn">Search</button>
@@ -120,7 +111,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6">
+                                    <!-- <div class="col-lg-3 col-md-6">
                                         <div class="custom-project-wrap">
                                             <div class="dropdown project-thumb-toggle">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -252,7 +243,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </section>
                         </div>
                     </div>

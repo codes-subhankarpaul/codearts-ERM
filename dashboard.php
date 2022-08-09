@@ -32,13 +32,7 @@
             </a>
         </li>
 
-        <li class="<?php if($slug == 'leave.php' || $slug == 'leave_form.php' || $slug == 'leave_update.php' || $slug == 'leave_view.php') { echo 'active'; } ?>">
-            <a href="leave.php">
-                <span>
-                    <img src="assets/images/menu-icon-3.png" alt="">
-                </span> Leave
-            </a>
-        </li>
+        <li><a href="#"><span><img src="assets/images/menu-icon-3.png" alt=""></span> Leave</a></li>
         
         <li><a href="#"><span><img src="assets/images/menu-icon-4.png" alt=""></span> Holidays</a></li>
         
@@ -54,7 +48,7 @@
             </a>
         </li>
         
-        <li><a href="#"><span><img src="assets/images/menu-icon-8.png" alt=""></span> Time Sheet</a></li>
+        <li><a href="timesheet.php"><span><img src="assets/images/menu-icon-8.png" alt=""></span> Time Sheet</a></li>
         
         <li class="<?php if( ($slug == 'access_log.php') || (strpos($slug, 'employee_access_log.php')!== false) ) { echo 'active'; } ?>">
             <a href="access_log.php">
