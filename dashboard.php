@@ -48,7 +48,7 @@
             </a>
         </li>
         
-        <li><a href="#"><span><img src="assets/images/menu-icon-8.png" alt=""></span> Time Sheet</a></li>
+        <li><a href="timesheet.php"><span><img src="assets/images/menu-icon-8.png" alt=""></span> Time Sheet</a></li>
         
         <li class="<?php if( ($slug == 'access_log.php') || (strpos($slug, 'employee_access_log.php')!== false) ) { echo 'active'; } ?>">
             <a href="access_log.php">
