@@ -96,7 +96,7 @@
                                                         class="dropdown-item" href="view-project.php?viewid=<?php echo $row['project_id'];?>">View</a> <a class="dropdown-item"
                                                         href="edit-project.php?editid=<?php echo $row['project_id'];?>">Edit</a> </div>
                                             </div>
-                                            <a class="project-title" href="#"><?php echo $row['project_name'];?></a>
+                                            <a class="project-title" href="view-project.php?viewid=<?php echo $row['project_id'];?>"><?php echo $row['project_name'];?></a>
                                             <h6><span class="project-count">1</span> open tasks, <span
                                                     class="project-count">9</span> tasks completed</h6>
                                             <p class="demo"><?php echo $row['project_details']; ?></p>

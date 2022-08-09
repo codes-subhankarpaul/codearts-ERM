@@ -48,18 +48,22 @@
                             <?php include 'dashboard.php'; ?>
                         </div>
                         <div class="col-lg-9">
+                            
                             <section class="inner-head-brd">
                                 <h2>Projects</h2>
                                 <ul>
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li>Projects</li>
                                 </ul>
+                                <ul class="projects-btn">
+                                    <li><a class="creat-project-btn" href="create_project_task.php?project_id=<?php echo $_GET['viewid'] ?>"><span>+</span> Creat Task</a></li>
+                                </ul>
                                
                             </section>
                             
                             <section class="custom-projects">
                                 <form method="POST" enctype="multipart/form-data">
-                                    <h4>Create Project</h4>
+                                    
                                     <div class="form-row"> 
                                     <?php
                                     
@@ -157,7 +161,7 @@
                                       ?>
                                    
                                     <div class="col-md-12 text-center">
-                                        <input type="submit" class="btn dp-em-nxt-btn" name="create" value="Create" >
+                                        <input type="submit" class="btn dp-em-nxt-btn" name="create" value="Update" >
                                       </div>
                                     </div>
                                 </form>

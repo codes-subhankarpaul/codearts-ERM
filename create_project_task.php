@@ -178,7 +178,7 @@
                                         $members = $_POST['members_name'];
                                         $team = implode(",", $members);
 
-                                        $task_insert_query = "INSERT INTO `capms_project_task_info`(`task_id`, `task_name`, `priority`, `task_start_date`, `task_end_date`, `task_domain`, `task_type`, `assigned_members`, `trello_task_id`, `trello_task_link`, `task_desc`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['task_name']."', '".$_POST['task_priority']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['task_domain']."', '".$_POST['task_type']."', '".$team."', '".$_POST['trello_taskid']."', '".$_POST['trello_link']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' )";
+                                        $task_insert_query = "INSERT INTO `capms_project_task_info`(`task_id`,`project_id`, `task_name`, `priority`, `task_start_date`, `task_end_date`, `task_domain`, `task_type`, `assigned_members`, `trello_task_id`, `trello_task_link`, `task_desc`, `created_at`, `updated_at`) VALUES (NULL,'".$_GET['project_id']."', '".$_POST['task_name']."', '".$_POST['task_priority']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['task_domain']."', '".$_POST['task_type']."', '".$team."', '".$_POST['trello_taskid']."', '".$_POST['trello_link']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' )";
                                         
                                         $task_insert_result = mysqli_query($con, $task_insert_query);
 
