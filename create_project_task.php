@@ -183,7 +183,7 @@
                                         $task_insert_result = mysqli_query($con, $task_insert_query);
 
                                     }
-                                ?>
+                                ?> 
                             </section>
                         </div>
                     </div>
