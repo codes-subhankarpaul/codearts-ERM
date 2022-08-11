@@ -175,15 +175,24 @@
                                 </form>
                                 <?php
                                     if(isset($_POST['create_task'])){
-                                        $members = $_POST['members_name'];
-                                        $team = implode(",", $members);
 
-                                        $task_insert_query = "INSERT INTO `capms_project_task_info`(`task_id`, `task_name`, `priority`, `task_start_date`, `task_end_date`, `task_domain`, `task_type`, `assigned_members`, `trello_task_id`, `trello_task_link`, `task_desc`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['task_name']."', '".$_POST['task_priority']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['task_domain']."', '".$_POST['task_type']."', '".$team."', '".$_POST['trello_taskid']."', '".$_POST['trello_link']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' )";
+                                        $task_insert_query = "INSERT INTO `capms_project_task_info`(`task_id`, `task_name`, `priority`, `task_start_date`, `task_end_date`, `task_domain`, `task_type`, `trello_task_id`, `trello_task_link`, `task_desc`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['task_name']."', '".$_POST['task_priority']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['task_domain']."', '".$_POST['task_type']."', '".$_POST['trello_taskid']."', '".$_POST['trello_link']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' )";
                                         
+                                        //print_r($task_insert_query);
+                                        //die();
                                         $task_insert_result = mysqli_query($con, $task_insert_query);
 
+                                        $last_task_id = $con->insert_id;
+
+                                        if(is_array($_POST['members_name'])){
+                                            foreach($_POST['members_name'] as $key){
+                                                $user_work_load = "INSERT INTO capms_user_workload_info (workload_id, user_id, project_id, task_id, created_at, updated_at) VALUES (NULL, '".$key."', '".$_GET['project_id']."', '".$last_task_id."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' ) ";
+
+                                                mysqli_query($con, $user_work_load);
+                                            }
+                                        }
                                     }
-                                ?>
+                                ?> 
                             </section>
                         </div>
                     </div>

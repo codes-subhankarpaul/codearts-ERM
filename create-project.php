@@ -4,11 +4,13 @@
     <head>
         <!-- Header CSS files -->
         <?php include 'header_css.php'; ?>
-        <?php
-                if($_SESSION['emp_id'] == '')
-                {
-                  echo "<script>location.href='".$baseURL."login.php';</script>";
-                }
+        <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+    </head>
+    <?php
+            if($_SESSION['emp_id'] == '')
+            {
+            echo "<script>location.href='http://localhost/codearts/login.php';</script>";
+            }
             ?>
 
             <?php 
@@ -18,25 +20,26 @@
             $names = '[';
 
             if ($result->num_rows > 0) {
-              // output data of each row
-              while($row = $result->fetch_assoc()) {
-                $names.='"'.$row["user_fullname"].'"'.",";
-              }
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+            $names.='"'.$row["user_fullname"].'"'.",";
+            }
             } else {
-             
+
             }
             $names.="]";
-            $con->close();
-
-             ?>
-        <title>Projects - CERM :: Codearts Employee Relationship Management</title>
-    </head>
+            //$con->close();
+    ?>
 
     <body>
         <header class="custom-header">
             <!-- Dashboard Top Info Panel -->
-            <?php include 'info_panel.php'; ?>
+            <?php 
+            include 'info_panel.php';
+            //include('database.php');
+            ?>
         </header>
+
         <main class="custom-dahboard-main">
             <div class="custom-page-wrap-dp">
                 <div class="container">
@@ -51,14 +54,13 @@
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li>Projects</li>
                                 </ul>
-                               
+                                
                             </section>
                             
                             <section class="custom-projects">
                                 <form method="POST" enctype="multipart/form-data">
                                     <h4>Create Project</h4>
                                     <div class="form-row"> 
-                                  
                                       <div class="form-group col-md-12">  
                                           <div class="multi-field-wrapper">
                                           <div class="multi-fields dp-custom-multifields">
@@ -73,10 +75,30 @@
                                                 <div class="col-md-6">
                                                     <label>Priority</label> 
                                                     <select class="form-control" id="priority" name="priority">
-                                                        <option>High</option>
-                                                        <option>Medium</option>
-                                                        <option>Low</option>
-                                                        <option>Top</option>
+                                                        <option value="4">TOP MOST</option>
+                                                        <option value="3">HIGH</option>
+                                                        <option value="2">MEDIUM</option>
+                                                        <option value="1">LOW</option>
+                                                        <option value="0">NONE</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label>Domain</label> 
+                                                    <select class="form-control" id="priority" name="domain_name">
+                                                        <option>Choose a Domain</option>
+                                                        <?php
+                                                            $domain_query = "SELECT * FROM capms_department_info";
+                                                            $domain_result = mysqli_query($con, $domain_query);
+                                                            if($domain_result-> num_rows > 0){
+                                                                while($domain_rows = mysqli_fetch_assoc($domain_result)){
+                                                                    ?>
+                                                        <option value="<?php echo $domain_rows['dept_id']; ?>"><?php echo $domain_rows['dept_name']; ?></option>
+                                                        <?PHP
+                                                                }
+                                                            }
+                                                        ?>
+                                                        
                                                     </select>
                                                 </div>
                                                
@@ -91,30 +113,36 @@
                                                 
 
                                                 <div class="col-md-6">
-                                                    <label>Team Leader</label> 
-                                                    <input type="text" class="form-control" placeholder="Name" name="team_leader" id="leaders">
-                                                </div>
-
-
-                                                <div class="col-md-6">
-                                                    <label>Team Name</label> 
-                                                    <input type="text" class="form-control" placeholder="Name" name="team_name" id="teams">
+                                                     <label>Project Assigned to:</label> 
+                                                    <!-- <input type="text" class="form-control" placeholder="Name" name="team_name" id="teams"> -->
+                                                    <?php
+                                                        $sql1 = "SELECT * FROM capms_admin_users";
+                                                        $result1 = mysqli_query($con, $sql1);
+                                                        //print_r($result1);
+                                                        if($result1->num_rows > 0)
+                                                        {
+                                                            while($row1 = mysqli_fetch_assoc($result1))
+                                                            {
+                                                    ?>
+                                                        <input type="checkbox" id="team_name" name="team_name[]" value="<?php echo $row1['id']; ?>">
+                                                        <label for="team_name"><?php echo $row1['user_fullname']; ?> </label>
+                                                        
+                                                    <?php } } ?>
                                                 </div>
 
 
                                                 <div class="col-md-12">
                                                     <label>Project Details</label> 
                                                       <textarea id="editor" name="description"></textarea>
-
                                                 </div>
                                                
 
-                                                <div class="col-md-12">
+                                                <!-- <div class="col-md-12">
                                                     <div class="form-group files color">
                                                         <label>Upload Your File </label>
                                                         <input type="file" class="form-control" multiple="" name="document_files">
                                                       </div>
-                                                </div>
+                                                </div> -->
 
 
                                               </div>
@@ -126,11 +154,33 @@
                                       </div>
                                   
                                     <div class="col-md-12 text-center">
-                                        <input type="submit" class="btn dp-em-nxt-btn" name="create_project" value="Create" >
+                                        <input type="submit" class="btn dp-em-nxt-btn" name="create_project" value="Create Project" >
                                       </div>
                                     </div>
                                 </form>
+
+                                <?php
+                                    if(isset($_POST['create_project'])){
+
+                                        $create_project = "INSERT INTO `capms_project_info`(`project_id`, `title`, `domain`, `start_date`, `end_date`, `priority`, `project_details`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['project_name']."', '".$_POST['domain_name']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['priority']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."') ";
+
+                                      // echo $create_project;
+                                       //die();
+
+                                       mysqli_query($con, $create_project);
+
+                                       $last_project_id = $con->insert_id;
+
+                                       if(is_array($_POST['team_name'])){
+                                        foreach($_POST['team_name'] as $key){
+                                            $assigned_user_query = "INSERT INTO camps_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$key."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
+                                            mysqli_query($con, $assigned_user_query);
+                                        }
+                                       }
+                                    }
+                                ?>
                             </section>
+                            
                         </div>
                     </div>
                 </div>
@@ -143,7 +193,7 @@
         <!-- Footer JS files -->
         <?php include 'footer_js.php' ?>
 
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://jqueryui.com//resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
@@ -221,18 +271,6 @@
 }
 </style>
 
-
-
-
-<?php 
-
-if(isset($_POST['create_project']))
-{
-
-    print_r($_POST);
-}
-
- ?>
 
     </body>
 </html>
