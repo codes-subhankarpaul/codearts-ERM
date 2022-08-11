@@ -56,7 +56,7 @@
                                     <li>Projects</li>
                                 </ul>
                                 <ul class="projects-btn">
-                                    <li><a class="creat-project-btn" href="create_project_task.php?project_id=<?php echo $_GET['viewid'] ?>"><span>+</span> Creat Task</a></li>
+                                    <li><a class="creat-project-btn" href="create_project_task.php?project_id=<?php echo $_GET['viewid'] ?>"><span>+</span> Create Task</a></li>
                                 </ul>
                                
                             </section>
@@ -70,11 +70,12 @@
                                     if(isset($_GET['viewid'])){
                                         $vid = $_GET['viewid'];
 
-                                        $ret=mysqli_query($con,"SELECT * FROM `capms_admin_project` WHERE project_id = '".$vid."' ");
+                                        $ret=mysqli_query($con,"SELECT * FROM `capms_project_info` WHERE project_id = '".$vid."' ");
                                         $cnt=1;
                                         $row=mysqli_num_rows($ret);
                                         if($row>0){
                                         while ($row=mysqli_fetch_array($ret)) {
+
 
                                    ?>
                                   
@@ -86,16 +87,16 @@
 
                                                  <div class="col-md-6">
                                                     <label>Project Name</label> 
-                                                    <input type="text" class="form-control" placeholder="Name" name="project_name" value="<?php echo $row['project_name']; ?>" disabled>
+                                                    <input type="text" class="form-control" placeholder="Name" name="project_name" value="<?php echo $row['title']; ?>" disabled>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <label>Priority</label> 
                                                     <select class="form-control" id="priority" name="priority">
-                                                        <option value="High" <?php if($row['project_priority'] == 'High') { echo 'selected'; } ?> disabled>High</option>
-                                                        <option value="Medium" <?php if($row['project_priority'] == 'Medium') { echo 'selected'; } ?> disabled>Medium</option>
-                                                        <option value="Low" <?php if($row['project_priority'] == 'Low') { echo 'selected'; } ?> disabled>Low</option>
-                                                        <option value="Top" <?php if($row['project_priority'] == 'Top') { echo 'selected'; } ?> disabled>Top</option>
+                                                        <option value="High" <?php if($row['priority'] == 3) { echo 'selected'; } ?> >High</option>
+                                                        <option value="Medium" <?php if($row['priority'] == 2) { echo 'selected'; } ?> >Medium</option>
+                                                        <option value="Low" <?php if($row['priority'] == 1) { echo 'selected'; } ?> >Low</option>
+                                                        <option value="Top" <?php if($row['priority'] == 0) { echo 'selected'; } ?> >None</option>
                                                     <!-- <label>Priority</label> </br>
                                                     <input type="radio" id="top" name="Priority" value="TOP">
                                                     <label for="top">Top</label>
@@ -110,21 +111,65 @@
                                                
                                                 <div class="col-md-6">
                                                     <label>Start Date</label> 
-                                                    <input type="date" class="form-control" name="start_date" value="<?php echo $row['project_sdate']; ?>" disabled>
+                                                    <input type="date" class="form-control" name="start_date" value="<?php echo $row['start_date']; ?>" disabled>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>End Date</label> 
-                                                    <input type="date" class="form-control" name="end_date" value="<?php echo $row['project_edate']; ?>" disabled>
+                                                    <input type="date" class="form-control" name="end_date" value="<?php echo $row['end_date']; ?>" disabled>
                                                 </div>
                                                 
 
-                                                <div class="col-md-6">
+                                                <!-- <div class="col-md-6">
                                                     <label>Deadline</label> 
-                                                    <input type="date" class="form-control" placeholder="Name" name="deadline" id="deadline" value="<?php echo $row['project_deadline']; ?>" disabled>
-                                                </div>
-                                                <div class="col-md-6">
+                                                    <input type="date" class="form-control" placeholder="Name" name="deadline" id="deadline" value="<?php echo $row['end_date']; ?>" disabled>
+                                                </div> -->
+                                                <div class="col-md-12">
                                                     <label>Project Assigned to:</label> 
-                                                    <input type="text" class="form-control" placeholder="Name" name="team_name" id="teams" value="<?php echo $row['project_team']; ?>" disabled>
+                                                    <!-- <input type="text" class="form-control" placeholder="Name" name="team_name" id="teams" value="<?php //echo $row['project_team']; ?>" disabled> -->
+                                                    <?php 
+                                                    //echo "<pre>";
+                                                    // print_r($row);
+                                                    $assined_user_ids = '';
+                                                    $ret_teams=mysqli_query($con,"SELECT * FROM `camps_project_assigned_user_info` WHERE `project_id` = ".$row['project_id'].";");
+                                                    $row_teams=mysqli_num_rows($ret_teams);
+                                                    while ($row_teams=mysqli_fetch_array($ret_teams)) {
+                                                   
+                                            
+                                                    $sql1 = " SELECT * FROM capms_admin_users WHERE id ='".$row_teams['user_id']."' ";
+                                                    $result1 = mysqli_query($con, $sql1);
+                                                    
+                                                    if($result1->num_rows > 0)
+                                                    {
+                                                        while($row1 = mysqli_fetch_assoc($result1))
+                                                        {
+                                                            $assined_user_ids = $assined_user_ids.','.$row1['id'];
+                                                        } 
+                                                    } 
+                                                } ?>
+                                                    <?php
+                                                        $sql1 = "SELECT * FROM capms_admin_users";
+                                                        $result1 = mysqli_query($con, $sql1);
+                                                       
+                                                        $user_ids = explode(',',$assined_user_ids);
+                                                        
+
+                                                        if($result1->num_rows > 0)
+                                                        {
+                                                            while($row1 = mysqli_fetch_assoc($result1))
+                                                            {   
+                                                                if (in_array($row1['id'], $user_ids))
+                                                                {
+                                                                   $checked = 'yes';
+                                                                }
+                                                                else{
+                                                                    $checked = 'no';
+                                                                }
+                                                                
+                                                    ?>
+                                                        <input type="checkbox" id="team_name" name="team_name[]" value="<?php echo $row1['id']; ?>" <?php if($checked == 'yes'){ echo 'checked'; }?>>
+                                                        <label for="team_name"><?php echo $row1['user_fullname']; ?> </label>
+                                                        
+                                                    <?php } } ?>
                                                 </div>
  
                    

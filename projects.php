@@ -42,26 +42,7 @@
                                     <form method="POST">
                                         <input type="text" pacleholder="Search Project Name" name="search" style="width: 85%;margin: 20px;">
                                         <button type="submit" class="btn employee-search-btn" style="width: 10%" name="submit">Search</button>
-                                        <!-- <div class="row">
-                                            <div class="form-group col-lg-3 col-md-6">
-                                                <input type="text" class="form-control" placeholder="Project Name">
-                                            </div>
-                                            <div class="form-group col-lg-3 col-md-6">
-                                                <input type="text" class="form-control" placeholder="Employee Name">
-                                            </div>
-                                            <div class="form-group col-lg-3 col-md-6"> <span class="des">Designation</span>
-                                                <select class="form-control" id="exampleFormControlSelect1">
-                                                    <option>Select Roll</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-3 text-center">
-                                                <button type="submit" class="btn employee-search-btn">Search</button>
-                                            </div>
-                                        </div> -->
+                                       
                                     </form>
                                 </div>
                             </section>
@@ -69,7 +50,7 @@
                             <section class="custom-projects">
                                 <div class="row">
                                 <?php   
-                                        $num_per_page = 8;
+                                        $num_per_page = 4;
                                         if(!isset($_GET['page'])){
                                             $page = 1;
                                         }
@@ -78,7 +59,7 @@
                                         }
 
                                         $start_form =  ($page - 1)*$num_per_page;
-                                        $ret=mysqli_query($con,"SELECT * FROM `capms_admin_project` LIMIT $start_form,$num_per_page");
+                                        $ret=mysqli_query($con,"SELECT * FROM `capms_project_info` LIMIT $start_form,$num_per_page");
                                         
                                         //$ret=mysqli_query($con,"SELECT * FROM `capms_admin_project`");
                                         $cnt=1;
@@ -96,25 +77,28 @@
                                                         class="dropdown-item" href="view-project.php?viewid=<?php echo $row['project_id'];?>">View</a> <a class="dropdown-item"
                                                         href="edit-project.php?editid=<?php echo $row['project_id'];?>">Edit</a> </div>
                                             </div>
-                                            <a class="project-title" href="view-project.php?viewid=<?php echo $row['project_id'];?>"><?php echo $row['project_name'];?></a>
+                                          
+                                            <a class="project-title" href="view-project.php?viewid=<?php echo $row['project_id'];?>"><?php echo $row['title'];?></a>
                                             <h6><span class="project-count">1</span> open tasks, <span
                                                     class="project-count">9</span> tasks completed</h6>
                                             <p class="demo"><?php echo $row['project_details']; ?></p>
                                             <h5 class="custom-deadline">Deadline :</h5>
-                                            <p class="deadline-date"><?php echo $row['project_deadline'];?></p>
+                                            
+                                            <p class="deadline-date"><?php echo $row['end_date'];?></p>
                                             <!-- <h5 class="pro-leader">Project Leader :</h5>
                                             <a class="project-leader-img" href="#"> <img src="assets/images/client-img-1.jpg" alt="">
                                             </a> -->
                                             <h5 class="pro-team">Project Team :</h5>
                                             <ul class="project-team-list">
-                                            <?php $team = $row['project_team'];
-                                                  $team_members = explode(",",$team);
-                                                 
-                                                  foreach ($team_members as $each_members) {
-                                                    //print_r($each_members);
-                                                    
+                                            <?php 
+                                            //echo "<pre>";
+                                            // print_r($row);
+                                            $ret_teams=mysqli_query($con,"SELECT * FROM `camps_project_assigned_user_info` WHERE `project_id` = ".$row['project_id'].";");
+                                            $row_teams=mysqli_num_rows($ret_teams);
+                                            while ($row_teams=mysqli_fetch_array($ret_teams)) {
+                                                   
                                             
-                                                    $sql1 = " SELECT * FROM capms_admin_users WHERE id ='".$each_members."' ";
+                                                    $sql1 = " SELECT * FROM capms_admin_users WHERE id ='".$row_teams['user_id']."' ";
                                                     $result1 = mysqli_query($con, $sql1);
                                                     
                                                     if($result1->num_rows > 0)
@@ -136,7 +120,7 @@
                                             $cnt=$cnt+1;
 
                                             }
-                                            $sql2 = "SELECT * FROM `capms_admin_project`";
+                                            $sql2 = "SELECT * FROM `capms_project_info`";
                                           $rs_result = mysqli_query($con, $sql2);
                                           $total_records = mysqli_num_rows($rs_result);
                                           //echo $total_records;

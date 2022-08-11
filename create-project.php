@@ -56,69 +56,11 @@
                                 </ul>
                                 
                             </section>
-                            <?php
-                        $sql1 = "SELECT * FROM capms_admin_users WHERE id = '".$_SESSION['emp_id']."' ";
-                        $result1 = mysqli_query($con, $sql1);
-                        
-                        if($result1->num_rows > 0)
-                        {
-                            while($row1 = mysqli_fetch_assoc($result1))
-                            {
-
-                    ?>
                             
                             <section class="custom-projects">
                                 <form method="POST" enctype="multipart/form-data">
                                     <h4>Create Project</h4>
                                     <div class="form-row"> 
-                                    <?php
-                                    
-                                    if(isset($_POST['create'])){
-                                      $project_name = $_POST['project_name']; 
-                                      $project_priority = $_POST['priority'];
-                                      $project_sdate = $_POST['start_date'];
-                                      $project_edate = $_POST['end_date'];
-                                      $project_deadline = $_POST['deadline'];
-                                      $project_team = $_POST['team_name'];
-                                      $team = implode(",", $project_team);
-                                      $project_details = $_POST['description'];
-                                      $project_files = $_FILES['document_files'];
-
-                                      //print_r($project_files);
-                                      
-                                      $filename = $project_files['name'];
-                                      $filepath = $project_files['tmp_name'];
-                                      $fileerror = $project_files['error'];
-
-                                      if($fileerror == 0){ 
-
-                                        $destfile = 'Project_file/'.$filename;
-                                        //echo $destfile;
-                                        move_uploaded_file($filepath, $destfile);
-                                      }
-                                        
-                                     //$query=mysqli_query($con, "INSERT INTO capms_admin_project(project_id, project_name, project_priority, project_sdate, project_edate, project_deadline, project_team, project_details) VALUES ('','$project_name','$project_priority','$project_sdate','$project_edate','$project_deadline','$team','$project_details')");
-                                     $query = mysqli_query($con,"INSERT INTO capms_admin_project(project_id, project_name, project_priority, project_sdate, project_edate, project_deadline, project_team, project_details) VALUES (Null,'".$project_name."','".$project_priority."','".$project_sdate."','".$project_edate."','".$project_deadline."','".$team."','".$project_details."')");
-                                      
-
-
-                                    //   $query1=mysqli_query($con, "INSERT INTO `capms_member_assigned_project`(`assign_id`, `project_id`, `user_id`, `memeber_name`) VALUES ('','[value-2]',".$row1['user_empid']."','$team')");
-                                      
-                                    
-
-                                    if ($query) {
-                                        echo "<script>alert('You have successfully inserted the data');</script>";
-                                        echo "<script type='text/javascript'> document.location ='projects.php'; </script>";
-                                    }
-                                    else
-                                        {
-                                        echo "<script>alert('Something Went Wrong. Please try again');</script>";
-                                        }
-
-                                    }
-
-                                  ?>
-                                  
                                       <div class="form-group col-md-12">  
                                           <div class="multi-field-wrapper">
                                           <div class="multi-fields dp-custom-multifields">
@@ -133,10 +75,30 @@
                                                 <div class="col-md-6">
                                                     <label>Priority</label> 
                                                     <select class="form-control" id="priority" name="priority">
-                                                        <option>High</option>
-                                                        <option>Medium</option>
-                                                        <option>Low</option>
-                                                        <option>Top</option>
+                                                        <option value="4">TOP MOST</option>
+                                                        <option value="3">HIGH</option>
+                                                        <option value="2">MEDIUM</option>
+                                                        <option value="1">LOW</option>
+                                                        <option value="0">NONE</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label>Domain</label> 
+                                                    <select class="form-control" id="priority" name="domain_name">
+                                                        <option>Choose a Domain</option>
+                                                        <?php
+                                                            $domain_query = "SELECT * FROM capms_department_info";
+                                                            $domain_result = mysqli_query($con, $domain_query);
+                                                            if($domain_result-> num_rows > 0){
+                                                                while($domain_rows = mysqli_fetch_assoc($domain_result)){
+                                                                    ?>
+                                                        <option value="<?php echo $domain_rows['dept_id']; ?>"><?php echo $domain_rows['dept_name']; ?></option>
+                                                        <?PHP
+                                                                }
+                                                            }
+                                                        ?>
+                                                        
                                                     </select>
                                                 </div>
                                                
@@ -150,10 +112,6 @@
                                                 </div>
                                                 
 
-                                                <div class="col-md-6">
-                                                    <label>Deadline</label> 
-                                                    <input type="date" class="form-control" placeholder="Name" name="deadline" id="deadline">
-                                                </div>
                                                 <div class="col-md-6">
                                                      <label>Project Assigned to:</label> 
                                                     <!-- <input type="text" class="form-control" placeholder="Name" name="team_name" id="teams"> -->
@@ -179,12 +137,12 @@
                                                 </div>
                                                
 
-                                                <div class="col-md-12">
+                                                <!-- <div class="col-md-12">
                                                     <div class="form-group files color">
                                                         <label>Upload Your File </label>
                                                         <input type="file" class="form-control" multiple="" name="document_files">
                                                       </div>
-                                                </div>
+                                                </div> -->
 
 
                                               </div>
@@ -196,12 +154,33 @@
                                       </div>
                                   
                                     <div class="col-md-12 text-center">
-                                        <input type="submit" class="btn dp-em-nxt-btn" name="create" value="Create" >
+                                        <input type="submit" class="btn dp-em-nxt-btn" name="create_project" value="Create Project" >
                                       </div>
                                     </div>
                                 </form>
+
+                                <?php
+                                    if(isset($_POST['create_project'])){
+
+                                        $create_project = "INSERT INTO `capms_project_info`(`project_id`, `title`, `domain`, `start_date`, `end_date`, `priority`, `project_details`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['project_name']."', '".$_POST['domain_name']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['priority']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."') ";
+
+                                      // echo $create_project;
+                                       //die();
+
+                                       mysqli_query($con, $create_project);
+
+                                       $last_project_id = $con->insert_id;
+
+                                       if(is_array($_POST['team_name'])){
+                                        foreach($_POST['team_name'] as $key){
+                                            $assigned_user_query = "INSERT INTO camps_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$key."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
+                                            mysqli_query($con, $assigned_user_query);
+                                        }
+                                       }
+                                    }
+                                ?>
                             </section>
-                        <?php } } ?>
+                            
                         </div>
                     </div>
                 </div>
