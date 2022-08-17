@@ -7,13 +7,13 @@
         <?php
                 if($_SESSION['emp_id'] == '')
                 {
-                  echo "<script>location.href='".$baseURL."login.php';</script>";
+                  echo "<script>location.href='http://localhost/codearts/login.php';</script>";
                 }
             ?>
         <title>Projects - CERM :: Codearts Employee Relationship Management</title>
     </head>
-
-    <body>
+ 
+    <body>                 
         <header class="custom-header">
             <!-- Dashboard Top Info Panel -->
             <?php include 'info_panel.php'; ?>
@@ -34,225 +34,117 @@
                                     <li>Projects</li>
                                 </ul>
                                 <ul class="projects-btn">
-                                    <li>
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
-                                                    class="fas fa-bars"></i> </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a
-                                                    class="dropdown-item" href="#">Action</a> <a class="dropdown-item"
-                                                    href="#">Another action</a> <a class="dropdown-item" href="#">Something else
-                                                    here</a> </div>
-                                        </div>
-                                    </li>
                                     <li><a class="creat-project-btn" href="create-project.php"><span>+</span> Creat Project</a></li>
                                 </ul>
                             </section>
                             <section class="project-search">
                                 <div class="project-search-frm-wrap">
-                                    <form>
-                                        <div class="row">
-                                            <div class="form-group col-lg-3 col-md-6">
-                                                <input type="text" class="form-control" placeholder="Project Name">
-                                            </div>
-                                            <div class="form-group col-lg-3 col-md-6">
-                                                <input type="text" class="form-control" placeholder="Employee Name">
-                                            </div>
-                                            <div class="form-group col-lg-3 col-md-6"> <span class="des">Designation</span>
-                                                <select class="form-control" id="exampleFormControlSelect1">
-                                                    <option>Select Roll</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-3 text-center">
-                                                <button type="submit" class="btn employee-search-btn">Search</button>
-                                            </div>
-                                        </div>
+                                    <form method="POST">
+                                        <input type="text" pacleholder="Search Project Name" name="search" style="width: 85%;margin: 20px;">
+                                        <button type="submit" class="btn employee-search-btn" style="width: 10%" name="submit">Search</button>
+                                       
                                     </form>
                                 </div>
                             </section>
+
                             <section class="custom-projects">
                                 <div class="row">
+                                <?php   
+                                        $num_per_page = 4;
+                                        if(!isset($_GET['page'])){
+                                            $page = 1;
+                                        }
+                                        else{
+                                            $page = $_GET['page'];
+                                        }
+
+                                        $start_form =  ($page - 1)*$num_per_page;
+                                        $ret=mysqli_query($con,"SELECT * FROM `capms_project_info` LIMIT $start_form,$num_per_page");
+                                        
+                                        //$ret=mysqli_query($con,"SELECT * FROM `capms_admin_project`");
+                                        $cnt=1;
+                                        $row=mysqli_num_rows($ret);
+                                        if($row>0){
+                                        while ($row=mysqli_fetch_array($ret)) {
+                                ?>
+
                                     <div class="col-lg-3 col-md-6">
                                         <div class="custom-project-wrap">
                                             <div class="dropdown project-thumb-toggle">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a
-                                                        class="dropdown-item" href="#">Action</a> <a class="dropdown-item"
-                                                        href="#">Another action</a> <a class="dropdown-item" href="#">Something
-                                                        else here</a> </div>
+                                                        class="dropdown-item" href="view-project.php?viewid=<?php echo $row['project_id'];?>">View</a> <a class="dropdown-item"
+                                                        href="edit-project.php?editid=<?php echo $row['project_id'];?>">Edit</a> </div>
                                             </div>
-                                            <a class="project-title" href="project_task.php">Office Management</a>
+                                          
+                                            <a class="project-title" href="view-project.php?viewid=<?php echo $row['project_id'];?>"><?php echo $row['title'];?></a>
                                             <h6><span class="project-count">1</span> open tasks, <span
                                                     class="project-count">9</span> tasks completed</h6>
-                                            <p class="demo">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. When an unknown printer took a galley of type and scrambled it...</p>
+                                            <p class="demo"><?php echo $row['project_details']; ?></p>
                                             <h5 class="custom-deadline">Deadline :</h5>
-                                            <p class="deadline-date">17 dec 2021</p>
-                                            <h5 class="pro-leader">Project Leader :</h5>
+                                            
+                                            <p class="deadline-date"><?php echo $row['end_date'];?></p>
+                                            <!-- <h5 class="pro-leader">Project Leader :</h5>
                                             <a class="project-leader-img" href="#"> <img src="assets/images/client-img-1.jpg" alt="">
-                                            </a>
+                                            </a> -->
                                             <h5 class="pro-team">Project Team :</h5>
                                             <ul class="project-team-list">
-                                                <li><a href="#"><img src="assets/images/client-img-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-2.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-5.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-4.jpg" alt=""></a></li>
-                                                <li><a href="#">+15</a></li>
+                                            <?php 
+                                            //echo "<pre>";
+                                            // print_r($row);
+                                            $ret_teams=mysqli_query($con,"SELECT * FROM `camps_project_assigned_user_info` WHERE `project_id` = ".$row['project_id'].";");
+                                            $row_teams=mysqli_num_rows($ret_teams);
+                                            while ($row_teams=mysqli_fetch_array($ret_teams)) {
+                                                   
+                                            
+                                                    $sql1 = " SELECT * FROM capms_admin_users WHERE id ='".$row_teams['user_id']."' ";
+                                                    $result1 = mysqli_query($con, $sql1);
+                                                    
+                                                    if($result1->num_rows > 0)
+                                                    {
+                                                        while($row1 = mysqli_fetch_assoc($result1))
+                                                        {
+                                                            
+                                            ?>
+                                                <li><a href="#"><img src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image'] ?>" alt=""></a></li>
+
+                                            <?php  } } } ?>
+
                                             </ul>
-                                            <div class="custom-project-progress">
-                                                <h5 class="pro-team">Progress :</h5>
-                                                <div class="custom-dp-progress" style="width: 100%;">
-                                                    <div class="dp-progress-value">
-                                                        <p class="demo">40%</p>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="40"
-                                                            aria-valuemin="0" aria-valuemax="100" style="max-width: 40%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="custom-project-wrap">
-                                            <div class="dropdown project-thumb-toggle">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a
-                                                        class="dropdown-item" href="#">Action</a> <a class="dropdown-item"
-                                                        href="#">Another action</a> <a class="dropdown-item" href="#">Something
-                                                        else here</a> </div>
+
+                                    <?php 
+                                            $cnt=$cnt+1;
+
+                                            }
+                                            $sql2 = "SELECT * FROM `capms_project_info`";
+                                          $rs_result = mysqli_query($con, $sql2);
+                                          $total_records = mysqli_num_rows($rs_result);
+                                          //echo $total_records;
+                                          $total_pages=ceil($total_records/$num_per_page);
+                                          //echo $total_pages;
+                                          if($page>1){
+                                             echo "<a href='projects.php?page=".($page-1)."' class='btn btn-danger'>Previous</a>";
+                                          }
+
+
+                                          for($i=1;$i<=$total_pages;$i++)
+                                          {
+                                            echo "<a href='projects.php?page=".$i."' class='btn btn-primary'>".$i."</a>";
+                                          }
+
+                                          if($i>$page){
+                                             echo "<a href='projects.php?page=".($page+1)."' class='btn btn-danger'>Next</a>";
+                                          }
+
+                                          } else {?>
+                                            <div>
+                                                <h3 style="text-align:center; color:red;" colspan="6">No Record Found</h3>
                                             </div>
-                                            <a class="project-title" href="#">Office Management</a>
-                                            <h6><span class="project-count">1</span> open tasks, <span
-                                                    class="project-count">9</span> tasks completed</h6>
-                                            <p class="demo">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. When an unknown printer took a galley of type and scrambled it...</p>
-                                            <h5 class="custom-deadline">Deadline :</h5>
-                                            <p class="deadline-date">17 dec 2021</p>
-                                            <h5 class="pro-leader">Project Leader :</h5>
-                                            <a class="project-leader-img" href="#"> <img src="assets/images/client-img-1.jpg" alt="">
-                                            </a>
-                                            <h5 class="pro-team">Project Team :</h5>
-                                            <ul class="project-team-list">
-                                                <li><a href="#"><img src="assets/images/client-img-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-2.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-5.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-4.jpg" alt=""></a></li>
-                                                <li><a href="#">+15</a></li>
-                                            </ul>
-                                            <div class="custom-project-progress">
-                                                <h5 class="pro-team">Progress :</h5>
-                                                <div class="custom-dp-progress" style="width: 100%;">
-                                                    <div class="dp-progress-value">
-                                                        <p class="demo">60%</p>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                                            aria-valuemin="0" aria-valuemax="100" style="max-width: 60%"> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="custom-project-wrap">
-                                            <div class="dropdown project-thumb-toggle">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a
-                                                        class="dropdown-item" href="#">Action</a> <a class="dropdown-item"
-                                                        href="#">Another action</a> <a class="dropdown-item" href="#">Something
-                                                        else here</a> </div>
-                                            </div>
-                                            <a class="project-title" href="#">Office Management</a>
-                                            <h6><span class="project-count">1</span> open tasks, <span
-                                                    class="project-count">9</span> tasks completed</h6>
-                                            <p class="demo">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. When an unknown printer took a galley of type and scrambled it...</p>
-                                            <h5 class="custom-deadline">Deadline :</h5>
-                                            <p class="deadline-date">17 dec 2021</p>
-                                            <h5 class="pro-leader">Project Leader :</h5>
-                                            <a class="project-leader-img" href="#"> <img src="assets/images/client-img-1.jpg" alt="">
-                                            </a>
-                                            <h5 class="pro-team">Project Team :</h5>
-                                            <ul class="project-team-list">
-                                                <li><a href="#"><img src="assets/images/client-img-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-2.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-5.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-4.jpg" alt=""></a></li>
-                                                <li><a href="#">+15</a></li>
-                                            </ul>
-                                            <div class="custom-project-progress">
-                                                <h5 class="pro-team">Progress :</h5>
-                                                <div class="custom-dp-progress" style="width: 100%;">
-                                                    <div class="dp-progress-value">
-                                                        <p class="demo">80%</p>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="80"
-                                                            aria-valuemin="0" aria-valuemax="100" style="max-width: 80%"> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="custom-project-wrap">
-                                            <div class="dropdown project-thumb-toggle">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a
-                                                        class="dropdown-item" href="#">Action</a> <a class="dropdown-item"
-                                                        href="#">Another action</a> <a class="dropdown-item" href="#">Something
-                                                        else here</a> </div>
-                                            </div>
-                                            <a class="project-title" href="#">Office Management</a>
-                                            <h6><span class="project-count">1</span> open tasks, <span
-                                                    class="project-count">9</span> tasks completed</h6>
-                                            <p class="demo">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. When an unknown printer took a galley of type and scrambled it...</p>
-                                            <h5 class="custom-deadline">Deadline :</h5>
-                                            <p class="deadline-date">17 dec 2021</p>
-                                            <h5 class="pro-leader">Project Leader :</h5>
-                                            <a class="project-leader-img" href="#"> <img src="assets/images/client-img-1.jpg" alt="">
-                                            </a>
-                                            <h5 class="pro-team">Project Team :</h5>
-                                            <ul class="project-team-list">
-                                                <li><a href="#"><img src="assets/images/client-img-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-1.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-2.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-5.jpg" alt=""></a></li>
-                                                <li><a href="#"><img src="assets/images/employee-4.jpg" alt=""></a></li>
-                                                <li><a href="#">+15</a></li>
-                                            </ul>
-                                            <div class="custom-project-progress">
-                                                <h5 class="pro-team">Progress :</h5>
-                                                <div class="custom-dp-progress" style="width: 100%;">
-                                                    <div class="dp-progress-value">
-                                                        <p class="demo">98%</p>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="98"
-                                                            aria-valuemin="0" aria-valuemax="100" style="max-width: 98%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <?php } ?>
                             </section>
                         </div>
                     </div>

@@ -45,23 +45,31 @@
 
                             <section class="employee-form employee-basic-personal-bank-information">
                                 <form method="POST" enctype="multipart/form-data" id="education_form">
-                                <h4>Education Informations</h4> 
+                                <h4>Education Informations</h4>
+                                <?php
+                                    $sql1 = "SELECT * FROM `capms_user_education_info` WHERE user_id = '".$_SESSION['emp_id']."' ";
+                                    $result1 = mysqli_query($con, $sql1);
+                                    if($result1->num_rows > 0)
+                                    {
+                                        while($row1 = mysqli_fetch_assoc($result1))
+                                        {
+                                ?> 
                                     <div class="form-row" id="secondary_form">
                                         <div class="col-md-3 align-self-center">
                                             <label>Secondary Institute Name</label> 
-                                            <input type="text" class="form-control" placeholder="Secondary Institute Name" name="secondary_institute_name" id="secondary_institute_name" required>
+                                            <input type="text" class="form-control" placeholder="Secondary Institute Name" name="secondary_institute_name" id="secondary_institute_name" value="<?php echo $row1['secondary_institute']?>" required>
                                         </div>
                                         <div class="col-md-3 align-self-center">
                                             <label>Board Name</label> 
-                                            <input type="text" class="form-control" placeholder="Board Name" name="secondary_board" id="secondary_board" required>
+                                            <input type="text" class="form-control" placeholder="Board Name" name="secondary_board" id="secondary_board" value="<?php echo $row1['secondary_board']?>"  required>
                                         </div>
                                         <div class="col-md-3 align-self-center">
                                             <label>Year of Passout</label> 
-                                            <input type="date" class="form-control" name="secondary_yop" id="secondary_yop" required>
+                                            <input type="date" class="form-control" name="secondary_yop" id="secondary_yop" value="<?php echo $row1['secondary_yop']?>" required>
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Percentage</label> 
-                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="secondary_percentage" id="secondary_percentage" required>
+                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="secondary_percentage" id="secondary_percentage" value="<?php echo $row1['secondary_exam_percentage']?>" required>
                                         </div>
                                         <div class="col-md-1 align-self-center text-right">
                                             <div id="secondary_verification" class="verification-btn">
@@ -72,23 +80,23 @@
                                     <div class="form-row">
                                         <div class="col-md-3 align-self-center">
                                             <label>Higher Secondary Institute Name</label> 
-                                            <input type="text" class="form-control" placeholder="Higher Secondary Institute Name" name="hs_institute_name" id="hs_institute_name" required>
+                                            <input type="text" class="form-control" placeholder="Higher Secondary Institute Name" name="hs_institute_name" id="hs_institute_name" value="<?php echo $row1['higher_secondary_institute']?>" required>
                                         </div>
                                         <div class="col-md-3 align-self-center">
                                             <label>Board Name</label> 
-                                            <input type="text" class="form-control" placeholder="Board Name" name="hs_board" id="hs_board" required>
+                                            <input type="text" class="form-control" placeholder="Board Name" name="hs_board" id="hs_board" value="<?php echo $row1['higher_secondary_board']?>" required>
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Year of Start</label> 
-                                            <input type="date" class="form-control" name="hs_start_year" id="hs_start_year" required>
+                                            <input type="date" class="form-control" name="hs_start_year" id="hs_start_year" value="<?php echo $row1['higher_secondary_start_date']?>" required>
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Year of Finish</label>
-                                            <input type="date" class="form-control" name="hs_finish_year" id="hs_finish_year" required>
+                                            <input type="date" class="form-control" name="hs_finish_year" id="hs_finish_year" value="<?php echo $row1['higher_secondary_end_date']?>" required>
                                         </div>
                                         <div class="col-md-1 align-self-center">
                                             <label>Percentage</label> 
-                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="hs_passing_percentage" id="hs_passing_percentage" required>
+                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="hs_passing_percentage" id="hs_passing_percentage" value="<?php echo $row1['higher_secondary_exam_percentage']?>" required>
                                         </div>
                                         <div class="col-md-1 align-self-center text-right">
                                             <div id="higher_secondary_verification" class="verification-btn">
@@ -99,23 +107,23 @@
                                     <div class="form-row">
                                         <div class="col-md-3 align-self-center">
                                             <label>Graduation collage Name</label> 
-                                            <input type="text" class="form-control" placeholder="Collage Name" name="ug_institute_name" id="ug_institute_name" required>
+                                            <input type="text" class="form-control" placeholder="Collage Name" name="ug_institute_name" id="ug_institute_name" value="<?php echo $row1['ug_institute_name']?>" required>
                                         </div>
                                         <div class="col-md-3 align-self-center">
                                             <label>University Name</label> 
-                                            <input type="text" class="form-control" placeholder="University Name" name="ug_university_name" id="ug_university_name" required>
+                                            <input type="text" class="form-control" placeholder="University Name" name="ug_university_name" id="ug_university_name" value="<?php echo $row1['ug_university_name']?>" required>
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Year of Start</label> 
-                                            <input type="date" class="form-control" name="ug_start_year" id="ug_start_year" required>
+                                            <input type="date" class="form-control" name="ug_start_year" id="ug_start_year" value="<?php echo $row1['ug_start_year']?>" required>
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Year of Finish</label> 
-                                            <input type="date" class="form-control" name="ug_finish_year" id="ug_finish_year" required>
+                                            <input type="date" class="form-control" name="ug_finish_year" id="ug_finish_year" value="<?php echo $row1['ug_finish_year']?>" required>
                                         </div>
                                         <div class="col-md-1 align-self-center">
                                             <label>Percentage</label> 
-                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="ug_passing_percentage" id="ug_passing_percentage" required>
+                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="ug_passing_percentage" id="ug_passing_percentage" value="<?php echo $row1['ug_passing_percentage']?>" required>
                                         </div>
                                         <div class="col-md-1 align-self-center text-right">
                                             <div id="ug_verification" class="">
@@ -126,19 +134,19 @@
                                     <div class="form-row">
                                         <div class="col-md-3 align-self-center">
                                             <label>University Name (PG)</label> 
-                                            <input type="text" class="form-control" placeholder="University Name" name="pg_institute_name" id="pg_institute_name" required>
+                                            <input type="text" class="form-control" placeholder="University Name" name="pg_institute_name" id="pg_institute_name" value="<?php echo $row1['pg_institute_name']?>" required>
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Year of Start</label> 
-                                            <input type="date" class="form-control" name="pg_start_year" id="pg_start_year" required>
+                                            <input type="date" class="form-control" name="pg_start_year" id="pg_start_year" value="<?php echo $row1['pg_start_year']?>" required>
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Year of Finish</label> 
-                                            <input type="date" class="form-control" name="pg_finish_year" id="pg_finish_year" required>
+                                            <input type="date" class="form-control" name="pg_finish_year" id="pg_finish_year" value="<?php echo $row1['pg_finish_year']?>" required>
                                         </div>
                                         <div class="col-md-4 align-self-center">
                                             <label>Percentage</label> 
-                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="pg_passing_percentage" id="pg_passing_percentage" required>
+                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="pg_passing_percentage" id="pg_passing_percentage" value="<?php echo $row1['pg_passing_percentage']?>" required>
                                         </div>
                                         <div class="col-md-1 align-self-center text-right">
                                             <div id="pg_verification" class="verification-btn">
@@ -151,6 +159,11 @@
                                     <div class="col-md-12 text-center">
                                         <button type="submit" name= "user_education_info" class="btn dp-em-nxt-btn">Submit</button>
                                     </div>
+
+                                    <?php
+                                        }
+                                    }
+                                    ?>
 
                                 </form>
                          </section>

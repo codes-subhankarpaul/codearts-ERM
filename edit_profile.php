@@ -80,6 +80,34 @@
                                                         </span>
                                                         <input type="file" class="form-control" name="user_featured_image" id="user_featured_image">
                                                     </div>
+
+
+                                                    <!-- reports to -->
+                                                    <div class="form-group col-md-12">
+                                                        <label>Reports to</label>
+                                                        <select type="text" class="form-control" name="select_reports_to" id="Reports_to_dropdown">
+                                                        <option> CHOOSE ONE..</option>
+                                                        <?php
+                                                            $report_query = "SELECT * FROM capms_admin_users WHERE id != '".$_SESSION['emp_id']."' ";
+                                                            $reportResult = mysqli_query($con, $report_query);
+                                                            if($reportResult-> num_rows > 0) {
+                                                                while($reportRow = mysqli_fetch_assoc($reportResult)){
+                                                        ?>
+                                                            <option value="$reportRow['reports_to_uid']" <?php if($reportRow['id']!='') { echo 'selected'; } ?>><?php echo $reportRow['user_fullname']; ?></option>
+                                                             
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                           <?php
+                                                            }
+                                                            ?>
+                                                        
+                                                        </select>
+                                                        
+                                                    </div>
+
+
+
                                                     <!-- Salary -->
                                                     <div class="form-group col-md-12">
                                                         <label>Salary</label>
@@ -119,6 +147,10 @@
                                                 }
                                             }
                                         }
+
+                                        $sql4="UPDATE capms_admin_users SET reports_to_uid='".$_GET['id']."' WHERE id='".$_SESSION['$id']."'";
+                                        $query=mysqli_query($con,$sql4);
+
                                         echo "<script>location.href='".$baseURL."edit_profile_basic_info.php';</script>";
                                     }
                                 ?>

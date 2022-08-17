@@ -92,19 +92,39 @@
 
                     
                                                 <div class="col-md-6">
-                                                    <label>Task Domain</Th></label> 
+                                                    <label>Task Domain</Th></label>
                                                     <select id="domain-type" name="task_domain">
                                                         <option>Select Any</option>
                                                         <?php
-                                                            $query1 = "SELECT * FROM capms_department_info" ;
+                            
+                                                            $query1 = "SELECT domain FROM capms_project_info WHERE project_id = '".$_GET['project_id']."' " ;
                                                             $result1 = mysqli_query($con,$query1);
+                                                            
+                                                            $domain_names = array();
                                                             if($result1->num_rows > 0){
-                                                                while($row1 = mysqli_fetch_assoc($result1)){
-                                                        ?>
-                                                             <option value="<?php echo $row1['dept_id'] ?>"><?php echo $row1['dept_name']; ?></option>
-                                                        <?php
+                                                                while($domain_names = mysqli_fetch_assoc($result1)){
+                                                                    //echo $domain_names['domain'];
+                                                                    $dept_ids = explode(',', $domain_names['domain']);
+                                                                    //print_r($dept_ids);
+
+                                                                    foreach($dept_ids as $key)
+                                                                    {
+                                                                        $domain_name_fetch = "SELECT dept_name FROM capms_department_info WHERE dept_id = '".$key."' ";
+                                                                        $result2 = mysqli_query($con, $domain_name_fetch);
+                                                                        if($result2->num_rows > 0){
+                                                                            while($row100 = mysqli_fetch_assoc($result2)){
+                                                                                ?>
+                                                                            <option value="<?php echo $key; ?>"><?php echo $row100['dept_name']; ?></option>
+                                                                            <?php
+                                                                            }
+                                                                        }
+                                                                        
+                                                                    }
+
+                                                                    }
+                                                                    //print_r($domain_names);
                                                                 }
-                                                            }
+
                                                         ?>
 
                                                     </select>
