@@ -85,21 +85,19 @@
 
                                                 <div class="col-md-6">
                                                     <label>Domain</label> 
-                                                    <select class="form-control" id="priority" name="domain_name">
-                                                        <option>Choose a Domain</option>
-                                                        <?php
-                                                            $domain_query = "SELECT * FROM capms_department_info";
-                                                            $domain_result = mysqli_query($con, $domain_query);
-                                                            if($domain_result-> num_rows > 0){
-                                                                while($domain_rows = mysqli_fetch_assoc($domain_result)){
-                                                                    ?>
-                                                        <option value="<?php echo $domain_rows['dept_id']; ?>"><?php echo $domain_rows['dept_name']; ?></option>
-                                                        <?PHP
-                                                                }
+                                                    <?php
+                                                        $domain_query = "SELECT * FROM capms_department_info";
+                                                        $domain_result = mysqli_query($con, $domain_query);
+                                                        if($domain_result-> num_rows > 0){
+                                                            while($domain_rows = mysqli_fetch_assoc($domain_result)){
+                                                                ?>
+                                                    <input type="checkbox" id="team_name" name="domain_name[]" value="<?php echo $domain_rows['dept_id']; ?>">
+                                                    <label for="domain"><?php echo $domain_rows['dept_name']; ?> </label>
+                                                    <?php
                                                             }
-                                                        ?>
-                                                        
-                                                    </select>
+                                                        }
+                                                    ?>
+                                                    
                                                 </div>
                                                
                                                 <div class="col-md-6">
@@ -162,7 +160,10 @@
                                 <?php
                                     if(isset($_POST['create_project'])){
 
-                                        $create_project = "INSERT INTO `capms_project_info`(`project_id`, `title`, `domain`, `start_date`, `end_date`, `priority`, `project_details`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['project_name']."', '".$_POST['domain_name']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['priority']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."') ";
+                                        $project_domain = $_POST['domain_name'];
+                                        $temp_project_domain = implode(",", $project_domain );
+
+                                        $create_project = "INSERT INTO `capms_project_info`(`project_id`, `title`, `domain`, `start_date`, `end_date`, `priority`, `project_details`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['project_name']."', '".$temp_project_domain."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['priority']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."') ";
 
                                       // echo $create_project;
                                        //die();
@@ -171,12 +172,19 @@
 
                                        $last_project_id = $con->insert_id;
 
-                                       if(is_array($_POST['team_name'])){
-                                        foreach($_POST['team_name'] as $key){
-                                            $assigned_user_query = "INSERT INTO camps_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$key."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
-                                            mysqli_query($con, $assigned_user_query);
-                                        }
-                                       }
+                                       $project_team = $_POST['team_name'];
+                                       $team = implode(",", $project_team);
+                                       
+                                       $assigned_user_query = "INSERT INTO camps_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$team."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
+
+                                       mysqli_query($con, $assigned_user_query);
+
+                                    //    if(is_array($_POST['team_name'])){
+                                    //     foreach($_POST['team_name'] as $key){
+                                    //         $assigned_user_query = "INSERT INTO camps_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$key."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
+                                    //         mysqli_query($con, $assigned_user_query);
+                                    //     }
+                                    //    }
                                     }
                                 ?>
                             </section>

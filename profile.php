@@ -1,53 +1,49 @@
 <!doctype html>
 <html lang="en">
 
-    <head>    
-        <!-- Header CSS files -->
-        <?php include 'header_css.php'; ?>
-        <?php
-            if($_SESSION['emp_id'] == '')
-            {
-              echo "<script>location.href='".$baseURL."login.php';</script>";
-            }
-        ?>
-        <title>Profile - CERM :: Codearts Employee Relationship Management</title>
-    </head>
+<head>
+    <!-- Header CSS files -->
+    <?php include 'header_css.php'; ?>
+    <?php
+    if ($_SESSION['emp_id'] == '') {
+        echo "<script>location.href='" . $baseURL . "login.php';</script>";
+    }
+    ?>
+    <title>Profile - CERM :: Codearts Employee Relationship Management</title>
+</head>
 
-    <body>
-        <header class="custom-header">
-            <!-- Dashboard Top Info Panel -->
-            <?php include 'info_panel.php'; ?>
-        </header>
-        <main class="custom-dahboard-main">
-            <div class="custom-page-wrap-dp">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <!-- Dashboard Left Sidebar -->
-                            <?php include 'dashboard.php'; ?>
-                        </div>
-                        <div class="col-lg-9">
-                            <section class="inner-head-brd">
-                                <h2>Profile</h2>
-                                <ul>
-                                    <li><a href="<?php echo $baseURL; ?>">Home</a></li>
-                                    <li>Profile</li>
-                                </ul>
-                            </section>
-                            <?php
-                                $sql1 = "SELECT * FROM capms_admin_users WHERE id = '".$_SESSION['emp_id']."' ";
-                                $result1 = mysqli_query($con, $sql1);
-                                if($result1->num_rows > 0)
-                                {
-                                    while($row1 = mysqli_fetch_assoc($result1))
-                                    {
-                                        ?>
+<body>
+    <header class="custom-header">
+        <!-- Dashboard Top Info Panel -->
+        <?php include 'info_panel.php'; ?>
+    </header>
+    <main class="custom-dahboard-main">
+        <div class="custom-page-wrap-dp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <!-- Dashboard Left Sidebar -->
+                        <?php include 'dashboard.php'; ?>
+                    </div>
+                    <div class="col-lg-9">
+                        <section class="inner-head-brd">
+                            <h2>Profile</h2>
+                            <ul>
+                                <li><a href="<?php echo $baseURL; ?>">Home</a></li>
+                                <li>Profile</li>
+                            </ul>
+                        </section>
+                        <?php
+                        $sql1 = "SELECT * FROM capms_admin_users WHERE id = '" . $_SESSION['emp_id'] . "' ";
+                        $result1 = mysqli_query($con, $sql1);
+                        if ($result1->num_rows > 0) {
+                            while ($row1 = mysqli_fetch_assoc($result1)) {
+                        ?>
                                 <section class="custom-employee-profile">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="em-pro-main-details">
-                                                <div class="media em-pro-main-media"> <img class="mr-3"
-                                                        src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt="Employee Image">
+                                                <div class="media em-pro-main-media"> <img class="mr-3" src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt="Employee Image">
                                                     <div class="media-body">
                                                         <h4><?php echo $row1['user_fullname']; ?></h4>
                                                         <p class="demo">UI/UX Design Team</p>
@@ -64,20 +60,53 @@
                                                 <div class="contact-pin"> <span class="demo"><i class="fas fa-thumbtack"></i></span>
                                                 </div>
                                                 <ul class="common-details  employee-contact-list">
-                                                    <li><span>Phone: </span><a href="tel:9876543210;">9876543210</a></li>
-                                                    <li><span>Email: </span><a
-                                                            href="mailto:johndoe@example.com;">johndoe@example.com</a></li>
+                                                    <li><span>Phone: </span><a href="tel:9876543210;"><?php echo $row1['user_contact']; ?></a></li>
+                                                    <li><span>Email: </span>
+                                                        <a href="mailto:johndoe@example.com;"><?php echo $row1['user_email']; ?></a>
+                                                    </li>
                                                     <li><span>Birthday: </span>
-                                                        <p class="demo">24th July</p>
+                                                        <p class="demo">
+                                                            <?php echo $row1['user_dob']; ?>****</p>
+
                                                     </li>
                                                     <li><span>Address: </span>
-                                                        <p class="demo">1861 Bayonne Ave, Manchester Township, NJ, 08759</p>
+                                                        <p class="demo">
+                                                            <?php echo $row1['user_address']; ?></p>
                                                     </li>
                                                     <li><span>Gender: </span>
-                                                        <p class="demo">Male</p>
+                                                        <p class="demo">
+                                                            <?php echo $row1['user_gender']; ?></p>
+
                                                     </li>
-                                                    <li><span>Reports to: </span><a href="#"><span><img src="assets/images/admin-img.jpg"
-                                                                    alt=""></span> Jeffery Lalor</a></li>
+                                                    <li><span>Reports to: </span>
+                                                        <?php
+                                                        $sql = "SELECT user_featured_image, user_fullname FROM capms_admin_users WHERE id = '" . $row1['reports_to_uid'] . "' ";
+                                                        $report_query = mysqli_query($con, $sql);
+                                                        if ($report_query->num_rows > 0) {
+                                                            while ($report_row = mysqli_fetch_assoc($report_query)) {
+                                                        ?>
+                                                    <li><span>Reports to: </span><a href="#"><span> <img class="mr-3" src="assets/uploads/user_featured_images/<?php echo $report_row['user_featured_image']; ?>" alt="Employee Image">
+                                                            </span>
+                                                            <p class="demo d-inline"><?php echo $report_row['user_fullname']; ?></p>
+                                                        </a></li>
+
+                                                        <?php
+                                                                        }
+                                                                    } else {
+                                                                        echo '<p class="demo">Null</p>';
+                                                                    }
+
+                                                        ?>
+                                                        </li>
+
+
+
+
+
+
+                                            </select>
+
+                                            </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -85,12 +114,9 @@
                                 </section>
                                 <section class="custom-profile-information-tab">
                                     <ul class="nav nav-tabs dp-information-tab" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tabs-1"
-                                                role="tab">Profile</a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tabs-2"
-                                                role="tab">Projects</a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Bank &
-                                                Statutory <span>(Admin Only)</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Profile</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Projects</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Bank & Statutory <span>(Admin Only)</span></a> </li>
                                     </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content information-tab-content">
@@ -100,11 +126,10 @@
                                                     <div class="col-md-6">
                                                         <div class="common-info-inner-wrap">
                                                             <h4>Personal Informations</h4>
-                                                            <div class="contact-pin"> <span class="demo"><i
-                                                                        class="fas fa-thumbtack"></i></span> </div>
+                                                            <div class="contact-pin"> <span class="demo"><i class="fas fa-thumbtack"></i></span> </div>
                                                             <ul class="common-details  per-info-list">
                                                                 <li><span>Passport No: </span>
-                                                                    <p class="demo">9876543210</p>
+                                                                    <p class="demo"><?php echo $row1['user_passport_number']; ?></p>
                                                                 </li>
                                                                 <li><span>Passport Exp Date: </span>
                                                                     <p class="demo">9876525412</p>
@@ -113,19 +138,19 @@
                                                                     <p class="demo">24th July</p>
                                                                 </li>
                                                                 <li><span>Nationality: </span>
-                                                                    <p class="demo">Indian</p>
+                                                                    <p class="demo"><?php echo $row1['user_nationality']; ?></p>
                                                                 </li>
                                                                 <li><span>Religion: </span>
-                                                                    <p class="demo">Christian</p>
+                                                                    <p class="demo"><?php echo $row1['user_religion']; ?></p>
                                                                 </li>
                                                                 <li><span>Marital status: </span>
-                                                                    <p class="demo">Married</p>
+                                                                    <p class="demo"><?php echo $row1['user_marital_status']; ?></p>
                                                                 </li>
                                                                 <li><span>Employment of spouse: </span>
-                                                                    <p class="demo">No</p>
+                                                                    <p class="demo"><?php echo $row1['user_employment_of_spouse']; ?></p>
                                                                 </li>
                                                                 <li><span>No. of children: </span>
-                                                                    <p class="demo">2</p>
+                                                                    <p class="demo"><?php echo $row1['user_children_number']; ?></p>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -133,47 +158,49 @@
                                                     <div class="col-md-6">
                                                         <div class="common-info-inner-wrap emergency-info">
                                                             <h4>Emergency Contact</h4>
-                                                            <div class="contact-pin"> <span class="demo"><i
-                                                                        class="fas fa-thumbtack"></i></span> </div>
+                                                            <div class="contact-pin"> <span class="demo"><i class="fas fa-thumbtack"></i></span> </div>
                                                             <ul class="common-details  per-info-list">
                                                                 <h5>Primary</h5>
                                                                 <li><span>Name: </span>
-                                                                    <p class="demo">John Doe</p>
+                                                                    <p class="demo"><?php echo $row1['emergency_primary_name']; ?></p>
                                                                 </li>
-                                                                <li><span>Relationship: </span>
-                                                                    <p class="demo">Father</p>
+                                                                <li>
+                                                                    <span>Relationship:</span>
+                                                                    <p class="demo"><?php echo $row1['emergency_primary_relation']; ?></p>
                                                                 </li>
-                                                                <li><span>Phone: </span><a href="tel:9876543210">9876543210</a></li>
+                                                                <li><span>phone: </span>
+                                                                    <p class="demo"><?php echo $row1['emergency_primary_contact']; ?></p>
                                                             </ul>
                                                             <ul class="common-details  per-info-list">
                                                                 <h5>Secondary</h5>
                                                                 <li><span>Name: </span>
-                                                                    <p class="demo">Karen Wills</p>
+                                                                    <p class="demo"><?php echo $row1['emergency_secondary_name']; ?></p>
                                                                 </li>
                                                                 <li><span>Relationship: </span>
-                                                                    <p class="demo">Son</p>
+                                                                    <p class="demo"><?php echo $row1['emergency_secondary_relation']; ?></p>
                                                                 </li>
-                                                                <li><span>Phone: </span><a href="tel:9876543210">9876543210</a></li>
+                                                                <li><span>Phone: </span>
+                                                                    <p class="demo"><?php echo $row1['user_contact']; ?></p>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="common-info-inner-wrap">
                                                             <h4>Bank information</h4>
-                                                            <div class="contact-pin"> <span class="demo"><i
-                                                                        class="fas fa-thumbtack"></i></span> </div>
+                                                            <div class="contact-pin"> <span class="demo"><i class="fas fa-thumbtack"></i></span> </div>
                                                             <ul class="common-details  per-info-list">
                                                                 <li><span>Bank name: </span>
-                                                                    <p class="demo">ICICI Bank</p>
+                                                                    <p class="demo"><?php echo $row1['user_bank_name']; ?></p>
                                                                 </li>
                                                                 <li><span>Bank account No: </span>
-                                                                    <p class="demo">154978625412</p>
+                                                                    <p class="demo"><?php echo $row1['user_bank_account_no']; ?></p>
                                                                 </li>
                                                                 <li><span>IFSC Code: </span>
-                                                                    <p class="demo">ICI24508</p>
+                                                                    <p class="demo"><?php echo $row1['user_bank_ifsc_code']; ?></p>
                                                                 </li>
                                                                 <li><span>PAN No: </span>
-                                                                    <p class="demo">TC000YB6 </p>
+                                                                    <p class="demo"><?php echo $row1['user_pan_number']; ?></p>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -181,12 +208,11 @@
                                                     <div class="col-md-6">
                                                         <div class="common-info-inner-wrap">
                                                             <h4>Family information</h4>
-                                                            <div class="contact-pin"> <span class="demo"><i
-                                                                        class="fas fa-thumbtack"></i></span> </div>
+                                                            <div class="contact-pin"> <span class="demo"><i class="fas fa-thumbtack"></i></span> </div>
                                                             <table class="table family-table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th scope="col">Name </th>
+                                                                        <th scope="col">name</th>
                                                                         <th scope="col">Relationship</th>
                                                                         <th scope="col">Date of Birth</th>
                                                                         <th scope="col">Phone</th>
@@ -194,10 +220,18 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th scope="row">Leo</th>
-                                                                        <td>Brother</td>
-                                                                        <td>Feb 16th, 2019</td>
-                                                                        <td><a href="#">9876543210</a></td>
+                                                                        <th scope="row">
+                                                                            <p class="demo"><?php echo $row1['emergency_primary_name']; ?></p>
+                                                                        </th>
+                                                                        <td>
+                                                                            <p class="demo"><?php echo $row1['emergency_primary_relation']; ?></p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="demo"><?php echo $row1['user_dob']; ?></p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="demo"><?php echo $row1['emergency_primary_contact']; ?></p>
+                                                                        </td>
                                                                     </tr>
 
                                                                 </tbody>
@@ -207,27 +241,49 @@
                                                     <div class="col-md-6">
                                                         <div class="common-info-inner-wrap">
                                                             <h4>Education Informations</h4>
-                                                            <div class="contact-pin"> <span class="demo"><i
-                                                                        class="fas fa-thumbtack"></i></span> </div>
-                                                            <ul class="custom-education-exp-list education-custom">
-                                                                <li>
-                                                                    <h6>International College of Arts and Science (UG)</h6>
-                                                                    <p class="demo">Bsc Computer Science</p>
-                                                                    <p class="demo">2000 - 2003</p>
-                                                                </li>
-                                                                <li>
-                                                                    <h6>International College of Arts and Science (UG)</h6>
-                                                                    <p class="demo">Msc Computer Science</p>
-                                                                    <p class="demo">2000 - 2003</p>
-                                                                </li>
-                                                            </ul>
+                                                            <?php
+                                                            $sql2 = "SELECT * FROM `capms_user_education_info` WHERE user_id = '" . $_SESSION['emp_id'] . "' ";
+                                                            $result2 = mysqli_query($con, $sql2);
+                                                            if ($result2->num_rows > 0) {
+                                                                while ($row2 = mysqli_fetch_assoc($result2)) {
+                                                            ?>
+                                                                    <div class="contact-pin"> <span class="demo"><i class="fas fa-thumbtack"></i></span> </div>
+                                                                    <ul class="custom-education-exp-list education-custom">
+                                                                        <li>
+                                                                            <h6><?php echo $row2['secondary_institute'] ?></h6>
+                                                                            <p class="demo"><?php echo $row2['secondary_board'] ?></p>
+                                                                            <p class="demo"><?php echo $row2['secondary_yop'] ?> to <?php echo $row2['secondary_yop'] ?></p>
+                                                                            <p class="demo"><?php echo $row2['secondary_exam_percentage'] ?>%<span class="px-3">(secondary)</span></p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <h6><?php echo $row2['higher_secondary_institute'] ?></h6>
+                                                                            <p class="demo"><?php echo $row2['higher_secondary_board'] ?></p>
+                                                                            <p class="demo"><?php echo $row2['higher_secondary_start_date'] ?> to <?php echo $row2['higher_secondary_end_date'] ?></p>
+                                                                            <p class="demo"><?php echo $row2['higher_secondary_exam_percentage'] ?>%<span class="px-3">(higher secondary)</span></p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <h6><?php echo $row2['secondary_institute'] ?></h6>
+                                                                            <p class="demo"><?php echo $row2['ug_university_name'] ?></p>
+                                                                            <p class="demo"><?php echo $row2['ug_start_year'] ?> to <?php echo $row2['ug_finish_year'] ?></p>
+                                                                            <p class="demo"><?php echo $row2['ug_passing_percentage'] ?>%<span class="px-3">(ug)</span></p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <h6><?php echo $row2['secondary_institute'] ?></h6>
+                                                                            <p class="demo"><?php echo $row2['pg_institute_name'] ?></p>
+                                                                            <p class="demo"><?php echo $row2['pg_start_year'] ?> to <?php echo $row2['pg_finish_year'] ?></p>
+                                                                            <p class="demo"><?php echo $row2['pg_passing_percentage'] ?>%<span class="px-3">(pg)</span></p>
+                                                                        </li>
+                                                                    </ul>
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="common-info-inner-wrap">
-                                                            <h4>Education Informations</h4>
-                                                            <div class="contact-pin"> <span class="demo"><i
-                                                                        class="fas fa-thumbtack"></i></span> </div>
+                                                            <h4>Experience</h4>
+                                                            <div class="contact-pin"> <span class="demo"><i class="fas fa-thumbtack"></i></span> </div>
                                                             <ul class="custom-education-exp-list experience-custom">
                                                                 <li>
                                                                     <h6>Web Designer at Zen Corporation</h6>
@@ -251,17 +307,19 @@
                                         </div>
                                     </div>
                                 </section>
-                            <?php } } ?>
-                        </div>
+                        <?php }
+                        } ?>
                     </div>
                 </div>
             </div>
-        </main>
-        <footer class="custom-footer">
-            <!-- Copyright Content file -->
-            <?php include 'copyright_content.php'; ?>
-        </footer>
-        <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
-    </body>
+        </div>
+    </main>
+    <footer class="custom-footer">
+        <!-- Copyright Content file -->
+        <?php include 'copyright_content.php'; ?>
+    </footer>
+    <!-- Footer JS files -->
+    <?php include 'footer_js.php' ?>
+</body>
+
 </html>

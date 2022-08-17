@@ -110,7 +110,7 @@ if ($_SESSION['emp_id'] == '') {
               </ul>
             </section>
 
-            <section class="py-3">
+            <section class="py-3 mb-3">
               <button class="btn btn-primary" id="add_timesheet">add timesheet</button>
               <button class="btn btn-danger" id="close_add_timesheet">close timesheet</button>
             </section>
@@ -123,7 +123,7 @@ if ($_SESSION['emp_id'] == '') {
                       <div class="col">
                         <div class="mb-3">
                           <label for="dt">Select date - </label></br>
-                          <input id="dt" name="dt" placeholder=" choose date" />
+                          <input id="dt" name="dt" placeholder=" choose date" autocomplete="off"/>
                         </div>
                       </div>
                     </div>
@@ -136,13 +136,13 @@ if ($_SESSION['emp_id'] == '') {
                             <option value="">select project</option>
                             <?php
                             require_once "database.php";
-                            
+
                             $emp_id = $_SESSION['emp_id'];
-                            
+
                             $sql = "SELECT DISTINCT user_id, cpi.project_id, title 
                             FROM `capms_user_workload_info` as cuwi 
                             inner join `capms_project_info` as cpi on cuwi.project_id = cpi.project_id 
-                            where user_id = ".$emp_id.";";
+                            where user_id = " . $emp_id . ";";
                             $result = mysqli_query($con, $sql);
                             while ($row = mysqli_fetch_array($result)) {
                             ?>
@@ -155,7 +155,7 @@ if ($_SESSION['emp_id'] == '') {
                       </div>
                       <div class="col">
                         <div class="mb-3">
-                          <label for="task_id">task_id</label>
+                          <label for="task_id-dropdown">task_id</label>
                           <select class="form-control" id="task_id-dropdown" name="task_id">
                           </select>
                         </div>
@@ -164,49 +164,30 @@ if ($_SESSION['emp_id'] == '') {
                     <div class="row">
                       <div class="col">
                         <div class="mb-3">
-                          <label for="start_time" class="form-label">start_time (24 hrs)</label>
-                          <input type="number" class="form-control" name="start_time" max="24" min="1" step="1" placeholder="enter start_time">
+                          <label for="start_time" class="form-label">start_time(24 hrs)</label>
+                          <input type="text" class="form-control" name="start_time" max="24" min="1" step="1" placeholder="enter start_time (ex - 11.20)">
                         </div>
                       </div>
                       <div class="col">
                         <div class="mb-3">
-                          <label for="end_time" class="form-label">end_time (24 hrs)</label>
-                          <input type="number" class="form-control" name="end_time" max="24" min="1" step="1" placeholder="enter end_time">
+                          <label for="end_time" class="form-label">end_time(24 hrs)</label>
+                          <input type="text" class="form-control" name="end_time" max="24" min="1" step="1" placeholder="enter end_time (ex - 15.45)">
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col">
                         <div class="mb-3">
-                          <label for="task_type" class="form-label">task_type</label>
+                          <label for="task_type-dropdown" class="form-label">task_type</label>
                           <select class="form-control" id="task_type-dropdown" name="task_type">
-                            <option value="">select task_type</option>
-                            <?php
-                            $result = mysqli_query($con, "SELECT * FROM `capms_project_task_info` as cpti right join capms_project_tasktype_info as cptti on cpti.task_id = cptti.task_type_id;");
-                            while ($row = mysqli_fetch_array($result)) {
-                            ?>
-                              <option value="<?php echo $row['task_type']; ?>"><?php echo $row["task_type_name"]; ?></option>
-                            <?php
-                            }
-                            ?>
-                            </option>
                           </select>
                         </div>
                       </div>
                       <div class="col">
                         <div class="mb-3">
-                          <label for="task_domain" class="form-label">task_domain</label>
+                          <label for="task_domain-dropdown" class="form-label">task_domain</label>
                           <select class="form-control" id="task_domain-dropdown" name="task_domain">
                             <option value="">select task_domain</option>
-                            <?php
-                            $result = mysqli_query($con, "SELECT * FROM `capms_department_info`");
-                            while ($row = mysqli_fetch_array($result)) {
-                            ?>
-                              <option value="<?php echo $row['dept_id']; ?>"><?php echo $row["dept_name"]; ?></option>
-                            <?php
-                            }
-                            ?>
-                            </option>
                           </select>
                         </div>
                       </div>
@@ -240,7 +221,7 @@ if ($_SESSION['emp_id'] == '') {
 
             <section class="view-tasks">
               <table class="table">
-                <thead>
+                <thead class="bg-dark text-light">
                   <tr>
                     <th scope="col">Timesheet_id</th>
                     <th scope="col">Timesheet Date</th>
@@ -258,29 +239,48 @@ if ($_SESSION['emp_id'] == '') {
                   <?php
                   include 'database.php';
                   $user_id = $_SESSION['emp_id'];
-                  $query = "SELECT * from capms_user_timesheet as cut inner join `capms_user_timesheet_user` as cutu on cut.timesheet_id = cutu.timesheet_id where user_id = $user_id";
+                  $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "'";
                   $result = mysqli_query($con, $query);
                   if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                       echo "<tr>";
                       echo "<td>" . $row['timesheet_id'] . "</td>";
                       echo "<td>" . $row['timesheet_date'] . "</td>";
-                      // echo "<td>" . $row['task_date'] . "</td>";
-                      echo "<td>project name</td>";
-                      echo "<td>task name</td>";
-                      echo "<td>Backend - Development</td>";
-                      // echo "<td>" . $row['project_name'] . "</td>";
-                      echo "<td>" . $row['start_time'] . "hrs -" . $row['end_time'] ."hrs". "</td>";
-                      // echo "<td>" . $row['details'] . "</td>";
+
+                      // find project_id and task_id from workload_id and user_id
+                      $find_id_from_workload_sql = "SELECT * FROM `capms_user_workload_info` as cuwi inner join `capms_project_task_info` as cpti on cpti.task_id = cuwi.task_id inner join `capms_project_info` as cpi on cpi.project_id = cuwi.project_id WHERE cuwi.`user_id` = '" . $_SESSION['emp_id'] . "' AND `workload_id` = '" . $row['workload_id'] . "'";
+
+                      $result_from_workload = mysqli_query($con, $find_id_from_workload_sql);
+                      $project_name = 0;
+                      $task_name = 0;
+
+                      while ($row_from_workload = mysqli_fetch_array($result_from_workload)) {
+                        $project_name = $row_from_workload['title'];
+                        $task_name = $row_from_workload['task_name'];
+                      }
+
+                      echo "<td>" . $project_name . "</td>";
+                      echo "<td>" . $task_name . "</td>";
+                      echo "<td>" . $row['task_domain'] . " - " . $row['task_type'] . "</td>";
+                      echo "<td>" . $row['start_time'] . "hrs -" . $row['end_time'] . "hrs" . "</td>";
                       echo "<td>" . $row['trello_link'] . "</td>";
                       echo "<td>" . $row['description'] . "</td>";
-                      echo '<td><a href="">edit</a></td>';
-                      echo '<td><a href="">delete</a></td>';
+                      $id = $row['timesheet_id'];
+                      echo '<td><a href="timesheet_edit.php?id=' . $id . '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg></a></td>';
+
+                      // EDIT TIMESHEET BASED ON TIMESHEET_ID
+
+                      echo '<td><a class="text-danger" href="timesheet_deleteDB.php?id=' . $id . '"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg></a></td>';
                       echo "</tr>";
                     }
-                  } 
-                  else {
-                    echo "<script>alert("."no result".")</script>";
+                  } else {
+                    echo "<script>alert(\"no result\")</script>";
                   }
                   ?>
                 </tbody>
@@ -335,11 +335,11 @@ if ($_SESSION['emp_id'] == '') {
     $("#dt").datepicker({
       onSelect: function(dateText, inst) {
         var date = $(this).val();
-        console.log(date);
+        // console.log(date);
         var fullDate = new Date();
         var twoDigitMonth = ((fullDate.getMonth().length + 1) === 1) ? (fullDate.getMonth() + 1) : '0' + (fullDate.getMonth() + 1);
         var currentDate = fullDate.getDate() + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
-        console.log(currentDate);
+        // console.log(currentDate);
         var fullDateObj = new Date(date);
         var currentDateObj = new Date();
         if (fullDateObj > currentDateObj) {
@@ -369,6 +369,7 @@ if ($_SESSION['emp_id'] == '') {
   </script>
 
   <!-- TASK_ID FETCHED BASED ON PROJECT -->
+  <!-- TASK_DOMAIN FETCHED BASED ON TASK_ID -->
   <script>
     $(document).ready(function() {
       $('#project-dropdown').on('change', function() {
@@ -383,6 +384,39 @@ if ($_SESSION['emp_id'] == '') {
           cache: false,
           success: function(result) {
             $("#task_id-dropdown").html(result);
+          },
+          error: function() {
+            alert('problem in state');
+          }
+        });
+      });
+      $('#task_id-dropdown').on('change', function() {
+        // alert('Taks id is changed');
+        var task_id = this.value;
+        console.log(task_id);
+        $.ajax({
+          url: "timesheet_task_domain_by_task_id.php",
+          type: "POST",
+          data: {
+            task_id: task_id
+          },
+          cache: false,
+          success: function(result) {
+            $("#task_domain-dropdown").html(result);
+          },
+          error: function() {
+            alert('problem in state');
+          }
+        });
+        $.ajax({
+          url: "timesheet_task_type_by_task_id.php",
+          type: "POST",
+          data: {
+            task_id: task_id
+          },
+          cache: false,
+          success: function(result) {
+            $("#task_type-dropdown").html(result);
           },
           error: function() {
             alert('problem in state');

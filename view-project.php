@@ -3,7 +3,11 @@
 
     <head>
         <!-- Header CSS files -->
-        <?php include 'header_css.php'; ?>
+        <?php
+
+use LDAP\Result;
+
+ include 'header_css.php'; ?>
         <title>Projects - CERM :: Codearts Employee Relationship Management</title>
     </head>
     <?php
@@ -97,16 +101,39 @@
                                                         <option value="Medium" <?php if($row['priority'] == 2) { echo 'selected'; } ?> >Medium</option>
                                                         <option value="Low" <?php if($row['priority'] == 1) { echo 'selected'; } ?> >Low</option>
                                                         <option value="Top" <?php if($row['priority'] == 0) { echo 'selected'; } ?> >None</option>
-                                                    <!-- <label>Priority</label> </br>
-                                                    <input type="radio" id="top" name="Priority" value="TOP">
-                                                    <label for="top">Top</label>
-                                                    <input type="radio" id="high" name="Priority" value="HIGH">
-                                                    <label for="high">High</label>
-                                                    <input type="radio" id="medium" name="Priority" value="Medium">
-                                                    <label for="medium">Medium</label>
-                                                    <input type="radio" id="low" name="Priority" value="Low">
-                                                    <label for="low">Low</label> -->
                                                     </select>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label>Domain</label> 
+                                                    <?php
+                                                        $domain_array = array();
+                                                        $domain_query = "SELECT * FROM capms_department_info";
+                                                        $domain_result = mysqli_query($con, $domain_query);
+                                                        if($domain_result-> num_rows > 0){
+                                                            while($domain_rows = mysqli_fetch_assoc($domain_result)){
+                                                                $domain_selector = "SELECT `domain` FROM `capms_project_info` WHERE project_id = ".$row['project_id']." ";
+                                                                $domain_selector_result = mysqli_query($con,$domain_selector);
+                                                                if($domain_selector_result-> num_rows > 0){
+                                                                    while($row99 = mysqli_fetch_assoc($domain_selector_result)){
+                                                                        $domain_array = explode(',',$row99['domain']);
+                                                                        if (in_array($domain_rows['dept_id'], $domain_array))
+                                                                        {
+                                                                        $checked = 'yes';
+                                                                        }
+                                                                        else{
+                                                                            $checked = 'no';
+                                                                        }
+                                                                    }
+                                                                }
+                                                                ?>
+                                                    <input type="checkbox" id="team_name" name="domain_name[]" value="<?php echo $domain_rows['dept_id']; ?>" <?php if($checked == 'yes'){ echo 'checked'; }?>>
+                                                    <label for="domain"><?php echo $domain_rows['dept_name']; ?> </label>
+                                                    <?php
+                                                            }
+                                                        }
+                                                    ?>
+                                                    
                                                 </div>
                                                
                                                 <div class="col-md-6">
@@ -125,51 +152,39 @@
                                                 </div> -->
                                                 <div class="col-md-12">
                                                     <label>Project Assigned to:</label> 
-                                                    <!-- <input type="text" class="form-control" placeholder="Name" name="team_name" id="teams" value="<?php //echo $row['project_team']; ?>" disabled> -->
-                                                    <?php 
-                                                    //echo "<pre>";
-                                                    // print_r($row);
-                                                    $assined_user_ids = '';
-                                                    $ret_teams=mysqli_query($con,"SELECT * FROM `camps_project_assigned_user_info` WHERE `project_id` = ".$row['project_id'].";");
-                                                    $row_teams=mysqli_num_rows($ret_teams);
-                                                    while ($row_teams=mysqli_fetch_array($ret_teams)) {
-                                                   
-                                            
-                                                    $sql1 = " SELECT * FROM capms_admin_users WHERE id ='".$row_teams['user_id']."' ";
-                                                    $result1 = mysqli_query($con, $sql1);
-                                                    
-                                                    if($result1->num_rows > 0)
-                                                    {
-                                                        while($row1 = mysqli_fetch_assoc($result1))
-                                                        {
-                                                            $assined_user_ids = $assined_user_ids.','.$row1['id'];
-                                                        } 
-                                                    } 
-                                                } ?>
-                                                    <?php
-                                                        $sql1 = "SELECT * FROM capms_admin_users";
-                                                        $result1 = mysqli_query($con, $sql1);
-                                                       
-                                                        $user_ids = explode(',',$assined_user_ids);
-                                                        
+                                                        <?php
+                                                            $assined_user_ids = '';
+                                                            $project_user = "SELECT `user_id` FROM `camps_project_assigned_user_info` WHERE project_id = 12";
+                                                            $assign_user = mysqli_query($con,$project_user);
+                                                            if($assign_user->num_rows > 0){
+                                                                while($assign_user_row = mysqli_fetch_assoc($assign_user)){
+                                                                    $assined_user_ids = explode(',', $assign_user_row['user_id']);
+                                                                    // print_r ($assined_user_ids); 
+                                                                    // die();
+                                                                }
+                                                            }
 
-                                                        if($result1->num_rows > 0)
-                                                        {
-                                                            while($row1 = mysqli_fetch_assoc($result1))
-                                                            {   
-                                                                if (in_array($row1['id'], $user_ids))
-                                                                {
-                                                                   $checked = 'yes';
-                                                                }
-                                                                else{
-                                                                    $checked = 'no';
-                                                                }
-                                                                
-                                                    ?>
-                                                        <input type="checkbox" id="team_name" name="team_name[]" value="<?php echo $row1['id']; ?>" <?php if($checked == 'yes'){ echo 'checked'; }?>>
-                                                        <label for="team_name"><?php echo $row1['user_fullname']; ?> </label>
-                                                        
-                                                    <?php } } ?>
+                                                            $user_query = "SELECT * FROM capms_admin_users";
+                                                            $result_user = mysqli_query($con,$user_query);
+                                                            if($result_user->num_rows > 0)
+                                                            {
+                                                                while($row1 = mysqli_fetch_assoc($result_user))
+                                                                {   
+                                                                    if (in_array($row1['id'], $assined_user_ids))
+                                                                    {
+                                                                       $checked = 'yes';
+                                                                    }
+                                                                    else{
+                                                                        $checked = 'no';
+                                                                    }
+                                                                    
+                                                        ?>
+                                                            <input type="checkbox" id="team_name" name="team_name[]" value="<?php echo $row1['id']; ?>" <?php if($checked == 'yes'){ echo 'checked'; }?>>
+                                                            <label for="team_name"><?php echo $row1['user_fullname']; ?> </label>
+                                                            
+                                                        <?php } } ?>
+
+                                                         
                                                 </div>
  
                    
