@@ -1,9 +1,9 @@
 <?php
 session_start();
-if ($_SESSION['emp_type'] != "hr") { 
-    echo $_SESSION['emp_type'];
-    header("Location: holidays_view.php");
+if ($_SESSION['emp_type'] != "hr" && $_SESSION['emp_type'] != "admin") { 
+        header("Location: holidays_view.php");
 }
+
 else{
 ?>
 

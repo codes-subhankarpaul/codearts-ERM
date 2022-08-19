@@ -34,8 +34,16 @@
 
         <li><a href="#"><span><img src="assets/images/menu-icon-3.png" alt=""></span> Leave</a></li>
         
-        <li><a href="#"><span><img src="assets/images/menu-icon-4.png" alt=""></span> Holidays</a></li>
-        
+        <?php if($_SESSION['emp_type']=='admin' || $_SESSION['emp_type']=='hr'){ ?>
+        <li><a href="holidays_add.php"><span><img src="assets/images/menu-icon-4.png" alt=""></span> Holidays</a></li>
+        <?php 
+        }
+        else{
+        ?>
+        <li><a href="holidays_view.php"><span><img src="assets/images/menu-icon-4.png" alt=""></span> Holidays</a></li>
+        <?php
+        }
+        ?>
         <li><a href="#"><span><img src="assets/images/menu-icon-5.png" alt=""></span> Salary</a></li>
         
         <li><a href="#"><span><img src="assets/images/menu-icon-6.png" alt=""></span> Pay Slip</a></li>
