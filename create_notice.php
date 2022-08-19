@@ -1,3 +1,12 @@
+<?php 
+session_start();
+if ($_SESSION['emp_type'] != "hr") { 
+    echo $_SESSION['emp_type'];
+    header("Location: notice.php");
+}
+else{
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,3 +85,7 @@
     
 </body>
 </html>
+
+<?php
+}
+?>

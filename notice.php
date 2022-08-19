@@ -65,9 +65,13 @@
                                 ?>
                             </table>
                             </section>
+                            <?php if ($_SESSION['emp_type'] == "hr") { ?>
                             <div style="margin-top: 30px;">
                             <a class="creat-project-btn" href="create_notice.php"><span>+</span> Create Notice</a>
                             </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
