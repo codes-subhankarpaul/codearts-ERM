@@ -155,8 +155,8 @@ if ($_SESSION['emp_id'] == '') {
                       </div>
                       <div class="col">
                         <div class="mb-3">
-                          <label for="task_id-dropdown">task_id</label>
-                          <select class="form-control" id="task_id-dropdown" name="task_id">
+                          <label for="task_id-dropdown">task_name</label>
+                          <select class="form-control" id="task_id-dropdown" name="workload_id">
                           </select>
                         </div>
                       </div>
@@ -178,16 +178,16 @@ if ($_SESSION['emp_id'] == '') {
                     <div class="row">
                       <div class="col">
                         <div class="mb-3">
-                          <label for="task_type-dropdown" class="form-label">task_type</label>
-                          <select class="form-control" id="task_type-dropdown" name="task_type">
+                          <label for="task_domain-dropdown" class="form-label">task_domain</label>
+                          <select class="form-control" id="task_domain-dropdown" name="task_domain">
+                            <option value="">select task_domain</option>
                           </select>
                         </div>
                       </div>
                       <div class="col">
                         <div class="mb-3">
-                          <label for="task_domain-dropdown" class="form-label">task_domain</label>
-                          <select class="form-control" id="task_domain-dropdown" name="task_domain">
-                            <option value="">select task_domain</option>
+                          <label for="task_type-dropdown" class="form-label">task_type</label>
+                          <select class="form-control" id="task_type-dropdown" name="task_type">
                           </select>
                         </div>
                       </div>
@@ -251,8 +251,6 @@ if ($_SESSION['emp_id'] == '') {
                       $find_id_from_workload_sql = "SELECT * FROM `capms_user_workload_info` as cuwi inner join `capms_project_task_info` as cpti on cpti.task_id = cuwi.task_id inner join `capms_project_info` as cpi on cpi.project_id = cuwi.project_id WHERE cuwi.`user_id` = '" . $_SESSION['emp_id'] . "' AND `workload_id` = '" . $row['workload_id'] . "'";
 
                       $result_from_workload = mysqli_query($con, $find_id_from_workload_sql);
-                      $project_name = 0;
-                      $task_name = 0;
 
                       while ($row_from_workload = mysqli_fetch_array($result_from_workload)) {
                         $project_name = $row_from_workload['title'];

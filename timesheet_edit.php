@@ -104,8 +104,8 @@ if ($_SESSION['emp_id'] == '') {
     while ($row = mysqli_fetch_array($result)) {
 
         $timesheet_date = $row['timesheet_date'];
-        $project_name = $row['workload_id'];
-        $task_name = $row['workload_id'];
+        $project_name = "";
+        $task_name = "";
         $start_time = $row['start_time'];
         $end_time = $row['end_time'];
         $task_domain = $row['task_domain'];
@@ -209,8 +209,8 @@ if ($_SESSION['emp_id'] == '') {
                                             </div>
                                             <div class="col">
                                                 <div class="mb-3">
-                                                    <label for="task_id">task_id</label>
-                                                    <select class="form-control" id="task_id-dropdown" name="task_id">
+                                                    <label for="task_id">task_name</label>
+                                                    <select class="form-control" id="task_id-dropdown" name="workload_id">
 
                                                     </select>
                                                 </div>
