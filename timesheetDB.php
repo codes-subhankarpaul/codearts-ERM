@@ -7,12 +7,12 @@ $task_domain = $_REQUEST['task_domain'];
 $task_type = $_REQUEST['task_type'];
 $description = $_REQUEST['description'];
 $trello_link = $_REQUEST['trello_link'];
-$task_id = $_REQUEST['task_id'];
+$workload_id = $_REQUEST['workload_id'];
 $project_id = $_REQUEST['project'];
 $created_at = date('Y-m-d h:i:s', strtotime('now'));
 $updated_at = date('Y-m-d h:i:s', strtotime('now'));
 
-$timesheet_insert_sql = "INSERT INTO `capms_user_timesheet` (`timesheet_id`, `user_id`, `workload_id`, `timesheet_date`, `start_time`, `end_time`, `task_domain`, `task_type`, `description`, `trello_link`, `created_at`, `updated_at`) VALUES (NULL, '".$_SESSION['emp_id']."', '".$_SESSION['workload_id']."', '".$timesheet_date."','".$start_time."',  '".$end_time."', '".$task_domain."', '".$task_type."', '".$description."', '".$trello_link."', '".$created_at."', '".$updated_at."')";
+$timesheet_insert_sql = "INSERT INTO `capms_user_timesheet` (`timesheet_id`, `user_id`, `workload_id`, `timesheet_date`, `start_time`, `end_time`, `task_domain`, `task_type`, `description`, `trello_link`, `created_at`, `updated_at`) VALUES (NULL, '".$_SESSION['emp_id']."', '".$workload_id."', '".$timesheet_date."','".$start_time."',  '".$end_time."', '".$task_domain."', '".$task_type."', '".$description."', '".$trello_link."', '".$created_at."', '".$updated_at."')";
 
 if($con->query($timesheet_insert_sql) === TRUE) {
     header('location:timesheet.php');

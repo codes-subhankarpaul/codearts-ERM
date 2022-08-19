@@ -9,17 +9,19 @@ $result = mysqli_query($con, $sql);
 
 <?php
 while ($row = mysqli_fetch_array($result)) {
-    $_SESSION['workload_id'] = $row['workload_id'];
-    if (isset($_SESSION['task_id'])) {
-        $selected = "";
-        if ($row['task_id'] == $_SESSION['task_id']) {
-            $selected = 'selected';
-        }
-        echo '<option value="' . $row['task_id'] . '" ' . $selected . '>' . $row["task_name"] . '</option>';
-    }
-    else {
-        echo '<option value="' . $row['task_id'] . '">' . $row["task_name"] . '</option>';
-    }
+    // if(isset($_SESSION['workload_id'])) {
+    //     unset($_SESSION['workload_id']);
+    // }
+    // $_SESSION['workload_id'] = $row['workload_id'];
+    
+    // if (isset($_SESSION['task_id'])) {
+    //     $selected = "";
+    //     if ($row['task_id'] == $_SESSION['task_id']) {
+    //         $selected = 'selected';
+    //     }
+    //     echo '<option value="' . $row['task_id'] . '" ' . $selected . '>' . $row["task_name"] . '</option>';
+    // }
+    echo '<option value="' . $row['workload_id'] . '">' . $row["task_name"] . '</option>';
 }
 unset($_SESSION['task_id']);
 ?>
