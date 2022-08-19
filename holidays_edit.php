@@ -14,7 +14,7 @@
             $("#start_date").datepicker({
 
                 onSelect: function(dateText, inst) {
-
+                    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                     var date = $(this).val();
                     console.log(date);
                     var fullDate = new Date();
@@ -25,6 +25,9 @@
                     var currentDateObj = new Date();
                     if (fullDateObj < currentDateObj) {
                         // console.log(currentDateObj.getMonth()+1);
+                        if(fullDateObj.getDate() === currentDateObj.getDate()){
+                            display(weekday[new Date(dateText).getDay()]);
+                        }
                         if (fullDateObj.getMonth() < currentDateObj.getMonth()) {
                             alert("Previous date not allowed!!!");
                             $.datepicker._clearDate(this);
@@ -52,14 +55,20 @@
                             var currentDateObj = new Date();
                             if (fullDateObj < currentDateObj) {
                                 // console.log(currentDateObj.getMonth()+1);
-                                if (fullDateObj.getDate() < currentDateObj.getDate()) {
+                                if (fullDateObj.getDate() === currentDateObj.getDate()){
+                                    display(weekday[new Date(dateText).getDay()]);
+                                }
+                                if (fullDateObj.getMonth() < currentDateObj.getMonth()) {
+                                    alert("Previous date not allowed!!!");
+                                    $.datepicker._clearDate(this);
+                                }
+                                else if(fullDateObj.getDate() < currentDateObj.getDate()) {
                                     alert("Previous date not allowed!!!");
                                     $.datepicker._clearDate($("#end_date"));
                                 }
                             }
                         }
                     }
-                    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                     display(weekday[new Date(dateText).getDay()]);
                 }
             });
@@ -72,6 +81,7 @@
             $("#end_date").datepicker({
 
                 onSelect: function(dateText, inst) {
+                    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                     if ($("#start_date").val() == '') {
                         // alert("Please enter start date first.");
                         $.datepicker._clearDate(this);
@@ -94,13 +104,19 @@
                             var currentDateObj = new Date();
                             if (fullDateObj < currentDateObj) {
                                 // console.log(currentDateObj.getMonth()+1);
-                                if (fullDateObj.getDate() < currentDateObj.getDate()) {
+                                if (fullDateObj.getDate() === currentDateObj.getDate()){
+                                    display(weekday[new Date(dateText).getDay()]);
+                                }
+                                if (fullDateObj.getMonth() < currentDateObj.getMonth()) {
+                                    alert("Previous date not allowed!!!");
+                                    $.datepicker._clearDate(this);
+                                }
+                                else if (fullDateObj.getDate() < currentDateObj.getDate()) {
                                     alert("Previous date not allowed!!!");
                                     $.datepicker._clearDate(this);
                                 }
                             }
                         }
-                        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                         display(weekday[new Date(dateText).getDay()]);
                     }
 

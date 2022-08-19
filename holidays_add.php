@@ -21,9 +21,8 @@ else{
         $(function() {
 
             $("#start_date").datepicker({
-
                 onSelect: function(dateText, inst) {
-
+                    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                     var date = $(this).val();
                     console.log(date);
                     var fullDate = new Date();
@@ -34,6 +33,9 @@ else{
                     var currentDateObj = new Date();
                     if (fullDateObj < currentDateObj) {
                         // console.log(currentDateObj.getMonth()+1);
+                        if(fullDateObj.getDate() === currentDateObj.getDate()){
+                            display(weekday[new Date(dateText).getDay()]);
+                        }
                         if (fullDateObj.getMonth() < currentDateObj.getMonth()) {
                             alert("Previous date not allowed!!!");
                             $.datepicker._clearDate(this);
@@ -42,11 +44,7 @@ else{
                             $.datepicker._clearDate(this);
                         }
                     }
-                    else{
-
-                        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                        display(weekday[new Date(dateText).getDay()]);
-                    }
+                    display(weekday[new Date(dateText).getDay()]);
 
                 }
                 //   }).on("change", function() {
@@ -59,12 +57,12 @@ else{
         });
         $(function() {
             $("#end_date").datepicker({
-
                 onSelect: function(dateText, inst) {
                     if ($("#start_date").val() == '') {
                         // alert("Please enter start date first.");
                         $.datepicker._clearDate(this);
                     } else {
+                        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                         var date = $(this).val();
                         console.log(date);
                         var s_date = $("#start_date").val();
@@ -83,14 +81,19 @@ else{
                             var currentDateObj = new Date();
                             if (fullDateObj < currentDateObj) {
                                 // console.log(currentDateObj.getMonth()+1);
-                                if (fullDateObj.getDate() < currentDateObj.getDate()) {
+                                if (fullDateObj.getDate() === currentDateObj.getDate()){
+                                    display(weekday[new Date(dateText).getDay()]);
+                                }
+                                if (fullDateObj.getMonth() < currentDateObj.getMonth()){
                                     alert("Previous date not allowed!!!");
                                     $.datepicker._clearDate(this);
                                 }
-                            } else {
-                                const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                                display(weekday[new Date(dateText).getDay()]);
+                                else if(fullDateObj.getDate() < currentDateObj.getDate()){
+                                    alert("Previous date not allowed!!!");
+                                    $.datepicker._clearDate(this);
+                                }
                             }
+                            display(weekday[new Date(dateText).getDay()]);
                         }
 
                     }
@@ -103,7 +106,7 @@ else{
             function display(mess) {
                 $("#end_day").val(mess);
             }
-        });
+    });
     </script>
 </head>
 <?php
