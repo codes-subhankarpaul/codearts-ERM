@@ -99,7 +99,7 @@ if ($_SESSION['emp_id'] == '') {
     echo "<script>console.log(\"hello\")</script>";
     echo "<script>console.log(\"" . $user_id . "\")</script>";
     echo "<script>console.log(\"" . $timesheet_id . "\")</script>";
-    $select_all_sql = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "'";
+    $select_all_sql = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' AND `timesheet_id` = '".$_REQUEST['id']."'";
     $result = mysqli_query($con, $select_all_sql);
     while ($row = mysqli_fetch_array($result)) {
 
