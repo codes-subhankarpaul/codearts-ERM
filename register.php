@@ -39,7 +39,7 @@
                                             </span>
                                         </div>
                                         <div class="form-group col-lg-12 col-md-12">
-                                            <input placeholder="Date Of Joining" class="form-control" type="text" onfocus="(this.type='date')" id="date">
+                                            <input placeholder="Date Of Joining" class="form-control" type="text" onfocus="(this.type='date')" id="date" name="user_joining_date">
 
                                             <!-- <input placeholder="Date" class="textbox-n" type="text" onfocus="(this.type='date')" id="date"> -->
                                             <span class="custom-input-icon">

@@ -64,21 +64,27 @@
                                                     <li><span>Email: </span>
                                                         <a href="mailto:johndoe@example.com;"><?php echo $row1['user_email']; ?></a>
                                                     </li>
+                                                    <?php if($row1['user_dob']) { ?>
                                                     <li><span>Birthday: </span>
                                                         <p class="demo">
-                                                            <?php echo $row1['user_dob']; ?>****</p>
+                                                            <?php echo $row1['user_dob']; ?></p>
 
                                                     </li>
+                                                    <?php } ?>
+                                                    <?php if($row1['user_address']) { ?>
                                                     <li><span>Address: </span>
                                                         <p class="demo">
                                                             <?php echo $row1['user_address']; ?></p>
                                                     </li>
+                                                    <?php } ?>
+                                                    <?php if($row1['user_gender']) { ?>
                                                     <li><span>Gender: </span>
                                                         <p class="demo">
                                                             <?php echo $row1['user_gender']; ?></p>
 
                                                     </li>
-                                                    <li><span>Reports to: </span>
+                                                    <?php } ?>
+                                                    
                                                         <?php
                                                         $sql = "SELECT user_featured_image, user_fullname FROM capms_admin_users WHERE user_empid = '" . $row1['reports_to_uid'] . "' ";
                                                         $report_query = mysqli_query($con, $sql);
@@ -93,11 +99,11 @@
                                                         <?php
                                                                         }
                                                                     } else {
-                                                                        echo '<p class="demo">Null</p>';
+                                                                        //echo '<p class="demo">Null</p>';
                                                                     }
 
                                                         ?>
-                                                        </li>
+                                                        
 
 
 
