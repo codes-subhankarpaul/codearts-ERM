@@ -4,10 +4,12 @@ date_default_timezone_set("Asia/Kolkata");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "codearts_pms";
+$database = "codearts_pms_new";
 
 $con = mysqli_connect($servername, $username, $password, $database);
-session_start();
+if(!isset($_SESSION)) { 
+  session_start(); 
+} 
 
 if ($con->connect_error) {
   die("Connection failed: " . $con->connect_error);

@@ -14,6 +14,18 @@ if ($_SESSION['emp_id'] == '') {
 
 <body>
 
+    <style>
+        .block {
+        display: block;
+        width: 100%;
+        border: none;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        }
+    </style>
+
     <style type="text/css">
         .files input {
             outline: 2px dashed #92b0b3;
@@ -213,7 +225,7 @@ if ($_SESSION['emp_id'] == '') {
                                                         $sql = "SELECT DISTINCT user_id, cpi.project_id, title 
                                                             FROM `capms_user_workload_info` as cuwi 
                                                             inner join `capms_project_info` as cpi on cuwi.project_id = cpi.project_id 
-                                                            where user_id = " . $emp_id . ";";
+                                                            where user_id = " . $emp_id . " and project_status = 1;";
                                                         $result = mysqli_query($con, $sql);
                                                         while ($row = mysqli_fetch_array($result)) {
                                                             $selected = "";
@@ -230,7 +242,7 @@ if ($_SESSION['emp_id'] == '') {
                                                 <div class="mb-3">
                                                     <label for="task_id">task_name (current-<?php echo $task_name ?>)</label>
                                                     <select class="form-control" id="task_id-dropdown" name="workload_id" required>
-
+                                                        
                                                     </select>
                                                 </div>
                                             </div>
@@ -238,210 +250,24 @@ if ($_SESSION['emp_id'] == '') {
                                         <div class="row">
                                             <div class="col">
                                                 <div class="mb-3">
-                                                    <label for="start_time_dropdown">start time</label>
-                                                    <select class="form-control" name="start_time" id="start_time_dropdown" required>
-                                                        <option selected>select start time (current-<?php echo $start_time ?>)</option>
-                                                        <option value="00.00">12:00 am</option>
-                                                        <option value="00.15">12:15 am</option>
-                                                        <option value="00.30">12:30 am</option>
-                                                        <option value="00.45">12:45 am</option>
-                                                        <option value="01.00">01:00 am</option>
-                                                        <option value="01.15">01:15 am</option>
-                                                        <option value="01.30">01:30 am</option>
-                                                        <option value="01.45">01:45 am</option>
-                                                        <option value="02.00">02:00 am</option>
-                                                        <option value="02.15">02:15 am</option>
-                                                        <option value="02.30">02:30 am</option>
-                                                        <option value="02.45">02:45 am</option>
-                                                        <option value="03.00">03:00 am</option>
-                                                        <option value="03.15">03:15 am</option>
-                                                        <option value="03.30">03:30 am</option>
-                                                        <option value="03.45">03:45 am</option>
-                                                        <option value="04.00">04:00 am</option>
-                                                        <option value="04.15">04:15 am</option>
-                                                        <option value="04.30">04:30 am</option>
-                                                        <option value="04.45">04:45 am</option>
-                                                        <option value="05.00">05:00 am</option>
-                                                        <option value="05.15">05:15 am</option>
-                                                        <option value="05.30">05:30 am</option>
-                                                        <option value="05.45">05:45 am</option>
-                                                        <option value="06.00">06:00 am</option>
-                                                        <option value="06.15">06:15 am</option>
-                                                        <option value="06.30">06:30 am</option>
-                                                        <option value="06.45">06:45 am</option>
-                                                        <option value="07.00">07:00 am</option>
-                                                        <option value="07.15">07:15 am</option>
-                                                        <option value="07.30">07:30 am</option>
-                                                        <option value="07.45">07:45 am</option>
-                                                        <option value="08.00">08:00 am</option>
-                                                        <option value="08.15">08:15 am</option>
-                                                        <option value="08.30">08:30 am</option>
-                                                        <option value="08.45">08:45 am</option>
-                                                        <option value="09.00">09:00 am</option>
-                                                        <option value="09.15">09:15 am</option>
-                                                        <option value="09.30">09:30 am</option>
-                                                        <option value="09.45">09:45 am</option>
-                                                        <option value="10.00">10:00 am</option>
-                                                        <option value="10.15">10:15 am</option>
-                                                        <option value="10.30">10:30 am</option>
-                                                        <option value="10.45">10:45 am</option>
-                                                        <option value="11.00">11:00 am</option>
-                                                        <option value="11.15">11:15 am</option>
-                                                        <option value="11.30">11:30 am</option>
-                                                        <option value="11.45">11:45 am</option>
-                                                        <option value="12.00">12:00 pm</option>
-                                                        <option value="12.15">12:15 pm</option>
-                                                        <option value="12.30">12:30 pm</option>
-                                                        <option value="12.45">12:45 pm</option>
-                                                        <option value="13.00">01:00 pm</option>
-                                                        <option value="13.15">01:15 pm</option>
-                                                        <option value="13.30">01:30 pm</option>
-                                                        <option value="13.45">01:45 pm</option>
-                                                        <option value="14.00">02:00 pm</option>
-                                                        <option value="14.15">02:15 pm</option>
-                                                        <option value="14.30">02:30 pm</option>
-                                                        <option value="14.45">02:45 pm</option>
-                                                        <option value="15.00">03:00 pm</option>
-                                                        <option value="15.15">03:15 pm</option>
-                                                        <option value="15.30">03:30 pm</option>
-                                                        <option value="15.45">03:45 pm</option>
-                                                        <option value="16.00">04:00 pm</option>
-                                                        <option value="16.15">04:15 pm</option>
-                                                        <option value="16.30">04:30 pm</option>
-                                                        <option value="16.45">04:45 pm</option>
-                                                        <option value="17.00">05:00 pm</option>
-                                                        <option value="17.15">05:15 pm</option>
-                                                        <option value="17.30">05:30 pm</option>
-                                                        <option value="17.45">05:45 pm</option>
-                                                        <option value="18.00">06:00 pm</option>
-                                                        <option value="18.15">06:15 pm</option>
-                                                        <option value="18.30">06:30 pm</option>
-                                                        <option value="18.45">06:45 pm</option>
-                                                        <option value="19.00">07:00 pm</option>
-                                                        <option value="19.15">07:15 pm</option>
-                                                        <option value="19.30">07:30 pm</option>
-                                                        <option value="19.45">07:45 pm</option>
-                                                        <option value="20.00">08:00 pm</option>
-                                                        <option value="20.15">08:15 pm</option>
-                                                        <option value="20.30">08:30 pm</option>
-                                                        <option value="20.45">08:45 pm</option>
-                                                        <option value="21.00">09:00 pm</option>
-                                                        <option value="21.15">09:15 pm</option>
-                                                        <option value="21.30">09:30 pm</option>
-                                                        <option value="21.45">09:45 pm</option>
-                                                        <option value="22.00">10:00 pm</option>
-                                                        <option value="22.15">10:15 pm</option>
-                                                        <option value="22.30">10:30 pm</option>
-                                                        <option value="22.45">10:45 pm</option>
-                                                        <option value="23.00">11:00 pm</option>
-                                                        <option value="23.15">11:15 pm</option>
-                                                        <option value="23.30">11:30 pm</option>
-                                                        <option value="23.45">11:45 pm</option>
-                                                    </select>
+                                                <label>start time</label>
+                                                <div class="input-group clockpicker">
+                                                    <input type="text" class="form-control" name="start_time" value="<?php echo $start_time ?>">
+                                                    <span class="input-group-addon">
+                                                        <span class="btn btn-outline-primary">select</span>
+                                                    </span>
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="mb-3">
-                                                    <label for="end_time_dropdown">end time</label>
-                                                    <select class="form-control" name="end_time" id="end_time_dropdown">
-                                                        <option selected>select end time (current-<?php echo $end_time ?>)</option>
-                                                        <option value="00.00">12:00 am</option>
-                                                        <option value="00.15">12:15 am</option>
-                                                        <option value="00.30">12:30 am</option>
-                                                        <option value="00.45">12:45 am</option>
-                                                        <option value="01.00">01:00 am</option>
-                                                        <option value="01.15">01:15 am</option>
-                                                        <option value="01.30">01:30 am</option>
-                                                        <option value="01.45">01:45 am</option>
-                                                        <option value="02.00">02:00 am</option>
-                                                        <option value="02.15">02:15 am</option>
-                                                        <option value="02.30">02:30 am</option>
-                                                        <option value="02.45">02:45 am</option>
-                                                        <option value="03.00">03:00 am</option>
-                                                        <option value="03.15">03:15 am</option>
-                                                        <option value="03.30">03:30 am</option>
-                                                        <option value="03.45">03:45 am</option>
-                                                        <option value="04.00">04:00 am</option>
-                                                        <option value="04.15">04:15 am</option>
-                                                        <option value="04.30">04:30 am</option>
-                                                        <option value="04.45">04:45 am</option>
-                                                        <option value="05.00">05:00 am</option>
-                                                        <option value="05.15">05:15 am</option>
-                                                        <option value="05.30">05:30 am</option>
-                                                        <option value="05.45">05:45 am</option>
-                                                        <option value="06.00">06:00 am</option>
-                                                        <option value="06.15">06:15 am</option>
-                                                        <option value="06.30">06:30 am</option>
-                                                        <option value="06.45">06:45 am</option>
-                                                        <option value="07.00">07:00 am</option>
-                                                        <option value="07.15">07:15 am</option>
-                                                        <option value="07.30">07:30 am</option>
-                                                        <option value="07.45">07:45 am</option>
-                                                        <option value="08.00">08:00 am</option>
-                                                        <option value="08.15">08:15 am</option>
-                                                        <option value="08.30">08:30 am</option>
-                                                        <option value="08.45">08:45 am</option>
-                                                        <option value="09.00">09:00 am</option>
-                                                        <option value="09.15">09:15 am</option>
-                                                        <option value="09.30">09:30 am</option>
-                                                        <option value="09.45">09:45 am</option>
-                                                        <option value="10.00">10:00 am</option>
-                                                        <option value="10.15">10:15 am</option>
-                                                        <option value="10.30">10:30 am</option>
-                                                        <option value="10.45">10:45 am</option>
-                                                        <option value="11.00">11:00 am</option>
-                                                        <option value="11.15">11:15 am</option>
-                                                        <option value="11.30">11:30 am</option>
-                                                        <option value="11.45">11:45 am</option>
-                                                        <option value="12.00">12:00 pm</option>
-                                                        <option value="12.15">12:15 pm</option>
-                                                        <option value="12.30">12:30 pm</option>
-                                                        <option value="12.45">12:45 pm</option>
-                                                        <option value="13.00">01:00 pm</option>
-                                                        <option value="13.15">01:15 pm</option>
-                                                        <option value="13.30">01:30 pm</option>
-                                                        <option value="13.45">01:45 pm</option>
-                                                        <option value="14.00">02:00 pm</option>
-                                                        <option value="14.15">02:15 pm</option>
-                                                        <option value="14.30">02:30 pm</option>
-                                                        <option value="14.45">02:45 pm</option>
-                                                        <option value="15.00">03:00 pm</option>
-                                                        <option value="15.15">03:15 pm</option>
-                                                        <option value="15.30">03:30 pm</option>
-                                                        <option value="15.45">03:45 pm</option>
-                                                        <option value="16.00">04:00 pm</option>
-                                                        <option value="16.15">04:15 pm</option>
-                                                        <option value="16.30">04:30 pm</option>
-                                                        <option value="16.45">04:45 pm</option>
-                                                        <option value="17.00">05:00 pm</option>
-                                                        <option value="17.15">05:15 pm</option>
-                                                        <option value="17.30">05:30 pm</option>
-                                                        <option value="17.45">05:45 pm</option>
-                                                        <option value="18.00">06:00 pm</option>
-                                                        <option value="18.15">06:15 pm</option>
-                                                        <option value="18.30">06:30 pm</option>
-                                                        <option value="18.45">06:45 pm</option>
-                                                        <option value="19.00">07:00 pm</option>
-                                                        <option value="19.15">07:15 pm</option>
-                                                        <option value="19.30">07:30 pm</option>
-                                                        <option value="19.45">07:45 pm</option>
-                                                        <option value="20.00">08:00 pm</option>
-                                                        <option value="20.15">08:15 pm</option>
-                                                        <option value="20.30">08:30 pm</option>
-                                                        <option value="20.45">08:45 pm</option>
-                                                        <option value="21.00">09:00 pm</option>
-                                                        <option value="21.15">09:15 pm</option>
-                                                        <option value="21.30">09:30 pm</option>
-                                                        <option value="21.45">09:45 pm</option>
-                                                        <option value="22.00">10:00 pm</option>
-                                                        <option value="22.15">10:15 pm</option>
-                                                        <option value="22.30">10:30 pm</option>
-                                                        <option value="22.45">10:45 pm</option>
-                                                        <option value="23.00">11:00 pm</option>
-                                                        <option value="23.15">11:15 pm</option>
-                                                        <option value="23.30">11:30 pm</option>
-                                                        <option value="23.45">11:45 pm</option>
-                                                    </select>
+                                                <label>end time</label>
+                                                <div class="input-group clockpicker">
+                                                    <input type="text" class="form-control" name="end_time" value="<?php echo $end_time ?>">
+                                                    <span class="input-group-addon">
+                                                    <span class="btn btn-outline-primary">select</span>
+                                                    </span>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -467,17 +293,17 @@ if ($_SESSION['emp_id'] == '') {
                                             </div>
                                             <div class="col">
                                                 <div class="mb-3">
-                                                    <label for="task_type" class="form-label">task_type (current-<?php echo $task_type ?>)</label>
+                                                    <label for="task_type" class="form-label">task_type</label>
                                                     <select class="form-control" id="task_type-dropdown" name="task_type" required>
                                                         <option value="">select option</option>
                                                         <?php
                                                         $result = mysqli_query($con, "SELECT * FROM `capms_project_task_info` as cpti right join capms_project_tasktype_info as cptti on cpti.task_id = cptti.task_type_id;");
                                                         while ($row = mysqli_fetch_array($result)) {
                                                             $selected = "";
-                                                            if ($row['task_type'] == $task_type) {
+                                                            if ($row['task_type_name'] == $task_type) {
                                                                 $selected = 'selected';
                                                             }
-                                                            echo '<option value="' . $row['task_type'] . '" ' . $selected . '>' . $row["task_type_name"] . '</option>';
+                                                            echo '<option value="' . $row['task_type_id'] . '" ' . $selected . '>' . $row["task_type_name"] . '</option>';
                                                         }
                                                         ?>
                                                         </option>
@@ -515,7 +341,7 @@ if ($_SESSION['emp_id'] == '') {
                                         <div class="row">
                                             <div class="col">
                                                 <div class="mb-3">
-                                                    <input type="submit" class="btn btn-primary my-3" value="Update">
+                                                    <input type="submit" class="block bg-primary text-light" value="Update">
                                                 </div>
                                             </div>
                                         </div>
@@ -535,12 +361,13 @@ if ($_SESSION['emp_id'] == '') {
         ?>
     </footer>
     <!-- Footer JS files -->
-    <?php include 'footer_js.php' ?>
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://jqueryui.com//resources/demos/style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-clockpicker.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="assets/js/bootstrap-clockpicker.js"></script>
     <script>
         $(function() {
             var availableTeamMembers = <?php echo $names ?>;
@@ -615,65 +442,14 @@ if ($_SESSION['emp_id'] == '') {
         });
     </script>
 
-    <!-- TASK_ID FETCHED BASED ON PROJECT -->
-    <!-- TASK_DOMAIN FETCHED BASED ON TASK_ID -->
-    <script>
-        $(document).ready(function() {
-            $('#project-dropdown').on('change', function() {
-                var project_id = this.value;
-                console.log(project_id);
-                $.ajax({
-                    url: "timesheet_task_id_by_project.php",
-                    type: "POST",
-                    data: {
-                        project_id: project_id
-                    },
-                    cache: false,
-                    success: function(result) {
-                        $("#task_id-dropdown").html(result);
-                    },
-                    error: function() {
-                        alert('problem in state');
-                    }
-                });
-            });
-            $('#task_id-dropdown').on('change', function() {
-                // alert('Taks id is changed');
-                var task_id = this.value;
-                console.log(task_id);
-                $.ajax({
-                    url: "timesheet_task_domain_by_task_id.php",
-                    type: "POST",
-                    data: {
-                        task_id: task_id
-                    },
-                    cache: false,
-                    success: function(result) {
-                        $("#task_domain-dropdown").html(result);
-                    },
-                    error: function() {
-                        alert('problem in state');
-                    }
-                });
-                $.ajax({
-                    url: "timesheet_task_type_by_task_id.php",
-                    type: "POST",
-                    data: {
-                        task_id: task_id
-                    },
-                    cache: false,
-                    success: function(result) {
-                        $("#task_type-dropdown").html(result);
-                    },
-                    error: function() {
-                        alert('problem in state');
-                    }
-                });
-            });
-        });
+    <!-- CLOCK WIDGETS -->
+    <script type="text/javascript">
+    $('.clockpicker').clockpicker({
+        placement: 'top',
+        align: 'left',
+        donetext: 'Done'
+    });
     </script>
-
-
 
 
 

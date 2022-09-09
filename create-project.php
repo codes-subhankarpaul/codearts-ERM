@@ -160,24 +160,43 @@
                                 <?php
                                     if(isset($_POST['create_project'])){
 
+                                        $temp_name = $_POST['project_name'];
+                                        $temp_array = explode(" ", $temp_name);
+                                        $acronym = "";
+                                        foreach ($temp_array as $w) {
+                                            $acronym .= strtolower(mb_substr($w, 0, 1));
+                                          }
+                                        
                                         $project_domain = $_POST['domain_name'];
                                         $temp_project_domain = implode(",", $project_domain );
 
                                         $create_project = "INSERT INTO `capms_project_info`(`project_id`, `title`, `domain`, `start_date`, `end_date`, `priority`, `project_details`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['project_name']."', '".$temp_project_domain."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['priority']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."') ";
 
-                                      // echo $create_project;
+                                       //echo $create_project;
                                        //die();
 
                                        mysqli_query($con, $create_project);
 
                                        $last_project_id = $con->insert_id;
+                                        
+                                       if($last_project_id){
+                                       $invID = str_pad($last_project_id, 4, '0', STR_PAD_LEFT);
 
+                                       $project_name = "cap".$acronym.date("ymd").$invID;
+                                       //echo $project_name;
+                                       //die();
+                                       $update = "UPDATE `capms_project_info` SET `project_number`='".$project_name."' WHERE project_id = '".$last_project_id."' ";
+                                       mysqli_query($con, $update); 
+                                    
                                        $project_team = $_POST['team_name'];
                                        $team = implode(",", $project_team);
                                        
                                        $assigned_user_query = "INSERT INTO camps_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$team."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
 
                                        mysqli_query($con, $assigned_user_query);
+
+                                       echo "<script>location.href='".$baseURL."projects.php';</script>";
+                                        }
 
                                     //    if(is_array($_POST['team_name'])){
                                     //     foreach($_POST['team_name'] as $key){
@@ -199,7 +218,6 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
 
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://jqueryui.com//resources/demos/style.css">

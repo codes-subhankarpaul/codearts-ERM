@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>View Notices</title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -20,6 +20,7 @@
             }
 
             tr:nth-child(even) {
+
             background-color: #dddddd;
             }
     </style>
@@ -46,6 +47,9 @@
                                     <th>Notice Subject</th>
                                     <th>Notice Body</th>
                                     <th>Create Date</th>
+                                    <?php if ($_SESSION['emp_type'] == "hr") { ?>
+                                    <th colspan="2">Action</th>
+                                    <?php } ?>
                                 </tr>
                                 <?php
                                     $query = "SELECT * FROM capms_notice_info";
@@ -58,6 +62,10 @@
                                     <td><?php echo $row['notice_subject']; ?></td>
                                     <td><?php echo $row['notice_body']; ?></td>
                                     <td><?php echo $row['created_at']; ?></td>
+                                    <?php if ($_SESSION['emp_type'] == "hr") { ?>
+                                    <td><a href="edit_notice.php?id=<?php echo $row['notice_id']; ?>">Edit</a></td>
+                                    <td><a href="delete_notice.php?id=<?php echo $row['notice_id'];?>" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+                                    <?php } ?>
                                 </tr>
                                 <?php
                                         }

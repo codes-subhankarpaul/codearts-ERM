@@ -7,7 +7,7 @@
         <?php
             if($_SESSION['emp_id'] == '')
             {
-              echo "<script>location.href='".$baseURL."login.php';</script>";
+                echo "<script>location.href='".$baseURL."login.php';</script>";
             }
         ?>
         <title>Access Logs - CERM :: Codearts Employee Relationship Management</title>
@@ -162,7 +162,6 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
         <script src="assets/js/jquery-min.js"></script>
         <script>
             jQuery( document ).ready(function() {

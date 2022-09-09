@@ -33,9 +33,12 @@
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li>Projects</li>
                                 </ul>
+                                <?php if($_SESSION['emp_type'] == "hr" || $_SESSION['emp_type'] == "admin"){
+                                ?>
                                 <ul class="projects-btn">
                                     <li><a class="creat-project-btn" href="create-project.php"><span>+</span> Creat Project</a></li>
                                 </ul>
+                                <?php }?>
                             </section>
                             <section class="project-search">
                                 <div class="project-search-frm-wrap">
@@ -156,6 +159,5 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
     </body>
 </html>

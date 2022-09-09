@@ -122,6 +122,5 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
     </body>
 </html>

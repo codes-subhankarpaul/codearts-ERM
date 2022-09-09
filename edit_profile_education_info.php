@@ -198,7 +198,6 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
 
         <script src="assets/js/jquery-min.js"></script>
         <script src="assets/js/jquery-ui.min.js"></script>

@@ -14,8 +14,14 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Notice</title>
+    <title>Edit Notice</title>
 </head>
+<?php
+    $sid = $_GET['id'];
+    $query = "SELECT * FROM capms_notice_info WHERE notice_id ='" . $sid . "'";
+    $query_run = mysqli_query($con, $query);
+    $data = mysqli_fetch_assoc($query_run);
+?>
 <body>
     <!-- create notice update file for git hub -->
     <header class="custom-header">
@@ -32,30 +38,30 @@ else{
                         </div>
                         <div class="col-lg-9">
                             <section class="notfication-body">
-                                <form style="padding-top: 130px;" method="POST" enctype="multipart/form-data" id="noticeForm" action="create_notice.php">
+                                <form style="padding-top: 130px;" method="POST" enctype="multipart/form-data" id="noticeForm">
                                     <div class="form-group">
                                         <label for="noticeSubject">Notice Subject</label>
-                                        <input type="text" class="form-control" id="noticeSubject" placeholder="Enter Notification Subject" name="noticeSubject">
+                                        <input type="text" class="form-control" id="noticeSubject" placeholder="Enter Notification Subject" name="noticeSubject" value='<?php echo $data["notice_subject"]; ?>'>
                                     </div>
                                     <div class="form-group">
                                         <label for="noticeBody">Notice Content</label>
-                                        <textarea class="form-control" id="noticeBody" name="noticeBody" rows="3"></textarea>
+                                        <textarea class="form-control" id="noticeBody" name="noticeBody" rows="3"><?php echo $data["notice_body"]; ?></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="noticeFile">Choose file...</label>
-                                        <input type="file" id="noticeFile" name="noticeFile">
+                                        <input type="file" id="noticeFile" name="noticeFile" hidden="hidden">
+                                        <button type="button" id="customBtn"> Choose File</button>
+                                        <span id="customTxt"><?php echo $data["notice_file_name"]; ?></span>
                                     </div>
 
-                                    <input type="submit" name="noticeSubmit" value="Submit" class="btn btn-primary">
+                                    <input type="submit" name="noticeSubmit" value="Update" class="btn btn-primary">
                                 </form>
                                 <?php
                                     if(isset($_POST['noticeSubmit'])){
-                                        $current_date=strtotime("now");
-                                        $current_date=date("Y-m-d h:i:s",$current_date);
-                                        $query = "INSERT INTO `capms_notice_info` (`notice_id`, `notice_subject`, `notice_body`, `notice_file_name`, `created_at`) VALUES (Null, '".$_POST['noticeSubject']."', '".$_POST['noticeBody']."', '', '".$current_date."');";
+                                        $query_update="UPDATE `capms_notice_info` SET `notice_subject`='".$_POST['noticeSubject']."',`notice_body`='".$_POST['noticeBody']."' WHERE notice_id= '".$_REQUEST['id']."'";
 
-                                        mysqli_query($con, $query);
-                                        $last_notice_id = $con->insert_id;
+                                        mysqli_query($con, $query_update);
+                                        $last_notice_id = $_REQUEST['id'];
                                         if($last_notice_id){
                                             if(isset($_FILES['noticeFile']['name']))
                                                     {
@@ -84,11 +90,27 @@ else{
                 </div>
             </div>        
     </main>
-    
+    <script type="text/javascript">
+        const file= document.getElementById('noticeFile');
+        const btn= document.getElementById('customBtn');
+        const txt= document.getElementById('customTxt');
+
+        btn.addEventListener("click", function(){
+            noticeFile.click();
+        });
+
+        file.addEventListener("change", function(){
+            if(!file.value){
+                txt.innerHTML ="<?php echo $data["notice_file_name"]; ?>";
+
+            } else{
+                txt.innerHTML = file.value.replace(/^.*[\\\/]/, '');
+            }
+        })
+    </script>
 </body>
 </html>
 
 <?php
 }
 ?>
-

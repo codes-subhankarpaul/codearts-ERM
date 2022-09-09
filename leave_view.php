@@ -202,7 +202,6 @@
         <?php include 'copyright_content.php'; ?>
     </footer>
 
-    <?php include 'footer_js.php' ?>
 </body>
 
 </html>

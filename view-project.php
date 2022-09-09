@@ -60,7 +60,11 @@ use LDAP\Result;
                                     <li>Projects</li>
                                 </ul>
                                 <ul class="projects-btn">
-                                    <li><a class="creat-project-btn" href="create_project_task.php?project_id=<?php echo $_GET['viewid'] ?>"><span>+</span> Create Task</a></li>
+                                    <li><a class="creat-project-btn bg-primary" href="view_task.php?project_id=<?php echo $_GET['viewid'] ?>"><span>+</span> View Task</a></li>
+                                    <?php if($_SESSION['emp_type'] == "hr" || $_SESSION['emp_type'] == "admin"){
+                                    ?>
+                                        <li><a class="creat-project-btn" href="create_project_task.php?project_id=<?php echo $_GET['viewid'] ?>"><span>+</span> Create Task</a></li>
+                                    <?php }?>
                                 </ul>
                                
                             </section>
@@ -91,16 +95,22 @@ use LDAP\Result;
 
                                                  <div class="col-md-6">
                                                     <label>Project Name</label> 
-                                                    <input type="text" class="form-control" placeholder="Name" name="project_name" value="<?php echo $row['title']; ?>" disabled>
+                                                    <input type="text" class="form-control" placeholder="Name" name="project_name" value="<?php echo $row['title']; ?>">
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <lable>Project Number</lable>
+                                                    <input type="text" class="form-control readonly" placeholder="Project Number"
+                                                    value="<?php echo $row['project_number']; ?>" disabled>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <label>Priority</label> 
                                                     <select class="form-control" id="priority" name="priority">
-                                                        <option value="High" <?php if($row['priority'] == 3) { echo 'selected'; } ?> >High</option>
-                                                        <option value="Medium" <?php if($row['priority'] == 2) { echo 'selected'; } ?> >Medium</option>
-                                                        <option value="Low" <?php if($row['priority'] == 1) { echo 'selected'; } ?> >Low</option>
-                                                        <option value="Top" <?php if($row['priority'] == 0) { echo 'selected'; } ?> >None</option>
+                                                        <option value="3" <?php if($row['priority'] == 3) { echo 'selected'; } ?> >High</option>
+                                                        <option value="2" <?php if($row['priority'] == 2) { echo 'selected'; } ?> >Medium</option>
+                                                        <option value="1" <?php if($row['priority'] == 1) { echo 'selected'; } ?> >Low</option>
+                                                        <option value="0" <?php if($row['priority'] == 0) { echo 'selected'; } ?> >None</option>
                                                     </select>
                                                 </div>
 
@@ -138,11 +148,11 @@ use LDAP\Result;
                                                
                                                 <div class="col-md-6">
                                                     <label>Start Date</label> 
-                                                    <input type="date" class="form-control" name="start_date" value="<?php echo $row['start_date']; ?>" disabled>
+                                                    <input type="date" class="form-control" name="start_date" value="<?php echo $row['start_date']; ?>">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>End Date</label> 
-                                                    <input type="date" class="form-control" name="end_date" value="<?php echo $row['end_date']; ?>" disabled>
+                                                    <input type="date" class="form-control" name="end_date" value="<?php echo $row['end_date']; ?>">
                                                 </div>
                                                 
 
@@ -154,7 +164,7 @@ use LDAP\Result;
                                                     <label>Project Assigned to:</label> 
                                                         <?php
                                                             $assined_user_ids = '';
-                                                            $project_user = "SELECT `user_id` FROM `camps_project_assigned_user_info` WHERE project_id = 12";
+                                                            $project_user = "SELECT `user_id` FROM `camps_project_assigned_user_info` WHERE project_id = '".$row['project_id']."'";
                                                             $assign_user = mysqli_query($con,$project_user);
                                                             if($assign_user->num_rows > 0){
                                                                 while($assign_user_row = mysqli_fetch_assoc($assign_user)){
@@ -186,28 +196,23 @@ use LDAP\Result;
 
                                                          
                                                 </div>
- 
-                   
+                                                
+                                                <div class="col-md-12">
+                                                    <lable>Project Status</lable>
+                                                    <select class="form-control" id="project-status" name="project_status">
+                                                    <option value="1" <?php if($row['project_status'] == 1) { echo 'selected'; } ?> >In Progress</option>
+                                                        <option value="2" <?php if($row['project_status'] == 2) { echo 'selected'; } ?> >Stand By</option>
+                                                        <option value="0" <?php if($row['project_status'] == 0) { echo 'selected'; } ?> >Finished</option>
+                                                        <option value="3" <?php if($row['project_status'] == 3) { echo 'selected'; } ?> > Closed</option>
+                                                    </select>
+
+                                                </div>
+
                                                 <div class="col-md-12">
                                                     <label>Project Details</label> 
-                                                      <textarea id="editor" name="description" disabled><?php if($row['project_details'] != '') { echo $row['project_details']; } ?></textarea>
+                                                      <textarea id="editor" name="project_details"><?php if($row['project_details'] != '') { echo $row['project_details']; } ?>
+                                                      </textarea>
                                                 </div>
-                                                  
-
-                                                <!-- <div class="col-md-12">
-                                                    <div class="form-group files color">
-                                                         <label>Upload Your File </label>
-                                                        <label>Featured Image</label>
-                                                        <span class="featured-img-wrap">
-                                                            <img src="<?php if($row['user_featured_image'] != '') { echo 'Project_file/'.$row['file_upload']; }
-                                                            else {
-                                                                echo $row['project_name']; 
-                                                            }?>" title="<?php if($row['project_name'] != '') { echo $row['project_name']; }?>" alt="<?php if($row['project_name'] != '') { echo $row['project_name']; }?>" class="user-featured-img">
-                                                        </span>
-                                                        <input type="file" class="form-control" multiple="" name="document_files">
-                                                      </div>
-                                                </div> -->
-
 
                                               </div>
                                           </div>                        
@@ -220,11 +225,40 @@ use LDAP\Result;
                                             } } } 
                                       ?>
                                    
-                                    <div class="col-md-12 text-center">
-                                        <input type="submit" class="btn dp-em-nxt-btn" name="create" value="Update" >
-                                      </div>
+                                    <?php if($_SESSION['emp_type'] == "hr" || $_SESSION['emp_type'] == "admin"){
+                                    ?>
+                                        <div class="col-md-12 text-center">
+                                            <input type="submit" class="btn dp-em-nxt-btn" name="update" value="Update" >
+                                            <input type="submit" class="btn dp-em-nxt-btn" name="delete" value="delete">
+                                        </div>
+                                    <?php }?>
                                     </div>
                                 </form>
+                                <?php
+                                    if(isset($_POST['update'])){
+                                        $project_domain = $_POST['domain_name'];
+                                        $temp_project_domain = implode(",", $project_domain );
+
+                                        $project_update = "UPDATE `capms_project_info` SET `title`='".$_POST['project_name']."',`domain`='".$temp_project_domain."',`start_date`='".$_POST['start_date']."',`end_date`='".$_POST['end_date']."',`priority`='".$_POST['priority']."',`project_details`='".$_POST['project_details']."',`project_status`='".$_POST['project_status']."',updated_at='".date('Y-m-d h:i:s', strtotime('now'))."' where project_id = '".$_GET['viewid']."' ";
+
+                                       mysqli_query($con, $project_update);
+
+                                       $project_team = $_POST['team_name'];
+                                       $team = implode(",", $project_team);
+
+                                       $project_member_update = "UPDATE `camps_project_assigned_user_info` SET `user_id`='".$team."',`updated_at`='".date('Y-m-d h:i:s', strtotime('now'))."' WHERE project_id = '".$_GET['viewid']."' ";
+                                       mysqli_query($con,$project_member_update);
+
+                                       echo "<script>location.href='".$baseURL."view-project.php?viewid=".$vid." ';</script>";
+                                    }
+
+                                    if(isset($_POST['delete'])){
+                                        $query = "DELETE FROM `capms_project_info` WHERE project_id = '".$vid."'";
+                                        
+                                        mysqli_query($con,$query);
+                                        echo "<script>location.href='".$baseURL."projects.php';</script>";
+                                    }
+                                ?>
                             </section>
                         </div>
                     </div>
@@ -236,7 +270,6 @@ use LDAP\Result;
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
 
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://jqueryui.com//resources/demos/style.css">

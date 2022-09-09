@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-lg-9">
                             <section class="inner-head-brd">
-                                <h2>Projects Task</h2>
+                                <h2 id="project_heading">Projects Task</h2>
                                 <ul>
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li>Projects</li>
@@ -83,14 +83,15 @@
                                                
                                                 <div class="col-md-6">
                                                     <label>Start Date</label> 
-                                                    <input type="date" class="form-control" name="start_date">
+                                                    <input type="text" id="start_date" class="form-control" name="start_date" autocomplete="off">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>End Date</label> 
-                                                    <input type="date" class="form-control" name="end_date">
+                                                    <input type="text" id="end_date" class="form-control" name="end_date" autocomplete="off">
                                                 </div>
 
-                    
+
+
                                                 <div class="col-md-6">
                                                     <label>Task Domain</Th></label>
                                                     <select id="domain-type" name="task_domain">
@@ -99,7 +100,6 @@
                             
                                                             $query1 = "SELECT domain FROM capms_project_info WHERE project_id = '".$_GET['project_id']."' " ;
                                                             $result1 = mysqli_query($con,$query1);
-                                                            
                                                             $domain_names = array();
                                                             if($result1->num_rows > 0){
                                                                 while($domain_names = mysqli_fetch_assoc($result1)){
@@ -151,18 +151,37 @@
 
                                                 <div class="col-md-6">
                                                     <label>Assigned Member</label> 
-                                                        <?php
-                                                          $query = "SELECT * FROM capms_admin_users";
-                                                          $result = mysqli_query($con, $query);
-                                                          if($result->num_rows > 0){
-                                                            while($row = mysqli_fetch_assoc($result)){
-                                                        ?>
-                                                        <input type="checkbox" class="form-control" placeholder="Members Name" name="members_name[]" value="<?php echo $row['id']; ?>">
-                                                        <span><?php echo $row['user_fullname']; ?></span>
-                                                        <?php
+                                                    <?php
+                                                            $assined_user_ids = '';
+                                                            $project_user = "SELECT `user_id` FROM `camps_project_assigned_user_info` WHERE project_id = '".$_GET['project_id']."'";
+                                                            $assign_user = mysqli_query($con,$project_user);
+                                                            if($assign_user->num_rows > 0){
+                                                                while($assign_user_row = mysqli_fetch_assoc($assign_user)){
+                                                                    $assined_user_ids = explode(',', $assign_user_row['user_id']);
+                                                                    // print_r ($assined_user_ids); 
+                                                                    // die();
+                                                                }
                                                             }
-                                                          }
-                                                    ?>
+
+                                                            $user_query = "SELECT * FROM capms_admin_users";
+                                                            $result_user = mysqli_query($con,$user_query);
+                                                            if($result_user->num_rows > 0)
+                                                            {
+                                                                while($row1 = mysqli_fetch_assoc($result_user))
+                                                                {   
+                                                                    if (in_array($row1['id'], $assined_user_ids))
+                                                                    {
+                                                                       $checked = 'yes';
+                                                                    }
+                                                                    else{
+                                                                        $checked = 'no';
+                                                                    }
+                                                                    
+                                                        ?>
+                                                            <input type="checkbox" id="members_name" name="members_name[]" value="<?php echo $row1['id']; ?>" <?php if($checked == 'yes'){ echo 'checked'; } else{ echo 'disabled'; }?>>
+                                                            <label for="members_name"><?php echo $row1['user_fullname']; ?> </label>
+                                                            
+                                                        <?php } } ?>
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -196,20 +215,28 @@
                                 <?php
                                     if(isset($_POST['create_task'])){
 
-                                        $task_insert_query = "INSERT INTO `capms_project_task_info`(`task_id`, `task_name`, `priority`, `task_start_date`, `task_end_date`, `task_domain`, `task_type`, `trello_task_id`, `trello_task_link`, `task_desc`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['task_name']."', '".$_POST['task_priority']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['task_domain']."', '".$_POST['task_type']."', '".$_POST['trello_taskid']."', '".$_POST['trello_link']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' )";
-                                        
-                                        //print_r($task_insert_query);
-                                        //die();
+                                        $task_insert_query = "INSERT INTO `capms_project_task_info`(`task_id`, `task_name`, `task_status`, `priority`, `task_start_date`, `task_end_date`, `task_domain`, `task_type`, `trello_task_id`, `trello_task_link`, `task_desc`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['task_name']."', '1', '".$_POST['task_priority']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['task_domain']."', '".$_POST['task_type']."', '".$_POST['trello_taskid']."', '".$_POST['trello_link']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' )";
                                         $task_insert_result = mysqli_query($con, $task_insert_query);
-
                                         $last_task_id = $con->insert_id;
 
-                                        if(is_array($_POST['members_name'])){
-                                            foreach($_POST['members_name'] as $key){
-                                                $user_work_load = "INSERT INTO capms_user_workload_info (workload_id, user_id, project_id, task_id, created_at, updated_at) VALUES (NULL, '".$key."', '".$_GET['project_id']."', '".$last_task_id."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' ) ";
+                                        if($last_task_id){
+                                            $invTID = str_pad($last_task_id, 4, '0', STR_PAD_LEFT);
+                                            $invPID = str_pad($_GET['project_id'], 4, '0', STR_PAD_LEFT);
 
-                                                mysqli_query($con, $user_work_load);
+                                            $task_number = "capt".date("ymd").$invPID.$invTID;
+                                            $task_number;
+
+                                            $task_update = "UPDATE `capms_project_task_info` SET `task_number`='".$task_number."' WHERE task_id = '".$last_task_id."' ";
+
+                                            mysqli_query($con,$task_update);
+
+                                            if(is_array($_POST['members_name'])){
+                                                foreach($_POST['members_name'] as $key){
+                                                    $user_work_load = "INSERT INTO capms_user_workload_info (workload_id, user_id, project_id, task_id, created_at, updated_at) VALUES (NULL, '".$key."', '".$_GET['project_id']."', '".$last_task_id."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' ) ";
+                                                    mysqli_query($con, $user_work_load);
+                                                }
                                             }
+                                        echo "<script>location.href='".$baseURL."view_task.php?project_id=".$_GET['project_id']."';</script>";
                                         }
                                     }
                                 ?> 
@@ -224,7 +251,6 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
 
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://jqueryui.com//resources/demos/style.css">
@@ -304,6 +330,74 @@
 }
 </style>
 
+
+<?php
+                            
+    $query11 = "SELECT start_date, end_date FROM capms_project_info WHERE project_id = '".$_GET['project_id']."' " ;
+    $result11 = mysqli_query($con,$query11);
+
+    if($result11->num_rows > 0){
+        while($end = mysqli_fetch_assoc($result11)){
+            $psdate = $end['start_date'];
+            $pedate = $end['end_date'];
+?>
+
+<!-- START DATE AND END DATE PICKER -->
+<script>
+    $("#start_date").datepicker({
+        onSelect: function(dateText, inst) {
+            var sdate = $(this).val();
+            var fullStartDate = new Date(sdate);
+            var twoDigitMonthStart = ((fullStartDate.getMonth().length + 1) === 1) ? (fullStartDate.getMonth() + 1) : '0' + (fullStartDate.getMonth() + 1);
+            var startDate = fullStartDate.getDate() + "/" + twoDigitMonthStart + "/" + fullStartDate.getFullYear();
+
+            var projectStartDate = new Date("<?php echo $psdate;?>");
+            var projectEndDate = new Date("<?php echo $pedate;?>");
+            var selectedDate = new Date(sdate);
+
+            if (selectedDate > projectEndDate) {
+                alert("Can't select date after project end_date!!!");
+                $.datepicker._clearDate(this);
+            }
+            else if(selectedDate < projectStartDate.setDate(projectStartDate.getDate() - 1)){
+                alert("Can't select date before project start_date!!!");
+                $.datepicker._clearDate(this);
+            }
+        }
+    });
+    $("#end_date").datepicker({
+        onSelect: function(dateText, inst) {
+            var edate = $(this).val();
+            var fullStartDate = new Date(edate);
+            var twoDigitMonthStart = ((fullStartDate.getMonth().length + 1) === 1) ? (fullStartDate.getMonth() + 1) : '0' + (fullStartDate.getMonth() + 1);
+            var startDate = fullStartDate.getDate() + "/" + twoDigitMonthStart + "/" + fullStartDate.getFullYear();
+
+            var projectStartDate = new Date("<?php echo $psdate;?>");
+            var projectEndDate = new Date("<?php echo $pedate;?>");
+            var selectedDate = new Date(edate);
+
+            if (selectedDate > projectEndDate) {
+                alert("Can't select date after project end_date!!!");
+                $.datepicker._clearDate(this);
+            }
+            else if(selectedDate < projectStartDate.setDate(projectStartDate.getDate() - 1)){
+                alert("Can't select date before project start_date!!!");
+                $.datepicker._clearDate(this);
+            }
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#project_heading").append(" [duration : <?php echo $psdate.' to '.$pedate;?>]");
+    });
+</script>
+
+<?php
+        }
+    }
+?>
 
 </body>
 </html>

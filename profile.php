@@ -80,7 +80,7 @@
                                                     </li>
                                                     <li><span>Reports to: </span>
                                                         <?php
-                                                        $sql = "SELECT user_featured_image, user_fullname FROM capms_admin_users WHERE id = '" . $row1['reports_to_uid'] . "' ";
+                                                        $sql = "SELECT user_featured_image, user_fullname FROM capms_admin_users WHERE user_empid = '" . $row1['reports_to_uid'] . "' ";
                                                         $report_query = mysqli_query($con, $sql);
                                                         if ($report_query->num_rows > 0) {
                                                             while ($report_row = mysqli_fetch_assoc($report_query)) {
@@ -319,7 +319,7 @@
         <?php include 'copyright_content.php'; ?>
     </footer>
     <!-- Footer JS files -->
-    <?php include 'footer_js.php' ?>
+
 </body>
 
 </html>

@@ -81,6 +81,16 @@
                                                         <input type="file" class="form-control" name="user_featured_image" id="user_featured_image">
                                                     </div>
 
+                                                    <?php
+                                                        $report_original_query = "SELECT reports_to_uid FROM capms_admin_users WHERE id = '".$_SESSION['emp_id']."' ";
+                                                        $reportOriginalResult = mysqli_query($con, $report_original_query);
+                                                        if($reportOriginalResult-> num_rows > 0) {
+                                                            while($reportOriginalRow = mysqli_fetch_assoc($reportOriginalResult)){
+                                                                $reports_to_uid_original = $reportOriginalRow['reports_to_uid'];
+                                                            }
+                                                        }
+                                                    ?>
+
 
                                                     <!-- reports to -->
                                                     <div class="form-group col-md-12">
@@ -93,7 +103,7 @@
                                                             if($reportResult-> num_rows > 0) {
                                                                 while($reportRow = mysqli_fetch_assoc($reportResult)){
                                                         ?>
-                                                            <option value="$reportRow['reports_to_uid']" <?php if($reportRow['id']!='') { echo 'selected'; } ?>><?php echo $reportRow['user_fullname']; ?></option>
+                                                            <option value="<?php echo $reportRow['user_empid'];?>" <?php if($reports_to_uid_original == $reportRow['user_empid']) { echo 'selected'; } ?>><?php echo $reportRow['user_fullname']; ?></option>
                                                              
                                                                 <?php
                                                                 }
@@ -148,10 +158,10 @@
                                             }
                                         }
 
-                                        $sql4="UPDATE capms_admin_users SET reports_to_uid='".$_GET['id']."' WHERE id='".$_SESSION['$id']."'";
+                                        echo $sql4="UPDATE capms_admin_users SET reports_to_uid='".$_POST['select_reports_to']."' WHERE id='".$_SESSION['emp_id']."'";
                                         $query=mysqli_query($con,$sql4);
 
-                                        echo "<script>location.href='".$baseURL."edit_profile_basic_info.php';</script>";
+                                        // echo "<script>location.href='".$baseURL."edit_profile_basic_info.php';</script>";
                                     }
                                 ?>
                             </section>
@@ -165,6 +175,5 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <?php include 'footer_js.php' ?>
     </body>
 </html>
