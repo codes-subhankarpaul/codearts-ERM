@@ -5,20 +5,20 @@
                         class="img-fluid" alt="Codearts Logo"> </a> </div>
         </div>
         <div class="col-lg-3 col-md-6 align-self-center">
-            <div class="header-search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search Here">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button"> <i class="fa fa-search"></i> </button>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <div class="col-lg-2 col-md-6 align-self-center">
             <ul class="notification-chat">
-                <li><a href=""><img src="assets/images/notification-icon-header.png"
-                            alt="Notifications"><span>3</span></a></li>
-                <li><a href="#"><img src="assets/images/chat-icon-header.png" alt="Chat"><span>2</span></a></li>
+                <?php $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' "; 
+                $result2 = mysqli_query($con, $sql2);
+                if($result2->num_rows > 0)
+                {
+                    while($row2 = mysqli_fetch_assoc($result2))
+                    {?>
+                <li><a href="javascript:void(0)">Login<span><?php echo $row2['login_time']; ?></span></a></li>
+                <?php }
+                } ?>
+                
             </ul>
             <ul class="header-admin">
                 <div class="dropdown">

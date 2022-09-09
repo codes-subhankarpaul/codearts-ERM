@@ -29,83 +29,8 @@
                         <div class="col-lg-9">
                             <section class="dashboard-cal-sheet">
                                 <div class="row">
-                                    <div class="col-lg-5">
-                                        <div class="dasboard-calender">
-                                            <div class="card">
-                                                <div class="card-body p-0">
-                                                    <div id="calendar"></div>
-                                                </div>
-                                            </div>
-                                            <!-- calendar modal -->
-                                            <div id="modal-view-event" class="modal modal-top fade calendar-modal">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-body">
-                                                            <h4 class="modal-title"><span class="event-icon"></span><span
-                                                                    class="event-title"></span></h4>
-                                                            <div class="event-body"></div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary"
-                                                                data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <form id="add-event">
-                                                            <div class="modal-body">
-                                                                <h4>Add Event Detail</h4>
-                                                                <div class="form-group">
-                                                                    <label>Event name</label>
-                                                                    <input type="text" class="form-control" name="ename">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Event Date</label>
-                                                                    <input type="text" class="datetimepicker form-control"
-                                                                        name="edate">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Event Description</label>
-                                                                    <textarea class="form-control" name="edesc"></textarea>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Event Color</label>
-                                                                    <select class="form-control" name="ecolor">
-                                                                        <option value="fc-bg-default">fc-bg-default</option>
-                                                                        <option value="fc-bg-blue">fc-bg-blue</option>
-                                                                        <option value="fc-bg-lightgreen">fc-bg-lightgreen
-                                                                        </option>
-                                                                        <option value="fc-bg-pinkred">fc-bg-pinkred</option>
-                                                                        <option value="fc-bg-deepskyblue">fc-bg-deepskyblue
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Event Icon</label>
-                                                                    <select class="form-control" name="eicon">
-                                                                        <option value="circle">circle</option>
-                                                                        <option value="cog">cog</option>
-                                                                        <option value="group">group</option>
-                                                                        <option value="suitcase">suitcase</option>
-                                                                        <option value="calendar">calendar</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                                <button type="button" class="btn btn-primary"
-                                                                    data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7">
+                                    
+                                    <div class="col-lg-12">
                                         <div class="dp-weekly-time-sheet">
                                             <div class="custom-heading">
                                                 <h3>Monthly Access Log</h3>
@@ -117,7 +42,6 @@
                                                     <thead class="thead-dark">
                                                         <tr>
                                                             <th scope="col">Date</th>
-                                                            <th scope="col">Day</th>
                                                             <th scope="col">Login Time</th>
                                                             <th scope="col">Lunch Break</th>
                                                             <th scope="col">Evening Breaks</th>
@@ -126,94 +50,69 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <th scope="row">20-09</th>
-                                                            <td class="bg-dp-drk">Monday</td>
-                                                            <td>10.00</td>
-                                                            <td>1.00 - 1.30</td>
-                                                            <td>4.45 - 5.00</td>
-                                                            <td>6.30</td>
-                                                            <td>7.45</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">20-09</th>
-                                                            <td class="bg-dp-drk">Monday</td>
-                                                            <td>10.15</td>
-                                                            <td>1.00 - 1.30</td>
-                                                            <td>4.45 - 5.00</td>
-                                                            <td>6.30</td>
-                                                            <td>7.45</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">20-09</th>
-                                                            <td class="bg-dp-drk">Monday</td>
-                                                            <td>10.16</td>
-                                                            <td>1.00 - 1.30</td>
-                                                            <td>4.45 - 5.00</td>
-                                                            <td>6.30</td>
-                                                            <td>7.45</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">20-09</th>
-                                                            <td class="bg-dp-drk">Monday</td>
-                                                            <td>10.16</td>
-                                                            <td>1.00 - 1.30</td>
-                                                            <td>4.45 - 5.00</td>
-                                                            <td>6.30</td>
-                                                            <td>7.45</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">20-09</th>
-                                                            <td class="bg-dp-drk">Monday</td>
-                                                            <td>10.16</td>
-                                                            <td>1.00 - 1.30</td>
-                                                            <td>4.45 - 5.00</td>
-                                                            <td>6.30</td>
-                                                            <td>7.45</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">20-09</th>
-                                                            <td class="bg-dp-drk">Monday</td>
-                                                            <td>10.16</td>
-                                                            <td>1.00 - 1.30</td>
-                                                            <td>4.45 - 5.00</td>
-                                                            <td>6.30</td>
-                                                            <td>7.45</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">20-09</th>
-                                                            <td class="bg-dp-drk">Monday</td>
-                                                            <td>10.16</td>
-                                                            <td>1.00 - 1.30</td>
-                                                            <td>4.45 - 5.00</td>
-                                                            <td>6.30</td>
-                                                            <td>7.45</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">20-09</th>
-                                                            <td class="bg-dp-drk">Monday</td>
-                                                            <td>10.16</td>
-                                                            <td>1.00 - 1.30</td>
-                                                            <td>4.45 - 5.00</td>
-                                                            <td>6.30</td>
-                                                            <td>7.45</td>
-                                                        </tr>
+                                                        <?php
+                                                            $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' ";
+                                                            $result2 = mysqli_query($con, $sql2);
+                                                            if($result2->num_rows > 0)
+                                                            {
+                                                                while($row2 = mysqli_fetch_assoc($result2))
+                                                                {
+                                                                    ?>
+                                                                    <tr>
+                                                                        <!-- login date -->
+                                                                        <th scope="row">
+                                                                            <?php echo date('d-m-Y', strtotime($row2['login_date'])); ?>
+                                                                        </th>
+                                                                        <!-- login time -->
+                                                                        <td class="bg-dp-drk">
+                                                                            <?php echo $row2['login_time']; ?>
+                                                                        </td>
+                                                                        <!-- lunch break duration -->
+                                                                        <td>
+                                                                            <?php
+                                                                                if($row2['lunch_break_start'] != '')
+                                                                                {
+                                                                                    echo $row2['lunch_break_start'];
+                                                                                }
+                                                                                if($row2['lunch_break_end'] != '')
+                                                                                {
+                                                                                    echo " - ".$row2['lunch_break_end'];
+                                                                                }
+                                                                            ?>
+                                                                        </td>
+                                                                        <!-- evening break duration -->
+                                                                        <td>
+                                                                            <?php
+                                                                                if($row2['evening_break_start'] != '')
+                                                                                {
+                                                                                    echo $row2['evening_break_start'];
+                                                                                }
+                                                                                if($row2['evening_break_end'] != '')
+                                                                                {
+                                                                                    echo " - ".$row2['evening_break_end'];
+                                                                                }
+                                                                            ?>
+                                                                        </td>
+                                                                        <!-- logout time -->
+                                                                        <td class="bg-dp-drk">
+                                                                            <?php
+                                                                                $logout_time = str_replace('-', ':', $row2['logout_time']);
+                                                                                $logout_time = date('g:i A' ,strtotime($logout_time));
+                                                                                echo $logout_time;
+                                                                            ?>
+                                                                        </td>
+                                                                        <!-- total hours -->
+                                                                        <td>7.45</td>
+                                                                    </tr>
+                                                                    <?php
+                                                                }
+                                                            }
+                                                        ?>
                                                     </tbody>
-                                                </table>
+                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="custom-em-signtures"> <img src="assets/images/signature.png" alt="">
-                                                    <h6>Employee Signature</h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="custom-em-signtures"> <img src="assets/images/signature-2.png" alt="">
-                                                    <h6>Employer Signature</h6>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </section>
