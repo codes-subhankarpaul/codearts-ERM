@@ -96,8 +96,8 @@
                                             }
                                             else
                                             {
-                                                $empid = strtolower(str_replace(" ", "-", $_POST['user_fullname']));
-                                                $empid = $empid."-".rand(1111,9999);
+                                                //$empid = strtolower(str_replace(" ", "-", $_POST['user_fullname']));
+                                                $empid = 'CODE-'.rand(1111,9999);
                                                 $sql2= "INSERT INTO `capms_admin_users` (`id`, `user_type`, `user_fullname`, `user_department`, `user_empid`, `user_email`, `user_contact`, `user_joining_date`, `user_featured_image`, `user_salary`, `user_password`, `user_designation`, `user_dob`, `user_address`, `user_gender`, `reports_to_uid`, `user_passport_number`, `user_adhar_number`, `user_voter_id`, `user_pan_number`, `user_nationality`, `user_religion`, `user_marital_status`, `user_employment_of_spouse`, `user_children_number`, `emergency_primary_name`, `emergency_primary_relation`, `emergency_primary_contact`, `emergency_secondary_name`, `emergency_secondary_relation`, `emergency_secondary_contact`, `user_bank_name`, `user_bank_ifsc_code`, `user_bank_account_no`, `created_at`, `updated_at`) VALUES (NULL, '', '".$_POST['user_fullname']."', '', '".$empid."', '".$_POST['user_email']."', '''".$_POST['user_contact']."', '".$_POST['user_joining_date']."', '', '".$_POST['user_salary']."', '".md5($_POST['user_password'])."', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
                                               
                                                 mysqli_query($con, $sql2);

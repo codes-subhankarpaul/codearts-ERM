@@ -158,10 +158,10 @@
                                             }
                                         }
 
-                                        echo $sql4="UPDATE capms_admin_users SET reports_to_uid='".$_POST['select_reports_to']."' WHERE id='".$_SESSION['emp_id']."'";
+                                        $sql4="UPDATE capms_admin_users SET reports_to_uid='".$_POST['select_reports_to']."' WHERE id='".$_SESSION['emp_id']."'";
                                         $query=mysqli_query($con,$sql4);
 
-                                        // echo "<script>location.href='".$baseURL."edit_profile_basic_info.php';</script>";
+                                        echo "<script>location.href='".$baseURL."edit_profile_basic_info.php';</script>";
                                     }
                                 ?>
                             </section>

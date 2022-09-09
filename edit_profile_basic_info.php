@@ -53,8 +53,11 @@
                                                         <label>Designation</label>
                                                         <div class="designation-dd-wrap">
                                                             <?php
+                                                                $rank ='';
+                                                                $designation ='';
                                                                 if($row1['user_designation'] != '')
                                                                 {
+                                                                    
                                                                     $user_designation_name = $row1['user_designation'];
                                                                     $user_designation_name = explode("-",$user_designation_name);
                                                                     $rank = $user_designation_name[0];

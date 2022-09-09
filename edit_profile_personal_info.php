@@ -51,7 +51,7 @@
                                                     ?>
                                                     <div class="form-group col-md-12">    
                                                         <label>Passport No</label>            
-                                                        <input type="text" class="form-control"  placeholder="Passport Number" name="passport_no" value="<?php if($row['user_passport_number']!=''){echo $row['user_passport_number'];} ?>" required>
+                                                        <input type="text" class="form-control"  placeholder="Passport Number" name="passport_no" value="<?php if($row['user_passport_number']!=''){echo $row['user_passport_number'];} ?>">
                                                     </div>
                                                     <div class="form-group col-md-12">    
                                                         <label>Adhar No</label>            

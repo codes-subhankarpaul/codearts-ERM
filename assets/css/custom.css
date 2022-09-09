@@ -3174,9 +3174,9 @@ color: #fff;
   margin: 20px 0;
 }
 .dp-em-nxt-btn {
-  background-color: #7883eb;
+  background-color: #7883eb !important;
   color: #fff;
-  border-radius: 50px;
+  border-radius: 50px !important;
   padding: 12px 60px;
 }
 .dp-family-remove {
