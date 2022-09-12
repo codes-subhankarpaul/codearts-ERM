@@ -136,13 +136,43 @@
                                                             <!-- logout time -->
                                                             <td class="bg-dp-drk">
                                                                 <?php
-                                                                    $logout_time = str_replace('-', ':', $row2['logout_time']);
-                                                                    $logout_time = date('g:i A' ,strtotime($logout_time));
+                                                                    if($row2['logout_time']!='') {
+                                                                        $logout_time = str_replace('-', ':', $row2['logout_time']);
+                                                                        $logout_time = date('g:i A' ,strtotime($logout_time));
+                                                                    }
+                                                                    else {
+                                                                        $logout_time = '-';
+                                                                    }
                                                                     echo $logout_time;
                                                                 ?>
                                                             </td>
                                                             <!-- total hours -->
-                                                            <td>7.45</td>
+                                                            <td>
+                                                                <?php
+                                                                    $login_time = strtotime($row2['login_time']);
+                                                                    $lunch_break_start = strtotime($row2['lunch_break_start']);
+                                                                    $lunch_break_end = strtotime($row2['lunch_break_end']);
+                                                                    $evening_break_start =strtotime($row2['evening_break_start']);
+                                                                    $evening_break_end = strtotime($row2['evening_break_end']);
+                                                                    $logout_time = str_replace('-', ':', $row2['logout_time']);
+                                                                    $logout_time = strtotime($logout_time);
+
+                                                                    $lunch_break = $lunch_break_end - $lunch_break_start;
+                                                                    $evening_break = $evening_break_end - $evening_break_start;
+                                                                    $log_time = $logout_time - $login_time;
+
+                                                                    $total_time = $log_time - $lunch_break - $evening_break;
+
+                                                                    // Subtract time from datetime
+                                                                    $total_time = $total_time - (330 * 60);
+                                                                    if($logout_time!="") {
+                                                                        echo date("h:i:s",$total_time);
+                                                                    }
+                                                                    else {
+                                                                        echo "-";
+                                                                    }
+                                                                ?>
+                                                            </td>
                                                         </tr>
                                                         <?php
                                                     }
