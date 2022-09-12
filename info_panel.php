@@ -15,7 +15,7 @@
                 {
                     while($row2 = mysqli_fetch_assoc($result2))
                     {?>
-                <li><a href="javascript:void(0)">Login<span><?php echo $row2['login_time']; ?></span></a></li>
+                <!-- <li><a href="javascript:void(0)">Login<span><?php //echo $row2['login_time']; ?></span></a></li> -->
                 <?php }
                 } ?>
                 
