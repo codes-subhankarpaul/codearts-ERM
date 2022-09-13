@@ -3587,8 +3587,14 @@ top: 14px;
 
 
 
-
-
+.right{
+  background-color: #1fbd5e;
+  color: #fff;
+}
+.late{
+  background-color: #bb2020;
+  color: #fff;
+}
 
 
 

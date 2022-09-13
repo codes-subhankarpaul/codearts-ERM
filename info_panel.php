@@ -11,13 +11,14 @@
             <ul class="notification-chat">
                 <?php $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' AND login_date = '".date('d-m-Y')."'"; 
                 $result2 = mysqli_query($con, $sql2);
-                if($result2->num_rows > 0) {
-                    while($row2 = mysqli_fetch_assoc($result2)) {?>
-                <li><a href="javascript:void(0)">Login<span><?php echo $row2['login_time']; ?></span></a></li>
-                <?php 
-                    }
-                }    
-                ?>
+                if($result2->num_rows > 0)
+                {
+                    while($row2 = mysqli_fetch_assoc($result2))
+                    {?>
+                <!-- <li><a href="javascript:void(0)">Login<span><?php //echo $row2['login_time']; ?></span></a></li> -->
+                <?php }
+                } ?>
+                
             </ul>
             <ul class="header-admin">
                 <div class="dropdown">
