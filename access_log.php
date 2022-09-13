@@ -1,3 +1,6 @@
+<?php
+error_reporting(E_ALL ^ E_NOTICE);
+?>
 <!doctype html>
 <html lang="en">
 
@@ -91,12 +94,17 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                                $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' ";
+                                                $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."'";
                                                 $result2 = mysqli_query($con, $sql2);
                                                 if($result2->num_rows > 0)
                                                 {
                                                     while($row2 = mysqli_fetch_assoc($result2))
                                                     {
+                                                        $checkTime = strtotime('10:45:00');
+                                                        $loginTime = strtotime($row2['login_time']);
+                                                        $diff = $checkTime - $loginTime;
+                                                        ($diff < 0)? $class='access_log_wrong' : $class='access_log_ok';
+
                                                         ?>
                                                         <tr>
                                                             <!-- login date -->
@@ -104,11 +112,17 @@
                                                                 <?php echo date('d-m-Y', strtotime($row2['login_date'])); ?>
                                                             </th>
                                                             <!-- login time -->
-                                                            <td class="bg-dp-drk">
+                                                            <td class="bg-dp-drk <?php echo $class ?>">
                                                                 <?php echo $row2['login_time']; ?>
                                                             </td>
                                                             <!-- lunch break duration -->
-                                                            <td>
+                                                            <?php 
+                                                            
+                                                            $diff_lunch_break = strtotime($row2['lunch_break_end']) - strtotime($row2['lunch_break_start']);
+                                                            ($diff_lunch_break > 3600)? $class='access_log_wrong' : $class='access_log_ok';
+                                                            
+                                                            ?>
+                                                            <td class="<?php echo $class ?>">
                                                                 <?php
                                                                     if($row2['lunch_break_start'] != '')
                                                                     {
@@ -121,7 +135,11 @@
                                                                 ?>
                                                             </td>
                                                             <!-- evening break duration -->
-                                                            <td>
+                                                            <?php 
+                                                            $diff_evn_break = strtotime($row2['evening_break_end']) - strtotime($row2['evening_break_start']);
+                                                            ($diff_evn_break > 600)? $class='access_log_wrong' : $class='access_log_ok';
+                                                            ?>
+                                                            <td class="<?php echo $class?>">
                                                                 <?php
                                                                     if($row2['evening_break_start'] != '')
                                                                     {
@@ -136,15 +154,39 @@
                                                             <!-- logout time -->
                                                             <td class="bg-dp-drk">
                                                                 <?php
+                                                                if($row2['logout_time'] !=""){
                                                                     $logout_time = str_replace('-', ':', $row2['logout_time']);
                                                                     $logout_time = date('g:i A' ,strtotime($logout_time));
                                                                     echo $logout_time;
+                                                                }
                                                                 ?>
                                                             </td>
                                                             <!-- total hours -->
-                                                            <td>7.45</td>
+                                                            <?php 
+                                                                $diff = strtotime($logout_time) - strtotime($row2['login_time'])-$diff_lunch_break-$diff_evn_break;
+                                                                $secs = $diff % 60;
+                                                                $hrs = $diff / 60;
+                                                                $mins = $hrs % 60;
+                                                                $hrs = $hrs / 60;
+                                                                $working_hours =  ((int)$hrs . "." . (int)$mins);
+                                                            
+                                                                if(number_format($working_hours,2) >=7.40){
+                                                                $class = 'access_log_ok';
+                                                                }
+                                                                else{
+                                                                $class = 'access_log_wrong';
+                                                                }
+                                                            ?>
+                                                            <td class="<?php echo $class ?>">
+                                                                <?php 
+                                                                if($row2['logout_time'] !="" && $row2['login_time'] !="") {
+                                                                    echo $working_hours; 
+                                                                }
+                                                                ?>
+                                                            </td>
+                                                            
                                                         </tr>
-                                                        <?php
+                                            <?php
                                                     }
                                                 }
                                             ?>

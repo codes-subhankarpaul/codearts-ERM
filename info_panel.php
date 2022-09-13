@@ -9,7 +9,7 @@
         </div>
         <div class="col-lg-2 col-md-6 align-self-center">
             <ul class="notification-chat">
-                <?php $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' "; 
+                <?php $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' AND login_date = '".date('d-m-Y')."'"; 
                 $result2 = mysqli_query($con, $sql2);
                 if($result2->num_rows > 0)
                 {
