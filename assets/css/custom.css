@@ -3597,6 +3597,36 @@ top: 14px;
 }
 
 
+/*======================================= subrata access_log (start 13.09.22)=====================================*/
+
+.access_log_ok{
+  font-style: italic;
+}
+.access_log_wrong {
+  border: 1px solid orange;
+}
+
+.access_log_wrong::after {
+  content: "--";
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  display: inline;
+  background-color: rgb(255, 6, 6);
+}
+
+.access_log_wrong:hover::after {
+  content: "please maintain time!!!";
+  height: auto;
+  width: auto;
+  border-radius: 0%;
+  display: block;
+  position: relative;
+  background-color: rgb(255, 6, 6);
+  color: white;
+}
+/*======================================= subrata access_log (start 13.09.22)=====================================*/
+
 
 
 
