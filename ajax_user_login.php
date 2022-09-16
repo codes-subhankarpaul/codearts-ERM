@@ -25,6 +25,18 @@
                 $_SESSION['emp_name'] = $row1['user_fullname'];
                 $_SESSION['emp_image'] = $row1['user_featured_image'];
 
+                // check if pervious logout time is there then, $_SESSION['auto_login_status'] = "auto" else ""
+                $login_details = "SELECT * FROM `capms_login_information` WHERE user_id = '".$_SESSION['emp_id']."' ORDER BY ID DESC LIMIT 1";
+
+                $result_logout = mysqli_query($con, $login_details);
+                 
+                while($row_logout = mysqli_fetch_assoc($result_logout)) {
+                    if($row_logout['logout_time']=='') {
+                        // update previous day's logout time
+                        $logout_time = "UPDATE `capms_login_information` SET `logout_time`='19-30-00 auto' WHERE id = '".$row_logout['id']."'";
+                        $con->query($logout_time);
+                    }
+                }
 
                 $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' AND login_date = '".date('d-m-Y', strtotime('now'))."' ";
                 $result2 = mysqli_query($con, $sql2);
