@@ -142,6 +142,7 @@
                                                                            $mins = $hrs % 60;
                                                                            $hrs = $hrs / 60;
                                                                            $working_hours =  ((int)$hrs . "." . (int)$mins);
+                                                                           
                                                                       
                                                                            if(number_format($working_hours,2) >=7.40){
                                                                             $class = 'right';
