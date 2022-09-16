@@ -37,7 +37,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                     <li>Access Log</li>
                                 </ul>
                             </section>
-                            <?php if($_SESSION['emp_type'] == 'hr' || $_SESSION['emp_type'] == 'admin' ||$_SESSION['emp_type'] == 'project_lead' ) { ?>
+                            <?php if($_SESSION['emp_type'] == 'hr' || $_SESSION['emp_type'] == 'admin') { ?>
                                 <section class="employee-profiles">
                                     <div class="row">
                                         <?php 
@@ -155,9 +155,10 @@ error_reporting(E_ALL ^ E_NOTICE);
                                                             <td class="bg-dp-drk">
                                                                 <?php
                                                                 if($row2['logout_time'] !=""){
-                                                                    $logout_time = str_replace('-', ':', $row2['logout_time']);
+                                                                    $logout_time_array = explode(" ", $row2['logout_time']);
+                                                                    $logout_time = str_replace('-', ':', $logout_time_array[0]);
                                                                     $logout_time = date('g:i A' ,strtotime($logout_time));
-                                                                    echo $logout_time;
+                                                                    echo $logout_time." <span class='text-danger'><b>".$logout_time_array[1]."</b></span>";
                                                                 }
                                                                 ?>
                                                             </td>

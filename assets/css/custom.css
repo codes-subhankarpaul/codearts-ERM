@@ -3607,12 +3607,12 @@ top: 14px;
 }
 
 .access_log_wrong::after {
-  content: "--";
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  display: inline;
-  background-color: rgb(255, 6, 6);
+  content:"\A";
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background: #b83b3b;
+  display:inline-block;
 }
 
 .access_log_wrong:hover::after {
@@ -3622,7 +3622,7 @@ top: 14px;
   border-radius: 0%;
   display: block;
   position: relative;
-  background-color: rgb(255, 6, 6);
+  background-color: #b83b3b;
   color: white;
 }
 /*======================================= subrata access_log (start 13.09.22)=====================================*/
