@@ -9,6 +9,22 @@
             {
               echo "<script>location.href='".$baseURL."login.php';</script>";
             }
+
+            // preventing auto-login using session when previous session is set and no previous logout time is there.
+
+            $login_details = "SELECT * FROM `capms_login_information` WHERE user_id = '".$_SESSION['emp_id']."' ORDER BY ID DESC LIMIT 1";
+
+            $result_logout = mysqli_query($con, $login_details);
+
+            while($row_logout = mysqli_fetch_assoc($result_logout)) {
+                if($row_logout['logout_time']=='') {
+                    unset($_SESSION['emp_id']);
+                    unset($_SESSION['emp_name']);
+                    unset($_SESSION['emp_image']);
+                    session_destroy();
+                    echo "<script>location.href='".$baseURL."login.php';</script>";
+                }
+            }
         ?>
         <title>CERM :: Codearts Employee Relationship Management</title>
     </head>
@@ -126,7 +142,6 @@
                                                                            $mins = $hrs % 60;
                                                                            $hrs = $hrs / 60;
                                                                            $working_hours =  ((int)$hrs . "." . (int)$mins);
-                                                                           
                                                                       
                                                                            if(number_format($working_hours,2) >=7.40){
                                                                             $class = 'right';
