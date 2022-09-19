@@ -5,19 +5,29 @@
         <!-- Header CSS files -->
         <?php include 'header_css.php'; ?>
         <?php
+        error_reporting(E_ALL ^ E_NOTICE);
             if($_SESSION['emp_id'] == '')
             {
               echo "<script>location.href='".$baseURL."login.php';</script>";
             }
 
             // preventing auto-login using session when previous session is set and no previous logout time is there.
+            //echo date('d-m-Y');
 
-            $login_details = "SELECT * FROM `capms_login_information` WHERE user_id = '".$_SESSION['emp_id']."' ORDER BY ID DESC LIMIT 1";
+            $login_details = "SELECT * FROM `capms_login_information` WHERE user_id = '".$_SESSION['emp_id']."' AND `logout_time` = '' ORDER BY ID DESC LIMIT 1";
 
             $result_logout = mysqli_query($con, $login_details);
+            
 
             while($row_logout = mysqli_fetch_assoc($result_logout)) {
-                if($row_logout['logout_time']=='') {
+                // echo '<pre>';
+                // print_r($_SESSION['start']);
+                // echo "<br/>";
+                // echo date('d-m-Y', 1662966494);
+
+                //print_r($row_logout);
+                //die;
+                if($row_logout['logout_time']=='' && $row_logout['login_date'] !=date('d-m-Y')) {
                     unset($_SESSION['emp_id']);
                     unset($_SESSION['emp_name']);
                     unset($_SESSION['emp_image']);
@@ -25,6 +35,15 @@
                     echo "<script>location.href='".$baseURL."login.php';</script>";
                 }
             }
+            if(date('d-m-Y',$_SESSION['start']) !=date('d-m-Y')){
+                unset($_SESSION['emp_id']);
+                unset($_SESSION['emp_name']);
+                unset($_SESSION['emp_image']);
+                session_destroy();
+                echo "<script>location.href='".$baseURL."login.php';</script>";
+
+            }
+            //die;
         ?>
         <title>CERM :: Codearts Employee Relationship Management</title>
     </head>
@@ -128,9 +147,10 @@
                                                                         <td class="bg-dp-drk">
                                                                             <?php
                                                                             if($row2['logout_time'] !=""){
-                                                                                $logout_time = str_replace('-', ':', $row2['logout_time']);
+                                                                                $logout_time_array = explode(" ", $row2['logout_time']);
+                                                                                $logout_time = str_replace('-', ':', $logout_time_array[0]);
                                                                                 $logout_time = date('g:i A' ,strtotime($logout_time));
-                                                                                echo $logout_time;
+                                                                                echo $logout_time." <span class='text-danger'><b>".$logout_time_array[1]."</b></span>";
                                                                             }
                                                                             ?>
                                                                         </td>

@@ -94,7 +94,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                         </thead>
                                         <tbody>
                                             <?php
-                                                $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."'";
+                                                $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' ORDER BY `login_date` ASC";
                                                 $result2 = mysqli_query($con, $sql2);
                                                 if($result2->num_rows > 0)
                                                 {

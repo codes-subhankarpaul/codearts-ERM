@@ -25,7 +25,7 @@ error_reporting(E_ALL ^ E_NOTICE);
             $sql_user = "SELECT * FROM `capms_admin_users` WHERE `id` = '".$_REQUEST['user_id']."'";
             $result_user = mysqli_query($con, $sql_user);
             while ($row_user = mysqli_fetch_array($result_user)) {
-        ?>
+        ?> 
         <main class="custom-dahboard-main">
             <div class="custom-page-wrap-dp">
                 <div class="container">
@@ -58,7 +58,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                         </thead>
                                         <tbody>
                                             <?php
-                                                $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_REQUEST['user_id']."'";
+                                                $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_REQUEST['user_id']."' ORDER BY `login_date` ASC ";
                                                 $result2 = mysqli_query($con, $sql2);
                                                 if($result2->num_rows > 0)
                                                 {
