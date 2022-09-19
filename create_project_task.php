@@ -1,3 +1,6 @@
+<?php
+error_reporting(E_ALL ^ E_NOTICE);
+?>
 <!doctype html>
 <html lang="en">
 
@@ -46,17 +49,16 @@
                         </div>
                         <div class="col-lg-9">
                             <section class="inner-head-brd">
-                                <h2 id="project_heading">Projects Task</h2>
+                                <h2 id="project_heading"></h2>
                                 <ul>
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li>Projects</li>
                                 </ul>
-                               
                             </section>
                             
                             <section class="custom-projects">
                                 <form method="POST" enctype="multipart/form-data">
-                                    <h4>Create Task</h4>
+                                    <h4 class="mb-3">Create Task</h4>
                                     <div class="form-row"> 
                                   
                                       <div class="form-group col-md-12">  
@@ -65,14 +67,14 @@
                                           <div class="multi-field">
                                             <div class="form-row">
 
-                                                 <div class="col-md-6">
+                                                 <div class="col-md-6 mb-3">
                                                     <label>Task Name</label> 
-                                                    <input type="text" class="form-control" placeholder=" Task Name" name="task_name">
+                                                    <input type="text" class="form-control" placeholder=" Task Name" name="task_name" required>
                                                 </div>
 
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 mb-3">
                                                     <label>Priority</label> 
-                                                    <select class="form-control" id="priority" name="task_priority">
+                                                    <select class="form-control" id="priority" name="task_priority" required>
                                                         <option value="4">Top</option>
                                                         <option value="3">High</option>
                                                         <option value="2">Medium</option>
@@ -81,58 +83,62 @@
                                                     </select>
                                                 </div>
                                                
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 mb-3">
                                                     <label>Start Date</label> 
-                                                    <input type="text" id="start_date" class="form-control" name="start_date" autocomplete="off">
+                                                    <input type="text" id="start_date" class="form-control" name="start_date" autocomplete="off" required>
                                                 </div>
-                                                <div class="col-md-6">
+
+                                                <div class="col-md-6 mb-3">
                                                     <label>End Date</label> 
-                                                    <input type="text" id="end_date" class="form-control" name="end_date" autocomplete="off">
+                                                    <input type="text" id="end_date" class="form-control" name="end_date" autocomplete="off" required>
                                                 </div>
 
-
-
-                                                <div class="col-md-6">
-                                                    <label>Task Domain</Th></label>
-                                                    <select id="domain-type" name="task_domain">
-                                                        <option>Select Any</option>
-                                                        <?php
-                            
-                                                            $query1 = "SELECT domain FROM capms_project_info WHERE project_id = '".$_GET['project_id']."' " ;
-                                                            $result1 = mysqli_query($con,$query1);
-                                                            $domain_names = array();
-                                                            if($result1->num_rows > 0){
-                                                                while($domain_names = mysqli_fetch_assoc($result1)){
-                                                                    //echo $domain_names['domain'];
-                                                                    $dept_ids = explode(',', $domain_names['domain']);
-                                                                    //print_r($dept_ids);
-
-                                                                    foreach($dept_ids as $key)
-                                                                    {
-                                                                        $domain_name_fetch = "SELECT dept_name FROM capms_department_info WHERE dept_id = '".$key."' ";
-                                                                        $result2 = mysqli_query($con, $domain_name_fetch);
-                                                                        if($result2->num_rows > 0){
-                                                                            while($row100 = mysqli_fetch_assoc($result2)){
-                                                                                ?>
-                                                                            <option value="<?php echo $key; ?>"><?php echo $row100['dept_name']; ?></option>
-                                                                            <?php
-                                                                            }
-                                                                        }
-                                                                        
+                                                <div class="col-md-6 mb-3">
+                                                    <label>Task Domain</label>
+                                                    <button class="btn btn-outline-dark w-100 form-control" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                        Select Task Domain
+                                                    </button>
+                                                    <div class="collapse" id="collapseExample">
+                                                        <div class="card">
+                                                            <div class="card-body w-100">  
+                                                            <?php
+                                                                $assined_domain_ids = '';
+                                                                $project_domain = "SELECT `domain` FROM `capms_project_info` WHERE project_id = '".$_GET['project_id']."'";
+                                                                $assign_domain = mysqli_query($con,$project_domain);
+                                                                if($assign_domain->num_rows > 0){
+                                                                    while($assign_domain_row = mysqli_fetch_assoc($assign_domain)){
+                                                                        $assign_domain_ids = explode(',', $assign_domain_row['domain']);
                                                                     }
-
-                                                                    }
-                                                                    //print_r($domain_names);
                                                                 }
 
-                                                        ?>
+                                                                // print_r($assign_domain_ids);
 
-                                                    </select>
+                                                                $user_domain = "SELECT * FROM `capms_department_info`";
+                                                                $result_domain = mysqli_query($con,$user_domain);
+                                                                if($result_domain->num_rows > 0)
+                                                                {
+                                                                    while($row_domain = mysqli_fetch_assoc($result_domain))
+                                                                    {   
+                                                                        if (in_array($row_domain['dept_id'], $assign_domain_ids)) {
+                                                                            $checked = 'yes';
+                                                                        }
+                                                                        else {
+                                                                            $checked = 'no';
+                                                                        }
+                                                                    if($checked == 'yes'){        
+                                                            ?>
+                                                                <input type="checkbox" id="domain_name" name="domain_name[]" value="<?php echo $row_domain['dept_id']; ?>">
+                                                                <label for="domain_name"><?php echo $row_domain['dept_name']; ?> </label>
+                                                                
+                                                            <?php } } } ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <label>Task type</Th></label> 
-                                                    <select id="task-type" name="task_type">
+                                                <div class="col-md-6 mb-3">
+                                                    <label>Task Type</Th></label> 
+                                                    <select id="task-type" class="form-control" name="task_type" required>
                                                         <option>Select Any</option>
                                                         <?php
                                                             $query2 = "SELECT * FROM capms_project_tasktype_info";
@@ -141,7 +147,7 @@
                                                                 while ($row2 = mysqli_fetch_assoc($result2)){
                                                         ?>
                                                                     <option value="<?php echo $row2['task_type_id']; ?>"><?php echo $row2['task_type_name']; ?></option>
-                                                                <?php
+                                                        <?php
                                                                 }
                                                             } 
                                                         ?>
@@ -149,49 +155,59 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <label>Assigned Member</label> 
-                                                    <?php
-                                                            $assined_user_ids = '';
-                                                            $project_user = "SELECT `user_id` FROM `camps_project_assigned_user_info` WHERE project_id = '".$_GET['project_id']."'";
-                                                            $assign_user = mysqli_query($con,$project_user);
-                                                            if($assign_user->num_rows > 0){
-                                                                while($assign_user_row = mysqli_fetch_assoc($assign_user)){
-                                                                    $assined_user_ids = explode(',', $assign_user_row['user_id']);
-                                                                    // print_r ($assined_user_ids); 
-                                                                    // die();
-                                                                }
-                                                            }
-
-                                                            $user_query = "SELECT * FROM capms_admin_users";
-                                                            $result_user = mysqli_query($con,$user_query);
-                                                            if($result_user->num_rows > 0)
-                                                            {
-                                                                while($row1 = mysqli_fetch_assoc($result_user))
-                                                                {   
-                                                                    if (in_array($row1['id'], $assined_user_ids))
-                                                                    {
-                                                                       $checked = 'yes';
-                                                                    }
-                                                                    else{
-                                                                        $checked = 'no';
-                                                                    }
-                                                                    
-                                                        ?>
-                                                            <input type="checkbox" id="members_name" name="members_name[]" value="<?php echo $row1['id']; ?>" <?php if($checked == 'yes'){ echo 'checked'; } else{ echo 'disabled'; }?>>
-                                                            <label for="members_name"><?php echo $row1['user_fullname']; ?> </label>
-                                                            
-                                                        <?php } } ?>
-                                                </div>
-
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 mb-3">
                                                     <label>Trello Task ID</label> 
                                                     <input type="text" class="form-control" placeholder="Trello task Id" name="trello_taskid">
                                                 </div>
 
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 mb-3">
                                                     <label>Trello Link</label> 
                                                     <input type="text" class="form-control" placeholder="Trello Link" name="trello_link">
+                                                </div>
+
+                                                <div class="col-md-12 mb-3">
+                                                    <button class="btn btn-dark w-100" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                                                        Assigned to ->
+                                                    </button>
+                                                    <div class="collapse show" id="collapseExample2">
+                                                        <div class="card">
+                                                            <div class="card-body w-75">
+                                                            <?php
+                                                                $assined_user_ids = '';
+                                                                $project_user = "SELECT `user_id` FROM `camps_project_assigned_user_info` WHERE project_id = '".$_GET['project_id']."'";
+                                                                $assign_user = mysqli_query($con,$project_user);
+                                                                if($assign_user->num_rows > 0){
+                                                                    while($assign_user_row = mysqli_fetch_assoc($assign_user)){
+                                                                        $assined_user_ids = explode(',', $assign_user_row['user_id']);
+                                                                        // print_r ($assined_user_ids); 
+                                                                        // die();
+                                                                    }
+                                                                }
+
+                                                                $user_query = "SELECT * FROM capms_admin_users";
+                                                                $result_user = mysqli_query($con,$user_query);
+                                                                if($result_user->num_rows > 0)
+                                                                {
+                                                                    while($row1 = mysqli_fetch_assoc($result_user))
+                                                                    {   
+                                                                        if (in_array($row1['id'], $assined_user_ids))
+                                                                        {
+                                                                        $checked = 'yes';
+                                                                        }
+                                                                        else{
+                                                                            $checked = 'no';
+                                                                        }
+                                                                    if($checked == 'yes'){ 
+                                                                    
+                                                                        
+                                                            ?>
+                                                                <input type="checkbox" id="members_name" name="members_name[]" value="<?php echo $row1['id']; ?>">
+                                                                <label for="members_name"><?php echo $row1['user_fullname']; ?> </label>
+                                                                
+                                                            <?php } } } ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-md-12">
@@ -215,7 +231,9 @@
                                 <?php
                                     if(isset($_POST['create_task'])){
 
-                                        $task_insert_query = "INSERT INTO `capms_project_task_info`(`task_id`, `task_name`, `task_status`, `priority`, `task_start_date`, `task_end_date`, `task_domain`, `task_type`, `trello_task_id`, `trello_task_link`, `task_desc`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['task_name']."', '1', '".$_POST['task_priority']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['task_domain']."', '".$_POST['task_type']."', '".$_POST['trello_taskid']."', '".$_POST['trello_link']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' )";
+                                        $temp_task_domain = implode(",", $_POST['domain_name'] );
+
+                                        $task_insert_query = "INSERT INTO `capms_project_task_info`(`task_id`, `task_name`, `task_status`, `priority`, `task_start_date`, `task_end_date`, `task_domain`, `task_type`, `trello_task_id`, `trello_task_link`, `task_desc`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['task_name']."', '1', '".$_POST['task_priority']."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$temp_task_domain."', '".$_POST['task_type']."', '".$_POST['trello_taskid']."', '".$_POST['trello_link']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."' )";
                                         $task_insert_result = mysqli_query($con, $task_insert_query);
                                         $last_task_id = $con->insert_id;
 
@@ -333,7 +351,7 @@
 
 <?php
                             
-    $query11 = "SELECT start_date, end_date FROM capms_project_info WHERE project_id = '".$_GET['project_id']."' " ;
+    $query11 = "SELECT * FROM capms_project_info WHERE project_id = '".$_GET['project_id']."' " ;
     $result11 = mysqli_query($con,$query11);
 
     if($result11->num_rows > 0){
@@ -363,6 +381,15 @@
                 alert("Can't select date before project start_date!!!");
                 $.datepicker._clearDate(this);
             }
+            else {
+                // end date checking
+                var edate = $('#end_date').val();
+                var edate = new Date(edate);
+                if(edate < selectedDate) {
+                    alert("Start date can't be greater than end date");
+                    $('#start_date').val('');
+                }
+            }
         }
     });
     $("#end_date").datepicker({
@@ -384,13 +411,24 @@
                 alert("Can't select date before project start_date!!!");
                 $.datepicker._clearDate(this);
             }
+            else {
+                var s_date = $("#start_date").val();
+                var st_date = new Date(s_date);
+                var e_date = new Date(edate);
+                if(e_date < st_date) {
+                    alert("End date can't be less than start date");
+                    $.datepicker._clearDate(this);
+                }
+            } 
         }
     });
 </script>
 
 <script>
     $(document).ready(function() {
-        $("#project_heading").append(" [duration : <?php echo $psdate.' to '.$pedate;?>]");
+        $("#project_heading").append("<?php echo $end['title']?> [duration : <?php echo $psdate.' to '.$pedate;?>]");
+        $('#start_date').datepicker('setDate', new Date('<?php echo $psdate;?>'));
+        $('#end_date').datepicker('setDate', new Date('<?php echo $pedate;?>'));
     });
 </script>
 

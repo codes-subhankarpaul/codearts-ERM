@@ -113,7 +113,7 @@ use LDAP\Result;
                                                         <option value="0" <?php if($row['priority'] == 0) { echo 'selected'; } ?> >None</option>
                                                     </select>
                                                 </div>
-
+                                            
                                                 <div class="col-md-6">
                                                     <label>Domain</label> 
                                                     <?php
@@ -148,11 +148,11 @@ use LDAP\Result;
                                                
                                                 <div class="col-md-6">
                                                     <label>Start Date</label> 
-                                                    <input type="date" class="form-control" name="start_date" value="<?php echo $row['start_date']; ?>">
+                                                    <input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo $row['start_date']; ?>">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>End Date</label> 
-                                                    <input type="date" class="form-control" name="end_date" value="<?php echo $row['end_date']; ?>">
+                                                    <input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo $row['end_date']; ?>">
                                                 </div>
                                                 
 
@@ -349,6 +349,26 @@ use LDAP\Result;
 }
 </style>
 
+<script>
+$('#start_date').on('input',function(e){
+    var e_date = $("#end_date").val();
+    var e_date = new Date(e_date);
+    var st_date = new Date($(this).val());
+    if(e_date < st_date) {
+        alert("End date can't be less than start date");
+        $('#end_date').val('');
+    }
+});
+$('#end_date').on('input',function(e){
+    var s_date = $("#start_date").val();
+    var st_date = new Date(s_date);
+    var e_date = new Date($(this).val());
+    if(e_date < st_date) {
+        alert("Start date can't be greater than end date");
+        $('#start_date').val('');
+    }
+});
+</script>
 
     </body>
 </html>

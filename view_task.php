@@ -119,21 +119,63 @@
                                         if($result1->num_rows > 0)
                                         {
                                             while($row1 = mysqli_fetch_assoc($result1)) {
-                                                $task_name_sql = "SELECT `task_name`,`task_number`,`task_status`,`task_start_date`,`task_end_date` FROM `capms_project_task_info` WHERE `task_id` = '".$row1['task_id']."'";
+                                                $task_name_sql = "SELECT * FROM `capms_project_task_info` WHERE `task_id` = '".$row1['task_id']."'";
                                                 $result2 = mysqli_query($con, $task_name_sql);
                                                 while($row2 = mysqli_fetch_assoc($result2)) {
+                                                        $task_type_sql = "SELECT * FROM `capms_project_tasktype_info` WHERE `task_type_id` = '".$row2['task_type']."'";
+                                                        $result3 = mysqli_query($con, $task_type_sql);
+                                                        while($row3 = mysqli_fetch_assoc($result3)) {
                                     ?>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="employee-profiles-thubmnail">
                                                             <div class="employee-content">
                                                                 <a href="edit_project_task.php?project_id=<?php echo $_REQUEST['project_id']; ?>&task_id=<?php echo $row1['task_id']?>"><?php echo $row2['task_name']; ?> (<?php echo $row2['task_number'];?>)</a>
-                                                                <h6>status : <?php echo $row2['task_status']; ?></h6>
+                                                                <h6>
+                                                                    status : <b><?php
+                                                                                switch($row2['task_status']) {
+                                                                                    case 0: echo "Finished"; break;
+                                                                                    case 1: echo "In Progress"; break;
+                                                                                    case 2: echo "Stand By"; break;
+                                                                                    case 3: echo "Closed"; break;
+                                                                                    default: echo "None";
+                                                                                }
+                                                                            ?></b>
+                                                                </h6>
                                                                 <h6>task_id : <?php echo $row1['task_id']; ?></h6>
+                                                                <h6>task_number : <?php echo $row2['task_number']; ?></h6>
+                                                                <h6>task_type : <?php echo $row3['task_type_name']; ?></h6>
                                                                 <h6>duration : <?php echo $row2['task_start_date']."  to  ".$row2['task_end_date']; ?></h6>
+                                                                <h6 class="p-3"><b>Task Memebers : </b></h6>
+                                                                <ul class="project-team-list">
+                                                                <?php 
+                                                                    $checked_members = '';
+                                                                    $sql_task_teams = "SELECT * FROM `capms_user_workload_info` WHERE `project_id` = '".$_REQUEST['project_id']."' AND `task_id` = '".$row1['task_id']."' AND status = 1";
+                                                                    $task_teams=mysqli_query($con,$sql_task_teams);
+                                                                    while ($row_teams=mysqli_fetch_array($task_teams)) {
+                                                                        // echo $row_teams['user_id'];
+                                                                        $sql_user_picture = "SELECT user_featured_image FROM `capms_admin_users` where id = '".$row_teams['user_id']."'";
+                                                                        $task_user_picture=mysqli_query($con,$sql_user_picture);
+                                                                        while ($row_user_picture=mysqli_fetch_array($task_user_picture)) {
+                                                                            // echo $row_user_picture['user_featured_image'];
+                                                                ?>
+                                                                            <li><img src="assets/uploads/user_featured_images/<?php
+                                                                                if(trim($row_user_picture['user_featured_image'])!='') {
+                                                                                    echo $row_user_picture['user_featured_image'];
+                                                                                }
+                                                                                else {
+                                                                                    echo "nopic.jpeg";
+                                                                                }
+                                                                            ?>" width="50px" alt=""></a></li>
+                                                                <?php
+                                                                        }
+                                                                    }         
+                                                                ?>
+                                                                </ul>
                                                             </div>
                                                         </div>
                                                     </div>
                                     <?php
+                                                    }
                                                 }
                                             }
                                         }
