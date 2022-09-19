@@ -102,11 +102,11 @@
                                                
                                                 <div class="col-md-6">
                                                     <label>Start Date</label> 
-                                                    <input type="date" class="form-control" name="start_date">
+                                                    <input type="date" id="start_date" class="form-control" name="start_date">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>End Date</label> 
-                                                    <input type="date" class="form-control" name="end_date">
+                                                    <input type="date" id="end_date" class="form-control" name="end_date">
                                                 </div>
                                                 
 
@@ -297,6 +297,26 @@
 }
 </style>
 
+<script>
+$('#start_date').on('input',function(e){
+    var e_date = $("#end_date").val();
+    var e_date = new Date(e_date);
+    var st_date = new Date($(this).val());
+    if(e_date < st_date) {
+        alert("End date can't be less than start date");
+        $('#end_date').val('');
+    }
+});
+$('#end_date').on('input',function(e){
+    var s_date = $("#start_date").val();
+    var st_date = new Date(s_date);
+    var e_date = new Date($(this).val());
+    if(e_date < st_date) {
+        alert("Start date can't be greater than end date");
+        $('#start_date').val('');
+    }
+});
+</script>
 
     </body>
 </html>
