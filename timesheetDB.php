@@ -1,9 +1,9 @@
 <?php
 require './database.php';
-$timesheet_date = $_REQUEST['dt'];
+$timesheet_date = date('m/d/Y', strtotime('now'));
 $start_time = $_REQUEST['start_time'];
 $end_time = $_REQUEST['end_time'];
-$task_domain = $_REQUEST['task_domain'];
+$task_domain = implode(",", $_REQUEST['domain_name'] );
 $task_type = $_REQUEST['task_type'];
 $description = $_REQUEST['description'];
 $trello_link = $_REQUEST['trello_link'];

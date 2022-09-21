@@ -154,21 +154,34 @@ if ($_SESSION['emp_id'] == '') {
 
                             date_default_timezone_set('UTC');
 
-                            $start_date = date('Y-m-01');;
+                            // $start_date = date('Y-m-01');
+                            $start_date = date('Y-m-25', strtotime(date('Y-m')." -1 month"));
                             $end_date = date('Y-m-t');
+
+                            // previous month saturday case
+                            $this_start_date = date('Y-m-01');
+
+                            $count_saturday = 0;
 
                             while (strtotime($start_date) <= strtotime($end_date)) {
                               $unfilled_sql = "SELECT * FROM `capms_user_timesheet` WHERE `timesheet_date` = '".date("m/d/Y",strtotime($start_date))."' and user_id = '" . $emp_id . "'";
                               $result_unfilled = mysqli_query($con, $unfilled_sql);
                               $rowcount=mysqli_num_rows($result_unfilled);
                               if($rowcount<1) {
+                                if(date('D', strtotime($start_date))=="Sat" && $start_date>$this_start_date) {
+                                  $count_saturday++;
+                                }
+                                if(date('D', strtotime($start_date))!="Sun") {
+                                  if(!(date('D', strtotime($start_date))=="Sat" && ($count_saturday==1 || $count_saturday==3))) {
                           ?>
 
-                            <option value="<?php echo date("m/d/Y",strtotime($start_date)); ?>"><?php echo date("m/d/Y",strtotime($start_date))." - ".date('D', strtotime($start_date)); ?></option>
+                            <option value="<?php echo date("m/d/Y",strtotime($start_date)); ?>"><?php echo date("m/d/Y",strtotime($start_date))." - ".date('D', strtotime($start_date));?></option>
 
                           <?php
+                                  }
                                 }
-                                $start_date = date ("Y-m-d", strtotime("+1 days", strtotime($start_date)));
+                              }
+                                $start_date = date("Y-m-d", strtotime("+1 days", strtotime($start_date)));
                               }
                           ?>
                         </select>  
@@ -235,29 +248,22 @@ if ($_SESSION['emp_id'] == '') {
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col">
-                        <div class="mb-3">
-                          <label for="dt">select date</label></br>
-                          <input id="dt" class="form-control" name="dt" placeholder=" choose date" autocomplete="off" value="<?php if(isset($_POST['unfilled_timesheet_select'])) {echo $_POST['unfilled_timesheet_select'];}?>" required/>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="mb-3">
-                          <label for="task_category">task_category</label>
-                          <select class="form-control" id="task_category" name="task_category" required>
-                            <option value="" selected>select task_category</option>
-                            <option value="1">Assigned Task</option>
-                            <option value="0">Unassigned Task</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
                         <div class="col">
                             <div class="mb-3">
                               <label>start time</label>
                               <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="start_time" value="10:30">
+                                <input type="text" class="form-control" name="start_time" value="<?php 
+                                  $sql_last_end_time = "SELECT * FROM `capms_user_timesheet` WHERE timesheet_date = '".date('m/d/Y', strtotime('now'))."' ORDER BY end_time DESC LIMIT 1";
+                                  $result_last_end_time = mysqli_query($con, $sql_last_end_time);
+                                  if (mysqli_num_rows($result_last_end_time) > 0){
+                                    while ($row_last_end_time = mysqli_fetch_array($result_last_end_time)) {
+                                      echo $row_last_end_time['end_time'];
+                                    }
+                                  }
+                                  else {
+                                    echo "10:30";
+                                  }
+                                ?>" required>
                                 <span class="input-group-addon">
                                     <span class="btn btn-outline-primary">select</span>
                                 </span>
@@ -268,7 +274,7 @@ if ($_SESSION['emp_id'] == '') {
                             <div class="mb-3">
                               <label>end time</label>
                               <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="end_time" value="7:30">
+                                <input type="text" class="form-control" name="end_time" value="19:30" required>
                                 <span class="input-group-addon">
                                   <span class="btn btn-outline-primary">select</span>
                                 </span>
@@ -279,10 +285,10 @@ if ($_SESSION['emp_id'] == '') {
                     <div class="row">
                       <div class="col">
                         <div class="mb-3">
-                          <label for="task_domain-dropdown" class="form-label">task_domain</label>
-                          <select class="form-control" id="task_domain-dropdown" name="task_domain" required>
-                            <option value="">select task_domain</option>
-                          </select>
+                          <div id="task_domain-dropdown">
+                            <label for="demo_task_domain" class="form-label">task_domain</label>
+                            <input type="text" class="form-control" placeholder="select task_name first" disabled>
+                          </div>
                         </div>
                       </div>
                       <div class="col">
@@ -393,13 +399,13 @@ if ($_SESSION['emp_id'] == '') {
                   $user_id = $_SESSION['emp_id'];
                   
                   if(isset($_POST['sdate']) && isset($_POST['edate'])) {
-                    // echo $_POST['sdate']." - ";
-                    // echo $_POST['edate'];
                     $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date` BETWEEN '".$_POST['sdate']."' AND '".$_POST['edate']."'";
                   }
                   else {
                     $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date`= '".$current_date."'";
                   }
+
+                  $duration = array();
 
                   $result = mysqli_query($con, $query);
                   if (mysqli_num_rows($result) > 0) {
@@ -419,16 +425,33 @@ if ($_SESSION['emp_id'] == '') {
                         $task_name = $row_from_workload['task_name'];
                       }
 
-                      // find task_domain name by task_domain id
-                      $task_domain_name_sql = "SELECT * FROM `capms_department_info` WHERE `dept_id` = '". $row['task_domain'] . "'";
+                      // find task_domain name by task_domain_id
+                      $task_domain_name_sql = "SELECT * FROM `capms_user_timesheet` WHERE `timesheet_id` = '".$row['timesheet_id']."'";
 
                       $result_task_domain_name = mysqli_query($con, $task_domain_name_sql);
 
                       while ($row_task_domain_name = mysqli_fetch_array($result_task_domain_name)) {
-                        $task_domain = $row_task_domain_name['dept_name'];
+                        $task_domain = $row_task_domain_name['task_domain'];
                       }
 
-                      // find task_domain name by task_domain id
+                      // for each task domain, find task_domain_name eg. frontend, backend, seo
+                      $task_domain_array = explode(',',$task_domain);
+                      $task_domain = '';
+                      foreach($task_domain_array as $td) {
+                        $sql_dept_select = "SELECT * FROM `capms_department_info` WHERE `dept_id` = '".$td."'";
+                        $result_dept_select = mysqli_query($con, $sql_dept_select);
+                        while($row_dept_select = mysqli_fetch_array($result_dept_select)) {
+                          if($task_domain=='') {
+                            $task_domain = $row_dept_select['dept_name'];
+                          }
+                          else {
+                            $task_domain .= ', '.$row_dept_select['dept_name'];
+                          }
+                        }
+                      }
+
+
+                      // find task_type by task_domain_id
                       $task_type_name_sql = "SELECT * FROM `capms_project_tasktype_info` WHERE `task_type_id` = '". $row['task_type'] . "'";
 
                       $result_task_type_name = mysqli_query($con, $task_type_name_sql);
@@ -436,11 +459,19 @@ if ($_SESSION['emp_id'] == '') {
                       while ($row_task_type_name = mysqli_fetch_array($result_task_type_name)) {
                         $task_type = $row_task_type_name['task_type_name'];
                       }
+              
+                      $diff = strtotime($row['end_time']) - strtotime($row['start_time']);
+                      $secs = $diff % 60;
+                      $hrs = $diff / 60;
+                      $mins = $hrs % 60;
+                      $hrs = $hrs / 60;
+                      $duration_one = sprintf('%0.2f', (float)((int)$hrs . "." . (int)$mins));
+                      array_push($duration,$duration_one);
 
                       echo "<td>" . $project_name . "</td>";
                       echo "<td>" . $task_name . "</td>";
-                      echo "<td>" . $task_domain . " - " . $task_type . "</td>";
-                      echo "<td>" . $row['start_time'] . "hrs - " . $row['end_time'] . "hrs" . "</td>";
+                      echo "<td>" . $task_domain . " => " . $task_type . "</td>";
+                      echo "<td>" . $row['start_time'] . "hrs - " . $row['end_time'] . "hrs" . " (".$duration_one.") "."</td>";
                       echo "<td><a href=".$row['trello_link'].">" . $row['trello_link'] ."</a></td>";
                       echo "<td>" . $row['description'] . "</td>";
                       $id = $row['timesheet_id'];
@@ -461,6 +492,28 @@ if ($_SESSION['emp_id'] == '') {
                   ?>
                 </tbody>
               </table>
+            </section>
+
+            <section class="total_time">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Total Time</h5>
+                  <p class="card-text"><?php
+                    print_r($duration);
+                    $total_hours = 0;
+                    $total_minutes = 0;
+                    foreach($duration as $du) {
+                      $du_array= explode('.',$du);
+                      $total_hours += (int)$du_array[0];
+                      $total_minutes += (int)$du_array[1];
+                    }
+                    $hours_add = (int)$total_minutes/60;
+                    $total_minutes = $total_minutes%60;
+                    $total_hours+=(int)$hours_add;
+                    echo '<br><h1>'.$total_hours.'.'.$total_minutes.' Hours</h1>';
+                  ?></p>
+                </div>
+              </div>
             </section>
           </div>
         </div>
@@ -600,7 +653,6 @@ if ($_SESSION['emp_id'] == '') {
   </script>
 
   <!-- TASK_ID FETCHED BASED ON PROJECT -->
-  <!-- TASK_DOMAIN FETCHED BASED ON TASK_ID -->
   <script>
     $(document).ready(function() {
       $('#project-dropdown').on('change', function() {
@@ -623,12 +675,12 @@ if ($_SESSION['emp_id'] == '') {
       });
       $('#task_id-dropdown').on('change', function() {
         var task_id = this.value;
-        console.log(task_id);
       });
     });
   </script>
 
   <!-- TASK NUMBER AND PROJECT NUMBER FETCHED ON WORKLOAD_ID -->
+  <!-- TASK_DOMAIN FETCHED BASED ON TASK_ID -->
   <script>
     $(document).ready(function() {
       $('#project-dropdown').on('change', function() {
@@ -664,16 +716,15 @@ if ($_SESSION['emp_id'] == '') {
             alert('problem in state');
           }
         });
-      });
-      $('#task_category').on('change', function() {
-        var task_category = this.value;
         var task_id = $('#task_id-dropdown').val();
+        var project_id = $('#project-dropdown').val();
+        console.log(project_id);
         $.ajax({
           url: "timesheet_task_domain_by_task_id.php",
           type: "POST",
           data: {
             task_id: task_id,
-            task_category: task_category
+            project_id: project_id
           },
           cache: false,
           success: function(result) {
@@ -687,8 +738,7 @@ if ($_SESSION['emp_id'] == '') {
           url: "timesheet_task_type_by_task_id.php",
           type: "POST",
           data: {
-            task_id: task_id,
-            task_category: task_category
+            task_id: task_id
           },
           cache: false,
           success: function(result) {
