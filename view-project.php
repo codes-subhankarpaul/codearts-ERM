@@ -95,7 +95,7 @@ use LDAP\Result;
 
                                                  <div class="col-md-6">
                                                     <label>Project Name</label> 
-                                                    <input type="text" class="form-control" placeholder="Name" name="project_name" value="<?php echo $row['title']; ?>">
+                                                    <input type="text" class="form-control" placeholder="Name" name="project_name" value="<?php echo $row['title']; ?>" required>
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -148,11 +148,11 @@ use LDAP\Result;
                                                
                                                 <div class="col-md-6">
                                                     <label>Start Date</label> 
-                                                    <input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo $row['start_date']; ?>">
+                                                    <input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo $row['start_date']; ?>" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>End Date</label> 
-                                                    <input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo $row['end_date']; ?>">
+                                                    <input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo $row['end_date']; ?>" required>
                                                 </div>
                                                 
 
@@ -236,6 +236,14 @@ use LDAP\Result;
                                 </form>
                                 <?php
                                     if(isset($_POST['update'])){
+                                        if(!(isset($_POST['domain_name'])) ){
+                                            echo "Domain name is not defined.Please set the domain name first.";
+                                            die();
+                                        }
+                                        if(!(isset($_POST['team_name']))){
+                                            echo "Team members are not defined.Please set the team first.";
+                                            die();
+                                        }
                                         $project_domain = $_POST['domain_name'];
                                         $temp_project_domain = implode(",", $project_domain );
 

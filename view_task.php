@@ -179,6 +179,9 @@
                                                 }
                                             }
                                         }
+                                        else{
+                                            echo "No task is created for this project";
+                                        }
                                     ?>
                                 </div>
                             </section>

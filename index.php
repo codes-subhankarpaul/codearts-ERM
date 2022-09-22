@@ -161,7 +161,7 @@
                                                                            $hrs = $diff / 60;
                                                                            $mins = $hrs % 60;
                                                                            $hrs = $hrs / 60;
-                                                                           $working_hours =  ((int)$hrs . "." . (int)$mins);
+                                                                           $working_hours = (float) ((int)$hrs . "." . (int)$mins);
                                                                       
                                                                            if(number_format($working_hours,2) >=7.40){
                                                                             $class = 'right';

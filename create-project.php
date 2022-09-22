@@ -69,7 +69,7 @@
 
                                                  <div class="col-md-6">
                                                     <label>Project Name</label> 
-                                                    <input type="text" class="form-control" placeholder="Name" name="project_name">
+                                                    <input type="text" class="form-control" placeholder="Name" name="project_name" required>
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -102,11 +102,11 @@
                                                
                                                 <div class="col-md-6">
                                                     <label>Start Date</label> 
-                                                    <input type="date" id="start_date" class="form-control" name="start_date">
+                                                    <input type="date" id="start_date" class="form-control" name="start_date" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>End Date</label> 
-                                                    <input type="date" id="end_date" class="form-control" name="end_date">
+                                                    <input type="date" id="end_date" class="form-control" name="end_date" required>
                                                 </div>
                                                 
 
@@ -166,6 +166,14 @@
                                         foreach ($temp_array as $w) {
                                             $acronym .= strtolower(mb_substr($w, 0, 1));
                                           }
+                                        if(!(isset($_POST['domain_name'])) ){
+                                            echo "Domain name is not defined.Please set the domain name first.";
+                                            die();
+                                        }
+                                        if(!(isset($_POST['team_name']))){
+                                            echo "Team members are not defined.Please set the team first.";
+                                            die();
+                                        }
                                         
                                         $project_domain = $_POST['domain_name'];
                                         $temp_project_domain = implode(",", $project_domain );
@@ -187,7 +195,7 @@
                                        //die();
                                        $update = "UPDATE `capms_project_info` SET `project_number`='".$project_name."' WHERE project_id = '".$last_project_id."' ";
                                        mysqli_query($con, $update); 
-                                    
+                                        
                                        $project_team = $_POST['team_name'];
                                        $team = implode(",", $project_team);
                                        
