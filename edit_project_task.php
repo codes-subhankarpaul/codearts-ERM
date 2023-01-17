@@ -82,7 +82,7 @@
                                                     ?>
                                                         <div class="col-md-6 mb-3">
                                                             <label>Task Name</label>
-                                                            <input type="text" class="form-control" placeholder=" Task Name" name="task_name" value="<?php echo $row['task_name']?>" <?php if($_SESSION['emp_type'] == "employee") echo "disabled";?>>
+                                                            <input type="text" class="form-control" placeholder=" Task Name" name="task_name" value="<?php echo $row['task_name']?>" <?php if($_SESSION['emp_type'] == "employee") echo "disabled";?> required>
                                                         </div>
 
                                                         <div class="col-md-6 mb-3">
@@ -159,11 +159,11 @@
 
                                                         <div class="col-md-6 mb-3">
                                                             <label>Start Date</label>
-                                                            <input type="text" class="form-control" id="start_date" name="start_date" value="<?php $task_start_date_select = $row['task_start_date']; echo $task_start_date_select;?>" autocomplete="off" <?php if($_SESSION['emp_type'] == "employee") echo "disabled";?>>
+                                                            <input type="text" class="form-control" id="start_date" name="start_date" value="<?php $task_start_date_select = $row['task_start_date']; echo $task_start_date_select;?>" autocomplete="off" <?php if($_SESSION['emp_type'] == "employee") echo "disabled";?> required>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label>End Date</label>
-                                                            <input type="text" class="form-control" id="end_date" name="end_date" value="<?php $task_end_date_select = $row['task_end_date']; echo $task_end_date_select;?>" autocomplete="off" <?php if($_SESSION['emp_type'] == "employee") echo "disabled";?>>
+                                                            <input type="text" class="form-control" id="end_date" name="end_date" value="<?php $task_end_date_select = $row['task_end_date']; echo $task_end_date_select;?>" autocomplete="off" <?php if($_SESSION['emp_type'] == "employee") echo "disabled";?> required>
                                                         </div>
 
                                                         <div class="col-md-6 mb-3">
@@ -294,6 +294,15 @@
 
                             <?php 
                                 if(isset($_POST['update_task'])) {
+
+                                    if(!(isset($_POST['domain_name'])) ){
+                                        echo "Domain name is not defined.Please set the domain name first.";
+                                        die();
+                                    }
+                                    if(!(isset($_POST['members_name']))){
+                                        echo "Team members are not defined.Please set the team first.";
+                                        die();
+                                    }
 
                                     $temp_task_domain = implode(",", $_POST['domain_name'] );
     

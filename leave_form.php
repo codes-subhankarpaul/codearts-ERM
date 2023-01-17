@@ -173,7 +173,7 @@
                                                                         <h6>Leave Start Date</h6>
                                                                     </div>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" id="leave_start_date" class="form-control" name="leave_start_date" />
+                                                                        <input type="text" id="leave_start_date" class="form-control" name="leave_start_date" autocomplete="off"/>
                                                                     </div>
                                                                 </div>
                                                                 <!-- Leave End Date -->
@@ -182,7 +182,7 @@
                                                                         <h6>Leave End Date</h6>
                                                                     </div>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" id="leave_end_date" class="form-control" name="leave_end_date" />
+                                                                        <input type="text" id="leave_end_date" class="form-control" name="leave_end_date" autocomplete="off"/>
                                                                     </div>
                                                                 </div>
                                                                 <!-- Leave Message -->
@@ -369,6 +369,12 @@
                                 jQuery("#confirm_leave_application").hide();
                                 jQuery("#submit_leave_application").show();
                                 jQuery("#leave_status_clarification_body").append(status_table);
+
+                                // check if total no of leave is 0
+                                if(jQuery("#total_leave_days").val()<1) {
+                                    jQuery("#total_leave_days").hide();
+                                }
+
                                 jQuery("#submit_leave_application").click(function(event) {
                                     event.preventDefault();
                                     jQuery.ajax({
@@ -389,6 +395,7 @@
                                         dataType: "json",
                                         success: function(response){
                                             console.log(response);
+                                            alert("Leave application submitted! Please wait for approval!");
                                         }
                                     });
                                 });

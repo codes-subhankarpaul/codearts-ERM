@@ -43,7 +43,54 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="em-pro-main-details">
-                                                <div class="media em-pro-main-media"> <img class="mr-3" src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt="Employee Image">
+                                                <div class="media em-pro-main-media"> 
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                                        <img class="mr-3" src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt="Employee Image">
+                                                    </button>
+
+                                                    <!-- Fullscreen Image Modal -->
+                                                    <div class="modal fade vw-100" id="fullimagemodal" tabindex="-1" role="dialog" aria-labelledby="fullimagemodal" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <!-- <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body vh-100">
+                                                            ...
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                        </div> -->
+                                                            <img class="mr-3 w-100" src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt="Employee Image">
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            ...
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#fullimagemodal">Save changes</button>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                                     <div class="media-body">
                                                         <h4><?php echo $row1['user_fullname']; ?></h4>
                                                         <?php if($row1['user_designation']) { ?>

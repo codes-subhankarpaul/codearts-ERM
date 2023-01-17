@@ -1,6 +1,6 @@
 <?php
 require './database.php';
-$timesheet_date = date('m/d/Y', strtotime('now'));
+$timesheet_date = $_REQUEST['dt'];
 $start_time = $_REQUEST['start_time'];
 $end_time = $_REQUEST['end_time'];
 $task_domain = implode(",", $_REQUEST['domain_name'] );

@@ -535,7 +535,8 @@ if ($_SESSION['emp_id'] == '') {
     $('.clockpicker').clockpicker({
         placement: 'top',
         align: 'left',
-        donetext: 'Done'
+        donetext: 'Done',
+        autoclose: true
     });
     </script>
 

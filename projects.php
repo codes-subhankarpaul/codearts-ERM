@@ -82,7 +82,7 @@
                                             $ret=mysqli_query($con,$sql_list);
                                         }
                                         else {
-                                            $sql_list = "SELECT COUNT(capms_user_workload_info.project_id), capms_user_workload_info.project_id, capms_project_info.title, capms_project_info.project_details, capms_project_info.end_date FROM capms_user_workload_info INNER JOIN capms_project_info on capms_user_workload_info.project_id=capms_project_info.project_id WHERE `user_id`=3 GROUP BY capms_user_workload_info.project_id order by capms_project_info.created_at DESC LIMIT $start_form,$num_per_page";
+                                            $sql_list = "SELECT COUNT(capms_user_workload_info.project_id), capms_user_workload_info.project_id, capms_project_info.title, capms_project_info.project_details, capms_project_info.end_date FROM capms_user_workload_info INNER JOIN capms_project_info on capms_user_workload_info.project_id=capms_project_info.project_id WHERE `user_id`='".$_SESSION['emp_id']."' GROUP BY capms_user_workload_info.project_id order by capms_project_info.created_at DESC LIMIT $start_form,$num_per_page";
                                             $ret=mysqli_query($con,$sql_list);
                                         }
                                     }
@@ -121,6 +121,7 @@
                                             //echo "<pre>";
                                             // print_r($row);
                                             $checked_members = '';
+                                            
                                             $ret_teams=mysqli_query($con,"SELECT * FROM `camps_project_assigned_user_info` WHERE `project_id` = ".$row['project_id'].";");
                                             while ($row_teams=mysqli_fetch_array($ret_teams)) {
 
@@ -179,26 +180,26 @@
 
                                             }
                                             $sql2 = "SELECT * FROM `capms_project_info`";
-                                          $rs_result = mysqli_query($con, $sql2);
-                                          $total_records = mysqli_num_rows($rs_result);
-                                          //echo $total_records;
-                                          $total_pages=ceil($total_records/$num_per_page);
-                                          //echo $total_pages;
-                                          if($page>1){
-                                             echo "<a href='projects.php?page=".($page-1)."' class='btn btn-danger'>Previous</a>";
-                                          }
+                                            $rs_result = mysqli_query($con, $sql2);
+                                            $total_records = mysqli_num_rows($rs_result);
+                                            //echo $total_records;
+                                            $total_pages=ceil($total_records/$num_per_page);
+                                            //echo $total_pages;
+                                            if($page>1){
+                                                echo "<a href='projects.php?page=".($page-1)."' class='btn btn-danger'>Previous</a>";
+                                            }
 
 
-                                          for($i=1;$i<=$total_pages;$i++)
-                                          {
-                                            echo "<a href='projects.php?page=".$i."' class='btn btn-primary'>".$i."</a>";
-                                          }
+                                            for($i=1;$i<=$total_pages;$i++)
+                                            {
+                                                echo "<a href='projects.php?page=".$i."' class='btn btn-primary'>".$i."</a>";
+                                            }
 
-                                          if($i>$page){
-                                             echo "<a href='projects.php?page=".($page+1)."' class='btn btn-danger'>Next</a>";
-                                          }
+                                            if($i>$page){
+                                                echo "<a href='projects.php?page=".($page+1)."' class='btn btn-danger'>Next</a>";
+                                            }
 
-                                          } else {?>
+                                            } else {?>
                                             <div>
                                                 <h3 style="text-align:center; color:red;" colspan="6">No Record Found</h3>
                                             </div>

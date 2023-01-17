@@ -12,8 +12,6 @@ if ($_SESSION['emp_id'] == '') {
 }
 ?>
 
-
-
 <body>
   <style>
     .block {
@@ -95,6 +93,15 @@ if ($_SESSION['emp_id'] == '') {
       overflow-x: auto;
       white-space: nowrap;
     }
+	.blink_me {
+		animation: blinker 1s linear infinite;
+	}
+
+	@keyframes blinker {
+		50% {
+			opacity: 0;
+		}
+	}
   </style>
 
   <header class="custom-header">
@@ -120,9 +127,10 @@ if ($_SESSION['emp_id'] == '') {
                 <li>Timesheet</li>
               </ul>
               <?php 
-                if($_SESSION['emp_type'] == "hr"){
+                if($_SESSION['emp_type'] == "hr" || $_SESSION['emp_type'] == "admin"){
                   include 'timesheet_all.php';
                 }
+                else {
               ?>
             </section>
 
@@ -137,6 +145,25 @@ if ($_SESSION['emp_id'] == '') {
               <button class="btn btn-danger" id="unfilled_timesheet_button">unfilled timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
 </svg></span></button>
+              <button class="btn btn-success" id="filled_timesheet_button">filled_timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+              </svg></span></button>
+              <button class="btn btn-dark" id="view_filled_timesheet_button">view filled timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+              </svg></span></button>
+            <?php
+              // if there is any grace time on that date and approved then add that grace time
+			        $temp_gracetime = '';
+              $sql_gracetime = "SELECT gracetime_taken FROM `capms_gracetime_info` WHERE `user_id`= '".$_SESSION['emp_id']."' and `gracetime_date` = '".date('m/d/Y')."' and `status` = '1';"; 
+              $result_gracetime = mysqli_query($con, $sql_gracetime);
+              while ($row_gracetime = mysqli_fetch_array($result_gracetime)) {
+				// echo $row_gracetime['gracetime_taken'];
+				echo '<span class="blink_me px-3 btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alarm-fill" viewBox="0 0 16 16">
+				<path d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5zm2.5 5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"/>
+			  </svg> '.$row_gracetime['gracetime_taken'].' minutes</span>';
+			  	$temp_gracetime = $row_gracetime['gracetime_taken'];
+              }
+            ?>
             </section>
 
             <section id="unfilled_timesheet" class="py-3 d-none">
@@ -163,7 +190,7 @@ if ($_SESSION['emp_id'] == '') {
 
                             $count_saturday = 0;
 
-                            while (strtotime($start_date) <= strtotime($end_date)) {
+                            while (strtotime($start_date) <= strtotime(date('Y-m-d', strtotime('now')))) {
                               $unfilled_sql = "SELECT * FROM `capms_user_timesheet` WHERE `timesheet_date` = '".date("m/d/Y",strtotime($start_date))."' and user_id = '" . $emp_id . "'";
                               $result_unfilled = mysqli_query($con, $unfilled_sql);
                               $rowcount=mysqli_num_rows($result_unfilled);
@@ -188,7 +215,122 @@ if ($_SESSION['emp_id'] == '') {
                       </div>
                       
                       <div class="col-md-2">
-                        <button type="submit" id="fill_unfilled_timesheet_button" class="btn btn-primary" disabled>fill timesheet</button>
+                        <button type="submit" id="fill_unfilled_timesheet_button" class="btn btn-danger" disabled>fill timesheet</button>
+                      </div>
+                    </div>
+                  </form> 
+                </div>
+              </div>
+            </section>
+
+            <section id="filled_timesheet" class="py-3 d-none">
+            <div class="row">
+                <div class="col">
+                  <label for="filled_timesheet_dropdown" class="form-label text-success">* please fill the unfilled timesheet of this month</label>
+                  <form action="" method="post">
+                    <div class="row">
+                      <div class="col-md-10">
+                        <select class="form-control" id="filled_timesheet_dropdown" name="filled_timesheet_select">
+                          <option value="">select unfilled timesheet</option>
+                          <?php
+                            require_once "database.php";
+                            $emp_id = $_SESSION['emp_id'];
+
+                            date_default_timezone_set('UTC');
+
+                            // $start_date = date('Y-m-01');
+                            $start_date = date('Y-m-25', strtotime(date('Y-m')." -1 month"));
+                            $end_date = date('Y-m-t');
+
+                            // previous month saturday case
+                            $this_start_date = date('Y-m-01');
+
+                            $count_saturday = 0;
+
+                            while (strtotime($start_date) <= strtotime(date('Y-m-d', strtotime('now')))) {
+                              $unfilled_sql = "SELECT * FROM `capms_user_timesheet` WHERE `timesheet_date` = '".date("m/d/Y",strtotime($start_date))."' and user_id = '" . $emp_id . "'";
+                              $result_unfilled = mysqli_query($con, $unfilled_sql);
+                              $rowcount=mysqli_num_rows($result_unfilled);
+                              if($rowcount>0) {
+                                if(date('D', strtotime($start_date))=="Sat" && $start_date>$this_start_date) {
+                                  $count_saturday++;
+                                }
+                                if(date('D', strtotime($start_date))!="Sun") {
+                                  if(!(date('D', strtotime($start_date))=="Sat" && ($count_saturday==1 || $count_saturday==3))) {
+                          ?>
+
+                            <option value="<?php echo date("m/d/Y",strtotime($start_date)); ?>"><?php echo date("m/d/Y",strtotime($start_date))." - ".date('D', strtotime($start_date));?></option>
+
+                          <?php
+                                  }
+                                }
+                              }
+                                $start_date = date("Y-m-d", strtotime("+1 days", strtotime($start_date)));
+                              }
+                          ?>
+                        </select>  
+                      </div>
+                      
+                      <div class="col-md-2">
+                        <button type="submit" id="fill_filled_timesheet_button" class="btn btn-success" disabled>fill timesheet</button>
+                      </div>
+                    </div>
+                  </form> 
+                </div>
+              </div>
+            </section>
+
+            <section id="view_filled_timesheet" class="py-3 d-none">
+              <div class="row">
+                <div class="col">
+                  <form action="" method="post">
+                    <div class="row">
+                      <div class="col-md-10">
+                        <ul>
+                          <?php
+                            require_once "database.php";
+                            $emp_id = $_SESSION['emp_id'];
+
+                            date_default_timezone_set('UTC');
+
+                            // $start_date = date('Y-m-01');
+                            $start_date = date('Y-m-25', strtotime(date('Y-m')." -1 month"));
+                            $end_date = date('Y-m-t');
+
+                            // previous month saturday case
+                            $this_start_date = date('Y-m-01');
+
+                            $count_saturday = 0;
+
+                            $filled_timesheet_count = 0;
+
+                            while (strtotime($start_date) <= strtotime(date('Y-m-d', strtotime('now')))) {
+                              $unfilled_sql = "SELECT * FROM `capms_user_timesheet` WHERE `timesheet_date` = '".date("m/d/Y",strtotime($start_date))."' and user_id = '" . $emp_id . "'";
+                              $result_unfilled = mysqli_query($con, $unfilled_sql);
+                              $rowcount=mysqli_num_rows($result_unfilled);
+                              if($rowcount>0) {
+                                if(date('D', strtotime($start_date))=="Sat" && $start_date>$this_start_date) {
+                                  $count_saturday++;
+                                }
+                                if(date('D', strtotime($start_date))!="Sun") {
+                                  if(!(date('D', strtotime($start_date))=="Sat" && ($count_saturday==1 || $count_saturday==3))) {
+                          ?>
+
+                            <li><a href="timesheet.php?selected_date=<?php echo date("m/d/Y",strtotime($start_date))?>"><?php echo date("m/d/Y",strtotime($start_date))." - ".date('D - M', strtotime($start_date));?></a></li>
+
+                          <?php
+                                  }
+                                }
+                                $filled_timesheet_count++;
+                              }
+                                $start_date = date("Y-m-d", strtotime("+1 days", strtotime($start_date)));
+                              }
+
+                              if($filled_timesheet_count==0) {
+                                echo '<span class="bg-danger p-1 text-light">No filled timesheet for this month!</span>';
+                              }
+                          ?>
+                        </ul> 
                       </div>
                     </div>
                   </form> 
@@ -203,6 +345,14 @@ if ($_SESSION['emp_id'] == '') {
                     <h5>* please fill the timesheet properly</h5> 
                   </div>
                   <div class="bg-light p-3 my-3 ">
+                    <div id="date_row" class="row d-none">
+                      <div class="col">
+                          <div class="mb-3">
+                              <label for="dt">Timesheet Date</label></br>
+                              <input id="dt" class="form-control" name="dt" placeholder="select date" value="<?php echo date('m/d/Y', strtotime('now'));?>" required />
+                          </div>
+                      </div>
+                    </div>
                     <div class="row">
                       <div class="col">
                         <div class="mb-3">
@@ -328,10 +478,20 @@ if ($_SESSION['emp_id'] == '') {
 
             <?php
               if(isset($_POST['unfilled_timesheet_select'])) {
-                // 1. open_add_timesheet, 2. set_date_filled_with_post_date
                 echo '<script>
-                  console.log("inside post - unfilled timesheet select");
                   $("#insert_timesheet").removeClass("d-none");
+                  $("#date_row").removeClass("d-none");
+                  $("#dt").val("'.$_POST['unfilled_timesheet_select'].'");
+                </script>';
+              }
+            ?>
+
+            <?php
+              if(isset($_POST['filled_timesheet_select'])) {
+                echo '<script>
+                  $("#insert_timesheet").removeClass("d-none");
+                  $("#date_row").removeClass("d-none");
+                  $("#dt").val("'.$_POST['filled_timesheet_select'].'");
                 </script>';
               }
             ?>
@@ -374,7 +534,6 @@ if ($_SESSION['emp_id'] == '') {
                   </div>
                 </div>
               </form>
-              
             </section>
 
             <section class="view-tasks">
@@ -401,11 +560,15 @@ if ($_SESSION['emp_id'] == '') {
                   if(isset($_POST['sdate']) && isset($_POST['edate'])) {
                     $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date` BETWEEN '".$_POST['sdate']."' AND '".$_POST['edate']."'";
                   }
+                  else if(isset($_GET['selected_date'])) {
+                    $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date`= '".$_GET['selected_date']."'";
+                  }
                   else {
                     $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date`= '".$current_date."'";
                   }
 
                   $duration = array();
+                  $task_number_array = array();
 
                   $result = mysqli_query($con, $query);
                   if (mysqli_num_rows($result) > 0) {
@@ -423,6 +586,7 @@ if ($_SESSION['emp_id'] == '') {
                       while ($row_from_workload = mysqli_fetch_array($result_from_workload)) {
                         $project_name = $row_from_workload['title'];
                         $task_name = $row_from_workload['task_name'];
+                        $task_number = $row_from_workload['task_number'];
                       }
 
                       // find task_domain name by task_domain_id
@@ -450,7 +614,6 @@ if ($_SESSION['emp_id'] == '') {
                         }
                       }
 
-
                       // find task_type by task_domain_id
                       $task_type_name_sql = "SELECT * FROM `capms_project_tasktype_info` WHERE `task_type_id` = '". $row['task_type'] . "'";
 
@@ -467,6 +630,7 @@ if ($_SESSION['emp_id'] == '') {
                       $hrs = $hrs / 60;
                       $duration_one = sprintf('%0.2f', (float)((int)$hrs . "." . (int)$mins));
                       array_push($duration,$duration_one);
+                      array_push($task_number_array,$task_number);
 
                       echo "<td>" . $project_name . "</td>";
                       echo "<td>" . $task_name . "</td>";
@@ -493,28 +657,84 @@ if ($_SESSION['emp_id'] == '') {
                 </tbody>
               </table>
             </section>
-
+              
             <section class="total_time">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Total Time</h5>
-                  <p class="card-text"><?php
-                    print_r($duration);
-                    $total_hours = 0;
-                    $total_minutes = 0;
-                    foreach($duration as $du) {
-                      $du_array= explode('.',$du);
-                      $total_hours += (int)$du_array[0];
-                      $total_minutes += (int)$du_array[1];
-                    }
-                    $hours_add = (int)$total_minutes/60;
-                    $total_minutes = $total_minutes%60;
-                    $total_hours+=(int)$hours_add;
-                    echo '<br><h1>'.$total_hours.'.'.$total_minutes.' Hours</h1>';
-                  ?></p>
+                  <h5 class="card-title">Time - <span class="text-danger">Task Number</span></h5>
+                  <p class="card-text">
+                    <?php
+                      $total_hours = 0;
+                      $total_minutes = 0;
+
+                      // if there is any gracetime add that to minutes
+                      if($temp_gracetime!='') {
+                        $exploded_gracetime= explode(':',$temp_gracetime);
+                        $total_minutes+=(int)$exploded_gracetime[1];
+                        echo '<h5>+'.$exploded_gracetime[0].'.'.$exploded_gracetime[1].' - <span class="px-1 text-danger">GRACE TIME APPLIED</span></h5> ';
+                      }
+
+                      // check if any breaks are there, add the break time difference in total_hours and total_minutes
+                      
+                      $user_id = $_SESSION['emp_id'];
+                      if(isset($_GET['selected_date'])) {
+                        $sql_break = "SELECT * FROM `capms_login_information` WHERE user_id='".$user_id."' and `login_date`= '".date('d-m-Y', strtotime($_GET['selected_date']))."'";
+                      }
+                      else {
+                        $sql_break = "SELECT * FROM `capms_login_information` WHERE user_id='".$user_id."' and `login_date`= '".date('d-m-Y', strtotime($current_date))."'";
+                      }
+                      $result_break = mysqli_query($con, $sql_break);
+                      if (mysqli_num_rows($result_break) > 0) {
+                        while ($row_break = mysqli_fetch_assoc($result_break)) {
+                          $lunch_start = $row_break['lunch_break_start'];
+                          $lunch_end = $row_break['lunch_break_end'];
+
+                          $from_time_lunch = strtotime($lunch_start); 
+                          $to_time_lunch = strtotime($lunch_end); 
+                          $diff_minutes_lunch = round(abs($from_time_lunch - $to_time_lunch) / 60,2);
+
+                          $evening_start = $row_break['evening_break_start'];
+                          $evening_end = $row_break['evening_break_end'];
+
+                          $from_time_evening = strtotime($evening_start); 
+                          $to_time_evening = strtotime($evening_end); 
+                          $diff_minutes_evening = round(abs($from_time_evening - $to_time_evening) / 60,2);
+                        }
+                      }
+
+                      // if lunch break then add
+                      if($diff_minutes_lunch!='') {
+                        $total_minutes+=(int)$diff_minutes_lunch;
+                        echo '<h5>+'.$diff_minutes_lunch.' - <span class="px-1 text-danger">lunch break</span></h5> ';
+                      }
+
+                      // if evening break then add
+                      if($diff_minutes_evening!='') {
+                        $total_minutes+=(int)$diff_minutes_evening;
+                        echo '<h5>+'.$diff_minutes_evening.' - <span class="px-1 text-danger">evening break</span></h5> ';
+                      }
+
+                      for($i=0; $i<count($duration); $i++) {
+                        $du_array= explode('.',$duration[$i]);
+                        $task_number_temp = $task_number_array[$i];
+                        if($task_number_temp=='') {
+                          $task_number_temp = 'Please assign a task number!';
+                        }
+                        echo '<h5>+'.$du_array[0].'.'.$du_array[1].' - <span class="px-1 text-danger">'.$task_number_temp.'</span></h5> ';
+                        $total_hours += (int)$du_array[0];
+                        $total_minutes += (int)$du_array[1];
+                      }
+                      
+                      $hours_add = (int)$total_minutes/60;
+                      $total_minutes = $total_minutes%60;
+                      $total_hours+=(int)$hours_add;
+                      echo '<hr><h1>Total - '.$total_hours.'.'.$total_minutes.' Hours</h1>';
+                    ?>
+                  </p>
                 </div>
               </div>
             </section>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -536,16 +756,16 @@ if ($_SESSION['emp_id'] == '') {
   <script src="assets/js/bootstrap-clockpicker.js"></script>
 
   <script>
-    $(function() {
-      var availableTeamMembers = <?php echo $names ?>;
-      $("#leaders").autocomplete({
-        source: availableTeamMembers
-      });
-      var availableTeams = ['Html-Css', 'Angular-Iocic', 'Development', 'Testing'];
-      $("#teams").autocomplete({
-        source: availableTeams
-      });
-    });
+    // $(function() {
+    //   var availableTeamMembers = <?php //echo $names ?>;
+    //   $("#leaders").autocomplete({
+    //     source: availableTeamMembers
+    //   });
+    //   var availableTeams = ['Html-Css', 'Angular-Iocic', 'Development', 'Testing'];
+    //   $("#teams").autocomplete({
+    //     source: availableTeams
+    //   });
+    // });
   </script>
 
   <script src="https://cdn.tiny.cloud/1/04z7u7156gqei101i37ypflfj99zptjgbodnyi91ni0bs5je/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -574,7 +794,7 @@ if ($_SESSION['emp_id'] == '') {
           $.datepicker._clearDate(this);
         } else {
           // console.log(currentDateObj.getMonth()+1);
-          if (fullDateObj.getMonth() < currentDateObj.getMonth()) {
+          if (fullDateObj < currentDateObj.getMonth()) {
             alert("Previous month's date not allowed!!!");
             $.datepicker._clearDate(this);
           }
@@ -593,7 +813,6 @@ if ($_SESSION['emp_id'] == '') {
         var startDate = fullStartDate.getDate() + "/" + twoDigitMonthStart + "/" + fullStartDate.getFullYear();
 
         if($('#edt').val()!='' && startDate!='') {
-          // enable submit button
           $('#filter_button').prop('disabled', false);
         }
       }
@@ -637,6 +856,12 @@ if ($_SESSION['emp_id'] == '') {
       $("#unfilled_timesheet_button").click(function() {
         $("#unfilled_timesheet").toggleClass("d-none");
       });
+      $("#filled_timesheet_button").click(function() {
+        $("#filled_timesheet").toggleClass("d-none");
+      });
+      $("#view_filled_timesheet_button").click(function() {
+        $("#view_filled_timesheet").toggleClass("d-none");
+      });
     });
   </script>
 
@@ -647,6 +872,12 @@ if ($_SESSION['emp_id'] == '') {
           var selectVal = this.value;
           if(selectVal!='') {
             $('#fill_unfilled_timesheet_button').prop('disabled', false);
+          }
+      });
+      $('#filled_timesheet_dropdown').on('change', function () {
+          var selectVal = this.value;
+          if(selectVal!='') {
+            $('#fill_filled_timesheet_button').prop('disabled', false);
           }
       });
     });
@@ -757,9 +988,12 @@ if ($_SESSION['emp_id'] == '') {
   $('.clockpicker').clockpicker({
       placement: 'top',
       align: 'left',
-      donetext: 'Done'
+      donetext: 'Done',
+      autoclose: true
   });
   </script>
+
+  
 
 </body>
 

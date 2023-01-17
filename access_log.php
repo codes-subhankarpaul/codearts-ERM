@@ -205,7 +205,8 @@ error_reporting(E_ALL ^ E_NOTICE);
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <script src="assets/js/jquery-min.js"></script>
+        <!-- <script src="assets/js/jquery-min.js"></script> -->
+        <!-- <script src="assets/js/jquery-ui.min.js"></script> -->
         <script>
             jQuery( document ).ready(function() {
                 /* lunch break time duration */
