@@ -16,11 +16,11 @@
                 onSelect: function(dateText, inst) {
                     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                     var date = $(this).val();
-                    console.log(date);
+                    //console.log(date);
                     var fullDate = new Date();
                     var twoDigitMonth = ((fullDate.getMonth().length + 1) === 1) ? (fullDate.getMonth() + 1) : '0' + (fullDate.getMonth() + 1);
                     var currentDate = twoDigitMonth + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
-                    console.log(currentDate);
+                    //console.log(currentDate);
                     var fullDateObj = new Date(date);
                     var currentDateObj = new Date();
                     if (fullDateObj < currentDateObj) {
@@ -50,7 +50,7 @@
                             var fullDate = new Date();
                             var twoDigitMonth = ((fullDate.getMonth().length + 1) === 1) ? (fullDate.getMonth() + 1) : '0' + (fullDate.getMonth() + 1);
                             var currentDate = twoDigitMonth + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
-                            console.log(currentDate);
+                            //console.log(currentDate);
                             var fullDateObj = new Date(e_date);
                             var currentDateObj = new Date();
                             if (fullDateObj < currentDateObj) {
@@ -74,7 +74,12 @@
             });
 
             function display(msg) {
-                $("#start_day").val(msg);
+                if($("#start_date").val() != ''){
+                    $("#start_day").val(msg);
+                }
+                else{
+                    $("#start_day").val('');
+                }
             }
         });
         $(function() {
@@ -87,9 +92,9 @@
                         $.datepicker._clearDate(this);
                     } else {
                         var date = $(this).val();
-                        console.log(date);
+                        //console.log(date);
                         var s_date = $("#start_date").val();
-                        console.log("This is start_date " + s_date);
+                        //console.log("This is start_date " + s_date);
                         var st_date = new Date(s_date);
                         var e_date = new Date(date);
                         if (e_date < st_date) {
@@ -99,7 +104,7 @@
                             var fullDate = new Date();
                             var twoDigitMonth = ((fullDate.getMonth().length + 1) === 1) ? (fullDate.getMonth() + 1) : '0' + (fullDate.getMonth() + 1);
                             var currentDate = twoDigitMonth + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
-                            console.log(currentDate);
+                            //console.log(currentDate);
                             var fullDateObj = new Date(date);
                             var currentDateObj = new Date();
                             if (fullDateObj < currentDateObj) {
@@ -126,7 +131,12 @@
             });
 
             function display(mess) {
-                $("#end_day").val(mess);
+                if($("#end_date").val() != ''){
+                    $("#end_day").val(mess);
+                }
+                else{
+                    $("#end_day").val('');
+                }
             }
         });
     </script>
@@ -285,6 +295,7 @@ $data = mysqli_fetch_assoc($query_run);
                                 <input type="text" id="remarks" name="edit_remarks" value='<?php echo $data["remarks"] ?>' class="form-control">
                             </div>
                             <input type="submit" value="Update" name="update" class="btn btn-primary">
+                            <input type="button" value="Cancel" onclick="history.back()" class="btn btn-primary">
                         </form>
                     </div>
                 </div>

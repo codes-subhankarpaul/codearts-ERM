@@ -134,7 +134,7 @@
         <script>
             function fetchdata(){
                 $.ajax({
-                    url: 'chat_get_new_msg_ajax.php',
+                    url: 'chat_get_new_group_msg_ajax.php',
                     type: 'post',
                     dataType: 'JSON',
                     data: {
@@ -146,21 +146,20 @@
                             console.log('no data!');
                         }
                         else{
-                            console.log(data[0]);
-                            var output_str = $("#output").html();
-                            var div_str = '';
-                            // if data is own user's then right side div
-                            
-                            if(data['user_id']==<?php echo $_SESSION['emp_id']?>) {
-                                console.log('own');
-                                div_str += '<div id="'+data[0]['message_id']+'" class="p-1 m-1" style="float:right; color:white; display:inline-block; background-color:#28aefc; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;"><p class="text-light">'+data[0]['message']+'</p></div>';
+                            for(var i = 0; i<data.length; i++){
+                                var output_str = $("#output").html();
+                                var div_str = '';
+                                // if data is own user's then right side div
+                                
+                                if(data[i]['user_id']== <?php echo $_SESSION['emp_id']?>) {
+                                    div_str += '<div id="message_'+data[i]['message_id']+'" class="p-1 m-1" style=" float:right; color:white; display:inline-block; border-color: transparent transparent #28aefc transparent; background-color:#28aefc; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;"><p class="text-light">'+data[i]['message']+'</p></div>';
+                                }
+                                else {
+                                    div_str += '<div id="message_'+data[i]['message_id']+'" class="p-1 m-1" style="float:left; display:inline-block; border-color: transparent transparent #bfd6f5 transparent; background-color:#bfd6f5; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;"><span class="text-dark" style="font-size:10px">'+data[i]['user_name']+'</span><p>'+data[i]['message']+'</p></div>';
+                                }
+                                output_str+=div_str;
+                                $("#output").html(output_str);
                             }
-                            else {
-                                console.log('d-own');
-                                div_str += '<div id="'+data[0]['message_id']+'" class="p-1 m-1" style="float:left; color:white; display:inline-block; background-color:#28aefc; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;"><p class="text-light">'+data[0]['message']+'</p></div>';
-                            }
-                            output_str+=div_str;
-                            $("#output").html(output_str);
                         }
                     },
                     complete:function(data){

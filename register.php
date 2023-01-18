@@ -70,6 +70,7 @@
                                             <span class="custom-input-icon">
                                                 <img src="assets/images/register-frm-icon-6.png">
                                             </span>
+                                             
                                         </div>
                                         <div class="col-md-12">
                                             <input type="submit" name="user_register" class="btn dp-reg-btn" value="Register Now">
@@ -95,35 +96,43 @@
                                                 echo "<p class='register-error text-danger'>This Email ID or Contact Number already exists. Either login or try some other Email ID or Contact Number.</p>";
                                             }
                                             else
-                                            {
+                                            {   
+                                                if(isset($_FILES['user_featured_image'])) {
+                                                    $errors     = "";
+                                                    if ($_FILES["user_featured_image"]["size"] > 500000) 
+                                                        echo "Sorry, your file is too large.";
+                                                    // echo $errors;
+                                                } 
+                                                else{
                                                 //$empid = strtolower(str_replace(" ", "-", $_POST['user_fullname']));
-                                                $empid = 'CODE-'.rand(1111,9999);
-                                                $sql2= "INSERT INTO `capms_admin_users` (`id`, `user_type`, `user_fullname`, `user_department`, `user_empid`, `user_email`, `user_contact`, `user_joining_date`, `user_featured_image`, `user_salary`, `user_password`, `user_designation`, `user_dob`, `user_address`, `user_gender`, `reports_to_uid`, `user_passport_number`, `user_adhar_number`, `user_voter_id`, `user_pan_number`, `user_nationality`, `user_religion`, `user_marital_status`, `user_employment_of_spouse`, `user_children_number`, `emergency_primary_name`, `emergency_primary_relation`, `emergency_primary_contact`, `emergency_secondary_name`, `emergency_secondary_relation`, `emergency_secondary_contact`, `user_bank_name`, `user_bank_ifsc_code`, `user_bank_account_no`, `created_at`, `updated_at`) VALUES (NULL, '', '".$_POST['user_fullname']."', '', '".$empid."', '".$_POST['user_email']."', '''".$_POST['user_contact']."', '".$_POST['user_joining_date']."', '', '".$_POST['user_salary']."', '".md5($_POST['user_password'])."', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
-                                              
-                                                mysqli_query($con, $sql2);
+                                                    $empid = 'CODE-'.rand(1111,9999);
+                                                    $sql2= "INSERT INTO `capms_admin_users` (`id`, `user_type`, `user_fullname`, `user_department`, `user_empid`, `user_email`, `user_contact`, `user_joining_date`, `user_featured_image`, `user_salary`, `user_password`, `user_designation`, `user_dob`, `user_address`, `user_gender`, `reports_to_uid`, `user_passport_number`, `user_adhar_number`, `user_voter_id`, `user_pan_number`, `user_nationality`, `user_religion`, `user_marital_status`, `user_employment_of_spouse`, `user_children_number`, `emergency_primary_name`, `emergency_primary_relation`, `emergency_primary_contact`, `emergency_secondary_name`, `emergency_secondary_relation`, `emergency_secondary_contact`, `user_bank_name`, `user_bank_ifsc_code`, `user_bank_account_no`, `created_at`, `updated_at`) VALUES (NULL, '', '".$_POST['user_fullname']."', '', '".$empid."', '".$_POST['user_email']."', '".$_POST['user_contact']."', '".$_POST['user_joining_date']."', '', '".$_POST['user_salary']."', '".md5($_POST['user_password'])."', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
                                                 
-                                                $last_id = $con->insert_id;
-                                                if($last_id)
-                                                {
-                                                    if(isset($_FILES['user_featured_image']['name']))
+                                                    mysqli_query($con, $sql2);
+                                                    
+                                                    $last_id = $con->insert_id;
+                                                    if($last_id)
                                                     {
-                                                        $tmpFilePath = $_FILES['user_featured_image']['tmp_name'];
-                                                        if($tmpFilePath != "")
+                                                        if(isset($_FILES['user_featured_image']['name']))
                                                         {
-                                                            $shortname = $_FILES['user_featured_image']['name'];
-                                                            $timestamp = strtotime('now').'-'.$_FILES['user_featured_image']['name'];
-                                                            $filename = $_FILES['user_featured_image']['name'];
-                                                            $filePath = "assets/uploads/user_featured_images/" .$timestamp;
-
-                                                            if(move_uploaded_file($tmpFilePath, $filePath))
+                                                            $tmpFilePath = $_FILES['user_featured_image']['tmp_name'];
+                                                            if($tmpFilePath != "")
                                                             {
-                                                                $sql3 = "UPDATE capms_admin_users SET user_featured_image = '".$timestamp."' WHERE id = '".$last_id."' ";
-                                                                mysqli_query($con, $sql3);
+                                                                $shortname = $_FILES['user_featured_image']['name'];
+                                                                $timestamp = strtotime('now').'-'.$_FILES['user_featured_image']['name'];
+                                                                $filename = $_FILES['user_featured_image']['name'];
+                                                                $filePath = "assets/uploads/user_featured_images/" .$timestamp;
+
+                                                                if(move_uploaded_file($tmpFilePath, $filePath))
+                                                                {
+                                                                    $sql3 = "UPDATE capms_admin_users SET user_featured_image = '".$timestamp."' WHERE id = '".$last_id."' ";
+                                                                    mysqli_query($con, $sql3);
+                                                                }
                                                             }
                                                         }
                                                     }
+                                                    echo "<script>location.href='".$baseURL."login.php';</script>";
                                                 }
-                                                echo "<script>location.href='".$baseURL."login.php';</script>";
                                             }
                                         }
                                         else

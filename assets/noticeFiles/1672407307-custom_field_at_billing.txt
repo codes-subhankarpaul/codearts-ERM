@@ -1,0 +1,148 @@
+//global array to reposition the elements to display as you want (e.g. kept 'title' before 'first_name' )
+$wdm_address_fields = array('country',
+'my_field', //new field
+'first_name',
+'last_name',
+//'company',
+'address_2',
+'address_1',
+'city',
+'state',
+'postcode');
+
+//global array only for extra fields
+// $wdm_ext_fields = array('my_field',
+// 'address_3',
+// 'address_4');
+
+add_filter( 'woocommerce_default_address_fields' , 'wdm_override_default_address_fields' );
+
+     function wdm_override_default_address_fields( $address_fields ){
+    
+     $temp_fields = array();
+
+     $address_fields['my_field'] = array(
+    'label'     => __('My Field', 'woocommerce'),
+    'class'     => array('form-row-wide'),
+    'type'  => 'text'
+     );
+     
+    // $address_fields['address_1']['placeholder'] = '';
+    // $address_fields['address_1']['label'] = __('Street', 'woocommerce');
+    
+    // $address_fields['address_2']['placeholder'] = '';
+    // $address_fields['address_2']['label'] = __('Building', 'woocommerce');
+    
+    // $address_fields['address_3'] = array(
+    // 'label' => __('House No / Name', 'woocommerce'),
+    // 'placeholder'=> '',
+    // 'required'   => true,
+    // 'class'      => array('form-row-wide', 'address-field'),
+    // 'type'  => 'text'
+    //  );
+      
+    // $address_fields['address_4'] = array(
+    // 'label' => __('Area', 'woocommerce'),
+    // 'placeholder'=> '',
+    // 'class'     => array('form-row-wide', 'address-field'),
+    // 'type'  => 'text'
+    //  );
+           
+    global $wdm_address_fields;
+
+    foreach($wdm_address_fields as $fky){       
+    $temp_fields[$fky] = $address_fields[$fky];
+    }
+    
+    $address_fields = $temp_fields;
+    
+    return $address_fields;
+}
+//    add_filter('woocommerce_formatted_address_replacements', 'wdm_formatted_address_replacements', 99, 2);
+
+//     function wdm_formatted_address_replacements( $address, $args ){
+
+//     $address['{name}'] = $args['my_field']." ".$args['first_name']." ".$args['last_name']; //show title along with name
+//     // $address['{address_1}'] = $args['address_1']."\r\n".$args['address_2']; //reposition to display as it should be
+//     // $address['{address_2}'] = $args['address_3']."\r\n".$args['address_4']; //reposition to display as it should be
+    
+//     return $address;
+// }
+
+add_filter( 'woocommerce_order_formatted_billing_address', 'wdm_update_formatted_billing_address', 99, 2);
+
+function wdm_update_formatted_billing_address( $address, $obj ){
+
+    global $wdm_address_fields;
+         
+    if(is_array($wdm_address_fields)){
+        
+        foreach($wdm_address_fields as $waf){
+            $address[$waf] = $obj->{'billing_'.$waf};
+        }
+    }
+         
+    return $address;    
+}
+
+add_filter( 'woocommerce_order_formatted_shipping_address', 'wdm_update_formatted_shipping_address', 99, 2);
+
+function wdm_update_formatted_shipping_address( $address, $obj ){
+
+    global $wdm_address_fields;
+         
+    if(is_array($wdm_address_fields)){
+        
+        foreach($wdm_address_fields as $waf){
+            $address[$waf] = $obj->{'shipping_'.$waf};
+        }
+    }   
+    
+    return $address;    
+}
+?>
+<?php
+add_filter('woocommerce_my_account_my_address_formatted_address', 'wdm_my_account_address_formatted_address', 99, 3);
+
+function wdm_my_account_address_formatted_address( $address, $customer_id, $name ){
+    
+    global $wdm_address_fields;
+    
+    if(is_array($wdm_address_fields)){
+        
+        foreach($wdm_address_fields as $waf){
+            $address[$waf] = get_user_meta( $customer_id, $name.'_'.$waf, true );
+        }
+    }
+    
+    return $address;
+}
+?>
+<?php
+add_filter('woocommerce_admin_billing_fields', 'wdm_add_extra_customer_field');
+add_filter('woocommerce_admin_shipping_fields', 'wdm_add_extra_customer_field');
+
+function wdm_add_extra_customer_field( $fields ){
+    
+    //take back up of email and phone fields as they will be lost after repositioning
+    $email = $fields['email']; 
+    $phone = $fields['phone'];
+
+    $fields = wdm_override_default_address_fields( $fields );
+    
+    //reassign email and phone fields
+    $fields['email'] = $email;
+    $fields['phone'] = $phone;
+    
+    global $wdm_ext_fields;
+    
+    if(is_array($wdm_ext_fields)){
+        
+        foreach($wdm_ext_fields as $wef){
+            $fields[$wef]['show'] = false; //hide the way they are display by default as we have now merged them within the address field
+        }
+    }
+    
+    return $fields;
+}
+?>

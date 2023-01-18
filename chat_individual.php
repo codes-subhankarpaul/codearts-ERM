@@ -51,7 +51,7 @@
                                     <li>Edit</li>
                                 </ul>
                             </section>
-                            <div class="output" id="conversation" style="height: 20rem; overflow-y: scroll;">
+                            <div class="output" id="output" style="height: 20rem; overflow-y: scroll;">
                                 <?php 
                                     $r_u_id = $_GET['reciever_user_id'];
                                     $sql = "SELECT * FROM `capms_personal_chat` WHERE (to_user_id='".$r_u_id."' AND from_user_id='".$_SESSION['emp_id']."') OR (to_user_id='".$_SESSION['emp_id']."' AND from_user_id='".$r_u_id."') ORDER BY created_at;";
@@ -62,8 +62,8 @@
                                             $id_array[]=$row['chat_message_id'];
                                             $message_id = $row['chat_message_id'];
                                             if($row['from_user_id'] === $_SESSION['emp_id']){
-                                                echo '<p id="message_'.$message_id.'" class="p-1 m-1" style="float:right; color:white; display:inline-block; border-color: transparent
-                                                transparent #28aefc transparent; background-color:#28aefc; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;">'.$row['chat_message'].'</p><br/><br/>';
+                                                echo '<div id="message_'.$message_id.'" class="p-1 m-1" style="float:right; color:white; display:inline-block; border-color: transparent
+                                                transparent #28aefc transparent; background-color:#28aefc; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;"><p class="text-light">'.$row['chat_message'].'</p></div><br/><br/>';
                                             ?>
                                                 <div id="message_<?php echo $message_id;?>_time" style="display:none;" class="p-1 m-1 h3">
                                                     <span style="color:black;float:right;
@@ -74,8 +74,8 @@
                                             <?php
                                             }
                                             else{
-                                                echo '<p id="message_'.$message_id.'" class="p-1 m-1" style="float:left; display:inline-block; border-color: transparent
-                                                transparent #bfd6f5 transparent; background-color:#bfd6f5; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;">'.$row['chat_message'].'</p><br/><br/>';
+                                                echo '<div id="message_'.$message_id.'" class="p-1 m-1" style="float:left; display:inline-block; border-color: transparent
+                                                transparent #bfd6f5 transparent; background-color:#bfd6f5; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;"><p>'.$row['chat_message'].'</p></div><br/><br/>';
                                             ?>
                                                 <div id="message_<?php echo $message_id;?>_time" style="display:none;" class="p-1 m-1 h3">
                                                     <span style="color:black; float:left;
@@ -119,12 +119,8 @@
                         type: "POST",
                         url: "chat_send_individual.php",
                         data: {msg: m, to_user_id:<?php echo $_GET['reciever_user_id']?>},
-                        dataType: 'json',
-                        success: function (response) {
-                            $.each(response, function(i, item) {
-                                $('p').append(item.chat_message);
-                                $('span').append(item.created_at);
-                            });
+                        success: function () {
+                            $("#msg").val("");
                         }
                     });
                 });
@@ -137,6 +133,50 @@
                     $('#message_<?php echo $id_array[$i];?>_time').toggle();
                 });
                 <?php }?>
+            });
+        </script>
+
+        <!-- SENDING LAST MESSAGE ID AND ADDING NEW CHAT VIA AJAX -->
+        <script>
+            function fetchdata(){
+                $.ajax({
+                    url: 'chat_get_new_individual_msg_ajax.php',
+                    type: 'post',
+                    dataType: 'JSON',
+                    data: {
+                        last_message_id: $("#output div").last().attr('id').split("_")[1],
+                        to_user_id:<?php echo $_GET['reciever_user_id']?>
+                    },
+                    success: function(data){
+                    
+                        if(data.length==0){
+                            console.log('no data!');
+                        }
+                        else{
+                            for(var i = 0; i<data.length; i++){
+                                var output_str = $("#output").html();
+                                var div_str = '';
+                                // if data is own user's then right side div
+                                
+                                if(data[i]['from_user_id']== <?php echo $_SESSION['emp_id']?>) {
+                                    div_str += '<div id="message_'+data[i]['chat_message_id']+'" class="p-1 m-1" style="float:right; color:white; display:inline-block; border-color: transparent transparent #28aefc transparent; background-color:#28aefc; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;"><p class="text-light">'+data[i]['chat_message']+'</p></div>';
+                                }
+                                else {
+                                    div_str += '<div id="message_'+data[i]['chat_message_id']+'" class="p-1 m-1" style="float:left; display:inline-block; border-color: transparent transparent #bfd6f5 transparent; background-color:#bfd6f5; border-radius:5px; border-style: solid; border-width: 0 8px 8px 8px; margin-right:20px; clear:both;"><p>'+data[i]['chat_message']+'</p></div>';
+                                }
+                                output_str+=div_str;
+                                $("#output").html(output_str);
+                            }
+                        }
+                    },
+                    complete:function(data){
+                        setTimeout(fetchdata,5000);
+                    }
+                });
+            }
+
+            $(document).ready(function(){
+                setTimeout(fetchdata,5000);
             });
         </script>
     </body>

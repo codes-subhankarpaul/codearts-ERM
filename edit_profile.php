@@ -76,7 +76,7 @@
                                                     <div class="form-group col-md-12">
                                                         <label>Featured Image</label>
                                                         <span class="featured-img-wrap">
-                                                            <img src="<?php if($row1['user_featured_image'] != '') { echo 'assets/uploads/user_featured_images/'.$row1['user_featured_image']; }?>" title="<?php if($row1['user_fullname'] != '') { echo $row1['user_fullname']; }?>" alt="<?php if($row1['user_fullname'] != '') { echo $row1['user_fullname']; }?>" class="user-featured-img">
+                                                            <img src="<?php if($row1['user_featured_image'] != '') { echo 'assets/uploads/user_featured_images/'.$row1['user_featured_image']; }?>" title="<?php if($row1['user_fullname'] != '') { echo $row1['user_fullname']; }?>" alt="<?php if($row1['user_fullname'] != '') { echo $row1['user_fullname']; }?>" class="user-featured-img" width=150 height=180>
                                                         </span>
                                                         <input type="file" class="form-control" name="user_featured_image" id="user_featured_image">
                                                     </div>
@@ -140,20 +140,28 @@
                                         $sql1 = "UPDATE capms_admin_users SET user_fullname = '".$_POST['user_fullname']."', user_email = '".$_POST['user_email']."', user_contact = '".$_POST['user_contact']."', updated_at = '".date('Y-m-d h:i:s', strtotime('now'))."' WHERE id = '".$_SESSION['emp_id']."' ";
                                         $result1 = mysqli_query($con, $sql1);
 
-                                        if(isset($_FILES['user_featured_image']['name']))
-                                        {
-                                            $tmpFilePath = $_FILES['user_featured_image']['tmp_name'];
-                                            if($tmpFilePath != "")
+                                        if(isset($_FILES['user_featured_image'])) {
+                                            $errors     = "";
+                                            if ($_FILES["user_featured_image"]["size"] > 500000) 
+                                                echo "Sorry, your file is too large.";
+                                            // echo $errors;
+                                        }
+                                        else{
+                                            if(isset($_FILES['user_featured_image']['name']))
                                             {
-                                                $shortname = $_FILES['user_featured_image']['name'];
-                                                $timestamp = strtotime('now').'-'.$_FILES['user_featured_image']['name'];
-                                                $filename = $_FILES['user_featured_image']['name'];
-                                                $filePath = "assets/uploads/user_featured_images/" .$timestamp;
-
-                                                if(move_uploaded_file($tmpFilePath, $filePath))
+                                                $tmpFilePath = $_FILES['user_featured_image']['tmp_name'];
+                                                if($tmpFilePath != "")
                                                 {
-                                                    $sql3 = "UPDATE capms_admin_users SET user_featured_image = '".$timestamp."' WHERE id = '".$_SESSION['emp_id']."' ";
-                                                    mysqli_query($con, $sql3);
+                                                    $shortname = $_FILES['user_featured_image']['name'];
+                                                    $timestamp = strtotime('now').'-'.$_FILES['user_featured_image']['name'];
+                                                    $filename = $_FILES['user_featured_image']['name'];
+                                                    $filePath = "assets/uploads/user_featured_images/" .$timestamp;
+
+                                                    if(move_uploaded_file($tmpFilePath, $filePath))
+                                                    {
+                                                        $sql3 = "UPDATE capms_admin_users SET user_featured_image = '".$timestamp."' WHERE id = '".$_SESSION['emp_id']."' ";
+                                                        mysqli_query($con, $sql3);
+                                                    }
                                                 }
                                             }
                                         }
