@@ -136,21 +136,27 @@ if ($_SESSION['emp_id'] == '') {
 
             <section class="py-3 mb-3">
               <button class="btn btn-primary" id="add_timesheet">add timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
-  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-</svg></span></button>
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+              </svg></span></button>
               <button class="btn btn-warning" id="timesheet_filter">timesheet filter toggle <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
-  <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-</svg></span></button>
-              <button class="btn btn-danger" id="unfilled_timesheet_button">unfilled timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-</svg></span></button>
-              <button class="btn btn-success" id="filled_timesheet_button">filled_timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
               </svg></span></button>
-              <button class="btn btn-dark" id="view_filled_timesheet_button">view filled timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+              <button class="btn btn-danger" id="unfilled_timesheet_button">unfilled timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-fill" viewBox="0 0 16 16">
+                <path d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"/>
               </svg></span></button>
+              <button class="btn btn-success" id="filled_timesheet_button">filled_timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play-fill" viewBox="0 0 16 16">
+                <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm6.258-6.437a.5.5 0 0 1 .507.013l4 2.5a.5.5 0 0 1 0 .848l-4 2.5A.5.5 0 0 1 6 12V7a.5.5 0 0 1 .258-.437z"/>
+              </svg></span></button>
+              <button class="btn btn-dark" id="view_filled_timesheet_button">view filled timesheet <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-database-fill" viewBox="0 0 16 16">
+                <path d="M3.904 1.777C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4s-.875 1.755-1.904 2.223C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777C2.875 5.755 2 5.007 2 4s.875-1.755 1.904-2.223Z"/>
+                <path d="M2 6.161V7c0 1.007.875 1.755 1.904 2.223C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777C13.125 8.755 14 8.007 14 7v-.839c-.457.432-1.004.751-1.49.972C11.278 7.693 9.682 8 8 8s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972Z"/>
+                <path d="M2 9.161V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13s3.022-.289 4.096-.777C13.125 11.755 14 11.007 14 10v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972Z"/>
+                <path d="M2 12.161V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972Z"/>
+              </svg></span></button>
+              <button class="btn btn-dark" id="accordion_button">filter timesheet <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
+              </svg></button>
             <?php
               // if there is any grace time on that date and approved then add that grace time
 			        $temp_gracetime = '';
@@ -336,6 +342,30 @@ if ($_SESSION['emp_id'] == '') {
                   </form> 
                 </div>
               </div>
+            </section>
+
+            <section id="timesheet_accordion" class="py-3 d-none">
+              <?php
+                // get years of employee
+                $sql_timesheet_year = "SELECT DISTINCT SUBSTRING_INDEX(timesheet_date,'/',-1) AS timesheet_year from `capms_user_timesheet` where user_id='".$_SESSION['emp_id']."' order by timesheet_year desc;";
+                $timesheet_year = '';
+                $timesheet_year_array = array();
+                $result_timesheet_year = mysqli_query($con,$sql_timesheet_year);
+                if($result_timesheet_year->num_rows>0) {
+                  while($row_timesheet_year = mysqli_fetch_assoc($result_timesheet_year)) {
+                    $timesheet_year = $row_timesheet_year['timesheet_year'];
+              ?>
+            
+              <h3 id="timesheet_<?php echo $timesheet_year?>_title"><?php echo $timesheet_year?></h3>
+              <div>
+                <p id="timesheet_<?php echo $timesheet_year?>_content">This is a demo description!</p>
+              </div>
+                  
+              <?php
+                  array_push($timesheet_year_array,$timesheet_year);
+                }} 
+                // print_r($timesheet_year_array);
+              ?>
             </section>
 
             <section id="insert_timesheet" class="insert_timesheet d-none border shadow mb-3 bg-light">
@@ -557,11 +587,25 @@ if ($_SESSION['emp_id'] == '') {
                   include 'database.php';
                   $user_id = $_SESSION['emp_id'];
                   
+                  // if(isset($_POST['sdate']) && isset($_POST['edate'])) {
+                  //   $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date` BETWEEN '".$_POST['sdate']."' AND '".$_POST['edate']."'";
+                  // }
+                  // else if(isset($_GET['selected_date'])) {
+                  //   $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date`= '".$_GET['selected_date']."'";
+                  // }
+                  // else {
+                  //   $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date`= '".$current_date."'";
+                  // }
+
                   if(isset($_POST['sdate']) && isset($_POST['edate'])) {
                     $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date` BETWEEN '".$_POST['sdate']."' AND '".$_POST['edate']."'";
                   }
                   else if(isset($_GET['selected_date'])) {
                     $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date`= '".$_GET['selected_date']."'";
+                  }
+                  else if(isset($_GET['timesheet_year_send']) && isset($_GET['timesheet_month_send']) && isset($_GET['timesheet_day_send'])) {
+                    $selected_date_send = ''.$_GET['timesheet_month_send'].'/'.$_GET['timesheet_day_send'].'/'.$_GET['timesheet_year_send'].'';
+                    $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date`= '".$selected_date_send."'";
                   }
                   else {
                     $query = "SELECT * FROM `capms_user_timesheet` WHERE `user_id` = '" . $user_id . "' and `timesheet_date`= '".$current_date."'";
@@ -862,6 +906,9 @@ if ($_SESSION['emp_id'] == '') {
       $("#view_filled_timesheet_button").click(function() {
         $("#view_filled_timesheet").toggleClass("d-none");
       });
+      $("#accordion_button").click(function() {
+        $("#timesheet_accordion").toggleClass("d-none");
+      });
     });
   </script>
 
@@ -983,6 +1030,98 @@ if ($_SESSION['emp_id'] == '') {
     });
   </script>
 
+  <!-- jquery for nested data fetch -->
+  <?php if(isset($timesheet_year_array)) { foreach($timesheet_year_array as $timesheet_year) {?>
+  <script>
+    $(document).ready(function() {
+      $('#timesheet_<?php echo $timesheet_year?>_title').on('click', function() {
+        // console.log($(this).text());
+        var timesheet_year_js = $(this).text();
+        $.ajax({
+          url: "timesheet_months_by_year_ajax.php",
+          type: "POST",
+          dataType: "JSON",
+          data: {
+            timesheet_year: timesheet_year_js,
+            user_id: <?php echo $_SESSION['emp_id']?>
+          },
+          cache: false,
+          success: function(result) {
+            // console.log(result);
+            var len = result.length;
+            var ul_str = "<ul>";
+            for(let i=0; i<len; i++) {
+              var id = result[i].id;
+              var value = result[i].value;
+              var month_value = result[i].month_value;
+              const p_string = '<p id="'+timesheet_year_js+'_content"'+'></p>';
+              // console.log(p_string);
+              if(i===len-1) {
+                ul_str += "<li id='"+id+"'>"+month_value+"-"+value+p_string+"</li>";
+              }
+              else {
+                ul_str += "<li id='"+id+"'>"+month_value+"-"+value+"</li>";
+              }
+            }
+            ul_str += "</ul>";
+            
+            $("#timesheet_<?php echo $timesheet_year?>_content").html(ul_str);
+
+            for(let i=0; i<len; i++) {
+              var inner_id = result[i].id;
+              $('#'+inner_id).on('click',function(){
+                var clicked_inner_id = result[i].id;
+                var timesheet_month_js = result[i].value;
+                // console.log("timesheet_month : "+timesheet_month_js);
+                console.log(clicked_inner_id);
+                $.ajax({
+                  url: "timesheet_days_by_month_ajax.php",
+                  type: "POST",
+                  dataType: "JSON",
+                  data: {
+                    timesheet_year: timesheet_year_js,
+                    timesheet_month: timesheet_month_js,
+                    user_id: <?php echo $_SESSION['emp_id']?>
+                  },
+                  cache: false,
+                  success: function(result) {
+                    // console.log(result);
+                    const day_length = result.length;
+                    // <div class="row">
+                    //   <div class="col-sm">
+                    //     One of three columns
+                    //   </div>
+                    // </div>
+                    var ul_str = "<div class='row py-3'>";
+                    for(let j=0; j<day_length; j++) {
+                      var day_value = result[j].value;
+                      // console.log(day_value);
+                      day_value_id = clicked_inner_id+'_'+day_value;
+                      console.log(day_value_id);
+                      ul_str += "<div class='col-sm'><a href='timesheet.php?user_id=<?php echo $_SESSION['emp_id']?>&timesheet_year_send="+timesheet_year_js+"&timesheet_month_send="+timesheet_month_js+"&timesheet_day_send="+day_value+"' class='btn btn-dark text-light w-100' id='"+day_value_id+"'>"+day_value+"</a></div>";
+                      // <button type="button" class="btn btn-primary btn-sm rounded">Small</button>
+                    }
+                    ul_str += "</div>";
+                    const ul_heading = "<hr><h6 class='fw-bolder'>Month - "+timesheet_month_js+"</h6>";
+                    const ul_final = ul_heading+ul_str;
+                    $("#"+timesheet_year_js+'_content').html(ul_final);
+                  },
+                  error: function() {
+                    alert('problem in state');
+                  }
+                });
+              });
+            }
+          },
+          error: function() {
+            alert('problem in state');
+          }
+        });
+      });
+    });
+  </script>
+  <?php }}?>
+
   <!-- CLOCK WIDGETS -->
   <script type="text/javascript">
   $('.clockpicker').clockpicker({
@@ -993,7 +1132,16 @@ if ($_SESSION['emp_id'] == '') {
   });
   </script>
 
-  
+  <!-- JQUERY UI ACCORDION -->
+  <script>
+  $( function() {
+    $( "#timesheet_accordion" ).accordion({
+      collapsible: true,
+      heightStyle: "content",
+      active: false
+    });
+  });
+  </script>
 
 </body>
 

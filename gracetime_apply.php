@@ -1,7 +1,7 @@
 <?php 
 session_start();
 if ($_SESSION['emp_type'] != "employee") { 
-    echo "<script>location.href='".$baseURL."gracetime.php';</script>";
+    // echo "<script>location.href='gracetime.php';</script>";
 }
 else{
 ?>

@@ -46,12 +46,12 @@
                                                 <img src="assets/images/register-frm-icon-7.png">
                                             </span>
                                         </div>
-                                        <div class="form-group col-lg-12 col-md-12">
+                                        <!-- <div class="form-group col-lg-12 col-md-12">
                                             <input type="text" class="form-control" placeholder="Initial Salary" name="user_salary">
                                             <span class="custom-input-icon">
                                                 <img src="assets/images/register-frm-icon-4.png">
                                             </span>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group col-lg-12 col-md-12">
                                             <input type="password" class="form-control" placeholder="Password" name="user_password" required>
                                             <span class="custom-input-icon">
@@ -64,14 +64,14 @@
                                                 <img src="assets/images/register-frm-icon-5.png">
                                             </span>
                                         </div>
-                                        <div class="form-group col-lg-12 col-md-12">
+                                        <!-- <div class="form-group col-lg-12 col-md-12">
                                             <input class="form-control" id="file-img" type="file" placeholder="Password" name="user_featured_image" required>
                                             <label for="file-img">Upload Image</label>
                                             <span class="custom-input-icon">
                                                 <img src="assets/images/register-frm-icon-6.png">
                                             </span>
                                              
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-12">
                                             <input type="submit" name="user_register" class="btn dp-reg-btn" value="Register Now">
                                             <button type="reset" class="btn dp-reset-btn">

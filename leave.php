@@ -33,10 +33,11 @@
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li>Leaves</li>
                                 </ul>
-                                
+                                <?php if($_SESSION['emp_type'] == 'employee' || $_SESSION['emp_type'] == '' ) { ?>
                                 <a class="add-employee-btn" href="leave_form.php">
                                     <span class="add-icon">+</span> Add Leave
                                 </a>
+                                <?php } ?>
                             </section>
                             <?php if($_SESSION['emp_type'] == 'hr' || $_SESSION['emp_type'] == 'admin' ||$_SESSION['emp_type'] == 'project_lead' ) { ?>
                                 <section class="employee-profiles">
@@ -58,14 +59,14 @@
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item"
                                                                             href="javascript:void(0)"><?php echo ucwords($row1['user_type']); ?></a>
-                                                                        <a class="dropdown-item" href="employee_access_log.php?user_id=<?php echo $row1['id']; ?>">Access Log</a>
+                                                                        <a class="dropdown-item" href="employee_leave_view.php?user_id=<?php echo $row1['id']; ?>">Access Log</a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="employee-image">
-                                                                    <a href="employee_access_log.php?user_id=<?php echo $row1['id']; ?>"><img src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt=""></a>
+                                                                    <a href="employee_leave_view.php?user_id=<?php echo $row1['id']; ?>"><img src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt=""></a>
                                                                 </div>
                                                                 <div class="employee-content">
-                                                                    <a href="employee_access_log.php?user_id=<?php echo $row1['id']; ?>"><?php echo $row1['user_fullname']; ?></a>
+                                                                    <a href="employee_leave_view.php?user_id=<?php echo $row1['id']; ?>"><?php echo $row1['user_fullname']; ?></a>
                                                                     <h6><?php echo $row1['user_designation']; ?></h6>
                                                                 </div>
                                                             </div>

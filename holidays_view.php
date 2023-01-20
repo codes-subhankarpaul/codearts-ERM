@@ -93,9 +93,9 @@ $names .= "]";
                                 <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                 <li>View</li>
                             </ul>    
-                            <form method="POST">
-                                <input type="text" id='datepicker'name='year_holiday' />
-                                <button type="submit" name='search'>Search</button>
+                            <form method="POST" class="d-flex flex-row my-3">
+                                <input type="text" class="form-control" id='datepicker'name='year_holiday' autocomplete='off'/>
+                                <button type="submit" class="btn btn-primary mx-3" name='search'>View Holidays</button>
                             </form>
                         </section>
                         
