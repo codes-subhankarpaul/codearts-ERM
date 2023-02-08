@@ -4,7 +4,7 @@
     <head>
         <!-- Header CSS files -->
         <?php include 'header_css.php'; ?>
-        <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+        <title>Chat - CERM :: Codearts Employee Relationship Management</title>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -131,24 +131,19 @@
                     });
                 }
                 function individual_notification(){
-                    <?php for($i=0; $i<count($id_array); $i++) {?>
                     $.ajax({
                         url: 'chat_notification.php',
                         type: 'post',
-                        data: {
-                            from_user_id: <?php echo $id_array[$i]; ?>
-                        },
                         success: function(data){
-                            $('#notification_<?php echo $id_array[$i]; ?>').text(data);
-                            // console.log(data);
+                            data = JSON.parse(data);
+                            for(var j = 0; j<data.length; j++){  
+                                $('#notification_'+data[j]['f_id']).text(data[j]['count']);
+                            }
                         },
                         complete:function(data){
                             setTimeout(individual_notification,5000);
                         }
                     });
-                    <?php
-                    }
-                    ?>
                 }
 
                 $(document).ready(function(){
