@@ -4,7 +4,7 @@
     <head>
         <!-- Header CSS files -->
         <?php include 'header_css.php'; ?>
-        <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+        <title>Group Chat - CERM :: Codearts Employee Relationship Management</title>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
