@@ -72,6 +72,17 @@
                                             </span>
                                              
                                         </div> -->
+                                        <div class="form-group col-lg-12 col-md-12">
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                            <label class="form-check-label" for="invalidCheck">
+                                                Agree to terms and conditions
+                                            </label>
+                                            <div class="invalid-feedback">
+                                                You must agree before submitting.
+                                            </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <input type="submit" name="user_register" class="btn dp-reg-btn" value="Register Now">
                                             <button type="reset" class="btn dp-reset-btn">

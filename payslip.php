@@ -39,10 +39,47 @@
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li><a href="<?php echo $baseURL; ?>payslip.php">Pay Slip</a></li>
                                 </ul>
+                                <?php if($_SESSION['emp_type'] == 'hr' || $_SESSION['emp_type'] == 'admin' ) { ?>
+                                <a class="add-employee-btn" href="payslip_add.php">
+                                    <span class="add-icon">+</span> Add Payslip
+                                </a>
+                                <?php } ?>
                             </section>
-                            <section class="pay-slip-table" style="text-align:center ;">
+                            <!-- <section class="pay-slip-table" style="text-align:center ;">
                                 <button type="submit"><a href="payslip_details.php">view</a></button>
-                            </section>
+                            </section> -->
+                            <form method="POST" enctype="multipart/form-data" action="payslip.php">
+                                <label for="salarymonth">Salary of (month and year):</label>
+                                <input type="month" id="salarymonth" name="salarymonth" required>
+                                <input type="submit" name="payslipView" value="View Payslip" class="btn btn-primary"> 
+                            </form>
+                            <?php
+                                if(isset($_POST['payslipView'])){
+                                    if($_POST['salarymonth']==''){
+                                        echo "Select the month first";
+                                    }
+                                    else{
+                                        $query = "SELECT * FROM `capms_payslips` WHERE user_id='".$_SESSION['emp_id']."' and salary_month = '".$_POST['salarymonth']."';";
+                                        $query_run = mysqli_query($con, $query);
+                                        if($query_run->num_rows > 0){
+                                            while ($row = $query_run->fetch_assoc()) {
+                                                $pdf = $row['payslip'];
+                                                $filePath = "assets/payslips/" .$pdf;
+                                            }
+                                            echo '<h1>Payslip</h1>';
+                            ?>
+                                            <br/><br/>
+                                            <iframe src="<?php echo $filePath; ?>" width="90%" height="500px"></iframe>
+                                            <button type="submit" class="btn btn-success"><a href="<?php echo $filePath; ?>" download>Download</a></button>
+                            <?php
+                                        }
+                                        else{
+                                            echo '<h1>No record found for this month.</h1>';
+                                        }
+                                    }
+                                }
+                            ?>
+                            
                         </div>
                     </div>
                 </div>

@@ -117,8 +117,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< Updated upstream
-=======
             <script>
                 function group_notification(){
                     $.ajax({
@@ -172,7 +170,6 @@
                     });
                 });
             </script>
->>>>>>> Stashed changes
         </main>
     </body>
 </html>

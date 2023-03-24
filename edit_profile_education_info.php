@@ -215,34 +215,37 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <button onclick="ug_show()" class="btn btn-primary" id="ug_btn">Add Graduation Details</button>
+                                    <div class="form-row" id="ug_form"  style="display:none;">
                                         <div class="col-md-3 align-self-center">
                                             <label>Graduation collage Name</label> 
-                                            <input type="text" class="form-control" placeholder="Collage Name" name="ug_institute_name" id="ug_institute_name" required>
+                                            <input type="text" class="form-control" placeholder="Collage Name" name="ug_institute_name" id="ug_institute_name">
                                         </div>
                                         <div class="col-md-3 align-self-center">
                                             <label>University Name</label> 
-                                            <input type="text" class="form-control" placeholder="University Name" name="ug_university_name" id="ug_university_name"  required>
+                                            <input type="text" class="form-control" placeholder="University Name" name="ug_university_name" id="ug_university_name">
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Year of Start</label> 
-                                            <input type="date" class="form-control" name="ug_start_year" id="ug_start_year" required>
+                                            <input type="date" class="form-control" name="ug_start_year" id="ug_start_year">
                                         </div>
                                         <div class="col-md-2 align-self-center">
                                             <label>Year of Finish</label> 
-                                            <input type="date" class="form-control" name="ug_finish_year" id="ug_finish_year" required>
+                                            <input type="date" class="form-control" name="ug_finish_year" id="ug_finish_year">
                                         </div>
                                         <div class="col-md-1 align-self-center">
                                             <label>Percentage</label> 
-                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="ug_passing_percentage" id="ug_passing_percentage" required>
+                                            <input type="text" class="form-control" placeholder="Exam Percentage" name="ug_passing_percentage" id="ug_passing_percentage">
                                         </div>
                                         <div class="col-md-1 align-self-center text-right">
                                             <div id="ug_verification" class="">
                                                 <i class="far fa-check-circle"></i>
                                             </div>
                                         </div>
+                                        <button onclick="ug_hide()" class="btn btn-primary" id="ug_cancelBtn">Cancel</button>
                                     </div>
-                                    <div class="form-row">
+                                    <button onclick="pg_show()" class="btn btn-primary" id="pg_btn">Add Post Graduation Details</button>
+                                    <div class="form-row" id="pg_form"  style="display:none;">
                                         <div class="col-md-3 align-self-center">
                                             <label>University Name (PG)</label> 
                                             <input type="text" class="form-control" placeholder="University Name" name="pg_institute_name" id="pg_institute_name">
@@ -264,6 +267,7 @@
                                                 <i class="far fa-check-circle"></i>
                                             </div>
                                         </div>
+                                        <button onclick="pg_hide()" class="btn btn-primary" id="pg_cancelBtn">Cancel</button>
                                     </div>
                                     <div class="custom-devider-dp"></div>
                                     
@@ -401,6 +405,62 @@
             //checking class
             // new file
 
+        </script>
+        <script>
+            function ug_show() {
+            var x = document.getElementById("ug_form");
+            const btn = document.getElementById('ug_btn');
+            const cbtn = document.getElementById('ug_cancelBtn');
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                btn.style.display = 'none';
+                document.getElementById("ug_institute_name").required = true;
+                document.getElementById("ug_university_name").required = true;
+                document.getElementById("ug_start_year").required = true;
+                document.getElementById("ug_finish_year").required = true;
+                document.getElementById("ug_passing_percentage").required = true;
+            }
+            }
+            function ug_hide() {
+            var x = document.getElementById("ug_form");
+            const btn = document.getElementById('ug_btn');
+            const cbtn = document.getElementById('ug_cancelBtn');
+            if (x.style.display === "block") {
+                x.style.display = "none";
+                btn.style.display = 'block';
+                document.getElementById("ug_institute_name").required = false;
+                document.getElementById("ug_university_name").required = false;
+                document.getElementById("ug_start_year").required = false;
+                document.getElementById("ug_finish_year").required = false;
+                document.getElementById("ug_passing_percentage").required = false;
+            }
+            }
+            function pg_show() {
+            var x = document.getElementById("pg_form");
+            const btn = document.getElementById('pg_btn');
+            const cbtn = document.getElementById('pg_cancelBtn');
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                btn.style.display = 'none';
+                document.getElementById("pg_institute_name").required = true;
+                document.getElementById("pg_start_year").required = true;
+                document.getElementById("pg_finish_year").required = true;
+                document.getElementById("pg_passing_percentage").required = true;
+            }
+            }
+            function pg_hide() {
+            var x = document.getElementById("pg_form");
+            const btn = document.getElementById('pg_btn');
+            const cbtn = document.getElementById('pg_cancelBtn');
+            if (x.style.display === "block") {
+                x.style.display = "none";
+                btn.style.display = 'block';
+                document.getElementById("pg_institute_name").required = false;
+                document.getElementById("pg_start_year").required = false;
+                document.getElementById("pg_finish_year").required = false;
+                document.getElementById("pg_passing_percentage").required = false;
+            }
+            }
         </script>
     </body>
 </html>  

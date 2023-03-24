@@ -78,7 +78,7 @@ else{
                                     $created_at = date('Y-m-d h:i:s', strtotime('now'));
                                     $updated_at = date('Y-m-d h:i:s', strtotime('now'));
 
-                                    $sql_gracetime = "INSERT INTO `capms_gracetime_info`(`id`, `user_id`, `gracetime_date`, `gracetime_taken`, `reason`, `status`, `feedback`, `created_at`, `updated_at`) VALUES (NULL,'".$_SESSION['emp_id']."','".$_POST['gracetime_date']."','".$_POST['gracetime_taken']."','".$_POST['reason']."','0','','".$created_at."','".$updated_at."')";
+                                    $sql_gracetime = "INSERT INTO `capms_gracetime_info`(`user_id`, `gracetime_date`, `gracetime_taken`, `reason`, `status`, `feedback`, `created_at`, `updated_at`) VALUES ('".$_SESSION['emp_id']."','".$_POST['gracetime_date']."','".$_POST['gracetime_taken']."','".$_POST['reason']."','0','','".$created_at."','".$updated_at."')";
 
                                     if($con->query($sql_gracetime) === TRUE) {
                                         echo "<script>location.href='".$baseURL."gracetime.php';</script>";

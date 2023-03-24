@@ -162,21 +162,21 @@
                                                     <?php } ?>
                                                     
                                                         <?php
-                                                        $sql = "SELECT user_featured_image, user_fullname FROM capms_admin_users WHERE user_empid = '" . $row1['reports_to_uid'] . "' ";
-                                                        $report_query = mysqli_query($con, $sql);
-                                                        if ($report_query->num_rows > 0) {
-                                                            while ($report_row = mysqli_fetch_assoc($report_query)) {
+                                                        // $sql = "SELECT user_featured_image, user_fullname FROM capms_admin_users WHERE user_empid = '" . $row1['reports_to_uid'] . "' ";
+                                                        // $report_query = mysqli_query($con, $sql);
+                                                        // if ($report_query->num_rows > 0) {
+                                                        //     while ($report_row = mysqli_fetch_assoc($report_query)) {
                                                         ?>
-                                                    <li><span>Reports to: </span><a href="#"><span> <img class="mr-3" src="assets/uploads/user_featured_images/<?php echo $report_row['user_featured_image']; ?>" alt="Employee Image">
+                                                    <!-- <li><span>Reports to: </span><a href="#"><span> <img class="mr-3" src="assets/uploads/user_featured_images/<?php //echo $report_row['user_featured_image']; ?>" alt="Employee Image">
                                                             </span>
-                                                            <p class="demo d-inline"><?php echo $report_row['user_fullname']; ?></p>
-                                                        </a></li>
+                                                            <p class="demo d-inline"><?php //echo $report_row['user_fullname']; ?></p>
+                                                        </a></li> -->
 
                                                         <?php
-                                                                        }
-                                                                    } else {
-                                                                        //echo '<p class="demo">Null</p>';
-                                                                    }
+                                                                    //     }
+                                                                    // } else {
+                                                                    //     //echo '<p class="demo">Null</p>';
+                                                                    // }
 
                                                         ?>
                                                         

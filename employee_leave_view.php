@@ -56,8 +56,9 @@
                                                             <th scope="col">user_id</th>
                                                             <th scope="col">reason_of_leave</th>
                                                             <th scope="col">type_of_leave</th>
-                                                            <th scope="col">leave_status</th>
                                                             <th scope="col">leave_date</th>
+                                                            <th scope="col">leave_status</th>
+                                                            <th scope="col">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -72,8 +73,20 @@
                                                             <td><?php echo $row_leave_view['user_id'];?></td>
                                                             <td><?php echo $row_leave_view['reason_of_leave'];?></td>
                                                             <td><?php echo $row_leave_view['type_of_leave'];?></td>
-                                                            <td><?php echo $row_leave_view['leave_status'];?></td>
+                                                            <!-- <td><?php //echo $row_leave_view['leave_status'];?></td> -->
                                                             <td><?php echo $row_leave_view['leave_date'];?></td>
+                                                            <form action="leave_status_change.php?leave_id=<?php echo $row_leave_view['leave_id']?>&user_id=<?php echo $_REQUEST['user_id']; ?>" method="POST">
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" id="status" name="leave_status">
+                                                                        <option value="Pending" <?php if($row_leave_view['leave_status'] == "Pending") { echo 'selected'; } ?>>Pending</option>
+                                                                        <option value="Aproved" <?php if($row_leave_view['leave_status'] == "Aproved") { echo 'selected'; } ?>>Aproved</option>
+                                                                        <option value="Rejected" <?php if($row_leave_view['leave_status'] == "Rejected") { echo 'selected'; } ?>>Rejected</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td><button type="submit" class="btn btn-outline-primary">change</button></td>
+                                                            </form>
                                                         </tr>
                                                         <?php
                                                     }

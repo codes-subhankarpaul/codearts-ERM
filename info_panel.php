@@ -29,6 +29,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="profile.php?emp_id=<?php echo $_SESSION['emp_id']; ?>"><?php echo $_SESSION['emp_name']; ?></a>
                         <a class="dropdown-item" href="#">Employee Role</a>
+                        <a class="dropdown-item" href="change_password.php">Change Password</a>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                     <span class="active"></span>
