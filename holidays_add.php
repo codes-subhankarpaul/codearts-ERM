@@ -13,14 +13,20 @@ else{
 <head>
     <!-- Header CSS files -->
     <?php include 'header_css.php'; ?>
-    <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+    <title>Add Holidays - CERM :: Codearts Employee Relationship Management</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+        // var dates = ["20/01/2018", "21/01/2018", "22/01/2018", "23/01/2018"];
+        // function DisableDates(date) {
+        //     var string = jQuery.datepicker.formatDate('dd/mm/yy', date);
+        //     return [dates.indexOf(string) == -1];
+        // }
         $(function() {
 
             $("#start_date").datepicker({
+                // beforeShowDay: DisableDates
                 onSelect: function(dateText, inst) {
                     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                     var date = $(this).val();
@@ -52,7 +58,12 @@ else{
             });
 
             function display(msg) {
-                $("#start_day").val(msg);
+                if($("#start_date").val() != ''){
+                    $("#start_day").val(msg);
+                }
+                else{
+                    $("#start_day").val('');
+                }
             }
         });
         $(function() {

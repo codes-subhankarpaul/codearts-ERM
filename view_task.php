@@ -4,7 +4,7 @@
     <head>
         <!-- Header CSS files -->
         <?php include 'header_css.php'; ?>
-        <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+        <title>View Task - CERM :: Codearts Employee Relationship Management</title>
     </head>
     <?php
             if($_SESSION['emp_id'] == '')
@@ -178,6 +178,9 @@
                                                     }
                                                 }
                                             }
+                                        }
+                                        else{
+                                            echo "No task is created for this project";
                                         }
                                     ?>
                                 </div>

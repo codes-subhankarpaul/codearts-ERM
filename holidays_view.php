@@ -3,8 +3,7 @@ require_once('database.php');
 $year = date("Y");
 // $query1="SELECT start_dates FROM capms_holidays ORDER BY str_to_date(`start_dates`, '%m/%d/%Y') DESC";
 // $query1_run=mysqli_query($conn,$query);
-$query = "SELECT * FROM capms_holidays WHERE start_dates LIKE '%/$year' ORDER BY str_to_date(`start_dates`, '%m/%d/%Y')";
-$query_run = mysqli_query($con, $query);
+
 ?>
 
 <!doctype html>
@@ -13,47 +12,33 @@ $query_run = mysqli_query($con, $query);
 <head>
     <!-- Header CSS files -->
     <?php include 'header_css.php'; ?>
-    <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+    <title>Holidays - CERM :: Codearts Employee Relationship Management</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function() {
-
-            $(".date").datepicker({
-
-                onSelect: function(dateText) {
-                    display("Selected date: " + dateText + ", Current Selected Value= " + this.value);
-                    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                    display(weekday[new Date(dateText).getDay()]);
-                    $(this).change();
-                }
-                //   }).on("change", function() {
-                //     display("Change event");
-            });
-
-            function display(msg) {
-                $("#start_day").val(msg);
+    <style type='text/css'>
+        /* Style to hide Dates / Months */
+            .ui-datepicker-calendar,.ui-datepicker-month { 
+                display: none; 
             }
-        });
+    </style>
+    <script type='text/javascript'>
         $(function() {
-            $(".dateP").datepicker({
+            $('#datepicker').datepicker({
+                //changeMonth: false,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: '1990:<?php echo $year; ?>', // Optional Year Range
+                dateFormat: 'yy',
+                onClose: function(dateText, inst) { 
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, 1));
+            }});
 
-                onSelect: function(dateText) {
-                    display("Selected date: " + dateText + ", Current Selected Value= " + this.value);
-                    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                    display(weekday[new Date(dateText).getDay()]);
-                    $(this).change();
-                }
-                //   }).on("change", function() {
-                //     display("Change event");
-            });
-
-            function display(mess) {
-                $("#end_day").val(mess);
-            }
         });
+        
     </script>
+    
 </head>
 <?php
 if ($_SESSION['emp_id'] == '') {
@@ -84,6 +69,13 @@ $names .= "]";
         <?php
         include 'info_panel.php';
         //include('database.php');
+        if(isset($_POST['search'])){
+            $year= $_POST['year_holiday'];
+            $query = "SELECT * FROM capms_holidays WHERE start_dates LIKE '%/$year' ORDER BY str_to_date(`start_dates`, '%m/%d/%Y')";
+            $query_run = mysqli_query($con, $query);
+        }
+        $query = "SELECT * FROM capms_holidays WHERE start_dates LIKE '%/$year' ORDER BY str_to_date(`start_dates`, '%m/%d/%Y')";
+        $query_run = mysqli_query($con, $query);
         ?>
     </header>
 
@@ -100,9 +92,14 @@ $names .= "]";
                             <ul>
                                 <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                 <li>View</li>
-                            </ul>
-
+                            </ul>    
+                            <form method="POST" class="d-flex flex-row my-3">
+                                <input type="text" class="form-control" id='datepicker'name='year_holiday' autocomplete='off'/>
+                                <button type="submit" class="btn btn-primary mx-3" name='search'>View Holidays</button>
+                            </form>
                         </section>
+                        
+                        
                         <table class="table">
                             <thead>
                                 <tr>

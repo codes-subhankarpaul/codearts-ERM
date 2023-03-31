@@ -101,6 +101,7 @@
                                                 </div>
                                                 
                                                 <div class="col-md-12 text-center">
+                                                    <a href="edit_profile_personal_info.php" class="btn dp-em-nxt-btn frm-previous-btn">Previous</a>
                                                     <button type="submit" class="btn dp-em-nxt-btn" name="emergency_form_btn">Next</button>
                                                 </div>
                                     <?php

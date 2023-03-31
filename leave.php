@@ -33,10 +33,11 @@
                                     <li><a href="<?php echo $baseURL; ?>">Home</a></li>
                                     <li>Leaves</li>
                                 </ul>
-                                
+                                <?php if($_SESSION['emp_type'] == 'employee' || $_SESSION['emp_type'] == '' ) { ?>
                                 <a class="add-employee-btn" href="leave_form.php">
                                     <span class="add-icon">+</span> Add Leave
                                 </a>
+                                <?php } ?>
                             </section>
                             <?php if($_SESSION['emp_type'] == 'hr' || $_SESSION['emp_type'] == 'admin' ||$_SESSION['emp_type'] == 'project_lead' ) { ?>
                                 <section class="employee-profiles">
@@ -58,14 +59,14 @@
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item"
                                                                             href="javascript:void(0)"><?php echo ucwords($row1['user_type']); ?></a>
-                                                                        <a class="dropdown-item" href="employee_access_log.php?user_id=<?php echo $row1['id']; ?>">Access Log</a>
+                                                                        <a class="dropdown-item" href="employee_leave_view.php?user_id=<?php echo $row1['id']; ?>">Access Log</a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="employee-image">
-                                                                    <a href="employee_access_log.php?user_id=<?php echo $row1['id']; ?>"><img src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt=""></a>
+                                                                    <a href="employee_leave_view.php?user_id=<?php echo $row1['id']; ?>"><img src="assets/uploads/user_featured_images/<?php echo $row1['user_featured_image']; ?>" alt=""></a>
                                                                 </div>
                                                                 <div class="employee-content">
-                                                                    <a href="employee_access_log.php?user_id=<?php echo $row1['id']; ?>"><?php echo $row1['user_fullname']; ?></a>
+                                                                    <a href="employee_leave_view.php?user_id=<?php echo $row1['id']; ?>"><?php echo $row1['user_fullname']; ?></a>
                                                                     <h6><?php echo $row1['user_designation']; ?></h6>
                                                                 </div>
                                                             </div>
@@ -81,6 +82,43 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-12">
+                                                <?php
+                                                    $sql_leave_view = "SELECT * FROM `capms_admin_individual_leaves` WHERE `user_id` = '".$_SESSION['emp_id']."'";
+                                                    $result_leave_view = mysqli_query($con,$sql_leave_view);
+                                                    ?>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">leave_id</th>
+                                                                <th scope="col">user_id</th>
+                                                                <th scope="col">reason_of_leave</th>
+                                                                <th scope="col">type_of_leave</th>
+                                                                <th scope="col">leave_status</th>
+                                                                <th scope="col">leave_date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                    <?php
+                                                    $i = 1;
+                                                    if($result_leave_view->num_rows > 0) {
+                                                        while($row_leave_view = mysqli_fetch_assoc($result_leave_view)) {
+                                                            ?>
+                                                            <tr>
+                                                                <th scope="row"><?php echo $i++;?></th>
+                                                                <td><?php echo $row_leave_view['leave_id'];?></td>
+                                                                <td><?php echo $row_leave_view['user_id'];?></td>
+                                                                <td><?php echo $row_leave_view['reason_of_leave'];?></td>
+                                                                <td><?php echo $row_leave_view['type_of_leave'];?></td>
+                                                                <td><?php echo $row_leave_view['leave_status'];?></td>
+                                                                <td><?php echo $row_leave_view['leave_date'];?></td>
+                                                            </tr>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                        </tbody>
+                                                    </table>
                                             </div>
                                         </div>
                                     </div>

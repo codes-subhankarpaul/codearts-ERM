@@ -32,7 +32,7 @@
             </a>
         </li>
 
-        <li><a href="#"><span><img src="assets/images/menu-icon-3.png" alt=""></span> Leave</a></li>
+        <li><a href="leave.php"><span><img src="assets/images/menu-icon-3.png" alt=""></span> Leave</a></li>
         
         <?php if($_SESSION['emp_type']=='admin' || $_SESSION['emp_type']=='hr'){ ?>
         <li><a href="holidays_add.php"><span><img src="assets/images/menu-icon-4.png" alt=""></span> Holidays</a></li>
@@ -46,7 +46,7 @@
         ?>
         <li><a href="#"><span><img src="assets/images/menu-icon-5.png" alt=""></span> Salary</a></li>
         
-        <li><a href="#"><span><img src="assets/images/menu-icon-6.png" alt=""></span> Pay Slip</a></li>
+        <li><a href="payslip.php"><span><img src="assets/images/menu-icon-6.png" alt=""></span> Pay Slip</a></li>
         
         <li class="<?php if($slug == 'projects.php') { echo 'active'; } ?>">
             <a href="projects.php">
@@ -66,9 +66,11 @@
             </a>
         </li>
        
-        <li><a href="#"><span><img src="assets/images/menu-icon-9.png" alt=""></span> Chat</a></li>
+        <li><a href="chat.php"><span><img src="assets/images/menu-icon-9.png" alt=""></span> Chat</a></li>
        
         <li><a href="notice.php"><span><img src="assets/images/menu-icon-10.png" alt=""></span> Notices</a></li>
+
+        <li><a href="gracetime.php"><span><img src="assets/images/menu-icon-11.png" alt=""></span> Grace Time</a></li>
        
         <!-- <li>
             <a href="logout.php">

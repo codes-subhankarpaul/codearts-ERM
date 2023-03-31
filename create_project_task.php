@@ -139,7 +139,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                                 <div class="col-md-6 mb-3">
                                                     <label>Task Type</Th></label> 
                                                     <select id="task-type" class="form-control" name="task_type" required>
-                                                        <option>Select Any</option>
+                                                        <option value="">Select Any</option>
                                                         <?php
                                                             $query2 = "SELECT * FROM capms_project_tasktype_info";
                                                             $result2 = mysqli_query($con, $query2);
@@ -230,6 +230,15 @@ error_reporting(E_ALL ^ E_NOTICE);
                                 </form>
                                 <?php
                                     if(isset($_POST['create_task'])){
+
+                                        if(!(isset($_POST['domain_name'])) ){
+                                            echo "Domain name is not defined.Please set the domain name first.";
+                                            die();
+                                        }
+                                        if(!(isset($_POST['members_name']))){
+                                            echo "Team members are not defined.Please set the team first.";
+                                            die();
+                                        }
 
                                         $temp_task_domain = implode(",", $_POST['domain_name'] );
 

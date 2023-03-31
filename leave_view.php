@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <?php include 'header_css.php'; ?>
-    <title>employee leave request form</title>
+    <title>Leaves - CERM :: Codearts Employee Relationship Management</title>
 </head>
 
 <body>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Notices</title>
+    <title>Notice - CERM :: Codearts Employee Relationship Management</title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -46,6 +46,7 @@
                                     <th>Notice ID</th>
                                     <th>Notice Subject</th>
                                     <th>Notice Body</th>
+                                    <th>Notice File</th>
                                     <th>Create Date</th>
                                     <?php if ($_SESSION['emp_type'] == "hr") { ?>
                                     <th colspan="2">Action</th>
@@ -61,6 +62,7 @@
                                     <td><?php echo $row['notice_id']; ?></td>
                                     <td><?php echo $row['notice_subject']; ?></td>
                                     <td><?php echo $row['notice_body']; ?></td>
+                                    <td><a href="assets\noticeFiles\<?php echo $row['notice_file_name']; ?>" download><?php echo $row['notice_file_name']; ?></a></td>
                                     <td><?php echo $row['created_at']; ?></td>
                                     <?php if ($_SESSION['emp_type'] == "hr") { ?>
                                     <td><a href="edit_notice.php?id=<?php echo $row['notice_id']; ?>">Edit</a></td>

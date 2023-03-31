@@ -169,7 +169,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                                                 $hrs = $diff / 60;
                                                                 $mins = $hrs % 60;
                                                                 $hrs = $hrs / 60;
-                                                                $working_hours =  ((int)$hrs . "." . (int)$mins);
+                                                                $working_hours = (float) ((int)$hrs . "." . (int)$mins);
                                                             
                                                                 if(number_format($working_hours,2) >=7.40){
                                                                 $class = 'access_log_ok';
@@ -205,7 +205,8 @@ error_reporting(E_ALL ^ E_NOTICE);
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-        <script src="assets/js/jquery-min.js"></script>
+        <!-- <script src="assets/js/jquery-min.js"></script> -->
+        <!-- <script src="assets/js/jquery-ui.min.js"></script> -->
         <script>
             jQuery( document ).ready(function() {
                 /* lunch break time duration */

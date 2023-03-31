@@ -4,7 +4,7 @@
 <head>
     <!-- Header CSS files -->
     <?php include 'header_css.php'; ?>
-    <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+    <title>Edit Timesheet - CERM :: Codearts Employee Relationship Management</title>
 </head>
 <?php
 if ($_SESSION['emp_id'] == '') {
@@ -250,6 +250,20 @@ if ($_SESSION['emp_id'] == '') {
                                         <div class="row">
                                             <div class="col">
                                                 <div class="mb-3">
+                                                <label for="project_number">project_number</label>
+                                                <input type="text" id="project_number" class="form-control" value="Project Number" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                <label for="task_number">task_number</label>
+                                                <input type="text" id="task_number" class="form-control" value="Task Number" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
                                                 <label>start time</label>
                                                 <div class="input-group clockpicker">
                                                     <input type="text" class="form-control" name="start_time" value="<?php echo $start_time ?>">
@@ -274,40 +288,16 @@ if ($_SESSION['emp_id'] == '') {
                                         <div class="row">
                                             <div class="col">
                                                 <div class="mb-3">
-                                                    <label for="task_domain" class="form-label">task_domain</label>
-                                                    <select class="form-control" id="task_domain-dropdown" name="task_domain" required>
-                                                        <option value="">select option</option>
-                                                        <?php
-                                                        $result = mysqli_query($con, "SELECT * FROM `capms_department_info`");
-                                                        while ($row = mysqli_fetch_array($result)) {
-                                                            $selected = "";
-                                                            if ($row['dept_id'] == $task_domain) {
-                                                                $selected = 'selected';
-                                                            }
-                                                            echo '<option value="' . $row['dept_id'] . '" ' . $selected . '>' . $row["dept_name"] . '</option>';
-                                                        }
-                                                        ?>
-                                                        </option>
-                                                    </select>
+                                                <div id="task_domain-dropdown">
+                                                    <label for="demo_task_domain" class="form-label">task_domain</label>
+                                                    <input type="text" class="form-control" placeholder="select task_name first" disabled>
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="mb-3">
                                                     <label for="task_type" class="form-label">task_type</label>
-                                                    <select class="form-control" id="task_type-dropdown" name="task_type" required>
-                                                        <option value="">select option</option>
-                                                        <?php
-                                                        $result = mysqli_query($con, "SELECT * FROM `capms_project_task_info` as cpti right join capms_project_tasktype_info as cptti on cpti.task_id = cptti.task_type_id;");
-                                                        while ($row = mysqli_fetch_array($result)) {
-                                                            $selected = "";
-                                                            if ($row['task_type_name'] == $task_type) {
-                                                                $selected = 'selected';
-                                                            }
-                                                            echo '<option value="' . $row['task_type_id'] . '" ' . $selected . '>' . $row["task_type_name"] . '</option>';
-                                                        }
-                                                        ?>
-                                                        </option>
-                                                    </select>
+                                                    <select class="form-control" id="task_type-dropdown" name="task_type" required></select>
                                                 </div>
                                             </div>
                                         </div>
@@ -374,13 +364,10 @@ if ($_SESSION['emp_id'] == '') {
             $("#leaders").autocomplete({
                 source: availableTeamMembers
             });
-
             var availableTeams = ['Html-Css', 'Angular-Iocic', 'Development', 'Testing'];
             $("#teams").autocomplete({
                 source: availableTeams
             });
-
-
         });
     </script>
 
@@ -420,6 +407,33 @@ if ($_SESSION['emp_id'] == '') {
         });
     </script>
 
+    <!-- TASK_ID FETCHED BASED ON PROJECT -->
+    <script>
+        $(document).ready(function() {
+        $('#project-dropdown').on('change', function() {
+            var project_id = this.value;
+            console.log(project_id);
+            $.ajax({
+            url: "timesheet_task_id_by_project.php",
+            type: "POST",
+            data: {
+                project_id: project_id
+            },
+            cache: false,
+            success: function(result) {
+                $("#task_id-dropdown").html(result);
+            },
+            error: function() {
+                alert('problem in state');
+            }
+            });
+        });
+        $('#task_id-dropdown').on('change', function() {
+            var task_id = this.value;
+        });
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             var project_id = <?php echo $project_id ?>;
@@ -438,7 +452,81 @@ if ($_SESSION['emp_id'] == '') {
                     alert('problem in state');
                 }
             });
+            
+        });
+    </script>
 
+    <!-- TASK NUMBER AND PROJECT NUMBER FETCHED ON WORKLOAD_ID -->
+    <!-- TASK_DOMAIN FETCHED BASED ON TASK_ID -->
+    <script>
+        $(document).ready(function() {
+            $('#project-dropdown').on('change', function() {
+                var project_id = this.value;
+                $.ajax({
+                    url: "timesheet_ajax_project_number.php",
+                    type: "POST",
+                    data: {
+                        project_id: project_id
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $("#project_number").val(result);
+                    },
+                    error: function() {
+                        alert('problem in state');
+                    }
+                });
+            });
+            $('#task_id-dropdown').on('change', function() {
+                var workload_id = this.value;
+                $.ajax({
+                    url: "timesheet_ajax_task_number.php",
+                    type: "POST",
+                    data: {
+                        workload_id: workload_id
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $("#task_number").val(result);
+                    },
+                    error: function() {
+                        alert('problem in state');
+                    }
+                });
+                var task_id = $('#task_id-dropdown').val();
+                var project_id = $('#project-dropdown').val();
+                console.log(project_id);
+                $.ajax({
+                    url: "timesheet_task_domain_by_task_id.php",
+                    type: "POST",
+                    data: {
+                        task_id: task_id,
+                        project_id: project_id,
+                        timesheet_id: <?php echo $_REQUEST['id'] ?>
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $("#task_domain-dropdown").html(result);
+                    },
+                    error: function() {
+                        alert('problem in state');
+                    }
+                });
+                $.ajax({
+                    url: "timesheet_task_type_by_task_id.php",
+                    type: "POST",
+                    data: {
+                        task_id: task_id
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $("#task_type-dropdown").html(result);
+                    },
+                    error: function() {
+                        alert('problem in state');
+                    }
+                });
+            });
         });
     </script>
 
@@ -447,7 +535,8 @@ if ($_SESSION['emp_id'] == '') {
     $('.clockpicker').clockpicker({
         placement: 'top',
         align: 'left',
-        donetext: 'Done'
+        donetext: 'Done',
+        autoclose: true
     });
     </script>
 
