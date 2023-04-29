@@ -44,6 +44,7 @@
                                     <span class="add-icon">+</span> Add Payslip
                                 </a>
                                 <?php } ?>
+                                <a href="payslip_details.php">Payslip</a>
                             </section>
                             <!-- <section class="pay-slip-table" style="text-align:center ;">
                                 <button type="submit"><a href="payslip_details.php">view</a></button>

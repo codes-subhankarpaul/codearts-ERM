@@ -11,6 +11,9 @@
             }
         ?>
         <title>Leaves - CERM :: Codearts Employee Relationship Management</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     
     <body>
@@ -243,7 +246,11 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-
+        <?php 
+        // $year = date("Y");
+        // $sql_holidays = "SELECT * FROM `capms_holidays` WHERE start_dates LIKE '%/".$year."'";
+        // $result_holiday 
+        ?>                                                
         <script type="text/javascript">
             jQuery(document).ready(function(){
                 jQuery("#submit_leave_application").hide();
@@ -300,6 +307,37 @@
                         {
                             if(leave_end_date == '')
                             {
+                                if(type_of_leave!='Full Day'){
+                                    var total = "0.5";
+                                    <?php 
+                                        $sql_existing_leave = '';
+                                    ?>
+                                    jQuery.ajax({
+                                        type: "GET",
+                                        url: "<?php echo $baseURL; ?>ajax_leave_application.php",
+                                        data: {
+                                            baseURL: '<?php echo $baseURL; ?>',
+                                            emp_id: '<?php echo $_SESSION['emp_id']; ?>',
+                                            emp_name: emp_name,
+                                            emp_dept: emp_dept,
+                                            emp_remaining_pls: emp_remaining_pls,
+                                            reason_of_leave: reason_of_leave,
+                                            type_of_leave: type_of_leave,
+                                            date: leave_start_date,
+                                            total_leaves: total,
+                                            leave_message: leave_message
+                                        },
+                                        dataType: "json",
+                                        success: function(response){
+                                            console.log(response);
+                                            alert("Leave application submitted! Please wait for approval!");
+                                            window.location.href = 'http://localhost/ERM/leave.php';
+                                        }
+                                    });
+                                }
+                                else{
+                                    alert("Please enter end date.");
+                                }
 
                             }
                             else
@@ -396,6 +434,7 @@
                                         success: function(response){
                                             console.log(response);
                                             alert("Leave application submitted! Please wait for approval!");
+                                            window.location.href = 'http://localhost/ERM/leave.php';
                                         }
                                     });
                                 });

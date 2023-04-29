@@ -49,6 +49,7 @@
                                             {
                                                 while($row1 = mysqli_fetch_assoc($result1))
                                                 {
+                                                    if($row1['user_type']!='admin' && $row1['user_type']!='hr'){
                                                     ?>
                                                         <div class="col-lg-3 col-md-6">
                                                             <div class="employee-profiles-thubmnail">
@@ -59,7 +60,7 @@
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item"
                                                                             href="javascript:void(0)"><?php echo ucwords($row1['user_type']); ?></a>
-                                                                        <a class="dropdown-item" href="employee_leave_view.php?user_id=<?php echo $row1['id']; ?>">Access Log</a>
+                                                                        <a class="dropdown-item" href="employee_leave_view.php?user_id=<?php echo $row1['id']; ?>">Leave</a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="employee-image">
@@ -72,6 +73,7 @@
                                                             </div>
                                                         </div>
                                                     <?php
+                                                    }
                                                 }
                                             }
                                         ?>

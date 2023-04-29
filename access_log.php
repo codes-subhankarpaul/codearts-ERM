@@ -47,6 +47,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                             {
                                                 while($row1 = mysqli_fetch_assoc($result1))
                                                 {
+                                                    if($row1['user_type']!='admin' && $row1['user_type']!='hr'){
                                                     ?>
                                                         <div class="col-lg-3 col-md-6">
                                                             <div class="employee-profiles-thubmnail">
@@ -70,6 +71,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                                             </div>
                                                         </div>
                                                     <?php
+                                                    }
                                                 }
                                             }
                                         ?>

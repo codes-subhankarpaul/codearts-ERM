@@ -44,7 +44,7 @@
         <?php
         }
         ?>
-        <li><a href="#"><span><img src="assets/images/menu-icon-5.png" alt=""></span> Salary</a></li>
+        <li><a href="salary.php"><span><img src="assets/images/menu-icon-5.png" alt=""></span> Salary</a></li>
         
         <li><a href="payslip.php"><span><img src="assets/images/menu-icon-6.png" alt=""></span> Pay Slip</a></li>
         

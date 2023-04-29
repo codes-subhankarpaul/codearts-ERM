@@ -5,6 +5,24 @@
         <!-- Header CSS files -->
         <?php include 'header_css.php'; ?>
         <title>Projects - CERM :: Codearts Employee Relationship Management</title>
+        <script>
+            $(function(){
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var minDate = year + '-' + month + '-' + day;    
+    $('#start_date').attr('min', minDate);
+    $('#end_date').attr('min', minDate);
+});
+        </script>
     </head>
     <?php
             if($_SESSION['emp_id'] == '')
@@ -178,7 +196,7 @@
                                         $project_domain = $_POST['domain_name'];
                                         $temp_project_domain = implode(",", $project_domain );
 
-                                        $create_project = "INSERT INTO `capms_project_info`(`project_id`, `title`, `domain`, `start_date`, `end_date`, `priority`, `project_details`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['project_name']."', '".$temp_project_domain."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['priority']."', '".$_POST['description']."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."') ";
+                                        $create_project = "INSERT INTO `capms_project_info`(`project_id`, `title`, `domain`, `start_date`, `end_date`, `priority`, `project_details`, `project_status`, `created_at`, `updated_at`) VALUES (NULL, '".$_POST['project_name']."', '".$temp_project_domain."', '".$_POST['start_date']."', '".$_POST['end_date']."', '".$_POST['priority']."', '".$_POST['description']."', '1', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."') ";
 
                                        //echo $create_project;
                                        //die();

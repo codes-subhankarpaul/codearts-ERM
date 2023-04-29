@@ -45,12 +45,12 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <?php 
-                                                include 'pdf_details.php';
+                                                include 'payslip_by_ERM.php';
                                                 echo $paySlip_Data;
                                              ?>
                                         </div>
                                         <div class="col-lg-3">
-                                            <button type="submit"><a href="payslip_getpdf.php">Download Here</a></button>
+                                            <button type="submit" class="btn btn-success"><a href="payslip_getpdf.php" style="color: inherit;">Download Here</a></button>
                                         </div>
                                     </div>
                                 </div>

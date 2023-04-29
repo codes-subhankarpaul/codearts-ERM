@@ -66,6 +66,18 @@
                                                         <input type="text" class="form-control"  placeholder="Pan Number" name="pan_number" value="<?php if($row['user_pan_number']!=''){echo $row['user_pan_number'];} ?>" required>
                                                     </div>
                                                     <div class="form-group col-md-12">    
+                                                        <label>PF No</label>            
+                                                        <input type="text" class="form-control"  placeholder="PF Number" name="pf_number" value="<?php if($row['user_pf_number']!=''){echo $row['user_pf_number'];} ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-12">    
+                                                        <label>ESI No</label>            
+                                                        <input type="text" class="form-control"  placeholder="ESI Number" name="esi_number" value="<?php if($row['user_esi_number']!=''){echo $row['user_esi_number'];} ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-12">    
+                                                        <label>UAN No</label>            
+                                                        <input type="text" class="form-control"  placeholder="UAN Number" name="uan_number" value="<?php if($row['user_uan_number']!=''){echo $row['user_uan_number'];} ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-12">    
                                                         <label>Nationality</label> 
                                                         <select class="form-control" name="nationality" required>
                                                             <option value="">-- select one --</option>
@@ -304,7 +316,7 @@
                                         if(isset($_POST['user_personal_info_update']))
                                         {
                                             // $query = "UPDATE capms_admin_users SET user_passport_number = '".$_POST['passport_no']."' , user_adhar_number = '".$_POST['adhar_number']."', user_voter_id = '".$_POST['voter_id']."', user_pan_number = '".$_POST['pan_number']."', user_nationality = '".$_POST['nationality']."', user_religion = '".$_POST['religion']."', user_marital_status = '".$_POST['user_marital_status']."' , user_employment_of_spouse = '".$_POST['user_employment_of_spouse']."', user_children_number = '".$_POST['number_of_children']."' WHERE id = '".$_SESSION['emp_id']."' ";
-                                            $query = "UPDATE capms_admin_users SET user_passport_number = '".$_POST['passport_no']."' , user_adhar_number = '".$_POST['adhar_number']."', user_voter_id = '".$_POST['voter_id']."', user_pan_number = '".$_POST['pan_number']."', user_nationality = '".$_POST['nationality']."', user_marital_status = '".$_POST['user_marital_status']."' , WHERE id = '".$_SESSION['emp_id']."' ";
+                                            $query = "UPDATE capms_admin_users SET user_passport_number = '".$_POST['passport_no']."' , user_adhar_number = '".$_POST['adhar_number']."', user_voter_id = '".$_POST['voter_id']."', user_pan_number = '".$_POST['pan_number']."',`user_pf_number`='".$_POST['pf_number']."',`user_esi_number`='".$_POST['esi_number']."',`user_uan_number`='".$_POST['uan_number']."', user_nationality = '".$_POST['nationality']."', user_marital_status = '".$_POST['user_marital_status']."' , WHERE id = '".$_SESSION['emp_id']."' ";
                                             $result = mysqli_query($con,$query);
                                             echo "<script>location.href='".$baseURL."edit_profile_emargency_contact.php';</script>";
                                         } 

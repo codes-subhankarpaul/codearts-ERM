@@ -13,7 +13,7 @@
 
             // preventing auto-login using session when previous session is set and no previous logout time is there.
             //echo date('d-m-Y');
-            
+
             $login_details = "SELECT * FROM `capms_login_information` WHERE user_id = '".$_SESSION['emp_id']."' AND `logout_time` = '' ORDER BY ID DESC LIMIT 1";
 
             $result_logout = mysqli_query($con, $login_details);
@@ -71,40 +71,7 @@
                                                 <h3>Monthly Access Log</h3>
                                             </div>
                                             <div class="weekly-time-table-dashboard">
-                                                <div class="custom-heading">
-                                                    <h4>Employee Name: <span><?php echo $_SESSION['emp_name'];  ?></span></h4>
-                                                    <h3>Filter By Month & Year</h3>
-                                                    <label for="month">Choose a Month:</label>
-
-                                                        <select name="month" id="months">
-                                                            <option value="01">January</option>
-                                                            <option value="02">February</option>
-                                                            <option value="03">March</option>
-                                                            <option value="04">April</option>
-                                                            <option value="05">May</option>
-                                                            <option value="06">June</option>
-                                                            <option value="07">July</option>
-                                                            <option value="08">Auguest</option>
-                                                            <option value="09">September</option>
-                                                            <option value="10">October</option>
-                                                            <option value="11">November</option>
-                                                            <option value="12">December</option>
-                                                        </select>
-
-                                                        <label for="month">Choose a Year:</label>
-
-                                                            <select name="year" id="years">
-                                                                <option value="2021">2021</option>
-                                                                <option value="2022">2022</option>
-                                                                <option value="2023">2023</option>
-                                                               
-                                                            </select>
-
-                                                        <div class="go_filter">
-                                                            <button type="button" class="go_btn">Go</button>
-                                                        </div>    
-
-                                                    </div>    
+                                                <h4>Employee Name: <span><?php echo $_SESSION['emp_name'];  ?></span></h4>
                                                 <!-- Employee Weekly Timesheet file -->
                                                 <table class="table weekly-time-table-dp">
                                                     <thead class="thead-dark">
@@ -117,48 +84,19 @@
                                                             <th scope="col">Total Hours</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody class="user_access_montly">
+                                                    <tbody>
                                                         <?php
-                                                        
-                                                        $fir_sat = date('d-m-Y', strtotime('first saturday of March 2023'));
-                                                        
-                                                        $third_sat = date('d-m-Y', strtotime('third saturday of March 2023'));
-                                                        $wkend_days = array($fir_sat,$third_sat);
-                                                        
-                                                        
-                                                        function getSundays($y, $m)
-                                                        {
-                                                            return new DatePeriod(
-                                                                new DateTime("first sunday of $y-$m"),
-                                                                DateInterval::createFromDateString('next sunday'),
-                                                                new DateTime("last day of $y-$m 23:59:59")
-                                                            );
-                                                        }
-
-                                                        foreach (getSundays(2023, 03) as $sunday) {
-                                                            array_push($wkend_days,$sunday->format("d-m-Y"));
-                                                            
-                                                        }
-
-                                                        //print_r($wkend_days);
-
-                                                            $month = date('m');
-                                                            $sql2 = "SELECT * FROM `capms_login_information` WHERE `user_id` = '".$_SESSION['emp_id']."' AND `login_date` LIKE '%-".$month."-%'";
-                                                            
-
+                                                            $sql2 = "SELECT * FROM capms_login_information WHERE user_id = '".$_SESSION['emp_id']."' ORDER BY `login_date` ASC ";
                                                             $result2 = mysqli_query($con, $sql2);
                                                             if($result2->num_rows > 0)
                                                             {
                                                                 while($row2 = mysqli_fetch_assoc($result2))
                                                                 {
-                                                                    //print_r($row2);
-                                                                    //die;
                                                                     $checkTime = strtotime('10:45:00');
                                                                     $loginTime = strtotime($row2['login_time']);
                                                                     $diff = $checkTime - $loginTime;
                                                                     ($diff < 0)? $class='late' : $class='right';
-                                                                    
-                                                                    if (!in_array(date('d-m-Y', strtotime($row2['login_date'])), $wkend_days)) {   
+
                                                                     ?>
                                                                     <tr>
                                                                         <!-- login date -->
@@ -242,7 +180,6 @@
                                                                         
                                                                     </tr>
                                                                     <?php
-                                                                    }
                                                                 }
                                                             }
                                                         ?>
@@ -265,32 +202,6 @@
             <?php include 'copyright_content.php'; ?>
         </footer>
         <!-- Footer JS files -->
-         <script>
-            jQuery(document).ready(function(){
-                jQuery('.go_btn').click(function(){
-                    var month = $( "#months option:selected" ).val();
-                    var year = $( "#years option:selected" ).val();
 
-                    jQuery.ajax({
-                        type: "GET",
-                        url: "<?php echo $baseURL; ?>ajax_access_log.php",
-                        data: {
-                            month: month,
-                            year: year,
-                        },
-                        dataType: "json",
-                        success: function(response){
-                            console.log(response);
-                            if(response.status == 'success')
-                            {
-                                var html = (response.data);
-                                jQuery('.user_access_montly').html(html)
-                            }
-                        }
-                    });
-
-                })
-            })
-         </script>                                                   
     </body>
 </html>

@@ -17,7 +17,7 @@
     $dompdf->getOptions()->setChroot("/opt/lampp/htdoc/pdf");
 
     
-    require('pdf_details.php');
+    require('payslip_by_ERM.php');
     $html =  $paySlip_Data;
 
     

@@ -131,6 +131,49 @@ if ($_SESSION['emp_id'] == '') {
                   include 'timesheet_all.php';
                 }
                 else {
+                  // $leave_date_sql = "SELECT * FROM `capms_admin_individual_leaves` WHERE user_id='".$_SESSION['emp_id']."' AND leave_date LIKE '%-".date("m")."-%' AND leave_status='Aproved' AND type_of_leave='Full Day'";
+                  $leave_date_sql = "SELECT * FROM `capms_admin_individual_leaves` WHERE user_id='".$_SESSION['emp_id']."' AND leave_date LIKE '%-".date("m-Y")."' AND leave_status='Aproved'";
+                  // echo $leave_date_sql;
+                  $result_leave_date_sql = mysqli_query($con,$leave_date_sql);
+                  $leave_days = array();
+                  if($result_leave_date_sql->num_rows>0){
+                    while($row_leave_date = mysqli_fetch_array($result_leave_date_sql)){
+                      // echo $row_leave_date['type_of_leave'];
+                      if($row_leave_date['type_of_leave']=='Full Day'){
+                        $leave_days[] = date_format(date_create($row_leave_date['leave_date']),"m/d/Y");
+                        // echo date_format(date_create($row_leave_date['leave_date']),"m/d/Y");
+                      }
+                    }
+                  }
+                  $flag=0;
+                  for($j=0;$j<count($leave_days);$j++){
+                    if(date("m/d/Y")==$leave_days[$j]){
+                      $flag = 1;
+                      break;
+                    }
+                  }
+                  if($flag==1){
+                    echo "<h3>Today is your leave date</h3>";
+                  }
+                  else{
+
+                    // $sql_holiday = "SELECT * FROM `capms_holidays` WHERE (SUBSTRING_INDEX(start_dates,'/',1)='".date("m")."' AND SUBSTRING_INDEX(start_dates,'/',-1)='".date("Y")."') OR (SUBSTRING_INDEX(end_dates,'/',1)='".date("m")."' AND SUBSTRING_INDEX(end_dates,'/',-1)='".date("Y")."')";
+                    // $result_sql_holiday = mysqli_query($con, $sql_holiday);
+                    // $holidays = array();
+                    // if(mysqli_num_rows($result_sql_holiday)>0){
+                    //   while($row_holidays = mysqli_fetch_array($result_sql_holiday)){
+                    //     $holidays[] = date_format(date_create($row_holidays['login_date']),"m/d/Y");
+                    //   }
+                    // }
+                    $login_dates = "SELECT * FROM `capms_login_information` WHERE (login_date LIKE '%-".date('m-Y', strtotime(date('Y-m')." -1 month"))."' OR login_date LIKE '%-".date("m-Y")."') AND user_id = '".$_SESSION['emp_id']."'";
+                    $result_login_dates = mysqli_query($con,$login_dates);
+                    $login_days = array();
+                    if(mysqli_num_rows($result_login_dates)>0){
+                      while($row_login_dates = mysqli_fetch_array($result_login_dates)){
+                        // echo date_format(date_create($row_login_dates['login_date']),"m/d/Y");
+                        $login_days[] = date_format(date_create($row_login_dates['login_date']),"m/d/Y");
+                      }
+                    }
               ?>
             </section>
 
@@ -197,20 +240,38 @@ if ($_SESSION['emp_id'] == '') {
                             $count_saturday = 0;
 
                             while (strtotime($start_date) <= strtotime(date('Y-m-d', strtotime('now')))) {
-                              $unfilled_sql = "SELECT * FROM `capms_user_timesheet` WHERE `timesheet_date` = '".date("m/d/Y",strtotime($start_date))."' and user_id = '" . $emp_id . "'";
-                              $result_unfilled = mysqli_query($con, $unfilled_sql);
-                              $rowcount=mysqli_num_rows($result_unfilled);
-                              if($rowcount<1) {
-                                if(date('D', strtotime($start_date))=="Sat" && $start_date>$this_start_date) {
-                                  $count_saturday++;
+                              $flag_login=0;
+                              for($j=0;$j<count($login_days);$j++){
+                                if(date("m/d/Y",strtotime($start_date))==$login_days[$j]){
+                                  $flag_login = 1;
+                                  break;
                                 }
-                                if(date('D', strtotime($start_date))!="Sun") {
-                                  if(!(date('D', strtotime($start_date))=="Sat" && ($count_saturday==1 || $count_saturday==3))) {
+                              }
+                              if($flag_login==1){
+                                $unfilled_sql = "SELECT * FROM `capms_user_timesheet` WHERE `timesheet_date` = '".date("m/d/Y",strtotime($start_date))."' and user_id = '" . $emp_id . "'";
+                                $result_unfilled = mysqli_query($con, $unfilled_sql);
+                                $rowcount=mysqli_num_rows($result_unfilled);
+                                if($rowcount<1) {
+                                  if(date('D', strtotime($start_date))=="Sat" && $start_date>$this_start_date) {
+                                    $count_saturday++;
+                                  }
+                                  if(date('D', strtotime($start_date))!="Sun") {
+                                    if(!(date('D', strtotime($start_date))=="Sat" && ($count_saturday==1 || $count_saturday==3))) {
+                                      $flag_unfilled=0;
+                                      for($j=0;$j<count($leave_days);$j++){
+                                        if(date("m/d/Y",strtotime($start_date))==$leave_days[$j]){
+                                          $flag_unfilled = 1;
+                                          break;
+                                        }
+                                      }
+                                      if($flag_unfilled==0){
                           ?>
 
                             <option value="<?php echo date("m/d/Y",strtotime($start_date)); ?>"><?php echo date("m/d/Y",strtotime($start_date))." - ".date('D', strtotime($start_date));?></option>
 
                           <?php
+                                    }
+                                  }
                                   }
                                 }
                               }
@@ -743,6 +804,26 @@ if ($_SESSION['emp_id'] == '') {
                           $from_time_evening = strtotime($evening_start); 
                           $to_time_evening = strtotime($evening_end); 
                           $diff_minutes_evening = round(abs($from_time_evening - $to_time_evening) / 60,2);
+                          $loginTime = strtotime($row_break['login_time']);
+                          // echo $row_break['login_time'].'login';
+                          $diff_lunch_break = strtotime($row_break['lunch_break_end']) - strtotime($row_break['lunch_break_start']);
+                          $diff_evn_break = strtotime($row_break['evening_break_end']) - strtotime($row_break['evening_break_start']);
+                          if($row_break['logout_time'] !=""){
+                            $logout_time_array = explode(" ", $row_break['logout_time']);
+                            $logout_time = str_replace('-', ':', $logout_time_array[0]);
+                            $logout_time = date('g:i A' ,strtotime($logout_time));
+                          }
+                          else{
+                            $logout_time = date("g:i A");
+                          }
+                          $diff = strtotime($logout_time) - $loginTime - $diff_lunch_break - $diff_evn_break;
+                          $secs = $diff % 60;
+                          $hrs = $diff / 60;
+                          $mins = $hrs % 60;
+                          $hrs = $hrs / 60;
+                          $working_hours = (float) ((int)$hrs . "." . (int)$mins);
+                          // echo $working_hours;
+                          // echo date("h:i:s");
                         }
                       }
 
@@ -773,12 +854,19 @@ if ($_SESSION['emp_id'] == '') {
                       $total_minutes = $total_minutes%60;
                       $total_hours+=(int)$hours_add;
                       echo '<hr><h1>Total - '.$total_hours.'.'.$total_minutes.' Hours</h1>';
+                      $total = $total_hours.'.'.$total_minutes;
+                      if($working_hours!=$total){
+                        echo 'Please fill the timesheet properly.';
+                      }
                     ?>
                   </p>
                 </div>
               </div>
             </section>
-            <?php } ?>
+            <?php 
+                
+                  }
+          } ?>
           </div>
         </div>
       </div>
