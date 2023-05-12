@@ -16,4 +16,5 @@ if ($con->connect_error) {
 }
 
 $baseURL = 'http://capms.codeartssolution.com/';
+
 ?>
