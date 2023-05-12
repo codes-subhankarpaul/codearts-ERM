@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - dev-subhankar
-name: 🚀 Deploy on live server on push
+name: 🚀 Deploy on live-server on push
 jobs:
   web-deploy:
     name: 🎉 Deploy
