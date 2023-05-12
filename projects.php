@@ -122,7 +122,7 @@
                                             // print_r($row);
                                             $checked_members = '';
                                             
-                                            $ret_teams=mysqli_query($con,"SELECT * FROM `camps_project_assigned_user_info` WHERE `project_id` = ".$row['project_id'].";");
+                                            $ret_teams=mysqli_query($con,"SELECT * FROM `capms_project_assigned_user_info` WHERE `project_id` = ".$row['project_id'].";");
                                             while ($row_teams=mysqli_fetch_array($ret_teams)) {
 
                                                 if($checked_members=='') {

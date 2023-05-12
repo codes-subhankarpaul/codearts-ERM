@@ -15,5 +15,5 @@ if ($con->connect_error) {
   die("Connection failed: " . $con->connect_error);
 }
 
-$baseURL = 'http://localhost/ERM/';
+$baseURL = 'http://capms.codeartssolution.com/';
 ?>

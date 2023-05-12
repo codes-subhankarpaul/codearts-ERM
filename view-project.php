@@ -164,7 +164,7 @@ use LDAP\Result;
                                                     <label>Project Assigned to:</label> 
                                                         <?php
                                                             $assined_user_ids = '';
-                                                            $project_user = "SELECT `user_id` FROM `camps_project_assigned_user_info` WHERE project_id = '".$row['project_id']."'";
+                                                            $project_user = "SELECT `user_id` FROM `capms_project_assigned_user_info` WHERE project_id = '".$row['project_id']."'";
                                                             $assign_user = mysqli_query($con,$project_user);
                                                             if($assign_user->num_rows > 0){
                                                                 while($assign_user_row = mysqli_fetch_assoc($assign_user)){
@@ -254,7 +254,7 @@ use LDAP\Result;
                                        $project_team = $_POST['team_name'];
                                        $team = implode(",", $project_team);
 
-                                       $project_member_update = "UPDATE `camps_project_assigned_user_info` SET `user_id`='".$team."',`updated_at`='".date('Y-m-d h:i:s', strtotime('now'))."' WHERE project_id = '".$_GET['viewid']."' ";
+                                       $project_member_update = "UPDATE `capms_project_assigned_user_info` SET `user_id`='".$team."',`updated_at`='".date('Y-m-d h:i:s', strtotime('now'))."' WHERE project_id = '".$_GET['viewid']."' ";
                                        mysqli_query($con,$project_member_update);
 
                                        echo "<script>location.href='".$baseURL."view-project.php?viewid=".$vid." ';</script>";

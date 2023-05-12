@@ -217,7 +217,7 @@
                                        $project_team = $_POST['team_name'];
                                        $team = implode(",", $project_team);
                                        
-                                       $assigned_user_query = "INSERT INTO camps_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$team."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
+                                       $assigned_user_query = "INSERT INTO capms_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$team."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
 
                                        mysqli_query($con, $assigned_user_query);
 
@@ -226,7 +226,7 @@
 
                                     //    if(is_array($_POST['team_name'])){
                                     //     foreach($_POST['team_name'] as $key){
-                                    //         $assigned_user_query = "INSERT INTO camps_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$key."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
+                                    //         $assigned_user_query = "INSERT INTO capms_project_assigned_user_info (project_id, user_id, created_at, updated_at) VALUES ('".$last_project_id."', '".$key."', '".date('Y-m-d h:i:s', strtotime('now'))."', '".date('Y-m-d h:i:s', strtotime('now'))."')";
                                     //         mysqli_query($con, $assigned_user_query);
                                     //     }
                                     //    }

@@ -174,7 +174,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                                             <div class="card-body w-75">
                                                             <?php
                                                                 $assined_user_ids = '';
-                                                                $project_user = "SELECT `user_id` FROM `camps_project_assigned_user_info` WHERE project_id = '".$_GET['project_id']."'";
+                                                                $project_user = "SELECT `user_id` FROM `capms_project_assigned_user_info` WHERE project_id = '".$_GET['project_id']."'";
                                                                 $assign_user = mysqli_query($con,$project_user);
                                                                 if($assign_user->num_rows > 0){
                                                                     while($assign_user_row = mysqli_fetch_assoc($assign_user)){
