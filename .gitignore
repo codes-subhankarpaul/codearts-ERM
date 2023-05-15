@@ -1,3 +1,7 @@
 assets/
 pdf/
 PHPMailer/
+ajax_user_login.php
+index.php
+register.php
+

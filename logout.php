@@ -1,8 +1,8 @@
 <?php
 	session_start();
-	$baseURL = 'http://localhost/ERM/';
+	$baseURL = 'http://capms.codeartssolution.com/';
 	date_default_timezone_set('Asia/Kolkata');
-	$con = mysqli_connect("localhost","root","root","codearts_pms_new");
+	$con = mysqli_connect("localhost","root","","codearts_pms_new");
 
 	if(isset($_SESSION['emp_id']))
 	{

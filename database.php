@@ -14,6 +14,6 @@ if(!isset($_SESSION)) {
 if ($con->connect_error) {
   die("Connection failed: " . $con->connect_error);
 }
-$baseURL = '';
+
 $baseURL = 'http://capms.codeartssolution.com/';
 ?>

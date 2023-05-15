@@ -11,7 +11,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 	$user = '';
 	$action = '';
 
-	$sql1 = "SELECT * FROM capms_admin_users WHERE user_email = '".$login_username."' OR user_contact = '".$login_username."' OR user_empid = '".$login_username."' ";
+	// $sql1 => to get the user from login credentials
+    // $result1 => result of $sql1
+    
+    $sql1 = "SELECT * FROM capms_admin_users WHERE user_email = '".$login_username."' OR user_contact = '".$login_username."' OR user_empid = '".$login_username."' ";
     $result1 = mysqli_query($con, $sql1);
     if($result1->num_rows > 0)
     {
