@@ -276,6 +276,7 @@
                 });
 
                 jQuery("#confirm_leave_application").click( function(e) {
+                    //alert('d');
                     e.preventDefault();
                     var emp_name = jQuery("#empname").val();
                     var emp_dept = jQuery("#empdept").val();
@@ -298,9 +299,44 @@
                         }
                         else
                         {
+                            //alert();
                             if(leave_end_date == '')
                             {
+                                var startDate = moment(leave_start_date, "DD-MM-YYYY");
+                                var endDate = moment(leave_start_date, "DD-MM-YYYY");
+                                var getDaysBetweenDates = function(startDate, endDate) {
+                                    var now = startDate.clone(), dates = [];
+                              
+                                    while (now.isSameOrBefore(endDate)) {
+                                        dates.push(now.format('DD-MM-YYYY'));
+                                        now.add(1, 'days');
+                                    }
+                                    return dates;
+                                };
+                                var dateList = getDaysBetweenDates(startDate, startDate);
 
+                                console.log(dateList)
+                                jQuery.ajax({
+                                        type: "GET",
+                                        url: "<?php echo $baseURL; ?>ajax_leave_application.php",
+                                        data: {
+                                            baseURL: '<?php echo $baseURL; ?>',
+                                            emp_id: '<?php echo $_SESSION['emp_id']; ?>',
+                                            emp_name: emp_name,
+                                            emp_dept: emp_dept,
+                                            emp_remaining_pls: emp_remaining_pls,
+                                            reason_of_leave: reason_of_leave,
+                                            type_of_leave: type_of_leave,
+                                            dateList: dateList,
+                                            total_leaves: '0.5',
+                                            leave_message: leave_message
+                                        },
+                                        dataType: "json",
+                                        success: function(response){
+                                            console.log(response);
+                                            alert("Leave application submitted! Please wait for approval!");
+                                        }
+                                    });
                             }
                             else
                             {
@@ -369,6 +405,8 @@
                                 jQuery("#confirm_leave_application").hide();
                                 jQuery("#submit_leave_application").show();
                                 jQuery("#leave_status_clarification_body").append(status_table);
+
+                                console.log(dateList);
 
                                 // check if total no of leave is 0
                                 if(jQuery("#total_leave_days").val()<1) {

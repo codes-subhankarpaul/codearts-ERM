@@ -194,7 +194,7 @@
                                         
                                     $row3 = mysqli_query($con, $update_qry);
 
-                                    echo "<script>location.href='http://localhost/codearts/leave.php';</script>"; 
+                                    echo "<script>location.href='http://localhost/ERM/leave.php';</script>"; 
                                     }
 
                                     ?>

@@ -48,7 +48,7 @@
                             <!-- <section class="pay-slip-table" style="text-align:center ;">
                                 <button type="submit"><a href="payslip_details.php">view</a></button>
                             </section> -->
-                            <form method="POST" enctype="multipart/form-data" action="payslip.php">
+                            <form class="payslip" method="POST" enctype="multipart/form-data" action="payslip.php">
                                 <label for="salarymonth">Salary of (month and year):</label>
                                 <input type="month" id="salarymonth" name="salarymonth" required>
                                 <input type="submit" name="payslipView" value="View Payslip" class="btn btn-primary"> 

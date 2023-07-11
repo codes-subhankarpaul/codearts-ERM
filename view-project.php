@@ -13,7 +13,7 @@ use LDAP\Result;
     <?php
             if($_SESSION['emp_id'] == '')
             {
-            echo "<script>location.href='http://localhost/codearts/login.php';</script>";
+                echo "<script>location.href='".$baseURL."login.php';</script>";
             }
             ?>
 

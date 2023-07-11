@@ -67,7 +67,7 @@ else{
                                     <li><a href="<?php echo $baseURL; ?>payslip_add.php">Add Employee Pay Slip</a></li>
                                 </ul>
                             </section>
-                            <table>
+                            <table class="payslip-table">
                                 <tr>
                                     <th>#</th>
                                     <th>Salary Month and Year</th>
@@ -100,7 +100,9 @@ else{
                                 ?>
                             </table>
                             <br/><br/>
-                            <button onclick="myFunctionshow()" class="btn btn-primary" id="btn">Add</button>
+                            <div class="payslip-add-btn">
+                                <button onclick="myFunctionshow()" class="btn btn-primary" id="btn">Add</button>
+                            </div>
                             <div id="myDIV" style="display:none;">
                                 <h1 style="text-decoration: underline;" class="text-center">Add Payslip </h1>
                                 <form style="padding-top: 120px; padding-left: 130px;" method="POST" enctype="multipart/form-data" action="employee_payslip_add.php?user_id=<?php echo $_REQUEST['user_id']?>">

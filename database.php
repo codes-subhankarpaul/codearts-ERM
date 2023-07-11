@@ -4,7 +4,7 @@ date_default_timezone_set("Asia/Kolkata");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "codearts_pms_new";
+$database = "codearts_erm";
 
 $con = mysqli_connect($servername, $username, $password, $database);
 if(!isset($_SESSION)) { 

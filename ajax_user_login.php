@@ -2,7 +2,8 @@
 error_reporting(E_ALL ^ E_NOTICE);
 	session_start();
 	date_default_timezone_set('Asia/Kolkata');
-	$con = mysqli_connect("localhost","root","","codearts_pms_new");
+    include 'database.php';
+	//$con = mysqli_connect("localhost","root","","codearts_erm");
 
     $baseURL = $_GET['baseURL'];
 	$login_username = $_GET['login_username'];
